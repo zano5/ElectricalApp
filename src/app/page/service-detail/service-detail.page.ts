@@ -7,7 +7,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./service-detail.page.scss'],
 })
 export class ServiceDetailPage implements OnInit {
-
   constructor(private router: Router) { }
 
   ngOnInit() {

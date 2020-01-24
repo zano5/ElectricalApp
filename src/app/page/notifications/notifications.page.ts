@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthServiceService } from 'src/app/Service/auth-service.service';
 
 @Component({
   selector: 'app-notifications',
@@ -6,10 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./notifications.page.scss'],
 })
 export class NotificationsPage implements OnInit {
-
-  constructor() { }
+  URL = '/sign-in'
+  constructor(public NotificationService: AuthServiceService) { }
 
   ngOnInit() {
+    this.NotificationService.getUser(this.URL)
   }
 
 

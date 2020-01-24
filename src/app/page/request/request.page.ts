@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthServiceService } from 'src/app/Service/auth-service.service';
 
 @Component({
   selector: 'app-request',
@@ -7,12 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RequestPage implements OnInit {
 
-
+  URL = "/sign-in"
   moreRequest = 'No';
 
-  constructor() { }
+  constructor(public requestService: AuthServiceService) { }
 
   ngOnInit() {
+    this.requestService.getUser(this.URL);
   }
 
 

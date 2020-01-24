@@ -13,7 +13,7 @@
     Email
     </ion-label>
 
-    <ion-input type="email"></ion-input>
+    <ion-input type="email" [(ngModel)] = "email"></ion-input>
   </ion-item>
 
 
@@ -23,11 +23,11 @@
       Password
     </ion-label>
 
-    <ion-input type="password"></ion-input>
+    <ion-input type="password" [(ngModel)] = "password"></ion-input>
   </ion-item>
 
 
 
-  <ion-button expand="full" shape="round" (click)="signIn()" color="dark">Sign In</ion-button>
+  <ion-button expand="full" shape="round" (click)="signIn();setUserName(email)" color="dark">Sign In</ion-button>
 
 </ion-content>
