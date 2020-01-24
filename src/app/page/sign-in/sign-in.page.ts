@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-sign-in',
@@ -8,7 +9,23 @@ import { Router } from '@angular/router';
 })
 export class SignInPage implements OnInit {
 
-  constructor(private router: Router) { }
+  public loginForm: FormGroup;
+  public forgotpasswordForm: FormGroup;
+  isForgotPassword: boolean = true;
+  
+  constructor(private fb: FormBuilder,  private router: Router,
+
+   ) {
+
+    this.loginForm = fb.group({
+      email:  ['', [Validators.required, Validators.email,Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z0-9-.]+$')]],
+      password: ['', Validators.compose([Validators.minLength(6), Validators.maxLength(12), Validators.required])],
+    });
+    this.forgotpasswordForm = fb.group({
+      email: ['', Validators.compose([Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z0-9-.]+$'), Validators.required])],
+    })
+ 
+ }
 
   ngOnInit() {
   }
@@ -18,5 +35,6 @@ export class SignInPage implements OnInit {
     this.router.navigateByUrl('tabs/services')
 
   }
+  
 
 }

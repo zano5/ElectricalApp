@@ -1,33 +1,96 @@
-
-
 <ion-content class="ion-padding">
+    <!-- <div class="logo">
+        <img src="/assets/images/scc.jpg">
+    </div>
+    <h1 style="text-align: center;"><b>Sign In</b></h1>
+    <ion-item style="margin-top: 1vh;">
 
-  <h3>Sign In</h3>
+        <ion-label position="floating">
+            Email
+        </ion-label>
 
-
-  <p>Enter Profile Number And Password</p>
-
-  <ion-item style="margin-top: 10vh;">
-
-    <ion-label position="floating">
-    Email
-    </ion-label>
-
-    <ion-input type="email"></ion-input>
-  </ion-item>
+        <ion-input type="email"></ion-input>
+    </ion-item>
 
 
-  <ion-item style="margin-top: 10vh;">
+    <ion-item style="margin-top: 1vh;">
 
-    <ion-label position="floating">
-      Password
-    </ion-label>
+        <ion-label position="floating">
+            Password
+        </ion-label>
 
-    <ion-input type="password"></ion-input>
-  </ion-item>
+        <ion-input type="password"></ion-input>
+    </ion-item>
+
+    <ion-button expand="full" shape="round" (click)="signIn()" color="dark" style="margin-top: 1vh;">Sign In</ion-button>
+    <p>No account? please<a href="sign-up">click here</a></p> -->
 
 
 
-  <ion-button expand="full" shape="round" (click)="signIn()" color="dark">Sign In</ion-button>
+
+    <!-- <ion-list lines="none"> -->
+    <ion-row>
+        <ion-col text-center>
+            <div id="logo">
+                <img src="/assets/images/scc.jpg" alt="Avatar" class="imgC">
+            </div>
+            <form [formGroup]="loginForm" *ngIf="isForgotPassword">
+                <div class="shipping-card">
+                    <ion-item color="transparent" class="group">
+                        <ion-label position="floating">Email</ion-label>
+                        <ion-input type="email" formControlName="email"></ion-input>
+                    </ion-item>
+                    <div class="error" *ngIf="loginForm.get('email').hasError('required') && loginForm.get('email').touched">
+                        Please input your email
+                    </div>
+                    <div class="error" *ngIf="loginForm.get('email').hasError('pattern') && loginForm.get('email').touched">
+                        Email address invalid
+                    </div>
+                    <ion-item color="transparent" class="group">
+                        <ion-label position="floating">Password</ion-label>
+                        <ion-input type="password" formControlName="password"></ion-input>
+                    </ion-item>
+                    <div class="error" *ngIf="loginForm.get('password').hasError('required') && loginForm.get('password').touched">
+                        Please input your password
+                    </div>
+                    <div class="error" *ngIf="loginForm.get('password').hasError('minlength') && loginForm.get('password').touched">
+                        Minimum 6 characters
+                    </div>
+                    <div class="error" *ngIf="loginForm.get('password').hasError('maxlength') && loginForm.get('password').touched">
+                        Maximum 12 characters
+                    </div>
+                    <br>
+                    <ion-button expand="full" shape="round" [disabled]="!loginForm.valid" (click)="signIn()" color="dark" style="margin-top: 1vh;">Sign In</ion-button>
+                    <p>No account? please<a href="sign-up">click here</a></p>
+                    <!-- <ion-button expand="block" color="primary" (click)="login()">login</ion-button>
+                    <p>Forgot Password? <a (click)="isForgotPassword = false">Reset your password</a></p>
+                    <p>Dont have Account? <a (click)="registerPage()">Sign Up</a></p> -->
+                </div>
+            </form>
+            <form [formGroup]="forgotpasswordForm" *ngIf="!isForgotPassword">
+                <ion-item color="transparent" class="group">
+                    <ion-label position="floating">Enter Email</ion-label>
+                    <ion-input type="email" formControlName="email"></ion-input>
+                </ion-item>
+                <div class="error" *ngIf="forgotpasswordForm.get('email').hasError('required') && forgotpasswordForm.get('email').touched">
+                    Please input your email
+                </div>
+                <div class="error" *ngIf="forgotpasswordForm.get('email').hasError('pattern') && forgotpasswordForm.get('email').touched">
+                    Email address invalid
+                </div>
+                <br>
+                <ion-grid>
+                    <ion-row>
+                        <ion-col>
+                            <ion-button expand="block" color="primary" (click)="isForgotPassword = true">Cancel</ion-button>
+                        </ion-col>
+                        <ion-col>
+                            <ion-button expand="block" [disabled]="!forgotpasswordForm.valid" color="primary" (click)="reset()">Reset</ion-button>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </form>
+        </ion-col>
+    </ion-row>
 
 </ion-content>
