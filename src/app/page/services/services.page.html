@@ -17,7 +17,7 @@
 
    
 <div class="scrolling-wrapper-flexbox">
-  <div  class="card" (click)="detail()" *ngFor = "let services of ArrayServices" style = "padding: 10px;">
+  <div  class="card"  *ngFor = "let services of ArrayServices" (click)="detail(services.id)" style = "padding: 10px;">
     <span style = "font-size: 15px;">{{services.name}}</span>
 
        

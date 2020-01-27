@@ -13,20 +13,26 @@ import { AuthServiceService } from 'src/app/Service/auth-service.service';
 export class ServicesPage implements OnInit {
   ArrayServices;
   imagePath="assets/images/wired.jpg";
+  obj : any;
 
   constructor(private router: Router,
     public loadingController: LoadingController,
-    public ViewServices: AuthServiceService) { }
+    public ViewServices: AuthServiceService) {
+  
+     }
 
   ngOnInit() {
   // this.ViewServices.getUser();
-  this.loadingServices();
+
+
+ this.loadingServices();
   }
 
 
-  detail(){
+  detail(id : any){
 
-    this.router.navigateByUrl('service-detail');
+    // this.router.navigateByUrl('service-detail')
+    this.router.navigate(['service-detail'],{queryParams : {key: id}} );
 
   }
 
@@ -36,10 +42,14 @@ export class ServicesPage implements OnInit {
       // duration: 2000
     });
     await loading.present();
-    this.ViewServices.getServices().then((services) => {
-      this.ArrayServices = services;
+    this.obj = this.ViewServices.getService();
+    
+    this.obj.subscribe((data)=>{
+      this.ArrayServices = data;
+      console.log(this.ArrayServices)
       loading.dismiss();
-    })
+    });
+  
     console.log('Loading dismissed!');
   }
 
