@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthServiceService } from 'src/app/Service/auth-service.service';
 
 @Component({
   selector: 'app-service-detail',
@@ -7,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./service-detail.page.scss'],
 })
 export class ServiceDetailPage implements OnInit {
-  constructor(private router: Router) { }
+  constructor(private router: Router,public description: AuthServiceService) { }
 
   ngOnInit() {
   }
@@ -15,8 +16,8 @@ export class ServiceDetailPage implements OnInit {
 
   request() {
 
-    this.router.navigateByUrl('request');
-
+    // this.router.navigateByUrl('request');
+    this.description.getUser('request');
   }
 
 }
