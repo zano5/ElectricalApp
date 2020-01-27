@@ -35,6 +35,11 @@ export class ServiceDetailPage implements OnInit {
 
     this.router.navigateByUrl('request');
 
+    localStorage.clear();
+    localStorage.setItem("name", this.ArrayServices.name);
+    localStorage.setItem("cost", this.ArrayServices.cost);
+    localStorage.setItem("description", this.ArrayServices.description)
+
   }
 
 }

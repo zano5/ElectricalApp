@@ -17,13 +17,16 @@ export class AuthServiceService {
 
   // The getUser is for checking the currently singed-in user
   getUser(url) {
+    console.log(url)
     return firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        // User is signed in
-        this.router.navigateByUrl(url);
-      } else {
-      }
+      // if (user) {
+      //   // User is signed in
+      //   this.router.navigateByUrl(url);
+      // } else {
+      // }
+      console.log(user)
     });
+   
   }
 
   getUserName(email) {
@@ -33,16 +36,16 @@ export class AuthServiceService {
   addUser(user){
 
     console.log(user);
-    // this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.pass).then((error:any )=> {
-    //   // Handle Errors here.
-    //   console.log(error + " added user succesful");
-    //   this.writePost = this.afs.collection<any>('user').doc(error.uid);
-    //   this.writePost.add(user).then(() =>{
+    this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.pass).then((error:any )=> {
+      // Handle Errors here.
+      console.log(error + " added user succesful");
+      this.writePost = this.afs.collection<any>('user').doc(error.uid);
+      this.writePost.add(user).then(() =>{
 
-    //   });
-    //     alert(user.email + " succesful registered" );
+      });
+        alert(user.email + " succesful registered" );
 
-    // });
+    });
 
   }
 

@@ -11,13 +11,14 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatExpansionModule} from '@angular/material/expansion';
-
+import {HttpClientModule} from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import * as firebase from "firebase";
-
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { MapPageModule } from '../app/page/map/map.module';
 var firebaseConfig = {
   apiKey: "AIzaSyB83CuKn-QSuzzxN6X8l2L5UKqfeb2NjvA",
   authDomain: "eletrical-engineer-cms.firebaseapp.com",
@@ -35,7 +36,7 @@ firebase.analytics();
 @NgModule({
   declarations: [AppComponent, TabsPage],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, BrowserAnimationsModule, MatExpansionModule,
+  imports: [BrowserModule, MapPageModule,IonicModule.forRoot(),HttpClientModule, AppRoutingModule, BrowserAnimationsModule, MatExpansionModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule, // firestore
     AngularFireAuthModule, // auth
@@ -44,6 +45,7 @@ firebase.analytics();
   providers: [
     StatusBar,
     SplashScreen,
+    Geolocation,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
