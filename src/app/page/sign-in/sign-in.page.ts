@@ -38,6 +38,10 @@ export class SignInPage implements OnInit {
   ngOnInit() {
   }
 
+  home() {
+    this.router.navigateByUrl('/tabs/services');
+  }
+
   setUserName(email) {
     this.SignInService.getUserName(email);
   }

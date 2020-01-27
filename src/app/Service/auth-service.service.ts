@@ -9,9 +9,10 @@ export class AuthServiceService {
   Results:Boolean;
   UserName;
   UserID;
+  UserArray = [];
   constructor(private router: Router) { }
 
-  // The getUser is for checking the currently singed-in user
+  // The getUser is for checking the currently singned-in user
   getUser(url) {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
@@ -29,6 +30,7 @@ export class AuthServiceService {
       if (results) {
         this.UserID = results['user'].uid;
         // this.userDocumentNo = results['user'].uid;
+        console.log("User id: " + this.UserID);
       }
       return results;
     }).catch((error) => {
@@ -36,6 +38,32 @@ export class AuthServiceService {
       var errorCode = error.message;
       return errorCode;
     });
+  }
+
+  logOut() {
+    return firebase.auth().signOut().then((results) => {
+      // Sign-out successful.
+      console.log(results);
+      return results;
+    }).catch((error) => {
+      // An error happened.
+      return error.message;
+    });
+  }
+
+
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  getUserProfile() {
+
+    return firebase.firestore().collection("user/").get(this.UserID).then((snapshot) => {
+      snapshot.forEach((doc) => {
+        this.UserArray.push(doc.data());
+      })
+
+      return this.UserArray;
+    })
   }
 
   getUserName(email) {
