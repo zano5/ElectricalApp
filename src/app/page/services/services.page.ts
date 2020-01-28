@@ -19,8 +19,7 @@ export class ServicesPage implements OnInit {
     public ViewServices: AuthServiceService) { }
 
   ngOnInit() {
-  // this.ViewServices.getUser();
-  this.loadingServices();
+    this.loadingServices();
   }
 
 

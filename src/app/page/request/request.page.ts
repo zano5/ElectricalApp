@@ -14,7 +14,6 @@ export class RequestPage implements OnInit {
   constructor(public requestService: AuthServiceService) { }
 
   ngOnInit() {
-    this.requestService.getUser(this.URL);
   }
 
 

@@ -11,7 +11,6 @@ export class NotificationsPage implements OnInit {
   constructor(public NotificationService: AuthServiceService) { }
 
   ngOnInit() {
-    this.NotificationService.getUser(this.URL)
   }
 
 
