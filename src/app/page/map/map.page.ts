@@ -55,7 +55,7 @@ export class MapPage implements OnInit {
   
     let lng = this.obj1.lng;
     let lat = this.obj1.lat;
-   
+   console.log(this.obj1)
     this.router.navigate(['request'] ,{queryParams : {KM: this.KM, lng : lng, lat : lat}} );
   }
 
@@ -180,8 +180,8 @@ this.map.on('mousemove', (e) => {
   '<br />' +
   // e.lngLat is the longitude, latitude geographical position of the event
   JSON.stringify(e.lngLat.wrap());
-  console.log(e);
-  console.log(e.lngLat);
+  // console.log(e);
+  // console.log(e.lngLat);
   this.obj = e.lngLat;
   console.log(this.obj);
   });
@@ -196,9 +196,10 @@ this.map.on('click', () => {
   this.getRoute(coords);
   var marker   = new mapboxgl.Marker()
   .setLngLat([this.obj.lng, this.obj.lat])
-
-
   .addTo(this.map);
+
+  this.obj1.lat = this.obj.lat;
+  this.obj1.lng = this.obj.lng;
 
 function onDragEnd() {
   var lngLat = marker.getLngLat();

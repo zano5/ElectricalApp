@@ -19,6 +19,8 @@ export class RequestPage implements OnInit {
   lat;
   lng;
   user;
+  time : string;
+  date : string;
   ref : string;
   addresses = [];
   flag : boolean = true;
@@ -29,13 +31,17 @@ export class RequestPage implements OnInit {
   KM;
   request = {
     refNo : "",
-    day : "",
+    service : "",
+    serviceDesc : "",
+    serviceCost : "",
+    date : "",
     stamp : Date.now(),
     coords: [],
-    time : 0,
+    time : "",
     distance : 0,
-    transFee : 0,
-    type : ""
+    calloutFee : 0,
+    uid : ''
+    
   
   }
 
@@ -90,14 +96,14 @@ export class RequestPage implements OnInit {
     this.addr.queryParams.subscribe(data => {
       console.log(data);
       this.KM = data.KM;
-
+      console.log(data.lng + "  " + data.lat);
       this.request.coords = [data.lng,data.lat];
-      console.log(this.request);
-      console.log(this.KM);
-      
+      // console.log(this.request);
+    
+      this.request.distance = this.KM;
       this.cost1 = this.KM * 5;
-      console.log(this.cost1);
-     
+      // console.log(this.cost1);
+      this.request.calloutFee = this.cost1;
     })
 
     let name = localStorage.getItem("name");
@@ -115,6 +121,19 @@ console.log(this.name)
 
   submit(){
 
+
+    this.request.service = this.name;
+    this.request.serviceDesc = this.descrp;
+    this.request.serviceCost = this.cost;
+    this.request.refNo = this.ref;
+    this.request.date = this.date.substr(0,10);
+    // console.log(this.request);
+    // console.log(this.time.substr(11,8) + " tyd");
+    // console.log(this.date.substr(0,10) + " dag");
+    this.request.time = this.time.substr(11,8);
+    
+
+    this.requestService.addRequest(this.request);
   }
 
 }

@@ -33,24 +33,50 @@ export class AuthServiceService {
     this.UserName = email;
   }
 
+  addRequest(item : any){
+    console.log(this.afAuth.auth.currentUser.uid)
+    item.uid = this.afAuth.auth.currentUser.uid;
+    this.writePost = this.afs.collection('user/').doc(this.afAuth.auth.currentUser.uid).collection('request');
+    this.writePost.add(item).then(() =>{
+            console.log(item);
+            console.log("request added successful ..");
+            console.log(item.stamp);
+            // console.log(item.description);
+            // this.router.navigateByUrl('tab/request');
+    
+        });
+}
+viewRequest(){
+      
+  return  this.afs.collection('user').doc(this.afAuth.auth.currentUser.uid).collection('request').valueChanges();
+
+}
+
+ gotUser(){
+  return  this.afs.collection('user').doc(this.afAuth.auth.currentUser.uid).valueChanges();
+ }
+
   addUser(user){
 
     console.log(user);
-    this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.pass).then((error:any )=> {
+  
+    this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.pass).then((error )=> {
       // Handle Errors here.
-      console.log(error + " added user succesful");
-      this.writePost = this.afs.collection<any>('user').doc(error.uid);
-      this.writePost.add(user).then(() =>{
-
-      });
+      console.log(error)
+      // console.log(error.user.uid)
+      user.uid = error.user.uid;
+      user.pass = "";
+    this.writePost = this.afs.collection<any>('user').doc(error.user.uid);
+    this.writePost.set(user);
+    
         alert(user.email + " succesful registered" );
-
+        this.router.navigateByUrl('sign-in');
     });
 
   }
 
   getDoc(key: string){
-    return this.afs.doc("services/"+key).valueChanges()
+    return this.afs.doc("services/"+key).valueChanges();
   }
 
   getService(){

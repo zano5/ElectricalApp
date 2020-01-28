@@ -1,5 +1,7 @@
 {
   "name": "ElectricalAPP",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }
