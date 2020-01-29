@@ -108,11 +108,12 @@ export class RequestPage implements OnInit {
 
     let name = localStorage.getItem("name");
     let description = localStorage.getItem("description")
-    let cost = localStorage.getItem("cost")
-
+    let cost = localStorage.getItem("cost");
+    let flag = localStorage.getItem("flag");
     this.name = name;
     this.descrp = description;
     this.cost = cost;
+    console.log(flag)
 console.log(this.cost)
 console.log(this.descrp)
 console.log(this.name)

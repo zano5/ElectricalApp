@@ -16,6 +16,7 @@ export class ServicesPage implements OnInit {
   imagePath="assets/images/wired.jpg";
   obj : any;
   obj1 : any;
+  flag : boolean = false;
   constructor(private router: Router,
     public loadingController: LoadingController,
     public ViewServices: AuthServiceService) {
@@ -36,6 +37,13 @@ export class ServicesPage implements OnInit {
 
 
   detail(id : any){
+
+    // this.router.navigateByUrl('service-detail')
+    this.flag = true;
+    this.router.navigate(['service-detail'],{queryParams : {key: id, flag : this.flag}} );
+
+  }
+  detail1(id : any){
 
     // this.router.navigateByUrl('service-detail')
     this.router.navigate(['service-detail'],{queryParams : {key: id}} );

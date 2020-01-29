@@ -20,92 +20,20 @@
   <div  class="card"  *ngFor = "let services of ArrayServices" (click)="detail(services.id)" style = "padding: 10px;">
     <span style = "font-size: 15px;">{{services.name}}</span>
 
-       
-    
   </div>
-    
-    
-      <!-- <div  class="card" *ngFor = "let services of ArrayServices">
-    
-    
-     
-    
-    
-      
-       
-    
-      </div>
-    
-      <div  class="card">
-    
-    
-    
-       
-      
-       
-    
-      </div>
-    
-      <div  class="card">
-    
-
-       
-    
-      </div> -->
-
+ 
     </div>
 
-
-   
-      
-   
 <h5 >Information Technology</h5>
 
 
 <div class="scrolling-wrapper-flexbox">
 
-  <div  class="card"  *ngFor = "let services of ArrayICTServices" (click)="detail(services.id)" style = "padding: 10px;">
-    <span style = "font-size: 15px;">{{services.name}}</span>
-
-  </div>
-    
-    
-      <!-- <div  class="card">
-    
-    
-    
-     
-    
-    
-      
-       
-    
+  <div  class="card" *ngFor = "let services of ArrayICTServices" (click)="detail1(services.id)">
+   
+    <span style = "font-size: 15px;">{{services.name}}</span><br>
       </div>
-    
-      <div  class="card">
-    
-    
-    
-      
-      
-       
-    
-      </div>
-    
-      <div  class="card">
-    
-    
-    
- 
-      
-       
-    
-      </div> -->
 
     </div>
-  
-   
-      
-   
 
 </ion-content>
