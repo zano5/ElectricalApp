@@ -9,12 +9,17 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ServiceDetailPage implements OnInit {
   ArrayServices;
+  ArrayICTServices;
   docKey ;
   constructor(private router: Router,private addr : ActivatedRoute, public ViewServices: AuthServiceService) { 
-    this.ViewServices.getServices().then((services) => {
-      this.ArrayServices = services;
+    // this.ViewServices.getServices().then((services) => {
+    //   this.ArrayServices = services;
      
-    })
+    // })
+    // this.ViewServices.getServiceICT().subscribe((services) => {
+    //   this.ArrayICTServices = services;
+     
+    // })
   }
 
   ngOnInit() {
@@ -28,6 +33,12 @@ export class ServiceDetailPage implements OnInit {
       console.log(data)
       this.ArrayServices = data;
     })
+
+    this.ViewServices.getICTDoc(this.docKey).subscribe((data) =>{
+      console.log(data)
+      this.ArrayICTServices = data;
+    })
+
   }
 
 

@@ -67,12 +67,11 @@ async fileRead() {
           widths: [ '*', 'auto', 100, '*' ],
 
           body: [
-            [ 'First', 'Second', 'Third', 'The last one' ],
-            [  this.request[i].service, 'R '+this.request[i].serviceCost , 'third', 'last one' ],
+            [ 'Service Requested', 'Cost'],
+            [  this.request[i].service, 'R '+this.request[i].serviceCost ],
             // [ { text: this.request[i].serviceDesc}],
-            [ { text: 'R '+this.request[i].serviceCost}, 'Val 2', 'Val 3', 'Val 4' ],
-            // [ { text: 'Requested Date&Time : '+ this.request[i].date, bold: true }, 'Val 3' ],
-            // [ { text: 'Distance '+this.request[i].distance +' KM', bold: true }, 'R '+this.request[i].calloutFee, 'Val 4' ]
+            // [ { text: 'Requested Date&Time : '+ this.request[i].date, bold: true }],
+            // [ { text: +this.request[i].distance +' KM', bold: true }, 'R '+this.request[i].calloutFee]
           ]
         }
       }

@@ -12,9 +12,10 @@ import { AuthServiceService } from 'src/app/Service/auth-service.service';
 })
 export class ServicesPage implements OnInit {
   ArrayServices;
+  ArrayICTServices;
   imagePath="assets/images/wired.jpg";
   obj : any;
-
+  obj1 : any;
   constructor(private router: Router,
     public loadingController: LoadingController,
     public ViewServices: AuthServiceService) {
@@ -23,7 +24,12 @@ export class ServicesPage implements OnInit {
 
   ngOnInit() {
   // this.ViewServices.getUser();
-
+  this.obj1 = this.ViewServices.getServiceICT();
+  this.obj1.subscribe((data)=>{
+    this.ArrayICTServices = data;
+    console.log(this.ArrayICTServices)
+    
+  });
 
  this.loadingServices();
   }
@@ -43,6 +49,7 @@ export class ServicesPage implements OnInit {
     });
     await loading.present();
     this.obj = this.ViewServices.getService();
+    this.obj1 = this.ViewServices.getServiceICT();
     
     this.obj.subscribe((data)=>{
       this.ArrayServices = data;

@@ -29,6 +29,19 @@ export class AuthServiceService {
    
   }
 
+  resetPassword(mail){
+    this.afAuth.auth.sendPasswordResetEmail(mail).then((success) => {
+      console.log(success);
+      alert(success);
+      this.router.navigateByUrl('sign-in');
+    }).catch((err) => {
+      console.log(err);
+      alert(err);
+    });
+  
+    }
+
+    
   getUserName(email) {
     this.UserName = email;
   }
@@ -77,6 +90,21 @@ viewRequest(){
 
   getDoc(key: string){
     return this.afs.doc("services/"+key).valueChanges();
+  }
+  getICTDoc(key: string){
+    return this.afs.doc("serviceICT/"+key).valueChanges();
+  }
+
+  getServiceICT(){
+
+    return this.afs.collection('serviceICT/').snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as any;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
+
   }
 
   getService(){

@@ -64,23 +64,13 @@
 
 <div class="scrolling-wrapper-flexbox">
 
-  <div  class="card">
+  <div  class="card"  *ngFor = "let services of ArrayICTServices" (click)="detail(services.id)" style = "padding: 10px;">
+    <span style = "font-size: 15px;">{{services.name}}</span>
 
-
- 
-    
-
-    
-      
+  </div>
     
     
-
-       
-    
-      </div>
-    
-    
-      <div  class="card">
+      <!-- <div  class="card">
     
     
     
@@ -110,7 +100,7 @@
       
        
     
-      </div>
+      </div> -->
 
     </div>
   
