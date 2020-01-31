@@ -64,6 +64,18 @@ const routes: Routes = [
     path: 'view-profile',
     loadChildren: () => import('./page/view-profile/view-profile.module').then( m => m.ViewProfilePageModule)
   },
+  {
+    path: 'update-names',
+    loadChildren: () => import('./page/modal/update-names/update-names.module').then( m => m.UpdateNamesPageModule)
+  },
+  {
+    path: 'update-email',
+    loadChildren: () => import('./page/modal/update-email/update-email.module').then( m => m.UpdateEmailPageModule)
+  },
+  {
+    path: 'update-contacts',
+    loadChildren: () => import('./page/modal/update-contacts/update-contacts.module').then( m => m.UpdateContactsPageModule)
+  },
 
 
  

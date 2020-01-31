@@ -1,5 +1,6 @@
 <ion-header>
   <ion-toolbar>
+    <ion-icon name="arrow-back" (click) = "back()"></ion-icon>
     <ion-title>ViewProfile</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -12,7 +13,7 @@
       <ion-label>
         {{user_info.name}} {{user_info.surname}}
       </ion-label>
-      <ion-icon name="open" (click) = "editName()"></ion-icon>
+      <ion-icon name="open" (click) = "UpdateNamesModal()"></ion-icon>
     </ion-item>
     
     <ion-item>
@@ -20,7 +21,7 @@
       <ion-label>
         {{user_info.email}}
       </ion-label>
-      <ion-icon name="open" (click) = "editEmail()"></ion-icon>
+      <ion-icon name="open" (click) = "UpdateEmailModal()"></ion-icon>
     </ion-item>
 
     <ion-item>
@@ -28,7 +29,7 @@
       <ion-label>
         {{user_info.number}}
       </ion-label>
-      <ion-icon name="open" (click) = "editNumber()"></ion-icon>
+      <ion-icon name="open" (click) = "UpdateContractsModal()"></ion-icon>
     </ion-item>
 
     <!-- <ion-item>

@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthServiceService } from 'src/app/Service/auth-service.service';
-import { LoadingController,AlertController } from '@ionic/angular';
+import { LoadingController,AlertController, ModalController } from '@ionic/angular';
+import { Router } from "@angular/router";
+import { UpdateNamesPage } from '../modal/update-names/update-names.page';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UpdateContactsPage } from '../modal/update-contacts/update-contacts.page';
+import { UpdateEmailPage } from '../modal/update-email/update-email.page';
 
 @Component({
   selector: 'app-view-profile',
@@ -9,129 +14,44 @@ import { LoadingController,AlertController } from '@ionic/angular';
 })
 export class ViewProfilePage implements OnInit {
   UserProfile:any = [];
+  Persona = [];
 
   constructor(public viewProfileService: AuthServiceService,
     public loadingController: LoadingController,
-    public Alert:AlertController) { }
+    public Alert:AlertController,
+    public route: Router,
+    public modalController: ModalController) { }
 
   ngOnInit() {
     this.loadingProfile();
   }
 
-  async editName() {
-    const alert = await this.Alert.create({
-      header: 'Alert',
-      inputs: [
-        {
-          name: 'name',
-          type: 'text',
-          placeholder: 'Enter your name'
-        },{
-          name: 'surname',
-          type: 'text',
-          placeholder: 'Enter your surname'
-        },
-      ],
-      // subHeader: 'Subtitle',
-      // message: 'This is an alert message.',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: () => {
-            console.log('Confirm Cancel');
-          }
-        },{
-          text: 'Edit',
-          role: "edit",
-          cssClass: 'secondary',
-          handler: (names) => {
-            // this.viewProfileService.UpdateNames(names.name,names.surname);
-            console.log('Confirm Edit');
-            this.loadingProfile();
-          }
-        },
-      ]
-    });
-
-    await alert.present();
+  back() {
+    this.viewProfileService.Clear();
+    this.route.navigateByUrl('/tabs/profile');
   }
 
-  async editEmail() {
-    const alert = await this.Alert.create({
-      header: 'Alert',
-      inputs: [
-        {
-          name: 'email',
-          type: 'text',
-          placeholder: 'Enter your new location'
-        },
-      ],
-      // subHeader: 'Subtitle',
-      // message: 'This is an alert message.',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: () => {
-            console.log('Confirm Cancel');
-          }
-        },{
-          text: 'Edit',
-          role: "edit",
-          cssClass: 'secondary',
-          handler: (Email) => {
-            // this.viewProfileService.UpdateEmail(Email.email);
-            this.loadingProfile();
-            console.log('Confirm Edit');
-          }
-        },
-      ]
+  async UpdateNamesModal() {
+    const modal = await this.modalController.create({
+      component: UpdateNamesPage,
     });
-
-    await alert.present();
+    return await modal.present();
   }
   
-  async editNumber() {
-    const alert = await this.Alert.create({
-      header: 'Alert',
-      inputs: [
-        {
-          name: 'number',
-          type: 'text',
-          placeholder: 'Enter your contact number',
-          max: 10
-        }
-      ],
-      // subHeader: 'Subtitle',
-      // message: 'This is an alert message.',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: () => {
-            console.log('Confirm Cancel');
-          }
-        },{
-          text: 'Edit',
-          role: "edit",
-          cssClass: 'secondary',
-          handler: (number) => {
-            if(number.number == ""){
-            }else{
-              this.viewProfileService.UpdateNumber(number.number);
-            }
-            this.loadingProfile();
-            console.log('Confirm Edit');
-          }
-        },
-      ]
-    });
+  async UpdateEmailModal() {
+    const modal = await this.modalController.create({
+      component: UpdateEmailPage,
+    })
 
-    await alert.present();
+    return await modal.present();
+  }
+
+  async UpdateContractsModal() {
+    const modal = await this.modalController.create({
+      component: UpdateContactsPage,
+    })
+
+    return await modal.present();
   }
 
   async loadingProfile() {

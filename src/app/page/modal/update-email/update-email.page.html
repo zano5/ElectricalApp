@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>UpdateEmail</ion-title>
+    <ion-icon name="close" (click) = "closeModal()"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <form [formGroup] = "updateEmailForm">
+      <ion-item>
+        <ion-input placeholder="Email" [(ngModel)] = "email" formControlName = "email"></ion-input>
+      </ion-item>
+    </form>
+  </div>
+
+  <div>
+    <ion-button size="large" color="light" [disabled] = "!updateEmailForm.valid" (click) = "updateEmail();closeModal()">Save</ion-button>
+  </div>
+</ion-content>

@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatExpansionModule} from '@angular/material/expansion';
 import * as firebase from "firebase";
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 var firebaseConfig = {
   apiKey: "AIzaSyB83CuKn-QSuzzxN6X8l2L5UKqfeb2NjvA",
@@ -30,7 +31,13 @@ firebase.analytics();
 @NgModule({
   declarations: [AppComponent, TabsPage],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, BrowserAnimationsModule, MatExpansionModule],
+  imports: [BrowserModule,
+     IonicModule.forRoot(), 
+     AppRoutingModule,
+     BrowserAnimationsModule,
+     MatExpansionModule,
+     ReactiveFormsModule,
+     FormsModule],
   providers: [
     StatusBar,
     SplashScreen,
