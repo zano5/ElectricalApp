@@ -50,11 +50,26 @@
                 <div class="error" *ngIf="register.get('name').hasError('required') && register.get('name').touched">
                     Please input your name
                 </div>
+                <ion-item>
+                    <ion-label position="floating">Surname</ion-label>
+                    <ion-input type="text" formControlName="surname" required></ion-input>
+                </ion-item>
+                <div class="error" *ngIf="register.get('surname').hasError('required') && register.get('surname').touched">
+                    Please input your Surname
+                </div>
+                <ion-item>
+                    <ion-label position="floating">Contact Number</ion-label>
+                    <ion-input type="text" formControlName="number" required></ion-input>
+                </ion-item>
+                <div class="error" *ngIf="register.get('number').hasError('required') && register.get('number').touched">
+                    Please input your Number
+                </div>
+
                 <div class="error" *ngIf="register.get('name').hasError('minlength') && register.get('name').touched">
-                    Minimum 4 characters
+                    Minimum 10 characters
                 </div>
                 <div class="error" *ngIf="register.get('name').hasError('maxlength') && register.get('name').touched">
-                    Maximum 30 characters
+                    Maximum 10 characters
                 </div>
 
                 <ion-item>
@@ -88,7 +103,7 @@
                     <ion-label position="floating">Confirm Password</ion-label>
                     <ion-input type="password" formControlName="cpassword"></ion-input>
                 </ion-item>
-
+<p id="pass"></p>
                 <div class="error" *ngIf="register.get('cpassword').hasError('required') && register.get('cpassword').touched">
                     Please confirm you password
                 </div>
@@ -103,7 +118,7 @@
 
                 <div class="error" *ngIf="register.get('cpassword').hasError('mustMatch') ">Passwords must match</div>
                 <br>
-                <ion-button [disabled]="!register.valid" expand="full" shape="round" color="dark" (click)="singIn()">Sign up</ion-button>
+                <ion-button [disabled]="!register.valid" expand="full" shape="round" color="dark" (click)="signUp()">Sign up</ion-button>
                 <p>Already have Account? <a (click)="login()">Sign In</a></p>
 
             </form>

@@ -12,20 +12,41 @@ import { AuthServiceService } from 'src/app/Service/auth-service.service';
 })
 export class ServicesPage implements OnInit {
   ArrayServices;
+  ArrayICTServices;
   imagePath="assets/images/wired.jpg";
-
+  obj : any;
+  obj1 : any;
+  flag : boolean = false;
   constructor(private router: Router,
     public loadingController: LoadingController,
-    public ViewServices: AuthServiceService) { }
+    public ViewServices: AuthServiceService) {
+  
+     }
 
   ngOnInit() {
-    this.loadingServices();
+  // this.ViewServices.getUser();
+  this.obj1 = this.ViewServices.getServiceICT();
+  this.obj1.subscribe((data)=>{
+    this.ArrayICTServices = data;
+    console.log(this.ArrayICTServices)
+    
+  });
+
+ this.loadingServices();
   }
 
 
-  detail(){
+  detail(id : any){
 
-    this.router.navigateByUrl('service-detail');
+    // this.router.navigateByUrl('service-detail')
+    this.flag = true;
+    this.router.navigate(['service-detail'],{queryParams : {key: id, flag : this.flag}} );
+
+  }
+  detail1(id : any){
+
+    // this.router.navigateByUrl('service-detail')
+    this.router.navigate(['service-detail'],{queryParams : {key: id}} );
 
   }
 
@@ -35,10 +56,15 @@ export class ServicesPage implements OnInit {
       // duration: 2000
     });
     await loading.present();
-    this.ViewServices.getServices().then((services) => {
-      this.ArrayServices = services;
+    this.obj = this.ViewServices.getService();
+    this.obj1 = this.ViewServices.getServiceICT();
+    
+    this.obj.subscribe((data)=>{
+      this.ArrayServices = data;
+      console.log(this.ArrayServices)
       loading.dismiss();
-    })
+    });
+  
     console.log('Loading dismissed!');
   }
 

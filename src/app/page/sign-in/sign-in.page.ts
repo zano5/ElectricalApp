@@ -29,9 +29,7 @@ export class SignInPage implements OnInit {
       email:  ['', [Validators.required, Validators.email,Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z0-9-.]+$')]],
       password: ['', Validators.compose([Validators.minLength(6), Validators.maxLength(12), Validators.required])],
     });
-    this.forgotpasswordForm = fb.group({
-      email: ['', Validators.compose([Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z0-9-.]+$'), Validators.required])],
-    })
+   
  
  }
 
@@ -46,18 +44,18 @@ export class SignInPage implements OnInit {
     this.SignInService.getUserName(email);
   }
 
-  signIn(){
-    this.SignInService.logIn(this.email, this.password).then(data => {
-      if (data.operationType === "signIn") {
-        this.router.navigateByUrl('/request');
-        // this.presentToast();
-      } else {
-        this.presentAlert(data);
-      }
-    });
-    this.LoadingRequest();
+  // signIn(){
+  //   this.SignInService.logIn(this.email, this.password).then(data => {
+  //     if (data.operationType === "signIn") {
+  //       this.router.navigateByUrl('/request');
+  //       // this.presentToast();
+  //     } else {
+  //       this.presentAlert(data);
+  //     }
+  //   });
+  //   this.LoadingRequest();
 
-  }
+  // }
 
   async LoadingRequest() {
     const loading = await this.loadingController.create({

@@ -56,9 +56,14 @@ const routes: Routes = [
   {
     path: 'register',
     loadChildren: () => import('./page/register/register.module').then( m => m.RegisterPageModule)
-  },  {
+  },
+  {
     path: 'sign-up',
     loadChildren: () => import('./page/sign-up/sign-up.module').then( m => m.SignUpPageModule)
+  },
+  {
+    path: 'forgot-password',
+    loadChildren: () => import('./page/forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
   },
   {
     path: 'view-profile',

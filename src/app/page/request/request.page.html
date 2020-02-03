@@ -9,28 +9,66 @@
 
 <ion-content>
 
-
+  <div>
+    <p >Reference no : {{ref}}</p>
+  </div>
   <div class="ion-padding">
-
-
+   
     <ion-item>
+      <span position="floating">{{name}}</span>
+  </ion-item>
+  <ion-item>
+      <span position="floating" text-wrap>{{descrp}}</span>
+  </ion-item>
+  <ion-item>
+    <span position="floating" text-wrap>R{{cost}}</span>
+</ion-item>
+    <ion-item color="transparent" class="group">
+      <ion-label position="floating">Address</ion-label>
+     
+      <ion-icon name="pin" style="zoom: 1.5;"   slot="end" (click)="presentModal()" ></ion-icon>
+          <ion-input type="text" (ionInput)="search($event)"  [value]="selectedAddress" clearInput></ion-input>
+      </ion-item>
+      <div style="position: absolute; max-width: 90%; min-width: 90%; z-index: 999; " class="search">
+          <ion-list lines="none" *ngIf="addresses.length > 0" color="lightb" style="background: var(--ion-item-background,var(--ion-background-color, black)); ">
+              <ion-item *ngFor="let address of addresses ; let i=index" (click)="onSelect(address, i)" color="dark">
+                  <ion-icon name="pin" ></ion-icon>
+                  <p class="searchv">{{ address}}</p>
+              </ion-item>
+          </ion-list>
+      
+      </div>
+
+    <!-- <ion-item>
 
       <ion-label position="floating">Location</ion-label>
       <ion-input type="text"></ion-input>
 
-    </ion-item>
+    </ion-item> -->
 
     <ion-item>
       <ion-label>Date:</ion-label>
-    <ion-datetime></ion-datetime>
+    <ion-datetime min="2020-01-01" max="2025-12-31" [(ngModel)]="date"></ion-datetime>
   </ion-item>
 
   <ion-item>
     <ion-label>HH:mm</ion-label>
-    <ion-datetime displayFormat="HH:mm"></ion-datetime>
+    <ion-datetime displayFormat="HH:mm" [(ngModel)]="time"></ion-datetime>
   </ion-item>
+  <ion-item *ngIf="flag; else logOut" lines="none"> 
 
-
+  </ion-item> 
+<ng-template #logOut>
+  <ion-item>
+    <span>Distance : <b>{{KM}} KM</b></span>
+    
+</ion-item>
+<ion-item>
+    <span>Call out fee  : <b>R {{cost1}}</b></span>
+    
+</ion-item>
+</ng-template>
+  
   <ion-item>
 
       <ion-label>Do You Want To Make More Request</ion-label>
