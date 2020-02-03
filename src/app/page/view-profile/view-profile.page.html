@@ -6,30 +6,30 @@
 </ion-header>
 
 <ion-content>
-
-  <ion-list *ngFor = "let user_info of UserProfile">
+<!-- *ngFor = "let user_info of UserArray" -->
+  <ion-list >
     <ion-item>
       <ion-icon name="person" style = "margin-right: 15px;"></ion-icon>
       <ion-label>
-        {{user_info.name}} {{user_info.surname}}
+        {{UserProfile?.name}} {{UserProfile?.surname}}
       </ion-label>
-      <ion-icon name="open" (click) = "UpdateNamesModal()"></ion-icon>
+      <ion-icon name="open" (click) = "UpdateNamesModal(UserProfile)"></ion-icon>
     </ion-item>
     
     <ion-item>
       <ion-icon name="mail" style = "margin-right: 15px;"></ion-icon>
       <ion-label>
-        {{user_info.email}}
+        {{UserProfile?.email}}
       </ion-label>
-      <ion-icon name="open" (click) = "UpdateEmailModal()"></ion-icon>
+      <ion-icon name="open" (click) = "UpdateEmailModal(UserProfile)"></ion-icon>
     </ion-item>
 
     <ion-item>
       <ion-icon name="call" style = "margin-right: 15px;"></ion-icon>
       <ion-label>
-        {{user_info.number}}
+        {{UserProfile?.number}}
       </ion-label>
-      <ion-icon name="open" (click) = "UpdateContractsModal()"></ion-icon>
+      <ion-icon name="open" (click) = "UpdateContractsModal(UserProfile)"></ion-icon>
     </ion-item>
 
     <!-- <ion-item>

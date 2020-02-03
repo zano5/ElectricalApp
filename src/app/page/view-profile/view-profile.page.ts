@@ -6,6 +6,7 @@ import { UpdateNamesPage } from '../modal/update-names/update-names.page';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UpdateContactsPage } from '../modal/update-contacts/update-contacts.page';
 import { UpdateEmailPage } from '../modal/update-email/update-email.page';
+import { database } from 'firebase';
 
 @Component({
   selector: 'app-view-profile',
@@ -13,17 +14,23 @@ import { UpdateEmailPage } from '../modal/update-email/update-email.page';
   styleUrls: ['./view-profile.page.scss'],
 })
 export class ViewProfilePage implements OnInit {
-  UserProfile:any = [];
+  UserProfile:any;
   Persona = [];
 
   constructor(public viewProfileService: AuthServiceService,
     public loadingController: LoadingController,
     public Alert:AlertController,
     public route: Router,
-    public modalController: ModalController) { }
+    public modalController: ModalController) {
+      this.viewProfileService.getUserProfile().subscribe((data) => {
+        this.UserProfile = data;
+        console.log(this.UserProfile);
+    
+      })
+    }
 
   ngOnInit() {
-    this.loadingProfile();
+    // this.loadingProfile();
   }
 
   back() {
@@ -31,24 +38,34 @@ export class ViewProfilePage implements OnInit {
     this.route.navigateByUrl('/tabs/profile');
   }
 
-  async UpdateNamesModal() {
+  async UpdateNamesModal(data) {
     const modal = await this.modalController.create({
       component: UpdateNamesPage,
+      componentProps: {
+        name: data.name,
+        surname: data.surname
+      }
     });
     return await modal.present();
   }
   
-  async UpdateEmailModal() {
+  async UpdateEmailModal(data) {
     const modal = await this.modalController.create({
       component: UpdateEmailPage,
+      componentProps: {
+        email: data.email
+      }
     })
 
     return await modal.present();
   }
 
-  async UpdateContractsModal() {
+  async UpdateContractsModal(data) {
     const modal = await this.modalController.create({
       component: UpdateContactsPage,
+      componentProps: {
+        contacts: data.number
+      }
     })
 
     return await modal.present();
@@ -60,11 +77,11 @@ export class ViewProfilePage implements OnInit {
       // duration: 2000
     });
     await loading.present();
-    this.viewProfileService.getUserProfile().then((data) => {
-      this.UserProfile = data;
-      console.log(this.UserProfile);
-      loading.dismiss();
-    })
+    // this.viewProfileService.getUserProfile().then((data) => {
+    //   this.UserProfile = data;
+    //   console.log(this.UserProfile);
+    //   loading.dismiss();
+    // })
   }
 
 

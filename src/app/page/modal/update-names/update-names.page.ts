@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavParams } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { AuthServiceService } from 'src/app/Service/auth-service.service';
 import { Router } from '@angular/router';
@@ -16,22 +16,29 @@ export class UpdateNamesPage implements OnInit {
   UserData = [];
   FirstName;
   LastName;
+
+  firstN;
+  lastN;
   constructor(public modalController: ModalController,
     public formBuilder: FormBuilder,
     public updateNamesService: AuthServiceService,
-    public route: Router) {
+    public route: Router,
+    private navParams: NavParams) {
       this.updateForm = formBuilder.group({
-        name: ["",[Validators.pattern("^[a-zA-Z]+$")]],
-        surname: ["",[Validators.pattern("[a-zA-Z]+$")]]
+        name: ["",[Validators.required,Validators.pattern("^[a-zA-Z]+$")]],
+        surname: ["",[Validators.required,Validators.pattern("[a-zA-Z]+$")]]
       })
     }
 
   ngOnInit() {
     // this.UserData = this.updateNamesService.returnArray();
+    this.firstN = this.navParams.get('name');
+    this.lastN = this.navParams.get('surname');
   }
 
   UpdateNames() {
     this.updateNamesService.UpdateNames(this.name,this.surname);
+    this.CloseModal() 
   }
 
   async CloseModal() {

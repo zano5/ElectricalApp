@@ -19,6 +19,6 @@ import { UpdateContactsPage } from '../modal/update-contacts/update-contacts.pag
     ReactiveFormsModule
   ],
   declarations: [ViewProfilePage, UpdateNamesPage, UpdateEmailPage, UpdateContactsPage],
-  entryComponents: [UpdateNamesPage, UpdateEmailPage, UpdateContactsPage]
+  entryComponents: [UpdateNamesPage,UpdateEmailPage, UpdateContactsPage]
 })
 export class ViewProfilePageModule {}

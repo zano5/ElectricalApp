@@ -9,7 +9,7 @@
   <div>
     <form [formGroup] = "updateContactsForm">
       <ion-item>
-        <ion-input placeholder="Contacts" [(ngModel)] = "contacts" formControlName = "contacts"></ion-input>
+        <ion-input placeholder="Contacts" value = "{{numbers}}" [(ngModel)] = "contacts" formControlName = "contacts"></ion-input>
       </ion-item>
     </form>
   </div>
