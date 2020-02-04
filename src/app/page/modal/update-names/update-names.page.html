@@ -1,8 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>UpdateNames</ion-title>
+    <ion-icon name="close" (click) = "CloseModal()" slot="end" 
+    style = "margin-right: 20px; width: 20px;height: 20px;"></ion-icon>
   </ion-toolbar>
-  <ion-icon name="close" (click) = "CloseModal()"></ion-icon>
 </ion-header>
 
 <ion-content>
@@ -19,7 +20,11 @@
       </ion-item>
     </form>
 
-    <ion-button color="primary" [disabled] = "!updateForm.valid" (click) = "UpdateNames()">Save</ion-button>
+    <!-- <ion-button color="primary" [disabled] = "!updateForm.valid" (click) = "UpdateNames()">Save</ion-button> -->
+  </div>
+
+  <div style = "text-align: center; margin-top: 20px;" >
+    <ion-button color="dark" [disabled] = "!updateForm.valid" (click) = "UpdateNames()">Save</ion-button>
   </div>
 
 </ion-content>

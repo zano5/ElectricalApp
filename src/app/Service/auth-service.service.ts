@@ -25,19 +25,13 @@ export class AuthServiceService {
   firtName;
   lastName;
   
-  constructor(private router: Router,private afs : AngularFirestore,public afAuth: AngularFireAuth) { }
+  constructor(private router: Router,private afs : AngularFirestore,public afAuth: AngularFireAuth) {
+  }
 
   // The getUser is for checking the currently singned-in user
   getUser(url) {
-    console.log(url)
+
     return firebase.auth().onAuthStateChanged((user) => {
-      // if (user) {
-      //   // User is signed in
-      //   this.router.navigateByUrl(url);
-      // } else {
-      // }
-      console.log(user)
-    firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         // User is signed in
         this.router.navigateByUrl(url);
@@ -45,7 +39,6 @@ export class AuthServiceService {
         this.router.navigateByUrl('/sign-in');
       }
     });
-  })
 }
 
   logIn(email,password) {

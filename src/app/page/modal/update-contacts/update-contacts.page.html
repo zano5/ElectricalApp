@@ -1,7 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>UpdateContacts</ion-title>
-    <ion-icon name="close" (click) = "CloseModal()"></ion-icon>
+    <ion-icon name="close" (click) = "CloseModal()"
+    slot="end" 
+    style = "margin-right: 20px; width: 20px;height: 20px;"></ion-icon>
   </ion-toolbar>
 </ion-header>
 
@@ -9,12 +11,13 @@
   <div>
     <form [formGroup] = "updateContactsForm">
       <ion-item>
+        <ion-icon name="call" style = "margin-right: 15px;"></ion-icon>
         <ion-input placeholder="Contacts" value = "{{numbers}}" [(ngModel)] = "contacts" formControlName = "contacts"></ion-input>
       </ion-item>
     </form>
   </div>
-
-  <div>
-    <ion-button size="large" color="medium" [disabled] = "!updateContactsForm.valid">Save</ion-button>
+  
+  <div style = "text-align: center; margin-top: 20px;" >
+    <ion-button color="dark" [disabled] = "!updateContactsForm.valid" (click) = "updateContacts();CloseModal()">Save</ion-button>
   </div>
 </ion-content>

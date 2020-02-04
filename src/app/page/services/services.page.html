@@ -33,7 +33,7 @@
 <div class="scrolling-wrapper-flexbox">
 
   <div  class="card" *ngFor = "let services of ArrayICTServices" (click)="detail1(services.id)">
-   
+    <img src = "{{services.photoURL}}" alt = "photos"/>
     <span style = "font-size: 15px;">{{services.name}}</span><br>
       </div>
 
