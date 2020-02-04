@@ -12,7 +12,8 @@ import { MapPage } from '../map/map.page';
 export class RequestPage implements OnInit {
   @Input() flag1 :string
   URL = "/sign-in"
-  moreRequest = 'No';
+  moreRequest : boolean = false;
+  moreRequestICT : boolean = false;
   coordinates : any;
   list : any;
   selectedAddress : string;
@@ -20,7 +21,7 @@ export class RequestPage implements OnInit {
   lng;
   user;
   time : string;
-  date : string;
+  date : string ="";
   ref : string;
   addresses = [];
   flag : boolean = true;
@@ -44,10 +45,12 @@ export class RequestPage implements OnInit {
     
   
   }
+  obj : any;
+  obj1 : any;
+  ArrayServices;
+  ArrayICTServices;
 
-
-
-  constructor(private addr : ActivatedRoute,private modalCtrl:ModalController,public requestService: AuthServiceService,private mapboxService :MapService) {
+  constructor(public ViewServices: AuthServiceService,private addr : ActivatedRoute,private modalCtrl:ModalController,public requestService: AuthServiceService,private mapboxService :MapService) {
 
     this.ref = (Math.random()* 100000).toFixed(0) + "AAC";
    }
@@ -74,6 +77,14 @@ export class RequestPage implements OnInit {
     } else {
       this.addresses = [];
     }
+  }
+  but1(){
+    this.moreRequestICT = false; 
+    console.log(this.moreRequestICT)
+  }
+  but(){
+    this.moreRequestICT = true; 
+    console.log(this.moreRequestICT)
   }
 
   onSelect(address, i) {
@@ -117,7 +128,23 @@ export class RequestPage implements OnInit {
 console.log(this.cost)
 console.log(this.descrp)
 console.log(this.name)
-  }
+
+this.obj = this.ViewServices.getService();
+this.obj1 = this.ViewServices.getServiceICT();
+
+this.obj.subscribe((data)=>{
+  this.ArrayServices = data;
+  console.log(this.ArrayServices)
+
+  })
+
+  this.obj1.subscribe((data)=>{
+    this.ArrayICTServices = data;
+    console.log(this.ArrayICTServices)
+  
+    })
+
+}
 
 
   submit(){

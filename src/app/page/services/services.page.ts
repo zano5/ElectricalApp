@@ -17,6 +17,7 @@ export class ServicesPage implements OnInit {
   obj : any;
   obj1 : any;
   flag : boolean = false;
+  run: boolean =false;
   constructor(private router: Router,
     public loadingController: LoadingController,
     public ViewServices: AuthServiceService) {
@@ -55,6 +56,7 @@ export class ServicesPage implements OnInit {
       message: 'loading...',
       // duration: 2000
     });
+    this.run= true;
     await loading.present();
     this.obj = this.ViewServices.getService();
     this.obj1 = this.ViewServices.getServiceICT();
@@ -63,6 +65,7 @@ export class ServicesPage implements OnInit {
       this.ArrayServices = data;
       console.log(this.ArrayServices)
       loading.dismiss();
+      this.run = false;
     });
   
     console.log('Loading dismissed!');

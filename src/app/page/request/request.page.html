@@ -1,13 +1,13 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="service-detail"></ion-back-button>
+      <ion-back-button defaultHref="welcome"></ion-back-button>
   </ion-buttons>
     <ion-title>Request</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
 
   <div>
     <p >Reference no : {{ref}}</p>
@@ -26,7 +26,7 @@
     <ion-item color="transparent" class="group">
       <ion-label position="floating">Address</ion-label>
      
-      <ion-icon name="pin" style="zoom: 1.5;"   slot="end" (click)="presentModal()" ></ion-icon>
+      <!-- <ion-icon name="pin" style="zoom: 1.5;"   slot="end" (click)="presentModal()" ></ion-icon> -->
           <ion-input type="text" (ionInput)="search($event)"  [value]="selectedAddress" clearInput></ion-input>
       </ion-item>
       <div style="position: absolute; max-width: 90%; min-width: 90%; z-index: 999; " class="search">
@@ -72,10 +72,10 @@
   <ion-item>
 
       <ion-label>Do You Want To Make More Request</ion-label>
-      <ion-select  value="moreRequest">
+      <ion-select  value="moreRequestICT">
 
-        <ion-select-option value="No">No</ion-select-option>
-        <ion-select-option value="Yes">Yes</ion-select-option>
+        <ion-select-option  (click)="but1()" value="false">No</ion-select-option>
+        <ion-select-option (click)="but()" value="true">Yes</ion-select-option>
        
       </ion-select>
 
@@ -88,8 +88,8 @@
     <ion-label>Etrical & Material</ion-label>
     <ion-select  [value]="moreRequest">
 
-      <ion-select-option value="No">No</ion-select-option>
-      <ion-select-option value="Yes">Yes</ion-select-option>
+      <ion-select-option value="false">No</ion-select-option>
+      <ion-select-option value="true">Yes</ion-select-option>
      
     </ion-select>
 
@@ -97,12 +97,12 @@
 </ion-item>
 
 
-<ion-item *ngIf="moreRequest == 'Yes'">
+<ion-item *ngIf="moreRequest">
 
   <ion-label>Electrical & Materials</ion-label>
-  <ion-select  multiple="true" value="electrical">
+  <ion-select  multiple="true" value="electrical" *ngFor = "let services of ArrayServices" >
 
-    <ion-select-option value="Item 1">Item 1</ion-select-option>
+    <ion-select-option value="services.name">{{services.name}}</ion-select-option>
     <ion-select-option value="Item 2">Item 2</ion-select-option>
     <ion-select-option value="Item 3">Item 3</ion-select-option>
     <ion-select-option value="Item 4">Item 4</ion-select-option>
@@ -114,12 +114,12 @@
 
 
 
-<ion-item  *ngIf="moreRequest == 'Yes'">
+<ion-item  *ngIf="moreRequestICT">
 
   <ion-label>Information Technology</ion-label>
-  <ion-select multiple="true" value="information">
+  <ion-select multiple="true" value="information"  *ngFor = "let services of ArrayICTServices">
 
-    <ion-select-option value="Item 1">Item 1</ion-select-option>
+    <ion-select-option value="services.name">{{services.name}}</ion-select-option>
     <ion-select-option value="Item 2">Item 2</ion-select-option>
     <ion-select-option value="Item 3">Item 3</ion-select-option>
     <ion-select-option value="Item 4">Item 4</ion-select-option>

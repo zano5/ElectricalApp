@@ -3,7 +3,7 @@
 <ion-content class="ion-padding"  [scrollEvents]="true"
 >
 <!-- <ion-button (click)="ScrollToBottom()"> recent</ion-button> -->
-<ion-fab-button (click)="ScrollToBottom()"><ion-icon name="arrow-round-down"></ion-icon></ion-fab-button>
+<ion-fab-button (click)="ScrollToBottom()" style="position: relative;bottom: 100px;"><ion-icon name="arrow-round-down" ></ion-icon></ion-fab-button>
   <div class="card" *ngFor="let item of request; let i = index">
 
     <div id="indicator"></div>

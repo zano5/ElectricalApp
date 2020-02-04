@@ -1,7 +1,49 @@
 
 
+  <div class="one" *ngIf="run">
 
+    
+     
+      
+          <ion-label>
+              <h3>
+                  <ion-skeleton-text animated style="width: 90%;"></ion-skeleton-text>
+              </h3>
+              <p>
+                  <ion-skeleton-text animated style="width: 90%;"></ion-skeleton-text>
+              </p>
+              <p>
+                  <ion-skeleton-text animated style="width: 90%;"></ion-skeleton-text>
+              </p>
+          </ion-label>
+     
+    
+        <!-- <ion-skeleton-text animated></ion-skeleton-text> -->
+          <ion-thumbnail slot="start"  >
+              <ion-skeleton-text animated style="position: absolute;width: 80%;height: 90%;"></ion-skeleton-text>
+          </ion-thumbnail>
+         
+
+        <ion-thumbnail slot="start" >
+          <ion-skeleton-text animated style="position: absolute;width: 80%;height: 90%;"></ion-skeleton-text>
+      </ion-thumbnail>
+       
+  
+      
+      <ion-label>
+          <h3>
+              <ion-skeleton-text animated style="width: 90%;"></ion-skeleton-text>
+          </h3>
+          <p>
+              <ion-skeleton-text animated style="width: 90%;"></ion-skeleton-text>
+          </p>
+          <p>
+              <ion-skeleton-text animated style="width: 90%;"></ion-skeleton-text>
+          </p>
+      </ion-label>
+  </div>
 <ion-content class="ion-padding">
+
 
 
   <h3>Make Your Request</h3>
@@ -17,8 +59,10 @@
 
    
 <div class="scrolling-wrapper-flexbox">
+  
   <div  class="card"  *ngFor = "let services of ArrayServices" (click)="detail(services.id)" style = "padding: 10px;">
-    <span style = "font-size: 15px;">{{services.name}}</span>
+   <img src={{photoUrl}} alt="avatar">
+    <span style = "font-size: 15px;position: relative;top: 133px;text-align: left;" text-wrap>{{services.name}}</span>
 
   </div>
  
@@ -30,10 +74,12 @@
 <div class="scrolling-wrapper-flexbox">
 
   <div  class="card" *ngFor = "let services of ArrayICTServices" (click)="detail1(services.id)">
-   
-    <span style = "font-size: 15px;">{{services.name}}</span><br>
+    <img src={{photoUrl}} alt="avatar">
+    <span style = "font-size: 15px;position: relative;top: 133px;text-align: left;" text-wrap>{{services.name}}</span><br>
       </div>
 
     </div>
+
+    <ion-skeleton-text animated style="position: absolute;width: 80%;height: 90%;"></ion-skeleton-text>
 
 </ion-content>
