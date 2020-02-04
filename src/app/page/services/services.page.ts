@@ -37,8 +37,7 @@ export class ServicesPage implements OnInit {
 
 
   detail(id : any){
-
-    // this.router.navigateByUrl('service-detail')
+    this.router.navigateByUrl('service-detail')
     this.flag = true;
     this.router.navigate(['service-detail'],{queryParams : {key: id, flag : this.flag}} );
 

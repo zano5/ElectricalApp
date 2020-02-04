@@ -45,17 +45,21 @@ export class SignInPage implements OnInit {
   }
 
   // signIn(){
-  //   this.SignInService.logIn(this.email, this.password).then(data => {
-  //     if (data.operationType === "signIn") {
-  //       this.router.navigateByUrl('/request');
-  //       // this.presentToast();
-  //     } else {
-  //       this.presentAlert(data);
-  //     }
-  //   });
-  //   this.LoadingRequest();
-
+    // this.router.navigateByUrl('/tabs/request')
   // }
+
+  signIn() {
+    this.SignInService.logIn(this.email, this.password).then(data => {
+      if (data.operationType === "signIn") {
+        this.router.navigateByUrl('/request');
+        // this.presentToast();
+      } else {
+        this.presentAlert(data);
+      }
+    });
+    this.LoadingRequest();
+
+  }
 
   async LoadingRequest() {
     const loading = await this.loadingController.create({

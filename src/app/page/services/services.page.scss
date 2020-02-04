@@ -33,8 +33,10 @@ ion-content {
         width: 100%;
         max-width: 400p;
         .card {
+            width: 300px;
+            height: 180px;
             flex: 0 0 auto;
-            background-color: whitesmoke;
+            background-color: grey;
         }
         .scrolling-wrapper-flexbox img {
             width: 100%;

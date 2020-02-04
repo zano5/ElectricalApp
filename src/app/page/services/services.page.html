@@ -1,39 +1,44 @@
-
-
-
 <ion-content class="ion-padding">
 
 
-  <h3>Make Your Request</h3>
+    <h3>Make Your Request</h3>
 
-  <p>Lets assist you make your service Request<br> Where would you like to start?</p>
-
-
+    <p>Lets assist you make your service Request<br> Where would you like to start?</p>
 
 
 
 
-<h5 >Electrical & Materials</h5>
-
-   
-<div class="scrolling-wrapper-flexbox">
-  <div  class="card"  *ngFor = "let services of ArrayServices" (click)="detail(services.id)" style = "padding: 10px;">
-    <span style = "font-size: 15px;">{{services.name}}</span>
-
-  </div>
- 
-    </div>
-
-<h5 >Information Technology</h5>
 
 
-<div class="scrolling-wrapper-flexbox">
+    <h5>Electrical & Materials</h5>
 
-  <div  class="card" *ngFor = "let services of ArrayICTServices" (click)="detail1(services.id)">
-   
-    <span style = "font-size: 15px;">{{services.name}}</span><br>
-      </div>
 
-    </div>
+    <ion-card class="scrolling-wrapper-flexbox">
+        <ion-card-header class="card" style="overflow:hidden;" (click)=" detail(services.id) " *ngFor="let services of ArrayServices " style="padding: 0px; ">
+            <div class="card1" style="width: 100%; height: 100%;" *ngIf="services.name == 'Process level control & security lightening'">
+
+            </div>
+            <div class="card2" style="width: 100%; height: 100%;" *ngIf="services.name == 'Maintenance of transformers'">
+            </div>
+            <div class="card3" style="width: 100%; height: 100%;" *ngIf="services.name == 'Electrin fencing & earthing'"> </div>
+            <div class="card4" style="width: 100%; height: 100%;" *ngIf="services.name == 'plumbing'"> </div>
+            <div class="card5" style="width: 100%; height: 100%;" *ngIf="services.name == 'Regular load testing and balancing'"> </div>
+            <div class="card6" style="width: 100%; height: 100%;" *ngIf="services.name == 'Installation of conduits and trunkin'"> </div>
+            <div class="card7" style="width: 100%; height: 100%;" *ngIf="services.name == 'Routine testing of entire electrical installation'"> </div>
+
+            <h5 class="text "><b>{{services.name}}</b></h5>
+        </ion-card-header>
+    </ion-card>
+
+    <h5>Information Technology</h5>
+
+
+    <ion-card class="scrolling-wrapper-flexbox">
+
+        <ion-card-header class="card" *ngFor="let services of ArrayICTServices" (click)="detail1(services.id)">
+            <h5 style="font-size: 15px;">{{services.name}}</h5><br>
+        </ion-card-header>
+
+    </ion-card>
 
 </ion-content>

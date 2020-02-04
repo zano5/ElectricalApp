@@ -10,16 +10,16 @@ import { ActivatedRoute } from '@angular/router';
 export class ServiceDetailPage implements OnInit {
   ArrayServices;
   ArrayICTServices;
-  docKey ;
-  flag :boolean = false;
-  constructor(private router: Router,private addr : ActivatedRoute, public ViewServices: AuthServiceService) { 
+  docKey;
+  flag: boolean = false;
+  constructor(private router: Router, private addr: ActivatedRoute, public ViewServices: AuthServiceService) {
     // this.ViewServices.getServices().then((services) => {
     //   this.ArrayServices = services;
-     
+
     // })
     // this.ViewServices.getServiceICT().subscribe((services) => {
     //   this.ArrayICTServices = services;
-     
+
     // })
   }
 
@@ -27,42 +27,44 @@ export class ServiceDetailPage implements OnInit {
 
     this.addr.queryParams.subscribe(data => {
       this.docKey = data.key;
+      console.log(data)
       this.flag = data.flag;
-      if(data.flag == "true"){
+      if (data.flag) {
         this.flag = true;
       }
-      else{
+      else {
         this.flag = false;
       }
       console.log(this.flag)
-      console.log(this.docKey)
+      console.log(this.docKey);
+      this.ViewServices.getDoc(this.docKey).subscribe((data) => {
+        console.log(data)
+        this.ArrayServices = data;
+      })
+
+      this.ViewServices.getICTDoc(this.docKey).subscribe((data) => {
+        console.log(data)
+        this.ArrayICTServices = data;
+      })
+
     });
 
-    this.ViewServices.getDoc(this.docKey).subscribe((data) =>{
-      console.log(data)
-      this.ArrayServices = data;
-    })
-
-    this.ViewServices.getICTDoc(this.docKey).subscribe((data) =>{
-      console.log(data)
-      this.ArrayICTServices = data;
-    })
 
   }
 
 
   request() {
 
-    
+
 
     localStorage.clear();
-    if(this.flag == true){
-       console.log(this.flag)
-    localStorage.setItem("name", this.ArrayServices.name);
-    localStorage.setItem("cost", this.ArrayServices.cost);
-    localStorage.setItem("description", this.ArrayServices.description)
+    if (this.flag == true) {
+      console.log(this.ArrayServices.name)
+      // localStorage.setItem("name", this.ArrayServices.name);
+      localStorage.setItem("cost", this.ArrayServices.cost);
+      localStorage.setItem("description", this.ArrayServices.description)
     }
-    else{
+    else {
       console.log(this.ArrayICTServices)
       console.log(this.flag)
       localStorage.setItem("name", this.ArrayICTServices.name);
@@ -71,12 +73,12 @@ export class ServiceDetailPage implements OnInit {
     }
     this.router.navigateByUrl('request');
 
-    
-   
+
+
     // localStorage.setItem("flag", this.flag.toString());
 
     // this.router.navigateByUrl('request');
-    // this.ViewServices.getUser('request');
+    this.ViewServices.getUser('request');
   }
 
 }
