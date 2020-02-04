@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>UpdateContacts</ion-title>
+    <ion-icon name="close" (click) = "CloseModal()"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <form [formGroup] = "updateContactsForm">
+      <ion-item>
+        <ion-input placeholder="Contacts" value = "{{numbers}}" [(ngModel)] = "contacts" formControlName = "contacts"></ion-input>
+      </ion-item>
+    </form>
+  </div>
+
+  <div>
+    <ion-button size="large" color="medium" [disabled] = "!updateContactsForm.valid">Save</ion-button>
+  </div>
+</ion-content>

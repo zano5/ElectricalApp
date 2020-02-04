@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthServiceService } from 'src/app/Service/auth-service.service';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-profile',
@@ -8,13 +9,25 @@ import { AuthServiceService } from 'src/app/Service/auth-service.service';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
-
+  results;
+  ViewProfileURL = '/sign-in';
   constructor(private router: Router,public profileService: AuthServiceService) { }
 
   ngOnInit() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        // User is signed in
+        this.results = 'true';
+      } else {
+        this.results = 'false';
+        // this.router.navigateByUrl('/sign-in');
+      }
+    });
   }
 
-
+Redirect() {
+  // this.profileService.getUser(this.ViewProfileURL);
+}
 
   terms() {
     this.router.navigateByUrl('terms');
@@ -28,7 +41,11 @@ export class ProfilePage implements OnInit {
   }
 
   viewProfile() {
-    this.router.navigateByUrl('view-profile');
+    if(this.results == 'true'){
+      this.router.navigateByUrl('/view-profile');
+    }else{
+      this.router.navigateByUrl('/sign-in');
+    }
   }
   
 
@@ -37,7 +54,7 @@ export class ProfilePage implements OnInit {
     this.profileService.logOut().then((data) => {
       console.log(data);
     });
-    // this.router.navigateByUrl('sign-in')
+    this.router.navigateByUrl('/sign-in');
 
   }
 

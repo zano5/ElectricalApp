@@ -33,6 +33,8 @@ export class ServicesPage implements OnInit {
   });
 
  this.loadingServices();
+
+
   }
 
 

@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>UpdateNames</ion-title>
+  </ion-toolbar>
+  <ion-icon name="close" (click) = "CloseModal()"></ion-icon>
+</ion-header>
+
+<ion-content>
+  <div>
+    <form [formGroup] = "updateForm">
+      <ion-item>
+        <ion-icon name="person" style = "margin-right: 10px;"></ion-icon>
+        <ion-input [(ngModel)] = "name" formControlName = "name" placeholder = "Name" value = "{{firstN}}"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="person" style = "margin-right: 10px;"></ion-icon>
+        <ion-input [(ngModel)] = "surname" formControlName = "surname" placeholder = "Surname" value = "{{lastN}}"></ion-input>
+      </ion-item>
+    </form>
+
+    <ion-button color="primary" [disabled] = "!updateForm.valid" (click) = "UpdateNames()">Save</ion-button>
+  </div>
+
+</ion-content>
