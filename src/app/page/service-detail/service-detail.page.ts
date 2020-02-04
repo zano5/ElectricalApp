@@ -35,20 +35,19 @@ export class ServiceDetailPage implements OnInit {
       else {
         this.flag = false;
       }
-      console.log(this.flag)
-      console.log(this.docKey);
-      this.ViewServices.getDoc(this.docKey).subscribe((data) => {
-        console.log(data)
-        this.ArrayServices = data;
-      })
-
-      this.ViewServices.getICTDoc(this.docKey).subscribe((data) => {
-        console.log(data)
-        this.ArrayICTServices = data;
-      })
-
+      // console.log(this.flag)
+      // console.log(this.docKey)
     });
 
+    this.ViewServices.getDoc(this.docKey).subscribe((data) =>{
+      // console.log(data)
+      this.ArrayServices = data;
+    })
+
+    this.ViewServices.getICTDoc(this.docKey).subscribe((data) =>{
+      // console.log(data)
+      this.ArrayICTServices = data;
+    })
 
   }
 
@@ -58,26 +57,20 @@ export class ServiceDetailPage implements OnInit {
 
 
     localStorage.clear();
-    if (this.flag == true) {
-      console.log(this.ArrayServices.name)
-      // localStorage.setItem("name", this.ArrayServices.name);
-      localStorage.setItem("cost", this.ArrayServices.cost);
-      localStorage.setItem("description", this.ArrayServices.description)
+    if(this.flag == true){
+      //  console.log(this.flag)
+    localStorage.setItem("name", this.ArrayServices.name);
+    localStorage.setItem("cost", this.ArrayServices.cost);
+    localStorage.setItem("description", this.ArrayServices.description)
     }
-    else {
-      console.log(this.ArrayICTServices)
-      console.log(this.flag)
+    else{
+      // console.log(this.ArrayICTServices)
+      // console.log(this.flag)
       localStorage.setItem("name", this.ArrayICTServices.name);
       localStorage.setItem("cost", this.ArrayICTServices.cost);
       localStorage.setItem("description", this.ArrayICTServices.description);
     }
-    this.router.navigateByUrl('request');
-
-
-
     // localStorage.setItem("flag", this.flag.toString());
-
-    // this.router.navigateByUrl('request');
     this.ViewServices.getUser('request');
   }
 
