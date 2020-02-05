@@ -3,6 +3,9 @@ import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms'
 import { Router } from '@angular/router';
 import { MustMatch } from '../module/must-match';
 import { AuthServiceService } from 'src/app/Service/auth-service.service';
+import{AlertController} from '@ionic/angular';
+import { from } from 'rxjs';
+import { async } from 'rxjs/internal/scheduler/async';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.page.html',
@@ -19,7 +22,7 @@ export class SignUpPage implements OnInit {
     number : 0,
   pass : ''}
 
-  constructor(private fb: FormBuilder,  private router: Router,public ViewServices: AuthServiceService) {
+  constructor(private fb: FormBuilder,  private router: Router,public ViewServices: AuthServiceService,private alertcontroller:AlertController) {
 
     this.register = fb.group({
       name: ['', Validators.compose([Validators.pattern('[a-zA-Z ]*'), Validators.minLength(4), Validators.maxLength(30), Validators.required])],
@@ -31,7 +34,8 @@ export class SignUpPage implements OnInit {
     }, {
       validator: MustMatch('password', 'cpassword')
     });
-  
+
+   
   }
 
 signUp(){
@@ -51,5 +55,21 @@ this.ViewServices.addUser(this.user);
   singIn(){
     this.router.navigateByUrl('/sign-in')
   }
+
+  async PresentAlert() {
+    const alert=await this.alertcontroller.create({
+      header:'Alert',
+      message:'You have successfulyy signed up',
+      buttons:['Ok']
+    });
+
+    await alert.present();
+    let result=await alert.onDidDismiss();
+    this.router.navigateByUrl('/sign-in')
+
+
+  
+  }
+
 
 }

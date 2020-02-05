@@ -10,16 +10,16 @@ import { ActivatedRoute } from '@angular/router';
 export class ServiceDetailPage implements OnInit {
   ArrayServices;
   ArrayICTServices;
-  docKey ;
-  flag :boolean = false;
-  constructor(private router: Router,private addr : ActivatedRoute, public ViewServices: AuthServiceService) { 
+  docKey;
+  flag: boolean = false;
+  constructor(private router: Router, private addr: ActivatedRoute, public ViewServices: AuthServiceService) {
     // this.ViewServices.getServices().then((services) => {
     //   this.ArrayServices = services;
-     
+
     // })
     // this.ViewServices.getServiceICT().subscribe((services) => {
     //   this.ArrayICTServices = services;
-     
+
     // })
   }
 
@@ -27,11 +27,12 @@ export class ServiceDetailPage implements OnInit {
 
     this.addr.queryParams.subscribe(data => {
       this.docKey = data.key;
+      console.log(data)
       this.flag = data.flag;
-      if(data.flag == "true"){
+      if (data.flag) {
         this.flag = true;
       }
-      else{
+      else {
         this.flag = false;
       }
       // console.log(this.flag)
@@ -53,7 +54,7 @@ export class ServiceDetailPage implements OnInit {
 
   request() {
 
-    
+
 
     localStorage.clear();
     if(this.flag == true){

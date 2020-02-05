@@ -1,42 +1,44 @@
-
-
-
 <ion-content class="ion-padding">
 
 
-  <h3>Make Your Request</h3>
+    <h3>Make Your Request</h3>
 
-  <p>Lets assist you make your service Request<br> Where would you like to start?</p>
-
-
+    <p>Lets assist you make your service Request<br> Where would you like to start?</p>
 
 
 
 
-<h5 >Electrical & Materials</h5>
-
-   
-<div class="scrolling-wrapper-flexbox">
-  <div>
-  </div>
-  <div  class="card"  *ngFor = "let services of ArrayServices" (click)="detail(services.id)" style = "padding: 10px;">
-    <img src = "{{services.photoURL}}" alt = "photos"/>
-    <span style = "font-size: 15px;">{{services.name}}</span>
-
-  </div>
- 
-    </div>
-
-<h5 >Information Technology</h5>
 
 
-<div class="scrolling-wrapper-flexbox">
+    <h5>Electrical & Materials</h5>
 
-  <div  class="card" *ngFor = "let services of ArrayICTServices" (click)="detail1(services.id)">
-    <img src = "{{services.photoURL}}" alt = "photos"/>
-    <span style = "font-size: 15px;">{{services.name}}</span><br>
-      </div>
 
-    </div>
+    <ion-card class="scrolling-wrapper-flexbox">
+        <ion-card-header class="card" style="overflow:hidden;" (click)=" detail(services.id) " *ngFor="let services of ArrayServices " style="padding: 0px; " [style.backgroundImage]="'url(' + services.photoURL + ')'" style="background-position: center;background-repeat: no-repeat; background-size: cover;">
+            <div class="shade"></div>
+            <div text-center class="card-title">
+                <div id="title">{{services.name}}</div>
+            </div>
+
+            <!-- <img src="{{services.photoURL}}" alt="photos" class="image" /> -->
+            <!-- <p class="text ">{{services.name}}</p> -->
+        </ion-card-header>
+
+    </ion-card>
+
+    <h5>Information Technology</h5>
+
+    <ion-card class="scrolling-wrapper-flexbox">
+        <ion-card-header class="card" *ngFor="let services of ArrayICTServices" (click)="detail1(services.id)" style="padding: 0px; " [style.backgroundImage]="'url(' + services.photoURL + ')'" style="background-position: center;background-repeat: no-repeat; background-size: cover;">
+            <div class="shade"></div>
+            <div text-center class="card-title">
+                <div id="title">{{services.name}}</div>
+            </div>
+            <!-- <img src="{{services.photoURL}}" alt="photos" />
+            <span style="font-size: 15px;">{{services.name}}</span><br> -->
+
+
+        </ion-card-header>
+    </ion-card>
 
 </ion-content>

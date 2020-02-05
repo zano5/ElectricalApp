@@ -1,63 +1,38 @@
 <ion-content>
-    <!-- <div>
-        <img src="/assets/images/scc.jpg">
-    </div>
-
-    <h3 style="text-align: center;">Sign Up</h3>
-<form [formGroup]="registrationform" (ngSubmit)="submit">
-  <ion-item style="margin-top: 1vh;">
-    <ion-label position="floating">
-        Username
-    </ion-label>
-    <ion-input formControlName="Username" autocapitalize inputmode="text"></ion-input>
-</ion-item>
-
-<ion-item style="margin-top: 1vh;">
-    <ion-label position="floating">
-        Email
-    </ion-label>
-    <ion-input  formControlName="Email"></ion-input>
-</ion-item>
-
-<ion-item style="margin-top: 1vh;">
-    <ion-label position="floating">
-        Password
-    </ion-label>
-    <ion-input type="password" formControlName="password" ></ion-input>
-</ion-item>
-
-<ion-item style="margin-top: 1vh;">
-    <ion-label position="floating">
-        Confirm Password
-    </ion-label>
-    <ion-input type="Confirm Password" formControlName="Confirm Password"></ion-input>
-</ion-item>
-</form>
-  
-    <ion-button [disabled]="!register.valid" expand="full" shape="round" color="dark" (click)="singIn()">Sign up</ion-button> -->
-
-
+    <br>
     <ion-row>
         <ion-col text-center>
             <div id="logo">
-                <img src="/assets/images/scc.jpg" alt="Avatar" class="imgC">
+                <img src="/assets/images/new logo-1.jpg" alt="Avatar" class="imgC" width="70%" style="position:absolute;left:10%;">
             </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <h1><b><i>Signup</i></b></h1>
             <form [formGroup]="register">
-                <ion-item>
+                <ion-item color="transparent">
                     <ion-label position="floating">Name</ion-label>
                     <ion-input type="text" formControlName="name" required></ion-input>
                 </ion-item>
                 <div class="error" *ngIf="register.get('name').hasError('required') && register.get('name').touched">
                     Please input your name
                 </div>
-                <ion-item>
+                <ion-item color="transparent">
                     <ion-label position="floating">Surname</ion-label>
                     <ion-input type="text" formControlName="surname" required></ion-input>
                 </ion-item>
                 <div class="error" *ngIf="register.get('surname').hasError('required') && register.get('surname').touched">
                     Please input your Surname
                 </div>
-                <ion-item>
+                <ion-item color="transparent">
                     <ion-label position="floating">Contact Number</ion-label>
                     <ion-input type="text" formControlName="number" required></ion-input>
                 </ion-item>
@@ -72,7 +47,7 @@
                     Maximum 10 characters
                 </div>
 
-                <ion-item>
+                <ion-item color="transparent">
                     <ion-label position="floating">Email</ion-label>
                     <ion-input type="email" formControlName="email"></ion-input>
                 </ion-item>
@@ -83,7 +58,7 @@
                     Email address invalid
                 </div>
 
-                <ion-item>
+                <ion-item color="transparent">
                     <ion-label position="floating">Password</ion-label>
                     <ion-input type="password" formControlName="password"></ion-input>
                 </ion-item>
@@ -99,11 +74,11 @@
                     Maximum 12 characters
                 </div>
 
-                <ion-item>
+                <ion-item color="transparent">
                     <ion-label position="floating">Confirm Password</ion-label>
                     <ion-input type="password" formControlName="cpassword"></ion-input>
                 </ion-item>
-<p id="pass"></p>
+                <p id="pass"></p>
                 <div class="error" *ngIf="register.get('cpassword').hasError('required') && register.get('cpassword').touched">
                     Please confirm you password
                 </div>
@@ -118,8 +93,8 @@
 
                 <div class="error" *ngIf="register.get('cpassword').hasError('mustMatch') ">Passwords must match</div>
                 <br>
-                <ion-button [disabled]="!register.valid" expand="full" shape="round" color="dark" (click)="signUp()">Sign up</ion-button>
-                <p>Already have Account? <a (click)="login()">Sign In</a></p>
+                <ion-button [disabled]="!register.valid" expand="full" shape="round" color="dark" (click)="PresentAlert()">Sign up</ion-button>
+                <p>Already have Account? <a (click)="singIn()"> Sign In</a></p>
 
             </form>
         </ion-col>

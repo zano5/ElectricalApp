@@ -4,6 +4,7 @@ import { MapService,Feature } from '../../Service/mapbox.service';
 import { ModalController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { MapPage } from '../map/map.page';
+import{AlertController} from '@ionic/angular';
 @Component({
   selector: 'app-request',
   templateUrl: './request.page.html',
@@ -47,7 +48,7 @@ export class RequestPage implements OnInit {
 
 
 
-  constructor(private addr : ActivatedRoute,private modalCtrl:ModalController,public requestService: AuthServiceService,private mapboxService :MapService) {
+  constructor(private alertcontroller:AlertController, private addr : ActivatedRoute,private modalCtrl:ModalController,public requestService: AuthServiceService,private mapboxService :MapService) {
 
     this.ref = (Math.random()* 100000).toFixed(0) + "AAC";
    }
@@ -136,5 +137,20 @@ console.log(this.name)
 
     this.requestService.addRequest(this.request);
   }
+
+  // async PresentAlert() {
+  //   const alert=await this.alertcontroller.create({
+  //     header:'Alert',
+  //     message:'You  successfulyy signed up',
+  //     buttons:['Ok']
+  //   });
+
+  //   await alert.present();
+  //   let result=await alert.onDidDismiss();
+ 
+
+
+  
+  // }
 
 }
