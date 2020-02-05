@@ -1,33 +1,30 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="tabs/services"></ion-back-button>
-  </ion-buttons>
-    <ion-title>Service</ion-title>
-  </ion-toolbar>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="tabs/services"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Service</ion-title>
+    </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
+    <div class="image_container">
+        <img src="{{ArrayServices?.photoURL}}" alt="photo" />
+        <nav>
+            {{ArrayServices?.name}}
+        </nav>
+    </div>
+    <div class="ion-padding">
 
+        <h5>Description</h5>
+        <!-- <span style = "font-size: 15px;">{{ArrayServices?.description}}</span> -->
+        <p>{{ArrayServices?.description}}</p>
+        <span style="font-size: 15px;">{{ArrayServices?.cost}}</span>
+        <p>{{ArrayICTServices?.description}}</p>
+        <span style="font-size: 15px;">{{ArrayICTServices?.cost}}</span>
+    </div>
 
-
-  <div class="image_container">
-
-
-  </div>
-
-
-<div class="ion-padding">
-
-  <h5>Description</h5>
-  <!-- <span style = "font-size: 15px;">{{ArrayServices?.description}}</span> -->
-  <p>{{ArrayServices?.description}}</p>
-  <span style = "font-size: 15px;">{{ArrayServices?.cost}}</span>
-  <p>{{ArrayICTServices?.description}}</p>
-  <span style = "font-size: 15px;">{{ArrayICTServices?.cost}}</span>
-</div>
-
-<ion-button expand="full" color="dark" (click)="request()" >Request</ion-button>
+    <ion-button expand="full" color="dark" (click)="request()">Request</ion-button>
 
 
 

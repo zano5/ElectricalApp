@@ -17,8 +17,11 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import * as firebase from "firebase";
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { MapPageModule } from '../app/page/map/map.module';
+import { UpdateNamesPage } from './page/modal/update-names/update-names.page';
 var firebaseConfig = {
   apiKey: "AIzaSyB83CuKn-QSuzzxN6X8l2L5UKqfeb2NjvA",
   authDomain: "eletrical-engineer-cms.firebaseapp.com",
@@ -37,6 +40,13 @@ firebase.analytics();
   declarations: [AppComponent, TabsPage],
   entryComponents: [],
   imports: [BrowserModule, MapPageModule,IonicModule.forRoot(),HttpClientModule, AppRoutingModule, BrowserAnimationsModule, MatExpansionModule,
+    BrowserModule,
+     IonicModule.forRoot(), 
+     AppRoutingModule,
+     BrowserAnimationsModule,
+     MatExpansionModule,
+     ReactiveFormsModule,
+     FormsModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule, // firestore
     AngularFireAuthModule, // auth

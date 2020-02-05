@@ -4,6 +4,8 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { Observable } from 'rxjs';
+import { error } from 'protractor';
 @Injectable({
   providedIn: 'root'
 })
@@ -14,34 +16,29 @@ export class AuthServiceService {
   Results:Boolean;
   UserName;
   UserID;
-  // "iJBFolJoORSamW141RcN26MlaKs2"
   UserArray = [];
-
   erroMessage;
+
+  USerIDArray = [];
+  Person = [];
+
+  firtName;
+  lastName;
+  
   constructor(private router: Router,private afs : AngularFirestore,public afAuth: AngularFireAuth) {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        // User is signed in
-        this.router.navigateByUrl("/sign-in");
-      } else {
-        this.router.navigateByUrl("welcome");
-      }
-    })
-   }
+  }
 
   // The getUser is for checking the currently singned-in user
   getUser(url) {
-    console.log(url)
-    return  firebase.auth().onAuthStateChanged((user) => {
+
+    return firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         // User is signed in
-        // this.UserID = user.uid;
         this.router.navigateByUrl(url);
       } else {
         this.router.navigateByUrl('/sign-in');
       }
     });
-  
 }
 
   logIn(email,password) {
@@ -71,17 +68,30 @@ export class AuthServiceService {
   }
 
   getUserProfile() {
-    this.UserID = firebase.auth().currentUser.uid;
-    var docRef = firebase.firestore().collection("user").doc(this.UserID);
-    return docRef.get().then((doc) => {
-      if(doc.exists){
-        this.UserArray.push(doc.data());
-      }else{}
+    // this.UserID = firebase.auth().currentUser.uid;
+    return this.afs.collection("user").doc("iJBFolJoORSamW141RcN26MlaKs2").valueChanges();
+    // var docRef = firebase.firestore().collection("user").doc("iJBFolJoORSamW141RcN26MlaKs2");
+    // return docRef.get().then((doc) => {
+    //   if(doc.exists){
+    //     this.UserArray.push(doc.data());
+    //   }else{}
 
-      return this.UserArray;
-    }).catch((error) => {
-      console.log("Error getting document:", error);
-    });
+    //   return this.UserArray;
+    // }).catch((error) => {
+    //   console.log("Error getting document:", error);
+    // });
+
+    // return new Observable((observer) => {
+    //   docRef.get().then((doc) => {
+    //     if(doc.exists){
+    //       this.UserArray.push(doc.data());
+    //     }else{}
+
+    //     return this.UserArray;
+    //   }).catch((error) => {
+    //     console.log("Error getting document:", error);
+    //   })
+    // })
    
   }
 
@@ -190,11 +200,9 @@ viewRequest(){
   }
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////////////////////////////////////
   UpdateNames(Name,Surname) {
     this.UserID = firebase.auth().currentUser.uid;
-    firebase.firestore().collection("user/").doc(this.UserID).update({
+    return firebase.firestore().collection("user").doc("iJBFolJoORSamW141RcN26MlaKs2").update({
       name: Name,
       surname: Surname
     })
@@ -202,16 +210,38 @@ viewRequest(){
 
   UpdateEmail(Email) {
     this.UserID = firebase.auth().currentUser.uid;
-    firebase.firestore().collection("user/").doc(this.UserID).update({
+    firebase.firestore().collection("user/").doc("iJBFolJoORSamW141RcN26MlaKs2").update({
       email: Email,
     })
+
+    // return new Observable((observer) => {
+    //   firebase.firestore().collection("user/").doc("iJBFolJoORSamW141RcN26MlaKs2").update({
+    //     email: Email,
+    //   })
+    // })
   }
 
   UpdateNumber(Contacts) {
     this.UserID = firebase.auth().currentUser.uid;
-    firebase.firestore().collection("user/").doc(this.UserID).update({
+    return firebase.firestore().collection("user/").doc("iJBFolJoORSamW141RcN26MlaKs2").update({
       email: Contacts,
     })
   }
 
+
+  Clear() {
+    this.UserArray.splice(0,1);
+  }
+
+  ////////////////////////////////////////////////////////////////////////
+  getInfo(name, surname) {
+    this.Person.push({
+      Name: name,
+      Surname: surname
+    })
+  }
+
+  returnArray() {
+    return this.Person;
+  }
 }
