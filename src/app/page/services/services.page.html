@@ -50,12 +50,20 @@
     <h5>Information Technology</h5>
 
     <ion-card class="scrolling-wrapper-flexbox">
+<<<<<<< HEAD
         <ion-card-header class="card" *ngFor="let services of ArrayICTServices" (click)="detail1(services.id)" style="padding: 0px; " [style.backgroundImage]="'url(' + services.photoURL + ')'" style="background-position: center;background-repeat: no-repeat; background-size: cover;">
             <div class="shade"></div>
             <div text-center class="card-title">
                 <div id="title">{{services.name}}</div>
             </div>
      
+=======
+        <ion-card-header class="card" style="overflow:hidden;" *ngFor="let services of ArrayICTServices" (click)="detail1(services.id)" style="padding: 0px; ">
+
+            <img src="{{services.photoURL}}" alt="photos" />
+            <span style="font-size: 15px;" class="text ">{{services.name}}</span><br>
+
+>>>>>>> 3ad1a8777b15fc1855885c95a1bc886a6eb5ea23
 
         </ion-card-header>
     </ion-card>
