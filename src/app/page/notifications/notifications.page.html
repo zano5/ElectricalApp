@@ -1,26 +1,20 @@
-<ion-content class="ion-padding" [scrollEvents]="true">
-    <!-- <ion-button (click)="ScrollToBottom()"> recent</ion-button> -->
-    <ion-fab-button (click)="ScrollToBottom()">
-        <ion-icon name="arrow-round-down"></ion-icon>
-    </ion-fab-button>
-    <div class="card" *ngFor="let item of request; let i = index">
-
-        <div id="indicator"></div>
-
-<<<<<<< HEAD
-<ion-content class="ion-padding"  [scrollEvents]="true"
->
+<ion-content class="ion-padding"  [scrollEvents]="true">
 <!-- <ion-button (click)="ScrollToBottom()"> recent</ion-button> -->
-<ion-fab-button (click)="ScrollToBottom()" style="position: relative;bottom: 100px;"><ion-icon name="arrow-round-down" ></ion-icon></ion-fab-button>
-  <div class="card" *ngFor="let item of request; let i = index">
-=======
+<ion-fab-button (click)="ScrollToBottom()" >
+    <ion-icon name="arrow-round-down" ></ion-icon>
+</ion-fab-button>
+  
+
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+        <ion-infinite-scroll-content>
+          <div class="card" *ngFor="let item of request; let i = index">
+    <div id="indicator"></div> 
         <h2>{{user.name | titlecase}} {{user.surname | titlecase}}</h2>
->>>>>>> bdfba957d0374fe393943fa34e07c7db3418f3b3
 
         <p>Reference Number: {{item.refNo}} </p>
         <p>Service: {{item.service}}</p>
         <p>Cost: R {{item.serviceCost}}</p>
-        <p>Call-Out Fee: R {{item.calloutFee}}</p>
+        <!-- <p>Call-Out Fee: R {{item.calloutFee}}</p> -->
         <p>Request Date: {{item.stamp | date : 'medium'}}</p>
         <ion-row>
             <ion-col>
@@ -42,5 +36,7 @@
 
 
     </div>
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
 
 </ion-content>

@@ -12,6 +12,7 @@ export class ServiceDetailPage implements OnInit {
   ArrayICTServices;
   docKey;
   flag: boolean = false;
+  run: boolean =true;
   constructor(private router: Router, private addr: ActivatedRoute, public ViewServices: AuthServiceService) {
     // this.ViewServices.getServices().then((services) => {
     //   this.ArrayServices = services;
@@ -21,10 +22,16 @@ export class ServiceDetailPage implements OnInit {
     //   this.ArrayICTServices = services;
 
     // })
+    
+    console.log('one')
+  }
+  runs(){
+    setTimeout(() =>{ this.run= false; }, 2000);
+   
   }
 
   ngOnInit() {
-
+    this.runs();
     this.addr.queryParams.subscribe(data => {
       this.docKey = data.key;
       console.log(data)
@@ -48,7 +55,8 @@ export class ServiceDetailPage implements OnInit {
       // console.log(data)
       this.ArrayICTServices = data;
     })
-
+    console.log('two')
+    // this.run= false;
   }
 
 

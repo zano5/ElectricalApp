@@ -80,18 +80,27 @@
        
       </ion-select>
         </ion-item> -->
-        <ion-item>
+        <ion-item >
 
-            <ion-label>Do You Want To Make More Request</ion-label>
-            <ion-select value="moreRequest">
+            <ion-label class="ion-text-wrap">Want To Make More ICT Request</ion-label>
+            <ion-select multiple="true" cancelText="Nah"  value="moreRequest" okText="Okay!" >
+                <div class="one" *ngFor = "let services of ArrayICTServices">
 
-              
-      <ion-select-option value="false">No</ion-select-option>
-      <ion-select-option value="true">Yes</ion-select-option>
-     
-    </ion-select>
+                    <ion-select-option value="bacon">{{services.name}}</ion-select-option>
+                </div>
 
+</ion-select>
+</ion-item>
+<ion-item >
 
+    <ion-label  class="ion-text-wrap">Want To Make More Electrical Request</ion-label>
+    <ion-select multiple="true" cancelText="Nah"  value="moreRequest" okText="Okay!">
+      
+
+            <ion-select-option value="bacon"  (click)="run(services)" *ngFor = "let services of ArrayServices; let i = index" >{{services.name}}</ion-select-option>
+       
+
+</ion-select>
 </ion-item>
 
     

@@ -64,6 +64,9 @@ export class RequestPage implements OnInit {
     });
     return await modal.present();
   }
+  run(i){
+console.log(i)
+  }
 
   search(event: any) {
     const searchTerm = event.target.value.toLowerCase();
@@ -109,13 +112,13 @@ export class RequestPage implements OnInit {
       console.log(data);
       this.KM = data.KM;
       console.log(data.lng + "  " + data.lat);
-      this.request.coords = [data.lng,data.lat];
+      // this.request.coords = [data.lng,data.lat];
       // console.log(this.request);
     
-      this.request.distance = this.KM;
+      // this.request.distance = this.KM;
       this.cost1 = this.KM * 5;
       // console.log(this.cost1);
-      this.request.calloutFee = this.cost1;
+      // this.request.calloutFee = this.cost1;
     })
 
     let name = localStorage.getItem("name");

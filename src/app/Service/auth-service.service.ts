@@ -120,7 +120,7 @@ export class AuthServiceService {
             console.log(item);
             console.log("request added successful ..");
             console.log(item.stamp);
-            alert("Transaction "+ item.refNo +"is currently being processed and Request was recieved succesfully ..");
+            alert("Transaction "+ item.refNo +" is currently being processed and Request was recieved succesfully ..");
             // console.log(item.description);
             this.router.navigateByUrl('tabs/notifications');
     
