@@ -25,6 +25,10 @@ export class ProfilePage implements OnInit {
     });
   }
 
+  setURL() {
+    this.profileService.getURL('/view-profile');
+  }
+
 Redirect() {
   // this.profileService.getUser(this.ViewProfileURL);
 }

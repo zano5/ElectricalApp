@@ -13,6 +13,7 @@ export class SignInPage implements OnInit {
   email;
   password;
 
+  url;
   public loginForm: FormGroup;
   public forgotpasswordForm: FormGroup;
   isForgotPassword: boolean = true;
@@ -34,6 +35,8 @@ export class SignInPage implements OnInit {
  }
 
   ngOnInit() {
+    this.url = this.SignInService.returnURL();
+    console.log(this.url);
   }
 
   home() {
@@ -47,6 +50,11 @@ export class SignInPage implements OnInit {
   signIn(){
     this.SignInService.logIn(this.email, this.password).then(data => {
       if (data.operationType === "signIn") {
+        // if(this.url == '/view-profile'){
+        //   this.router.navigateByUrl('/view-profile');
+        // }else{
+        //   this.router.navigateByUrl('/request');
+        // }
         this.router.navigateByUrl('/request');
         // this.presentToast();
       } else {
