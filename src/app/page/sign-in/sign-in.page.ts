@@ -35,8 +35,6 @@ export class SignInPage implements OnInit {
  }
 
   ngOnInit() {
-    this.url = this.SignInService.returnURL();
-    console.log(this.url);
   }
 
   home() {
@@ -47,19 +45,6 @@ export class SignInPage implements OnInit {
     this.SignInService.getUserName(email);
   }
 
-  // signIn(){
-  //   this.SignInService.logIn(this.email, this.password).then(data => {
-  //     if (data.operationType === "signIn") {
-  //       this.router.navigateByUrl('/request');
-  //       // this.presentToast();
-  //     } else {
-  //       this.presentAlert(data);
-  //     }
-  //   });
-  //   this.LoadingRequest();
-
-  // }
-
   signIn() {
     this.SignInService.logIn(this.email, this.password).then(data => {
       if (data.operationType === "signIn") {
@@ -68,6 +53,7 @@ export class SignInPage implements OnInit {
         // }else{
         //   this.router.navigateByUrl('/request');
         // }
+
         this.router.navigateByUrl('/request');
         // this.presentToast();
       } else {

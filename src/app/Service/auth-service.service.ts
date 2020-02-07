@@ -29,15 +29,7 @@ export class AuthServiceService {
   URL = [];
   constructor(private router: Router,private afs : AngularFirestore,public afAuth: AngularFireAuth) {
   }
-
-  getURL(url) {
-    this.URL = url;
-  }
-
-  returnURL() {
-    return this.URL;
-  }
-
+  
   // The getUser is for checking the currently singned-in user
   getUser(url) {
 
@@ -79,7 +71,7 @@ export class AuthServiceService {
 
   getUserProfile() {
     // this.UserID = firebase.auth().currentUser.uid;
-    return this.afs.collection("user").doc("iJBFolJoORSamW141RcN26MlaKs2").valueChanges();
+    return this.afs.collection("user").doc(this.afAuth.auth.currentUser.uid).valueChanges();
     // var docRef = firebase.firestore().collection("user").doc("iJBFolJoORSamW141RcN26MlaKs2");
     // return docRef.get().then((doc) => {
     //   if(doc.exists){
@@ -213,16 +205,15 @@ viewRequest(){
   ///////////////////////////////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////////////////////////////
   UpdateNames(Name,Surname) {
-    this.UserID = firebase.auth().currentUser.uid;
-    return firebase.firestore().collection("user").doc("iJBFolJoORSamW141RcN26MlaKs2").update({
+    // this.UserID = firebase.auth().currentUser.uid;
+    return firebase.firestore().collection("user").doc(this.afAuth.auth.currentUser.uid).update({
       name: Name,
       surname: Surname
     })
   }
 
   UpdateEmail(Email) {
-    this.UserID = firebase.auth().currentUser.uid;
-    firebase.firestore().collection("user/").doc("iJBFolJoORSamW141RcN26MlaKs2").update({
+    firebase.firestore().collection("user/").doc(this.afAuth.auth.currentUser.uid).update({
       email: Email,
     })
 
@@ -234,8 +225,7 @@ viewRequest(){
   }
 
   UpdateNumber(Contacts) {
-    this.UserID = firebase.auth().currentUser.uid;
-    return firebase.firestore().collection("user/").doc("iJBFolJoORSamW141RcN26MlaKs2").update({
+    return firebase.firestore().collection("user/").doc(this.afAuth.auth.currentUser.uid).update({
       email: Contacts,
     })
   }
