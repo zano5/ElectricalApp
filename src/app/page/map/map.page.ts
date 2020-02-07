@@ -48,6 +48,7 @@ export class MapPage implements OnInit {
   dismiss() {
     // using the injected ModalController this page
     // can "dismiss" itself and optionally pass back data
+    this.router.navigateByUrl('tabs/services');
     this.modalCtrl.dismiss({
       'dismissed': true
     });
@@ -56,7 +57,7 @@ export class MapPage implements OnInit {
     let lng = this.obj1.lng;
     let lat = this.obj1.lat;
    console.log(this.obj1)
-    this.router.navigate(['request'] ,{queryParams : {KM: this.KM, lng : lng, lat : lat}} );
+    // this.router.navigate(['request'] ,{queryParams : {KM: this.KM, lng : lng, lat : lat}} );
   }
 
   ionViewDidEnter() {

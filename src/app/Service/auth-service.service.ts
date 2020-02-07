@@ -122,7 +122,7 @@ export class AuthServiceService {
             console.log(item);
             console.log("request added successful ..");
             console.log(item.stamp);
-            alert("Transaction "+ item.refNo +"is currently being processed and Request was recieved succesfully ..");
+            alert("Transaction "+ item.refNo +" is currently being processed and Request was recieved succesfully ..");
             // console.log(item.description);
             this.router.navigateByUrl('tabs/notifications');
     
@@ -202,8 +202,6 @@ viewRequest(){
   }
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////////////////////////////////////
   UpdateNames(Name,Surname) {
     // this.UserID = firebase.auth().currentUser.uid;
     return firebase.firestore().collection("user").doc(this.afAuth.auth.currentUser.uid).update({
@@ -235,9 +233,6 @@ viewRequest(){
     this.UserArray.splice(0,1);
   }
 
-  ////////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   getInfo(name, surname) {
     this.Person.push({

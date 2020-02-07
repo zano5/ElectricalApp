@@ -6,15 +6,35 @@
         <ion-title>Service</ion-title>
     </ion-toolbar>
 </ion-header>
+<div class="ion-padding" *ngIf="run" style="position: relative;width: 100%;height: 100%;">
+
+    <ion-skeleton-text animated style="position: absolute;width: 90%;height: 37%;top: 15px; margin-left: 5px;"></ion-skeleton-text>
+   
+        <h4>
+           <ion-skeleton-text animated style="position: absolute;width: 90%;height: 5%;bottom: 210px;margin-top: 5px;"></ion-skeleton-text>
+       </h4>
+       <br><br>
+       <h3>
+        <ion-skeleton-text animated style="position: absolute;width: 90%;height: 5%;bottom: 160px;margin-top: 5px;"></ion-skeleton-text>
+    </h3>
+    
+    <h3>
+        <ion-skeleton-text animated style="position: absolute;width: 90%;height: 5%;bottom: 290px;margin-top: 5px;"></ion-skeleton-text>
+    </h3>
+    </div>
 
 <ion-content padding>
     <div class="image_container">
+        <!-- <div class="shade"></div> -->
         <img src="{{ArrayServices?.photoURL}}" alt="photo" />
-        <nav>
-            {{ArrayServices?.name}}
-        </nav>
+        <h5>{{ArrayServices?.name}} </h5>
     </div>
+
+    <br>
+    <br>
+    <br>
     <div class="ion-padding">
+
 
         <h5>Description</h5>
         <!-- <span style = "font-size: 15px;">{{ArrayServices?.description}}</span> -->

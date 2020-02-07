@@ -45,7 +45,7 @@ export class SignInPage implements OnInit {
     this.SignInService.getUserName(email);
   }
 
-  signIn() {
+  signIn(){
     this.SignInService.logIn(this.email, this.password).then(data => {
       if (data.operationType === "signIn") {
         // if(this.url == '/view-profile'){
@@ -63,6 +63,19 @@ export class SignInPage implements OnInit {
     this.LoadingRequest();
 
   }
+
+  // signIn() {
+  //   this.SignInService.logIn(this.email, this.password).then(data => {
+  //     if (data.operationType === "signIn") {
+  //       this.router.navigateByUrl('/request');
+  //       // this.presentToast();
+  //     } else {
+  //       this.presentAlert(data);
+  //     }
+  //   });
+  //   this.LoadingRequest();
+
+  // }
 
   async LoadingRequest() {
     const loading = await this.loadingController.create({

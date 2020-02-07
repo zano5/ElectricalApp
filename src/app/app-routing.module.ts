@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'welcome', pathMatch: 'full' },
+  // { path: '', redirectTo: 'welcome', pathMatch: 'full' },
   { path: 'home', loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)},
   {
     path: 'welcome',
@@ -41,10 +41,10 @@ const routes: Routes = [
     path: 'request',
     loadChildren: () => import('./page/request/request.module').then( m => m.RequestPageModule)
   },
-  {
-    path: 'map',
-    loadChildren: () => import('./page/map/map.module').then( m => m.MapPageModule)
-  },
+  // {
+  //   path: 'map',
+  //   loadChildren: () => import('./page/map/map.module').then( m => m.MapPageModule)
+  // },
   {
     path: 'contact',
     loadChildren: () => import('./page/contact/contact.module').then( m => m.ContactPageModule)
