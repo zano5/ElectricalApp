@@ -80,7 +80,11 @@ const routes: Routes = [
   {
     path: 'update-contacts',
     loadChildren: () => import('./page/modal/update-contacts/update-contacts.module').then( m => m.UpdateContactsPageModule)
+  },  {
+    path: 'request1',
+    loadChildren: () => import('./page/request1/request1.module').then( m => m.Request1PageModule)
   },
+
 
 
  

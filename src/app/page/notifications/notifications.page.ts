@@ -4,8 +4,10 @@ import { Plugins, FilesystemDirectory, FilesystemEncoding } from '@capacitor/cor
 import { Downloader, DownloadRequest, NotificationVisibility } from '@ionic-native/downloader/ngx';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
 import { IonContent } from '@ionic/angular';
 import { IonInfiniteScroll } from '@ionic/angular';
+import { observable } from 'rxjs';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 const { Filesystem } = Plugins;
 @Component({
@@ -19,8 +21,9 @@ export class NotificationsPage implements OnInit {
   URL = '/sign-in'
   request : any;
   user : any;
+  arr : [];
   
-  constructor(public service: AuthServiceService,private downloader: Downloader) { }
+  constructor(private previewAnyFile: PreviewAnyFile,public service: AuthServiceService,private downloader: Downloader) { }
 
   loadData(event) {
     setTimeout(() => {
@@ -33,6 +36,16 @@ export class NotificationsPage implements OnInit {
         event.target.disabled = true;
       }
     }, 500);
+  }
+  runPdf(){
+    alert('download strating ..')
+    var url = "https://firebasestorage.googleapis.com/v0/b/eletrical-engineer-cms.appspot.com/o/pdf%2FSCC(PTY)LTD%20COMPANY%20PROFILE%202019%20%20(1).pdf?alt=media&token=f3c42c70-3a3a-4574-b53a-b3b28f2e6cad";
+
+    this.previewAnyFile.preview(url).then(() => {
+
+    },(err) =>{
+      alert(JSON.stringify(err));
+    })
   }
 
   toggleInfiniteScroll() {
@@ -47,9 +60,12 @@ export class NotificationsPage implements OnInit {
       this.user = user;
       console.log(this.user);
     })
-
+    this.arr = [];
     this.service.viewRequest().subscribe((err) =>{
       this.request = err;
+      this.arr = this.request;
+      
+      console.log(this.arr)
       console.log(this.request);
     })
   }
@@ -173,7 +189,9 @@ async fileRead() {
 
       console.log(this.request[i])
       console.log("*** print pdf")
-    pdfMake.createPdf(invoiceDoc).download();
+    pdfMake.createPdf(invoiceDoc).download().then((err) =>{
+      console.log(err)
+    });
 
     // let contents = await Filesystem.readFile({
     //   path: 'secrets/text.txt',

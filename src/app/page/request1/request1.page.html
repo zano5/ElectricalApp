@@ -1,0 +1,124 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="service-detail"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Request</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+<div>
+  <p >Reference no : {{ref}}</p>
+</div>
+<div class="ion-padding">
+
+  <ion-item >
+
+    <ion-label  class="ion-text-wrap">Want To Make More Electrical Request</ion-label>
+    <ion-select multiple="true" cancelText="Nah"  value="moreRequest" okText="Okay!">
+      
+  
+            <ion-select-option value="bacon"  (click)="run(services)" *ngFor = "let services of ArrayServices; let i = index" >{{services.name}}</ion-select-option>
+       
+  
+  </ion-select>
+  </ion-item>
+          <ion-item >
+
+            <ion-label class="ion-text-wrap">Want To Make More ICT Request</ion-label>
+            <ion-select multiple="true" cancelText="Nah"  value="moreRequest" okText="Okay!" >
+                <div class="one" *ngFor = "let services of ArrayICTServices">
+  
+                    <ion-select-option value="bacon">{{services.name}}</ion-select-option>
+                </div>
+  
+  </ion-select>
+  </ion-item>
+  
+  <!-- <ion-item>
+    <span position="floating">{{name}}</span>
+</ion-item>
+<ion-item>
+    <span position="floating" text-wrap>{{descrp}}</span>
+</ion-item>
+<ion-item>
+  <span position="floating" text-wrap>{{cost}}</span>
+</ion-item> -->
+
+  <ion-item color="transparent" class="group">
+    <ion-label position="floating">Address</ion-label>
+   
+    <!-- <ion-icon name="pin" style="zoom: 1.5;"   slot="end" (click)="presentModal()" ></ion-icon> -->
+        <ion-input type="text" (ionInput)="search($event)"  [value]="selectedAddress" clearInput></ion-input>
+    </ion-item>
+    <div style="position: absolute; max-width: 90%; min-width: 90%; z-index: 999; " class="search">
+        <ion-list lines="none" *ngIf="addresses.length > 0" color="lightb" style="background: var(--ion-item-background,var(--ion-background-color, black)); ">
+            <ion-item *ngFor="let address of addresses ; let i=index" (click)="onSelect(address, i)" color="dark">
+                <ion-icon name="pin" ></ion-icon>
+                <p class="searchv">{{ address}}</p>
+            </ion-item>
+        </ion-list>
+    
+    </div>
+
+  <!-- <ion-item>
+
+    <ion-label position="floating">Location</ion-label>
+    <ion-input type="text"></ion-input>
+
+  </ion-item> -->
+
+      <ion-item color="transparent">
+          <ion-label>Date:</ion-label>
+          <ion-datetime min="2020-01-01" max="2025-12-31" [(ngModel)]="date"></ion-datetime>
+      </ion-item>
+
+      <ion-item color="transparent">
+          <ion-label>HH:mm</ion-label>
+          <ion-datetime displayFormat="HH:mm" [(ngModel)]="time"></ion-datetime>
+      </ion-item>
+      
+
+
+
+
+
+      <ion-item *ngIf="moreRequest == 'Yes'">
+
+          <ion-label>Electrical & Materials</ion-label>
+          <ion-select multiple="true" value="electrical">
+
+              <ion-select-option value="Item 4">Item 4</ion-select-option>
+          </ion-select>
+
+      </ion-item>
+
+
+
+
+
+      <ion-item *ngIf="moreRequest == 'Yes'">
+
+          <ion-label>Information Technology</ion-label>
+          <ion-select multiple="true" value="information">
+
+              <ion-select-option value="Item 1">Item 1</ion-select-option>
+              <ion-select-option value="Item 2">Item 2</ion-select-option>
+              <ion-select-option value="Item 3">Item 3</ion-select-option>
+              <ion-select-option value="Item 4">Item 4</ion-select-option>
+
+          </ion-select>
+
+
+      </ion-item>
+
+  </div>
+
+  <ion-button expand="full" color="dark" (click)="submit()">Submit</ion-button>
+
+
+
+
+</ion-content>
