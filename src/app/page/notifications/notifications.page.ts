@@ -1,7 +1,7 @@
 import { Component, OnInit,ViewChild  } from '@angular/core';
 import { AuthServiceService } from 'src/app/Service/auth-service.service';
 import { Plugins, FilesystemDirectory, FilesystemEncoding } from '@capacitor/core';
-import { Downloader, DownloadRequest, NotificationVisibility } from '@ionic-native/downloader/ngx';
+// import { Downloader, DownloadRequest, NotificationVisibility } from '@ionic-native/downloader/ngx';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { IonContent } from '@ionic/angular';
@@ -19,8 +19,8 @@ export class NotificationsPage implements OnInit {
   URL = '/sign-in'
   request : any;
   user : any;
-  
-  constructor(public service: AuthServiceService,private downloader: Downloader) { }
+  // ,private downloader: Downloader
+  constructor(public service: AuthServiceService) { }
 
   loadData(event) {
     setTimeout(() => {
@@ -57,22 +57,22 @@ export class NotificationsPage implements OnInit {
   
   run(){
 
-    var request: DownloadRequest = {
-      uri: 'YOUR_URI',
-      title: 'MyDownload',
-      description: '',
-      mimeType: '',
-      visibleInDownloadsUi: true,
-      notificationVisibility: NotificationVisibility.VisibleNotifyCompleted,
-      destinationInExternalFilesDir: {
-          dirType: 'Downloads',
-          subPath: 'MyFile.apk'
-      }
-  };
+  //   var request: DownloadRequest = {
+  //     uri: 'YOUR_URI',
+  //     title: 'MyDownload',
+  //     description: '',
+  //     mimeType: '',
+  //     visibleInDownloadsUi: true,
+  //     notificationVisibility: NotificationVisibility.VisibleNotifyCompleted,
+  //     destinationInExternalFilesDir: {
+  //         dirType: 'Downloads',
+  //         subPath: 'MyFile.apk'
+  //     }
+  // };
 
-  this.downloader.download(request)
-  .then((location: string) => console.log('File downloaded at:'+location))
-  .catch((error: any) => console.error(error));
+  // this.downloader.download(request)
+  // .then((location: string) => console.log('File downloaded at:'+location))
+  // .catch((error: any) => console.error(error));
 
   }
 async fileRead() {
