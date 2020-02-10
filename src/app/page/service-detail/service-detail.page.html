@@ -1,7 +1,7 @@
 <ion-header>
     <ion-toolbar color="primary">
         <ion-buttons slot="start">
-            <ion-back-button defaultHref="tabs/services"></ion-back-button>
+            <ion-back-button defaultHref="tabs/services" (click) = "clearData()"></ion-back-button>
         </ion-buttons>
         <ion-title>Service</ion-title>
     </ion-toolbar>
@@ -26,8 +26,10 @@
 <ion-content padding>
     <div class="image_container">
         <!-- <div class="shade"></div> -->
-        <img src="{{ArrayServices?.photoURL}}" alt="photo" />
+        <img src="{{ArrayServices?.photoURL}}" alt="photo"/>
+        <!-- <img src = "{{ArrayICTServices?.photoURL}}" alt = "photo"/> -->
         <h5>{{ArrayServices?.name}} </h5>
+        <!-- <h5>{{ArrayICTServices?.name}}</h5> -->
     </div>
 
     <br>

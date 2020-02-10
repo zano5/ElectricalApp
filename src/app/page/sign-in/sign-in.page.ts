@@ -46,15 +46,24 @@ export class SignInPage implements OnInit {
   }
 
   signIn(){
+    this.url = this.SignInService.getURL();
+    console.log(this.url);
+
     this.SignInService.logIn(this.email, this.password).then(data => {
       if (data.operationType === "signIn") {
-        // if(this.url == '/view-profile'){
-        //   this.router.navigateByUrl('/view-profile');
-        // }else{
-        //   this.router.navigateByUrl('/request');
-        // }
+        if(this.url == '/tabs/profile'){
+          this.router.navigateByUrl('/view-profile');
+        }else if(this.url == '/tabs/profile_logout'){
+          this.router.navigateByUrl('/tabs/profile');
+        }else if(this.url == '/service-detail'){
+          this.router.navigateByUrl('/request');
+        }else if(this.url == '/tabs/notifications') {
+          this.router.navigateByUrl('/tabs/notifications');
+        }else{
+          this.router.navigateByUrl('/tabs/services');
+        }
 
-        this.router.navigateByUrl('/request');
+        // this.router.navigateByUrl('/tabs/services');
         // this.presentToast();
       } else {
         this.presentAlert(data);

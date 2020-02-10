@@ -13,7 +13,10 @@ export class ServiceDetailPage implements OnInit {
   docKey;
   flag: boolean = false;
   run: boolean =true;
-  constructor(private router: Router, private addr: ActivatedRoute, public ViewServices: AuthServiceService) {
+
+  constructor(private router: Router,
+    private addr: ActivatedRoute,
+    public ViewServices: AuthServiceService) {
     // this.ViewServices.getServices().then((services) => {
     //   this.ArrayServices = services;
 
@@ -25,9 +28,18 @@ export class ServiceDetailPage implements OnInit {
     
     console.log('one')
   }
+
+  clearData() {
+    this.ArrayServices = null;
+    this.ArrayICTServices = null;
+  }
+
+  redirect() {
+    this.ViewServices.setURL('/service-detail')
+  }
+
   runs(){
     setTimeout(() =>{ this.run= false; }, 2000);
-   
   }
 
   ngOnInit() {
@@ -52,7 +64,7 @@ export class ServiceDetailPage implements OnInit {
     })
 
     this.ViewServices.getICTDoc(this.docKey).subscribe((data) =>{
-      // console.log(data)
+      console.log(data)
       this.ArrayICTServices = data;
     })
     console.log('two')

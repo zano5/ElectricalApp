@@ -7,7 +7,7 @@
 <ion-content>
 
   <ion-list>
-    <ion-item detail="true" (click)="viewProfile()">
+    <ion-item detail="true" (click)="viewProfile();Redirect()">
       
       Profile
     </ion-item>
@@ -26,7 +26,7 @@
     </ion-item>
 
 
-    <ion-item (click)="signOut()" *ngIf = "results == 'true'">
+    <ion-item (click)="signOut();logOutRedirect()" *ngIf = "results == 'true'">
 
       Log Out
      
