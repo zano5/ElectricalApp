@@ -26,10 +26,10 @@
 <ion-content padding>
     <div class="image_container">
         <!-- <div class="shade"></div> -->
-        <img src="{{ArrayServices?.photoURL}}" alt="photo"/>
-        <!-- <img src = "{{ArrayICTServices?.photoURL}}" alt = "photo"/> -->
+        <img src="{{ArrayServices?.photoURL}}" *ngIf = "!ArrayServices?.length > 0"/>
+        <img src = "{{ArrayICTServices?.photoURL}}" *ngIf = "!ArrayICTServices?.length > 0"/>
         <h5>{{ArrayServices?.name}} </h5>
-        <!-- <h5>{{ArrayICTServices?.name}}</h5> -->
+        <h5>{{ArrayICTServices?.name}}</h5>
     </div>
 
     <br>
