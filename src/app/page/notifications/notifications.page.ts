@@ -67,6 +67,17 @@ export class NotificationsPage implements OnInit {
       
       console.log(this.arr)
       console.log(this.request);
+      let a = 0;
+      // for(a;a < this.request.length;a++) {
+      //   if(this.request[a].ictObj[a].length > "5"){
+      //     console.log(this.request[a].ictObj[a]+ " service booked")
+      //   }
+      //   else{
+      //     console.log("Sorry no service booked")
+      //   }
+        
+      // }
+     
     })
   }
 

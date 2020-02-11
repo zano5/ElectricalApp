@@ -9,6 +9,7 @@
         <ion-infinite-scroll-content>
           <div class="card" *ngFor="let item of request; let i = index">
     <div id="indicator"></div> 
+    <!-- <div class="if" *ngIf="item.ictObj.length"> -->
         <h2>{{user.name | titlecase}} {{user.surname | titlecase}}</h2>
 
         <p>Reference Number: {{item.refNo}} </p>
@@ -33,7 +34,7 @@
 
             </ion-col>
         </ion-row>
-
+    <!-- </div> -->
 
     </div>
         </ion-infinite-scroll-content>

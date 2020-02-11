@@ -1,10 +1,10 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AuthServiceService } from 'src/app/Service/auth-service.service';
-import { MapService,Feature } from '../../Service/mapbox.service';
+import { MapService, Feature } from '../../Service/mapbox.service';
 import { ModalController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { MapPage } from '../map/map.page';
-import{AlertController} from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-request1',
   templateUrl: './request1.page.html',
@@ -12,48 +12,60 @@ import{AlertController} from '@ionic/angular';
 })
 export class Request1Page implements OnInit {
   URL = "/sign-in"
-  moreRequest : boolean = false;
-  moreRequestICT : boolean = false;
-  coordinates : any;
-  list : any;
-  selectedAddress : string;
+  moreRequest: boolean = false;
+  moreRequestICT: boolean = false;
+  coordinates: any;
+  list: any;
+  selectedAddress: string;
   lat;
   lng;
   user;
-  time : string;
-  date : string ="";
-  ref : string;
+  time: string;
+  date: string = "";
+  ref: string;
   addresses = [];
-  flag : boolean = true;
+  flag: boolean = true;
   descrp;;
   name;
   cost1;
   cost;
   KM;
+  ictObj: any = [];
+  eleObj: any = [];
+  dat = new Date();
+  runx: any = [];
+  run1: any = [];
   request = {
-    refNo : "",
-    service : "",
-    serviceDesc : "",
-    serviceCost : "",
-    date : "",
-    stamp : Date.now(),
-    coords: [],
-    time : "",
-    distance : 0,
-    calloutFee : 0,
-    uid : ''
-    
-  
+    refNo: "",
+    date: "",
+    stamp: Date.now(),
+    time: "",
+    uid: '',
+    eleObj : [],
+    ictObj : []
   }
-  obj : any;
-  obj1 : any;
+  obj: any;
+  obj1: any;
   ArrayServices;
   ArrayICTServices;
+  day: string;
 
-  constructor(private alertcontroller:AlertController,public ViewServices: AuthServiceService,private addr : ActivatedRoute,private modalCtrl:ModalController,private mapboxService :MapService) {
+  constructor(private alertcontroller: AlertController, public ViewServices: AuthServiceService, private addr: ActivatedRoute, private modalCtrl: ModalController, private mapboxService: MapService) {
 
-    this.ref = (Math.random()* 100000).toFixed(0) + "AAC";
-   }
+    this.ref = (Math.random() * 100000).toFixed(0) + "AAC";
+
+    // "2020-02-10"
+    let month = this.dat.getMonth() + 1;
+    console.log(this.dat.getDate())
+    console.log(this.dat.getMonth())
+    console.log(this.dat.getFullYear())
+    if (this.dat.getMonth() < 10) {
+      this.day = this.dat.getFullYear().toString() + '-0' + month.toString() + '-' + this.dat.getDate().toString();
+    } else {
+      this.day = this.dat.getFullYear().toString() + '-' + month.toString() + '-' + this.dat.getDate().toString();
+    }
+    console.log(this.day)
+  }
 
 
   search(event: any) {
@@ -70,12 +82,12 @@ export class Request1Page implements OnInit {
       this.addresses = [];
     }
   }
-  but1(){
-    this.moreRequestICT = false; 
+  but1() {
+    this.moreRequestICT = false;
     console.log(this.moreRequestICT)
   }
-  but(){
-    this.moreRequestICT = true; 
+  but() {
+    this.moreRequestICT = true;
     console.log(this.moreRequestICT)
   }
 
@@ -92,7 +104,7 @@ export class Request1Page implements OnInit {
     console.log(this.selectedAddress)
     // this.user.address = this.selectedAddress;
     this.addresses = [];
-  } 
+  }
   ngOnInit() {
     // this.requestService.getUser(this.URL);
 
@@ -102,56 +114,73 @@ export class Request1Page implements OnInit {
       // console.log(data.lng + "  " + data.lat);
       // this.request.coords = [data.lng,data.lat];
       // console.log(this.request);
-    
+
       // this.request.distance = this.KM;
       // this.cost1 = this.KM * 5;
       // console.log(this.cost1);
       // this.request.calloutFee = this.cost1;
     })
 
-//     let name = localStorage.getItem("name");
-//     let description = localStorage.getItem("description")
-//     let cost = localStorage.getItem("cost");
-//     let flag = localStorage.getItem("flag");
-//     this.name = name;
-//     this.descrp = description;
-//     this.cost = cost;
-//     console.log(flag)
-// console.log(this.cost)
-// console.log(this.descrp)
-// console.log(this.name)
+    //     let name = localStorage.getItem("name");
+    //     let description = localStorage.getItem("description")
+    //     let cost = localStorage.getItem("cost");
+    //     let flag = localStorage.getItem("flag");
+    //     this.name = name;
+    //     this.descrp = description;
+    //     this.cost = cost;
+    //     console.log(flag)
+    // console.log(this.cost)
+    // console.log(this.descrp)
+    // console.log(this.name)
 
-this.obj = this.ViewServices.getService();
-this.obj1 = this.ViewServices.getServiceICT();
+    this.obj = this.ViewServices.getService();
+    this.obj1 = this.ViewServices.getServiceICT();
 
-this.obj.subscribe((data)=>{
-  this.ArrayServices = data;
-  console.log(this.ArrayServices)
+    this.obj.subscribe((data) => {
+      this.ArrayServices = data;
+      console.log(this.ArrayServices)
 
-  })
-
-  this.obj1.subscribe((data)=>{
-    this.ArrayICTServices = data;
-    console.log(this.ArrayICTServices)
-  
     })
 
-}
+    this.obj1.subscribe((data) => {
+      this.ArrayICTServices = data;
+      console.log(this.ArrayICTServices)
 
+    })
 
-  submit(){
+  }
 
+  run(i) {
+    console.log(i)
+  }
 
-    this.request.service = this.name;
-    this.request.serviceDesc = this.descrp;
-    this.request.serviceCost = this.cost;
+  submit() {
+    // let a = this.runx;
+    console.log(this.runx)
+    console.log(this.run1)
+    let a = 0;
+    let b = 0;
+    for (a; a < this.runx.length; a++) {
+
+      console.log(this.runx[a])
+    }
+    for (b; b < this.runx.length; b++) {
+      console.log(this.run1[b])
+    }
+    // let b = a.indexOf("a");
+    // console.log(b)
+    this.request.eleObj = this.runx;
+    this.request.ictObj = this.run1;
+    // this.request.service = this.name;
+    // this.request.serviceDesc = this.descrp;
+    // this.request.serviceCost = this.cost;
     this.request.refNo = this.ref;
-    this.request.date = this.date.substr(0,10);
+    this.request.date = this.date.substr(0, 10);
     // console.log(this.request);
     // console.log(this.time.substr(11,8) + " tyd");
     // console.log(this.date.substr(0,10) + " dag");
-    this.request.time = this.time.substr(11,8);
-    
+    this.request.time = this.time.substr(11, 8);
+
 
     this.ViewServices.addRequest(this.request);
   }
@@ -165,10 +194,10 @@ this.obj.subscribe((data)=>{
 
   //   await alert.present();
   //   let result=await alert.onDidDismiss();
- 
 
 
-  
+
+
   // }
 
 }
