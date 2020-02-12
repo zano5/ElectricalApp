@@ -52,7 +52,7 @@ export class ServicesPage implements OnInit {
 
   }
   runs(){
-    this.router.navigateByUrl('request1');
+    this.router.navigateByUrl('request1/');
   }
 
   async loadingServices() {

@@ -31,6 +31,14 @@ export class AuthServiceService {
   constructor(private router: Router,private afs : AngularFirestore,public afAuth: AngularFireAuth) {
   }
   
+  setURL(url_address) {
+    this.URL = url_address;
+  }
+
+  getURL() {
+    return this.URL;
+  }
+
   // The getUser is for checking the currently singned-in user
   getUser(url) {
 

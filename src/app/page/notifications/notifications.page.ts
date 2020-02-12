@@ -94,22 +94,22 @@ export class NotificationsPage implements OnInit {
   
   run(){
 
-    var request: DownloadRequest = {
-      uri: 'YOUR_URI',
-      title: 'MyDownload',
-      description: '',
-      mimeType: '',
-      visibleInDownloadsUi: true,
-      notificationVisibility: NotificationVisibility.VisibleNotifyCompleted,
-      destinationInExternalFilesDir: {
-          dirType: 'Downloads',
-          subPath: 'MyFile.apk'
-      }
-  };
+  //   var request: DownloadRequest = {
+  //     uri: 'YOUR_URI',
+  //     title: 'MyDownload',
+  //     description: '',
+  //     mimeType: '',
+  //     visibleInDownloadsUi: true,
+  //     notificationVisibility: NotificationVisibility.VisibleNotifyCompleted,
+  //     destinationInExternalFilesDir: {
+  //         dirType: 'Downloads',
+  //         subPath: 'MyFile.apk'
+  //     }
+  // };
 
-  this.downloader.download(request)
-  .then((location: string) => console.log('File downloaded at:'+location))
-  .catch((error: any) => console.error(error));
+  // this.downloader.download(request)
+  // .then((location: string) => console.log('File downloaded at:'+location))
+  // .catch((error: any) => console.error(error));
 
   }
 async fileRead() {
