@@ -16,7 +16,12 @@ export class TabsPage implements OnInit {
 
   redirect() {
     // this.route.navigateByUrl('/tabs/notifications');
+    // this.TabService.setURL('/tabs/notifications');
     this.TabService.getUser(this.notificationURL);
     // console.log(this.TabService.getUser());
+  }
+
+  redirectTabs() {
+    this.TabService.setURL('/tabs/notifications');
   }
 }

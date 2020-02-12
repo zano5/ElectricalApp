@@ -27,6 +27,11 @@ export class ProfilePage implements OnInit {
 
 Redirect() {
   // this.profileService.getUser(this.ViewProfileURL);
+  this.profileService.setURL('/tabs/profile');
+}
+
+logOutRedirect() {
+  this.profileService.setURL('/tabs/profile_logout')
 }
 
   terms() {
