@@ -1,38 +1,50 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Account</ion-title>
-  </ion-toolbar>
+    <ion-toolbar color="danger">
+        <ion-title>Account</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
+<<<<<<< HEAD
+    <ion-list>
+        <ion-item detail="true" (click)="viewProfile()">
+=======
   <ion-list>
     <ion-item detail="true" (click)="viewProfile();Redirect()">
       
       Profile
     </ion-item>
+>>>>>>> 03dbaea7e685310df479cd77a16e416c2675c90a
 
-    <ion-item detail="true" (click)="contactInfo()">
+            Profile
+        </ion-item>
 
-      Contact Details
-    </ion-item>
+        <ion-item detail="true" (click)="contactInfo()">
 
-
-  
-    <ion-item detail="true" (click)="terms()">
-
-      Terms & Conditions
-      
-    </ion-item>
+            Contact Details
+        </ion-item>
 
 
+
+        <ion-item detail="true" (click)="terms()">
+
+<<<<<<< HEAD
+            Terms & Conditions
+=======
     <ion-item (click)="signOut();logOutRedirect()" *ngIf = "results == 'true'">
+>>>>>>> 03dbaea7e685310df479cd77a16e416c2675c90a
 
-      Log Out
-     
-    </ion-item>
+        </ion-item>
 
-  </ion-list>
+
+        <ion-item (click)="signOut()" *ngIf="results == 'true'">
+
+            Log Out
+
+        </ion-item>
+
+    </ion-list>
 
 
 </ion-content>

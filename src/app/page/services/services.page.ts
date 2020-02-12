@@ -55,7 +55,7 @@ export class ServicesPage implements OnInit {
   async loadingServices() {
     const loading = await this.loadingController.create({
       message: 'loading...',
-      // duration: 2000
+      //  duration: 20000
     });
     this.run= true;
     await loading.present();

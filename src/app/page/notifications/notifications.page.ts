@@ -19,8 +19,8 @@ export class NotificationsPage implements OnInit {
   URL = '/sign-in'
   request : any;
   user : any;
-  // ,private downloader: Downloader
-  constructor(public service: AuthServiceService) { }
+  
+  constructor(public service: AuthServiceService ) { }
 
   loadData(event) {
     setTimeout(() => {
@@ -129,13 +129,13 @@ async fileRead() {
       ],
       styles: {
           header: {
-          bold: true,
+          // bold: true,
           fontSize: 20,
           alignment: 'center',
           margin : 20 
           },
           sub_header: {
-          fontSize: 18,
+          fontSize: 12,
           alignment: 'left'
           
           },

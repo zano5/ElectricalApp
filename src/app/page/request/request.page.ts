@@ -51,7 +51,11 @@ export class RequestPage implements OnInit {
   ArrayServices;
   ArrayICTServices;
 
-  constructor(private alertcontroller:AlertController,public ViewServices: AuthServiceService,private addr : ActivatedRoute,private modalCtrl:ModalController,private mapboxService :MapService) {
+  constructor(private alertcontroller:AlertController,
+    public ViewServices: AuthServiceService,
+    private addr : ActivatedRoute,
+    private modalCtrl:ModalController,
+    private mapboxService :MapService) {
 
     this.ref = (Math.random()* 100000).toFixed(0) + "AAC";
    }
