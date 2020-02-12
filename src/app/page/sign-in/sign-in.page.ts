@@ -13,6 +13,7 @@ export class SignInPage implements OnInit {
   email;
   password;
 
+  url;
   public loginForm: FormGroup;
   public forgotpasswordForm: FormGroup;
   isForgotPassword: boolean = true;
@@ -44,7 +45,26 @@ export class SignInPage implements OnInit {
     this.SignInService.getUserName(email);
   }
 
-  // signIn(){
+  signIn(){
+    this.SignInService.logIn(this.email, this.password).then(data => {
+      if (data.operationType === "signIn") {
+        // if(this.url == '/view-profile'){
+        //   this.router.navigateByUrl('/view-profile');
+        // }else{
+        //   this.router.navigateByUrl('/request');
+        // }
+
+        this.router.navigateByUrl('/request');
+        // this.presentToast();
+      } else {
+        this.presentAlert(data);
+      }
+    });
+    this.LoadingRequest();
+
+  }
+
+  // signIn() {
   //   this.SignInService.logIn(this.email, this.password).then(data => {
   //     if (data.operationType === "signIn") {
   //       this.router.navigateByUrl('/request');
@@ -56,19 +76,6 @@ export class SignInPage implements OnInit {
   //   this.LoadingRequest();
 
   // }
-
-  signIn() {
-    this.SignInService.logIn(this.email, this.password).then(data => {
-      if (data.operationType === "signIn") {
-        this.router.navigateByUrl('/request');
-        // this.presentToast();
-      } else {
-        this.presentAlert(data);
-      }
-    });
-    this.LoadingRequest();
-
-  }
 
   async LoadingRequest() {
     const loading = await this.loadingController.create({

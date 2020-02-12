@@ -1,9 +1,11 @@
 import { Component, OnInit,ViewChild  } from '@angular/core';
 import { AuthServiceService } from 'src/app/Service/auth-service.service';
 import { Plugins, FilesystemDirectory, FilesystemEncoding } from '@capacitor/core';
+// import { Downloader, DownloadRequest, NotificationVisibility } from '@ionic-native/downloader/ngx';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { IonContent } from '@ionic/angular';
+import { IonInfiniteScroll } from '@ionic/angular';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 const { Filesystem } = Plugins;
 @Component({
@@ -12,15 +14,33 @@ const { Filesystem } = Plugins;
   styleUrls: ['./notifications.page.scss'],
 })
 export class NotificationsPage implements OnInit {
-  @ViewChild(IonContent,{static : true}) content: IonContent;
+  // @ViewChild(IonContent,{static : true}) content: IonContent;
+  @ViewChild(IonInfiniteScroll,{static : true}) infiniteScroll: IonInfiniteScroll;
   URL = '/sign-in'
   request : any;
   user : any;
-  constructor(public service: AuthServiceService) { }
+  
+  constructor(public service: AuthServiceService ) { }
 
-  ScrollToBottom(){
-    this.content.scrollToBottom(1500);
+  loadData(event) {
+    setTimeout(() => {
+      console.log('Done');
+      event.target.complete();
+
+      // App logic to determine if all data is loaded
+      // and disable the infinite scroll
+      if (this.request.length == 1000) {
+        event.target.disabled = true;
+      }
+    }, 500);
   }
+
+  toggleInfiniteScroll() {
+    this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
+  }
+  // ScrollToBottom(){
+  //   this.content.scrollToBottom(1500);
+  // }
   ngOnInit() {
     // this.NotificationService.getUser(this.URL)
     this.service.gotUser().subscribe((user) =>{
@@ -35,6 +55,26 @@ export class NotificationsPage implements OnInit {
   }
 
   
+  run(){
+
+  //   var request: DownloadRequest = {
+  //     uri: 'YOUR_URI',
+  //     title: 'MyDownload',
+  //     description: '',
+  //     mimeType: '',
+  //     visibleInDownloadsUi: true,
+  //     notificationVisibility: NotificationVisibility.VisibleNotifyCompleted,
+  //     destinationInExternalFilesDir: {
+  //         dirType: 'Downloads',
+  //         subPath: 'MyFile.apk'
+  //     }
+  // };
+
+  // this.downloader.download(request)
+  // .then((location: string) => console.log('File downloaded at:'+location))
+  // .catch((error: any) => console.error(error));
+
+  }
 async fileRead() {
   let contents = await Filesystem.readFile({
     path: 'secrets/text.txt',
@@ -57,9 +97,9 @@ async fileRead() {
       { text: 'Electrical Technology Supplier & Services Provider', style: 'sub_header' },
       { text: 'WEBSITE: under-construction', style: 'url' },
     'Service' + 'Cost ',
-      this.request[i].service  + this.request[i].service.cost,
+      this.request[i].service  +
       this.request[i].serviceDesc,
-      this.request[i].distance +' KM', 'R '+this.request[i].calloutFee,
+     
       {
       style: 'tableExample',
 			table: {
@@ -89,13 +129,13 @@ async fileRead() {
       ],
       styles: {
           header: {
-          bold: true,
+          // bold: true,
           fontSize: 20,
           alignment: 'center',
           margin : 20 
           },
           sub_header: {
-          fontSize: 18,
+          fontSize: 12,
           alignment: 'left'
           
           },
@@ -134,6 +174,30 @@ async fileRead() {
       console.log(this.request[i])
       console.log("*** print pdf")
     pdfMake.createPdf(invoiceDoc).download();
+
+    // let contents = await Filesystem.readFile({
+    //   path: 'secrets/text.txt',
+    //   directory: FilesystemDirectory.Documents,
+    //   encoding: FilesystemEncoding.UTF8
+    // });
+    // console.log(contents);
+
+
+  //   var request: DownloadRequest = {
+  //     uri: pdfMake.createPdf(invoiceDoc).download(),
+  //     title: 'MyDownload',
+  //     description: 'first',
+  //     mimeType: '',
+  //     visibleInDownloadsUi: true,
+  //     notificationVisibility: NotificationVisibility.VisibleNotifyCompleted,
+  //     destinationInExternalFilesDir: {
+  //         dirType: 'Downloads',
+  //         subPath: 'MyFile.apk'
+  //     }
+  // };
+  //   this.downloader.download(request)
+  // .then((location: string) => console.log('File downloaded at:'+location))
+  // .catch((error: any) => console.error(error));
 
   }
 

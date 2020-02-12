@@ -13,7 +13,8 @@ import{AlertController} from '@ionic/angular';
 export class RequestPage implements OnInit {
   @Input() flag1 :string
   URL = "/sign-in"
-  moreRequest = 'No';
+  moreRequest : boolean = false;
+  moreRequestICT : boolean = false;
   coordinates : any;
   list : any;
   selectedAddress : string;
@@ -21,7 +22,7 @@ export class RequestPage implements OnInit {
   lng;
   user;
   time : string;
-  date : string;
+  date : string ="";
   ref : string;
   addresses = [];
   flag : boolean = true;
@@ -45,10 +46,16 @@ export class RequestPage implements OnInit {
     
   
   }
+  obj : any;
+  obj1 : any;
+  ArrayServices;
+  ArrayICTServices;
 
-
-
-  constructor(private alertcontroller:AlertController, private addr : ActivatedRoute,private modalCtrl:ModalController,public requestService: AuthServiceService,private mapboxService :MapService) {
+  constructor(private alertcontroller:AlertController,
+    public ViewServices: AuthServiceService,
+    private addr : ActivatedRoute,
+    private modalCtrl:ModalController,
+    private mapboxService :MapService) {
 
     this.ref = (Math.random()* 100000).toFixed(0) + "AAC";
    }
@@ -60,6 +67,9 @@ export class RequestPage implements OnInit {
       component: MapPage
     });
     return await modal.present();
+  }
+  run(i){
+console.log(i)
   }
 
   search(event: any) {
@@ -75,6 +85,14 @@ export class RequestPage implements OnInit {
     } else {
       this.addresses = [];
     }
+  }
+  but1(){
+    this.moreRequestICT = false; 
+    console.log(this.moreRequestICT)
+  }
+  but(){
+    this.moreRequestICT = true; 
+    console.log(this.moreRequestICT)
   }
 
   onSelect(address, i) {
@@ -98,13 +116,13 @@ export class RequestPage implements OnInit {
       console.log(data);
       this.KM = data.KM;
       console.log(data.lng + "  " + data.lat);
-      this.request.coords = [data.lng,data.lat];
+      // this.request.coords = [data.lng,data.lat];
       // console.log(this.request);
     
-      this.request.distance = this.KM;
+      // this.request.distance = this.KM;
       this.cost1 = this.KM * 5;
       // console.log(this.cost1);
-      this.request.calloutFee = this.cost1;
+      // this.request.calloutFee = this.cost1;
     })
 
     let name = localStorage.getItem("name");
@@ -118,7 +136,23 @@ export class RequestPage implements OnInit {
 console.log(this.cost)
 console.log(this.descrp)
 console.log(this.name)
-  }
+
+this.obj = this.ViewServices.getService();
+this.obj1 = this.ViewServices.getServiceICT();
+
+this.obj.subscribe((data)=>{
+  this.ArrayServices = data;
+  console.log(this.ArrayServices)
+
+  })
+
+  this.obj1.subscribe((data)=>{
+    this.ArrayICTServices = data;
+    console.log(this.ArrayICTServices)
+  
+    })
+
+}
 
 
   submit(){
@@ -135,7 +169,7 @@ console.log(this.name)
     this.request.time = this.time.substr(11,8);
     
 
-    this.requestService.addRequest(this.request);
+    this.ViewServices.addRequest(this.request);
   }
 
   // async PresentAlert() {
