@@ -20,7 +20,7 @@ export class Request1Page implements OnInit {
   lat;
   lng;
   user;
-  time: string;
+  time: string = "";
   date: string = "";
   ref: string;
   addresses = [];
@@ -121,18 +121,6 @@ export class Request1Page implements OnInit {
       // this.request.calloutFee = this.cost1;
     })
 
-    //     let name = localStorage.getItem("name");
-    //     let description = localStorage.getItem("description")
-    //     let cost = localStorage.getItem("cost");
-    //     let flag = localStorage.getItem("flag");
-    //     this.name = name;
-    //     this.descrp = description;
-    //     this.cost = cost;
-    //     console.log(flag)
-    // console.log(this.cost)
-    // console.log(this.descrp)
-    // console.log(this.name)
-
     this.obj = this.ViewServices.getService();
     this.obj1 = this.ViewServices.getServiceICT();
 
@@ -160,28 +148,73 @@ export class Request1Page implements OnInit {
     console.log(this.run1)
     let a = 0;
     let b = 0;
-    for (a; a < this.runx.length; a++) {
 
-      console.log(this.runx[a])
-    }
-    for (b; b < this.runx.length; b++) {
-      console.log(this.run1[b])
-    }
-    // let b = a.indexOf("a");
-    // console.log(b)
-    this.request.eleObj = this.runx;
-    this.request.ictObj = this.run1;
+    this.request.eleObj = this.run1;
+    this.request.ictObj = this.runx;
     // this.request.service = this.name;
     // this.request.serviceDesc = this.descrp;
     // this.request.serviceCost = this.cost;
     this.request.refNo = this.ref;
-    this.request.date = this.date.substr(0, 10);
+  
+    // console.log(this.time.length)
+    
+    if (this.addresses.length > 0) {
+      this.addresses
+      console.log(this.addresses.length)
+    }
+    else {
+      alert("address field is required to make a request")
+    }
+      if (this.time.length == 0 && this.date.length == 0) {
+        alert("Date and Time required to make a request")
+        console.log('Date and Time required to make a request ')
+      }
+      else {
+        if(this.date.length > 0) {
+          this.request.date = this.date.substr(0, 10);
+          }
+          else {
+            alert("Date required to make an request")
+          }
+          if(this.time.length > 0) {
+            this.request.time = this.time.substr(11, 8);
+        
+            }
+            else {
+              alert("Time required to make an request")
+            }
+      }
     // console.log(this.request);
     // console.log(this.time.substr(11,8) + " tyd");
     // console.log(this.date.substr(0,10) + " dag");
-    this.request.time = this.time.substr(11, 8);
-
-
+    if (this.run1.length == 0 && this.runx.length == 0) {
+      alert("No services seleccted or booked for both ICT and electrical service")
+      console.log('No services seleccted or booked for both ICT and electrical service')
+    }
+    else {
+      if (this.runx.length > 0) {
+        for (a; a < this.runx.length; a++) {
+        
+          console.log(this.request.ictObj[a]+ ' services seleccted under ICT service')
+          }
+         
+        } else {
+          console.log('No services seleccted or booked under ICT service')
+          alert("No services seleccted or booked under ICT service")
+        }
+       
+        if (this.run1.length > 0) {
+           
+        for (b; b < this.run1.length; b++) {    
+          console.log(this.request.eleObj[b]+ ' services seleccted  under Electrical service')
+            }
+        }
+        else {
+          console.log('No services seleccted or booked under Electrical service')
+          alert("No services seleccted or booked under ICT service")
+        }
+    }
+ 
     this.ViewServices.addRequest(this.request);
   }
 

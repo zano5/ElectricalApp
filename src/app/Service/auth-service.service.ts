@@ -129,14 +129,14 @@ export class AuthServiceService {
             alert("Transaction "+ item.refNo +" is currently being processed and Request was recieved succesfully ..");
             // console.log(item.description);
             this.router.navigateByUrl('tabs/notifications');
-            
+            // this.router.navigate("tabs/notifications",{params : {}})
         });
        
 }
 
 viewRequest(){
       
-  return  this.afs.collection('user').doc(this.afAuth.auth.currentUser.uid).collection('request',ref => ref.where('uid', '==' ,this.afAuth.auth.currentUser.uid)).valueChanges();
+  return  this.afs.collection('user').doc(this.afAuth.auth.currentUser.uid).collection('request',ref => ref.where('uid', '==' ,this.afAuth.auth.currentUser.uid) && ref.orderBy('stamp',"desc")).valueChanges();
 
 }
 

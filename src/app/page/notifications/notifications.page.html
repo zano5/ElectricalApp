@@ -1,8 +1,8 @@
 <ion-content class="ion-padding"  [scrollEvents]="true">
-<!-- <ion-button (click)="ScrollToBottom()"> recent</ion-button> -->
+<!-- <ion-button (click)="ScrollToBottom()"> recent</ion-button> ->
 <ion-fab-button (click)="runPdf()" >
     <ion-icon name="arrow-round-down" ></ion-icon>
-</ion-fab-button>
+</ion-fab-button> -->
   
 
     <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
@@ -13,27 +13,22 @@
         <h2>{{user.name | titlecase}} {{user.surname | titlecase}}</h2>
 
         <p>Reference Number: {{item.refNo}} </p>
-        <p>Service: {{item.service}}</p>
+        <!-- <p>Service: {{item.service}}</p> -->
         <p>Cost: R {{item.serviceCost}}</p>
         <!-- <p>Call-Out Fee: R {{item.calloutFee}}</p> -->
-        <p>Request Date: {{item.stamp | date : 'medium'}}</p>
-        <ion-row>
-            <ion-col>
+        <p>Date: {{item.stamp | date : 'medium'}}</p>
+        
+       
 
-                <span text-wrap>Date: {{item.date}} & Time: {{item.time}}</span>
+            <div class="button1" >
 
-            </ion-col>
-
-            <ion-col>
-
-                <ion-fab vertical="bottom" horizontal="end">
-                    <ion-fab-button (click)="invoice(i)">
+                <ion-fab vertical="bottom" horizontal="end" style="position: relative;">
+                    <ion-fab-button  (click)="invoice(i)">
                         <ion-icon name="md-list-box"></ion-icon>
-                    </ion-fab-button>
+                    </ion-fab-button >
                 </ion-fab>
-
-            </ion-col>
-        </ion-row>
+</div>
+  
     <!-- </div> -->
 
     </div>
