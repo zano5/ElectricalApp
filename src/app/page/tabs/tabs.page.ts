@@ -21,7 +21,7 @@ export class TabsPage implements OnInit {
   }
 
   redirect() {
-    // this.TabService.getUser('/tabs/notifications');
+
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         // User is signed in
@@ -33,5 +33,8 @@ export class TabsPage implements OnInit {
         this.route.navigateByUrl('/sign-in');
       }
     });
+
+    // this.TabService.URL = '/tabs/notifications';
+    // this.TabService.getUser('/tabs/notifications');
   }
 }
