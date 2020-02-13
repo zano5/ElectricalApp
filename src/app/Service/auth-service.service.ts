@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import * as firebase from "firebase";
 import {AngularFirestore} from '@angular/fire/firestore';
-import { Router } from '@angular/router';
-import { map } from 'rxjs/operators';
+import { Router, RoutesRecognized } from '@angular/router';
+import { map, filter, pairwise } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 import { error } from 'protractor';
@@ -26,15 +26,20 @@ export class AuthServiceService {
   lastName;
   
 
-  URL = [];
+  URL;
   constructor(private router: Router,private afs : AngularFirestore,public afAuth: AngularFireAuth) {
+    // this.router.events.pipe(filter((evt: any) => evt instanceof RoutesRecognized),
+    // pairwise()).subscribe((events: RoutesRecognized[]) => {
+    //   this.URL = events[0].urlAfterRedirects;
+    // })
+
   }
   
-  setURL(url_address) {
+  set setURL(url_address) {
     this.URL = url_address;
   }
 
-  getURL() {
+  get getURL() {
     return this.URL;
   }
 
@@ -45,6 +50,17 @@ export class AuthServiceService {
       if (user) {
         // User is signed in
         this.router.navigateByUrl(url);
+        console.log(url);
+        // if(url == '/tabs/notifications'){
+        //   this.router.navigateByUrl('/tabs/notifications');
+        // }else if(url == '/view-profile'){
+        //   this.router.navigateByUrl('/view-profile');
+        // }else if(url == '/tabs/profile_logout'){
+        //   this.router.navigateByUrl('/tabs/profile');
+        // }else{
+        //   this.router.navigateByUrl('/tabs/services');
+        // }
+
       } else {
         this.router.navigateByUrl('/sign-in');
       }
@@ -69,11 +85,9 @@ export class AuthServiceService {
   logOut() {
     return firebase.auth().signOut().then((results) => {
       // Sign-out successful.
-      console.log(results);
-      return results;
+      // console.log(results);
     }).catch((error) => {
       // An error happened.
-      return error.message;
     });
   }
 

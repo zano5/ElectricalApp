@@ -3,7 +3,7 @@ import { AuthServiceService } from 'src/app/Service/auth-service.service';
 import { MapService,Feature } from '../../Service/mapbox.service';
 import { ModalController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
-import { MapPage } from '../map/map.page';
+
 import{AlertController} from '@ionic/angular';
 @Component({
   selector: 'app-request',
@@ -63,10 +63,7 @@ export class RequestPage implements OnInit {
    async presentModal() {
 
       this.flag = false;
-    const modal = await this.modalCtrl.create({
-      component: MapPage
-    });
-    return await modal.present();
+ 
   }
   run(i){
 console.log(i)
