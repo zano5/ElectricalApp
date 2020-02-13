@@ -1,7 +1,7 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Account</ion-title>
-  </ion-toolbar>
+    <ion-toolbar color="danger">
+        <ion-title>Account</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
@@ -12,27 +12,25 @@
       Profile
     </ion-item>
 
-    <ion-item detail="true" (click)="contactInfo()">
 
-      Contact Details
-    </ion-item>
+        <ion-item detail="true" (click)="contactInfo()">
 
-
-  
-    <ion-item detail="true" (click)="terms()">
-
-      Terms & Conditions
-      
-    </ion-item>
+            Contact Details
+        </ion-item>
 
 
-    <ion-item (click)="signOut();logOutRedirect()" *ngIf = "results == 'true'">
 
-      Log Out
-     
-    </ion-item>
+        <ion-item detail="true" (click)="terms()">
+            Terms
+        </ion-item>
 
-  </ion-list>
+        <ion-item (click)="signOut();logOutRedirect()" *ngIf="results == 'true'">
+
+            Log Out
+
+        </ion-item>
+
+    </ion-list>
 
 
 </ion-content>

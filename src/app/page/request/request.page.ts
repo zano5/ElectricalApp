@@ -4,6 +4,7 @@ import { MapService,Feature } from '../../Service/mapbox.service';
 import { ModalController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { MapPage } from '../map/map.page';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import{AlertController} from '@ionic/angular';
 @Component({
   selector: 'app-request',
@@ -11,17 +12,24 @@ import{AlertController} from '@ionic/angular';
   styleUrls: ['./request.page.scss'],
 })
 export class RequestPage implements OnInit {
+
+
+  checkAddress ="";
+
   @Input() flag1 :string
   URL = "/sign-in"
+  public requestForm: FormGroup;
+
+
   moreRequest : boolean = false;
   moreRequestICT : boolean = false;
   coordinates : any;
   list : any;
-  selectedAddress : string;
+  selectedAddress : string= "";
   lat;
   lng;
   user;
-  time : string;
+  time: string = "";
   date : string ="";
   ref : string;
   addresses = [];
@@ -50,10 +58,32 @@ export class RequestPage implements OnInit {
   obj1 : any;
   ArrayServices;
   ArrayICTServices;
-
-  constructor(private alertcontroller:AlertController,public ViewServices: AuthServiceService,private addr : ActivatedRoute,private modalCtrl:ModalController,private mapboxService :MapService) {
+  dat = new Date();
+  day;
+  constructor(private alertcontroller:AlertController,
+    public ViewServices: AuthServiceService,
+    private addr : ActivatedRoute,
+    private modalCtrl:ModalController,
+    private mapboxService :MapService,
+    private fb: FormBuilder,) {
 
     this.ref = (Math.random()* 100000).toFixed(0) + "AAC";
+    // this.requestForm = fb.group({
+    //   address:  ['', [Validators.required, Validators.email,Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z0-9-.]+$')]],
+    //   date: ['', [Validators.required]],
+    //   time: ['',  [Validators.required]]
+    // });
+
+    let month = this.dat.getMonth() + 1;
+    console.log(this.dat.getDate())
+    console.log(this.dat.getMonth())
+    console.log(this.dat.getFullYear())
+    if (this.dat.getMonth() < 10) {
+      this.day = this.dat.getFullYear().toString() + '-0' + month.toString() + '-' + this.dat.getDate().toString();
+    } else {
+      this.day = this.dat.getFullYear().toString() + '-' + month.toString() + '-' + this.dat.getDate().toString();
+    }
+    console.log(this.day)
    }
 
    async presentModal() {
@@ -152,8 +182,10 @@ this.obj.subscribe((data)=>{
 
 
   submit(){
-
-
+    // console.log(this.addresses)
+    // console.log(this.addresses.length)
+    console.log(this.selectedAddress)
+    console.log(this.selectedAddress.length)
     this.request.service = this.name;
     this.request.serviceDesc = this.descrp;
     this.request.serviceCost = this.cost;
@@ -165,22 +197,42 @@ this.obj.subscribe((data)=>{
     this.request.time = this.time.substr(11,8);
     
 
+    if (this.checkAddress ==  "") {
+      alert("address field is required to make a request");
+    }
+ 
+      if (this.time.length == 0 && this.date.length == 0) {
+        alert("Date and Time required to make a request")
+        console.log('Date and Time required to make a request ')
+      }
+      else {
+        if(this.date.length > 0) {
+          this.request.date = this.date.substr(0, 10);
+          }
+          else {
+            alert("Date required to make an request")
+          }
+          if(this.time.length > 0) {
+            this.request.time = this.time.substr(11, 8);
+        
+            }
+            else {
+              alert("Time required to make an request")
+            }
+      }
+
+      // make condition for to send request
     this.ViewServices.addRequest(this.request);
   }
 
-  // async PresentAlert() {
-  //   const alert=await this.alertcontroller.create({
-  //     header:'Alert',
-  //     message:'You  successfulyy signed up',
-  //     buttons:['Ok']
-  //   });
-
-  //   await alert.present();
-  //   let result=await alert.onDidDismiss();
- 
-
-
   
-  // }
+
+  addressCheck(event){
+
+
+    this.checkAddress = event.target.value;
+    console.log("info",this.checkAddress);    
+
+  }
 
 }

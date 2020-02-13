@@ -52,13 +52,13 @@ export class ServicesPage implements OnInit {
 
   }
   runs(){
-    this.router.navigateByUrl('request1/');
+    this.router.navigateByUrl('request1');
   }
 
   async loadingServices() {
     const loading = await this.loadingController.create({
       message: 'loading...',
-      // duration: 2000
+      //  duration: 20000
     });
     this.run= true;
     await loading.present();

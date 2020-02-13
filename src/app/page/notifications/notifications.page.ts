@@ -166,13 +166,13 @@ async fileRead() {
       ],
       styles: {
           header: {
-          bold: true,
+          // bold: true,
           fontSize: 20,
           alignment: 'center',
           margin : 20 
           },
           sub_header: {
-          fontSize: 18,
+          fontSize: 12,
           alignment: 'left'
           
           },
@@ -213,30 +213,6 @@ async fileRead() {
     pdfMake.createPdf(invoiceDoc).download().then((err) =>{
       console.log(err)
     });
-
-    // let contents = await Filesystem.readFile({
-    //   path: 'secrets/text.txt',
-    //   directory: FilesystemDirectory.Documents,
-    //   encoding: FilesystemEncoding.UTF8
-    // });
-    // console.log(contents);
-
-
-  //   var request: DownloadRequest = {
-  //     uri: pdfMake.createPdf(invoiceDoc).download(),
-  //     title: 'MyDownload',
-  //     description: 'first',
-  //     mimeType: '',
-  //     visibleInDownloadsUi: true,
-  //     notificationVisibility: NotificationVisibility.VisibleNotifyCompleted,
-  //     destinationInExternalFilesDir: {
-  //         dirType: 'Downloads',
-  //         subPath: 'MyFile.apk'
-  //     }
-  // };
-  //   this.downloader.download(request)
-  // .then((location: string) => console.log('File downloaded at:'+location))
-  // .catch((error: any) => console.error(error));
 
   }
 

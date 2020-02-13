@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="service"></ion-back-button>
+      <ion-back-button defaultHref="tabs/services"></ion-back-button>
     </ion-buttons>
     <ion-title>Request</ion-title>
   </ion-toolbar>
@@ -54,7 +54,7 @@
       <ion-label position="floating">Address</ion-label>
 
       <!-- <ion-icon name="pin" style="zoom: 1.5;"   slot="end" (click)="presentModal()" ></ion-icon> -->
-      <ion-input type="text" (ionInput)="search($event)" [value]="selectedAddress" clearInput></ion-input>
+      <ion-input type="text" (ionInput)="search($event)" (ionChange)="addressCheck($event)" [value]="selectedAddress" clearInput></ion-input>
     </ion-item>
     <div style="position: absolute; max-width: 90%; min-width: 90%; z-index: 999; " class="search">
       <ion-list lines="none" *ngIf="addresses.length > 0" color="lightb"

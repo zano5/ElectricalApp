@@ -12,6 +12,7 @@ import { AlertController } from '@ionic/angular';
 })
 export class Request1Page implements OnInit {
   URL = "/sign-in"
+  checkAddress;
   moreRequest: boolean = false;
   moreRequestICT: boolean = false;
   coordinates: any;
@@ -158,13 +159,10 @@ export class Request1Page implements OnInit {
   
     // console.log(this.time.length)
     
-    if (this.addresses.length > 0) {
-      this.addresses
-      console.log(this.addresses.length)
+    if (this.checkAddress ==  "") {
+      alert("address field is required to make a request");
     }
-    else {
-      alert("address field is required to make a request")
-    }
+ 
       if (this.time.length == 0 && this.date.length == 0) {
         alert("Date and Time required to make a request")
         console.log('Date and Time required to make a request ')
@@ -215,22 +213,15 @@ export class Request1Page implements OnInit {
         }
     }
  
-    this.ViewServices.addRequest(this.request);
+    // this.ViewServices.addRequest(this.request);
   }
 
-  // async PresentAlert() {
-  //   const alert=await this.alertcontroller.create({
-  //     header:'Alert',
-  //     message:'You  successfulyy signed up',
-  //     buttons:['Ok']
-  //   });
 
-  //   await alert.present();
-  //   let result=await alert.onDidDismiss();
+  addressCheck(event){
 
 
+    this.checkAddress = event.target.value;
+    console.log("info",this.checkAddress);    
 
-
-  // }
-
+  }
 }
