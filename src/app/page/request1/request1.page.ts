@@ -2,8 +2,10 @@ import { Component, OnInit, Input } from '@angular/core';
 import { AuthServiceService } from 'src/app/Service/auth-service.service';
 import { MapService, Feature } from '../../Service/mapbox.service';
 import { ModalController } from '@ionic/angular';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { auth } from 'firebase';
 @Component({
   selector: 'app-request1',
   templateUrl: './request1.page.html',
@@ -50,7 +52,7 @@ export class Request1Page implements OnInit {
   ArrayICTServices;
   day: string;
 
-  constructor(private alertcontroller: AlertController, public ViewServices: AuthServiceService, private addr: ActivatedRoute, private modalCtrl: ModalController, private mapboxService: MapService) {
+  constructor(public afAuth: AngularFireAuth,private alertcontroller: AlertController, public ViewServices: AuthServiceService, private addr: ActivatedRoute, private modalCtrl: ModalController, private mapboxService: MapService,private route : Router) {
 
     this.ref = (Math.random() * 100000).toFixed(0) + "AAC";
 
@@ -163,7 +165,11 @@ export class Request1Page implements OnInit {
     }
     else {
       if(this.time.length > 0 && this.date.length > 0) {
+        if(this.afAuth.auth.currentUser)
         this.ViewServices.addRequest(this.request);
+      }
+      else {
+        this.route.navigateByUrl('sign-in');
       }
     }
       if (this.time.length == 0 && this.date.length == 0) {
