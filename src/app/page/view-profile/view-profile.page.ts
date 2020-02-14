@@ -83,6 +83,9 @@ export class ViewProfilePage implements OnInit {
     //   loading.dismiss();
     // })
   }
-
+  // filechanged(event){
+  //   const files=event.target.files
+  //   console.log(files)
+  // }
 
 }

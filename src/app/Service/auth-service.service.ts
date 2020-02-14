@@ -28,36 +28,11 @@ export class AuthServiceService {
   
 
   URL;
-  constructor(private router: Router,private afs : AngularFirestore,public afAuth: AngularFireAuth) {
-    // this.router.events.pipe(filter((evt: any) => evt instanceof RoutesRecognized),
-    // pairwise()).subscribe((events: RoutesRecognized[]) => {
-    //   this.URL = events[0].urlAfterRedirects;
-    // })
-
+  constructor(private router: Router,
+    private afs : AngularFirestore,
+    public afAuth: AngularFireAuth) {
   }
   
-  set setURL(url_address) {
-    this.URL = url_address;
-  }
-
-  get getURL() {
-    return this.URL;
-  }
-
-  // The getUser is for checking the currently singned-in user
-  getUser(url) {
-
-    return firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        // User is signed in
-        this.router.navigateByUrl(url);
-        console.log(url);
-      } else {
-        this.router.navigateByUrl('/sign-in');
-      }
-    });
-}
-
   logIn(email,password) {
 
     return firebase.auth().signInWithEmailAndPassword(email, password).then((results) => {
@@ -73,13 +48,20 @@ export class AuthServiceService {
     });
   }
 
-  logOut() {
-    firebase.auth().signOut().then((results) => {
-      // Sign-out successful.
-      this.router.navigateByUrl('/tabs/services');
-    }).catch((error) => {
-      // An error happened.
-    });
+  // logOut() {
+  //   return firebase.auth().signOut().then((results) => {
+  //     // Sign-out successful.
+  //     console.log(results);
+  //   }).catch((error) => {
+  //     // An error happened.
+  //   });
+  // }
+
+  
+  async signOut() {
+    await this.afAuth.auth.signOut();
+    this.router.navigateByUrl('/tabs/services');
+    // this.router.navigate(['/']);
   }
 
   getUserProfile() {
@@ -152,9 +134,9 @@ viewRequest(){
 
 }
 
- gotUser(){
-  return  this.afs.collection('user').doc(this.afAuth.auth.currentUser.uid).valueChanges();
- }
+//  gotUser(){
+//   return  this.afs.collection('user').doc(this.afAuth.auth.currentUser.uid).valueChanges();
+//  }
 
   addUser(user){
 
