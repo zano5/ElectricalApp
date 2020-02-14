@@ -6,7 +6,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'welcome', pathMatch: 'full' },
   { path: 'home', loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)},
   {
-    path: 'welcome',
+    path: '',
     loadChildren: () => import('./page/welcome/welcome.module').then( m => m.WelcomePageModule)
   },
   {
@@ -78,7 +78,10 @@ const routes: Routes = [
     path: 'update-contacts',
     loadChildren: () => import('./page/modal/update-contacts/update-contacts.module').then( m => m.UpdateContactsPageModule)
   },
-
+  {
+    path: 'request1',
+    loadChildren: () => import('./page/request1/request1.module').then( m => m.Request1PageModule)
+  }
 
  
 ];

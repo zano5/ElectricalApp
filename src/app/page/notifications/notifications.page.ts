@@ -1,11 +1,13 @@
 import { Component, OnInit,ViewChild  } from '@angular/core';
 import { AuthServiceService } from 'src/app/Service/auth-service.service';
 import { Plugins, FilesystemDirectory, FilesystemEncoding } from '@capacitor/core';
-// import { Downloader, DownloadRequest, NotificationVisibility } from '@ionic-native/downloader/ngx';
+import { Downloader, DownloadRequest, NotificationVisibility } from '@ionic-native/downloader/ngx';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
 import { IonContent } from '@ionic/angular';
 import { IonInfiniteScroll } from '@ionic/angular';
+import { observable } from 'rxjs';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 const { Filesystem } = Plugins;
 @Component({
@@ -19,8 +21,10 @@ export class NotificationsPage implements OnInit {
   URL = '/sign-in'
   request : any;
   user : any;
+  arr : [];
+  obj : any;
   
-  constructor(public service: AuthServiceService ) { }
+  constructor(private previewAnyFile: PreviewAnyFile,public service: AuthServiceService,private downloader: Downloader) { }
 
   loadData(event) {
     setTimeout(() => {
@@ -33,6 +37,12 @@ export class NotificationsPage implements OnInit {
         event.target.disabled = true;
       }
     }, 500);
+  }
+  runPdf(ev: any){
+    
+    var url = ev;
+// window.open(url);
+    this.previewAnyFile.preview(url);
   }
 
   toggleInfiniteScroll() {
@@ -47,34 +57,28 @@ export class NotificationsPage implements OnInit {
       this.user = user;
       console.log(this.user);
     })
-
+    this.arr = [];
     this.service.viewRequest().subscribe((err) =>{
       this.request = err;
+      this.arr = this.request;
+      
+      console.log(this.arr)
+   
       console.log(this.request);
+      let c = 0;
+      // for(a;a < this.request.length;a++) {
+      //   if(this.request[a].ictObj[a].length > "5"){
+      //     console.log(this.request[a].ictObj[a]+ " service booked")
+      //   }
+      //   else{
+      //     console.log("Sorry no service booked")
+      //   }
+        
+      // }
+     
     })
   }
 
-  
-  run(){
-
-  //   var request: DownloadRequest = {
-  //     uri: 'YOUR_URI',
-  //     title: 'MyDownload',
-  //     description: '',
-  //     mimeType: '',
-  //     visibleInDownloadsUi: true,
-  //     notificationVisibility: NotificationVisibility.VisibleNotifyCompleted,
-  //     destinationInExternalFilesDir: {
-  //         dirType: 'Downloads',
-  //         subPath: 'MyFile.apk'
-  //     }
-  // };
-
-  // this.downloader.download(request)
-  // .then((location: string) => console.log('File downloaded at:'+location))
-  // .catch((error: any) => console.error(error));
-
-  }
 async fileRead() {
   let contents = await Filesystem.readFile({
     path: 'secrets/text.txt',
@@ -173,32 +177,20 @@ async fileRead() {
 
       console.log(this.request[i])
       console.log("*** print pdf")
-    pdfMake.createPdf(invoiceDoc).download();
-
-    // let contents = await Filesystem.readFile({
-    //   path: 'secrets/text.txt',
-    //   directory: FilesystemDirectory.Documents,
-    //   encoding: FilesystemEncoding.UTF8
-    // });
-    // console.log(contents);
-
-
-  //   var request: DownloadRequest = {
-  //     uri: pdfMake.createPdf(invoiceDoc).download(),
-  //     title: 'MyDownload',
-  //     description: 'first',
-  //     mimeType: '',
-  //     visibleInDownloadsUi: true,
-  //     notificationVisibility: NotificationVisibility.VisibleNotifyCompleted,
-  //     destinationInExternalFilesDir: {
-  //         dirType: 'Downloads',
-  //         subPath: 'MyFile.apk'
-  //     }
-  // };
-  //   this.downloader.download(request)
-  // .then((location: string) => console.log('File downloaded at:'+location))
-  // .catch((error: any) => console.error(error));
-
+      const pdfDocGenerator  = pdfMake.createPdf(invoiceDoc).download();
+      console.log(pdfDocGenerator)
+      pdfDocGenerator.getBase64((data) => {
+       
+        let a = "data:application/pdf;base64," + data;
+        this.runPdf(a);
+        console.log("data:application/pdf;base64," + data)
+        
+        // console.log("data:document/pdf;base64," + data)
+        // console.log(a)
+        // alert(a);
+      });
+      // console.log(JSON.stringify(this.obj))
+    
   }
 
 }

@@ -14,8 +14,8 @@ export class ServiceDetailPage implements OnInit {
   docKey;
   flag: boolean = false;
   run: boolean =true;
-
-  DocName
+  key : boolean = false;
+  DocName;
   constructor(private router: Router,
     private addr: ActivatedRoute,
     public ViewServices: AuthServiceService,
@@ -53,7 +53,7 @@ export class ServiceDetailPage implements OnInit {
       else {
         this.flag = false;
       }
-      // console.log(this.flag)
+      console.log(this.flag)
       // console.log(this.docKey)
     });
 

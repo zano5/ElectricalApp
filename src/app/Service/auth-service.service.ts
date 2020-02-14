@@ -12,6 +12,7 @@ import { error } from 'protractor';
 export class AuthServiceService {
   array;
   writePost;
+  writePost1;
   Services = [];
   Results:Boolean;
   UserName;
@@ -109,8 +110,11 @@ export class AuthServiceService {
   }
 
   addRequest(item : any){
-    console.log(this.afAuth.auth.currentUser.uid)
     item.uid = this.afAuth.auth.currentUser.uid;
+    this.writePost1 = this.afs.collection('request/').add(item);
+            // this.writePost1.add(item);
+    console.log(item)
+    
     this.writePost = this.afs.collection('user/').doc(this.afAuth.auth.currentUser.uid).collection('request');
     this.writePost.add(item).then(() =>{
             console.log(item);
@@ -119,13 +123,14 @@ export class AuthServiceService {
             alert("Transaction "+ item.refNo +" is currently being processed and Request was recieved succesfully ..");
             // console.log(item.description);
             this.router.navigateByUrl('tabs/notifications');
-    
+            // this.router.navigate("tabs/notifications",{params : {}})
         });
+       
 }
 
 viewRequest(){
       
-  return  this.afs.collection('user').doc(this.afAuth.auth.currentUser.uid).collection('request').valueChanges();
+  return  this.afs.collection('user').doc(this.afAuth.auth.currentUser.uid).collection('request',ref => ref.where('uid', '==' ,this.afAuth.auth.currentUser.uid) && ref.orderBy('stamp',"desc")).valueChanges();
 
 }
 
