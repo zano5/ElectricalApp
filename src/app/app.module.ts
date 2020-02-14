@@ -20,7 +20,6 @@ import * as firebase from "firebase";
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { MapPageModule } from '../app/page/map/map.module';
 import { UpdateNamesPage } from './page/modal/update-names/update-names.page';
 import { Downloader } from '@ionic-native/downloader/ngx';
 import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
@@ -44,7 +43,7 @@ firebase.analytics();
 @NgModule({
   declarations: [AppComponent, TabsPage],
   entryComponents: [],
-  imports: [BrowserModule, MapPageModule,IonicModule.forRoot(),HttpClientModule, AppRoutingModule, BrowserAnimationsModule, MatExpansionModule,
+  imports: [BrowserModule,IonicModule.forRoot(),HttpClientModule, AppRoutingModule, BrowserAnimationsModule, MatExpansionModule,
     BrowserModule,
      IonicModule.forRoot(), 
      AppRoutingModule,

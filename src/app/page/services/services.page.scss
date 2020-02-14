@@ -4,8 +4,6 @@ ion-content {
         margin-top: 30px;
     }
     .card {
-        // margin-top: 20px;
-        // margin-left: 0px;
         width: 300px;
         height: 203px;
         margin-right: 10px;
@@ -25,6 +23,7 @@ ion-content {
         // }
     }
     .recently {
+        box-shadow: none;
         .scrolling-wrapper-flexbox {
             box-shadow: none;
             display: flex;
@@ -35,36 +34,25 @@ ion-content {
             max-width: 400p;
         }
         .card {
+            box-shadow: none;
             width: 100px;
-            height: 100px;
+            height: 120px;
             flex: 0 0 auto;
-            background-color: white;
+            background-color: lightgray;
         }
-        // .shade {
-        //     position: absolute;
-        //     left: 0;
-        //     right: 0;
-        //     top: 0;
-        //     bottom: 0;
-        //     z-index: 10;
-        //     background: black;
-        //     opacity: 0.3;
-        // }
-        // img {
-        //     width: 100%;
-        //     height: 100%;
-        // }
-        // .card-title {
-        //     position: absolute;
-        //     top: 36%;
-        //     left: 25%;
-        //     font-size: 1rem;
-        //     width: 50%;
-        //     // font-weight: bold;
-        //     color: white;
-        //     font: bold;
-        //     z-index: 11;
-        // }
+        .images {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 60%;
+        }
+        .text {
+            position: absolute;
+            top: 60%;
+            text-align: center;
+            color: black;
+        }
     }
     .Electrical {
         .scrolling-wrapper-flexbox {
@@ -77,10 +65,35 @@ ion-content {
             max-width: 400p;
         }
         .card {
-            width: 300px;
-            height: 200px;
+            width: 280px;
+            height: 180px;
             flex: 0 0 auto;
             background-color: white;
+        }
+        .shade {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            z-index: 10;
+            background: black;
+            opacity: 0.5;
+        }
+        img {
+            width: 100%;
+            height: 100%;
+        }
+        .card-title {
+            position: absolute;
+            top: 36%;
+            left: 25%;
+            font-size: 1rem;
+            width: 50%;
+            // font-weight: bold;
+            color: white;
+            font: bold;
+            z-index: 11;
         }
     }
     .ICT {
@@ -94,10 +107,42 @@ ion-content {
             max-width: 400p;
         }
         .card {
-            width: 300px;
+            box-shadow: none;
+            width: 280px;
             height: 200px;
             flex: 0 0 auto;
-            background-color: white;
+            background-color: gray;
+        }
+        .text {
+            position: absolute;
+            top: 50%;
+            left: 20%;
+            color: white;
+        }
+        .shade {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            z-index: 10;
+            background: black;
+            opacity: 0.5;
+        }
+        img {
+            width: 100%;
+            height: 100%;
+        }
+        .card-title {
+            position: absolute;
+            top: 36%;
+            left: 25%;
+            font-size: 1rem;
+            width: 50%;
+            // font-weight: bold;
+            color: white;
+            font: bold;
+            z-index: 11;
         }
     }
 }

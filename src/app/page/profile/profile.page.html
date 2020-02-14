@@ -6,13 +6,10 @@
 
 <ion-content>
 
-  <ion-list>
-    <ion-item detail="true" (click)="viewProfile();Redirect()">
-      
-      Profile
-    </ion-item>
-
-
+    <ion-list>
+        <ion-item detail="true" (click)="Redirect()">
+            Profile
+        </ion-item>
         <ion-item detail="true" (click)="contactInfo()">
 
             Contact Details
@@ -21,7 +18,9 @@
 
 
         <ion-item detail="true" (click)="terms()">
-            Terms
+
+            Terms & Conditions
+
         </ion-item>
 
         <ion-item (click)="signOut();logOutRedirect()" *ngIf="results == 'true'">

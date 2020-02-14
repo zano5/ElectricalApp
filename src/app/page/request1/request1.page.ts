@@ -3,7 +3,6 @@ import { AuthServiceService } from 'src/app/Service/auth-service.service';
 import { MapService, Feature } from '../../Service/mapbox.service';
 import { ModalController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
-import { MapPage } from '../map/map.page';
 import { AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-request1',
@@ -12,7 +11,7 @@ import { AlertController } from '@ionic/angular';
 })
 export class Request1Page implements OnInit {
   URL = "/sign-in"
-  checkAddress;
+  checkAddress = "";
   moreRequest: boolean = false;
   moreRequestICT: boolean = false;
   coordinates: any;
@@ -157,12 +156,16 @@ export class Request1Page implements OnInit {
     // this.request.serviceCost = this.cost;
     this.request.refNo = this.ref;
   
-    // console.log(this.time.length)
+    console.log(this.checkAddress)
     
     if (this.checkAddress ==  "") {
       alert("address field is required to make a request");
     }
- 
+    else {
+      if(this.time.length > 0 && this.date.length > 0) {
+        this.ViewServices.addRequest(this.request);
+      }
+    }
       if (this.time.length == 0 && this.date.length == 0) {
         alert("Date and Time required to make a request")
         console.log('Date and Time required to make a request ')

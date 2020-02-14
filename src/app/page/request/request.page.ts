@@ -3,7 +3,6 @@ import { AuthServiceService } from 'src/app/Service/auth-service.service';
 import { MapService,Feature } from '../../Service/mapbox.service';
 import { ModalController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
-import { MapPage } from '../map/map.page';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import{AlertController} from '@ionic/angular';
 @Component({
@@ -89,10 +88,7 @@ export class RequestPage implements OnInit {
    async presentModal() {
 
       this.flag = false;
-    const modal = await this.modalCtrl.create({
-      component: MapPage
-    });
-    return await modal.present();
+ 
   }
   run(i){
 console.log(i)
@@ -200,6 +196,11 @@ this.obj.subscribe((data)=>{
     if (this.checkAddress ==  "") {
       alert("address field is required to make a request");
     }
+    else {
+      if(this.time.length > 0 && this.date.length > 0) {
+        this.ViewServices.addRequest(this.request);
+      }
+    }
  
       if (this.time.length == 0 && this.date.length == 0) {
         alert("Date and Time required to make a request")
@@ -222,7 +223,8 @@ this.obj.subscribe((data)=>{
       }
 
       // make condition for to send request
-    this.ViewServices.addRequest(this.request);
+      
+    // this.ViewServices.addRequest(this.request);
   }
 
   

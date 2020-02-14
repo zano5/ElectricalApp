@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RoutesRecognized } from '@angular/router';
 import { AuthServiceService } from 'src/app/Service/auth-service.service';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { LoadingController,AlertController } from '@ionic/angular';
+import { LoadingController,AlertController, Events } from '@ionic/angular';
+import { filter, pairwise } from 'rxjs/operators';
 
 @Component({
   selector: 'app-sign-in',
@@ -30,8 +31,7 @@ export class SignInPage implements OnInit {
       email:  ['', [Validators.required, Validators.email,Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z0-9-.]+$')]],
       password: ['', Validators.compose([Validators.minLength(6), Validators.maxLength(12), Validators.required])],
     });
-   
- 
+
  }
 
   ngOnInit() {
@@ -46,21 +46,31 @@ export class SignInPage implements OnInit {
   }
 
   signIn(){
-    this.url = this.SignInService.getURL();
+    this.url = this.SignInService.URL;
     console.log(this.url);
 
     this.SignInService.logIn(this.email, this.password).then(data => {
       if (data.operationType === "signIn") {
         if(this.url == '/tabs/profile'){
+
           this.router.navigateByUrl('/view-profile');
+
         }else if(this.url == '/tabs/profile_logout'){
-          this.router.navigateByUrl('/tabs/profile');
-        }else if(this.url == '/service-detail'){
-          this.router.navigateByUrl('/request');
-        }else if(this.url == '/tabs/notifications') {
-          this.router.navigateByUrl('/tabs/notifications');
-        }else{
+          
           this.router.navigateByUrl('/tabs/services');
+
+        }else if(this.url == '/service-detail'){
+          
+          this.router.navigateByUrl('/request');
+
+        }else if(this.url == '/tabs/notifications'){
+          
+          this.router.navigateByUrl('/tabs/notifications');
+
+        }else{
+          
+          this.router.navigateByUrl('/tabs/services');
+
         }
 
         // this.router.navigateByUrl('/tabs/services');
