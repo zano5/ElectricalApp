@@ -7,16 +7,25 @@
         right: 0px;
         width: 100%;
         height: 30%;
+        .button {
+            color: white;
+        }
     }
     .username {
-        background-color: black;
+        background-color: white;
         position: absolute;
-        top: 210px;
+        top: 170px;
+        // bottom: 150px;
         left: 20%;
-        width: 60%;
-        // height: 10%;
+        width: 65%;
+        height: 10;
         color: white;
         text-align: center;
+        color: black;
+        // .user {
+        //     position: absolute;
+        //     top: 20px;
+        // }
     }
     .userdetails {
         position: absolute;

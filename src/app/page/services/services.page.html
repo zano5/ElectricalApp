@@ -1,10 +1,15 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-title>Services</ion-title>
+    </ion-toolbar>
+</ion-header>
 <ion-content>
     <div class="recently">
         <h5 padding>Most viewed services</h5>
         <ion-card class="scrolling-wrapper-flexbox">
             <ion-card-header class="card" (click)=" detail(services.id) " *ngFor="let services of ArrayServices ">
                 <img src="{{services.photoURL}}" alt="photos" class="images" />
-                <p class="text"><b>{{services.name}}</b></p>
+                <span class="text"><b>{{services.name}}</b></span>
             </ion-card-header>
         </ion-card>
 
@@ -17,7 +22,7 @@
             <ion-card-header class="card" style="overflow:hidden;" (click)=" detail(services.id) " *ngFor="let services of ArrayServices " style="padding: 0px; " [style.backgroundImage]="'url(' + services.photoURL + ')'" style="background-position: center;background-repeat: no-repeat; background-size: cover;">
                 <div class="shade"></div>
                 <div text-center class="card-title">
-                    <div id="title">{{services.name}}</div>
+                    <span id="title">{{services.name}}</span>
                 </div>
             </ion-card-header>
         </ion-card>
@@ -27,49 +32,9 @@
         <ion-card class="scrolling-wrapper-flexbox">
             ​
             <ion-card-header class="card" style="overflow:hidden;" *ngFor="let services of ArrayICTServices" (click)="detail1(services.id)" style="padding: 0px; ">
-                ​
-                <!-- <div class="shade"></div> -->
                 <img src="{{services.photoURL}}" alt="photos" />
                 <span style="font-size: 15px;" class="text ">{{services.name}}</span><br> ​ ​
             </ion-card-header>
         </ion-card>
     </div>
-
-
-    <!-- <h3>Make Your Request</h3>
-
-
-
-
-
-    <p>Lets assist you make your service Request<br> Where would you like to start?</p>
-
-    <h5>Electrical & Materials</h5>
-
-
-    <ion-card class="scrolling-wrapper-flexbox">
-        <ion-card-header class="card" style="overflow:hidden;" (click)=" detail(services.id) " *ngFor="let services of ArrayServices " style="padding: 0px; " [style.backgroundImage]="'url(' + services.photoURL + ')'" style="background-position: center;background-repeat: no-repeat; background-size: cover;">
-            <div class="shade"></div>
-            <div text-center class="card-title">
-                <div id="title">{{services.name}}</div>
-            </div>
-
-
-        </ion-card-header>
-
-    </ion-card>
-
-    <h5>Information Technology</h5>
-
-    <ion-card class="scrolling-wrapper-flexbox">
-        <ion-card-header class="card" style="overflow:hidden;" *ngFor="let services of ArrayICTServices" (click)="detail1(services.id)" style="padding: 0px; ">
-
-            <img src="{{services.photoURL}}" alt="photos" />
-            <span style="font-size: 15px;" class="text ">{{services.name}}</span><br>
-
-
-        </ion-card-header>
-    </ion-card>
- -->
-
 </ion-content>
