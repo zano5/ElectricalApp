@@ -39,7 +39,9 @@ Redirect() {
 
   this.pathService.getUser('/view-profile');
 }
-
+history(){
+  this.router.navigateByUrl('transactions');
+}
   terms() {
     this.router.navigateByUrl('terms');
   }
