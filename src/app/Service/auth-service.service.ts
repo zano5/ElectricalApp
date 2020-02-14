@@ -47,12 +47,20 @@ export class AuthServiceService {
     });
   }
 
-  logOut() {
-    firebase.auth().signOut().then((results) => {
-      // Sign-out successful.
-    }).catch((error) => {
-      // An error happened.
-    });
+  // logOut() {
+  //   return firebase.auth().signOut().then((results) => {
+  //     // Sign-out successful.
+  //     console.log(results);
+  //   }).catch((error) => {
+  //     // An error happened.
+  //   });
+  // }
+
+  
+  async signOut() {
+    await this.afAuth.auth.signOut();
+    this.router.navigateByUrl('/tabs/services');
+    // this.router.navigate(['/']);
   }
 
   getUserProfile() {
@@ -114,15 +122,16 @@ export class AuthServiceService {
     
         });
 }
+
 viewRequest(){
       
   return  this.afs.collection('user').doc(this.afAuth.auth.currentUser.uid).collection('request').valueChanges();
 
 }
 
- gotUser(){
-  return  this.afs.collection('user').doc(this.afAuth.auth.currentUser.uid).valueChanges();
- }
+//  gotUser(){
+//   return  this.afs.collection('user').doc(this.afAuth.auth.currentUser.uid).valueChanges();
+//  }
 
   addUser(user){
 

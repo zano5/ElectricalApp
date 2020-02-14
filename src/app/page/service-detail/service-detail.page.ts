@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthServiceService } from 'src/app/Service/auth-service.service';
 import { ActivatedRoute } from '@angular/router';
+import { PathService } from 'src/app/Service/path.service';
 @Component({
   selector: 'app-service-detail',
   templateUrl: './service-detail.page.html',
@@ -17,7 +18,8 @@ export class ServiceDetailPage implements OnInit {
   DocName
   constructor(private router: Router,
     private addr: ActivatedRoute,
-    public ViewServices: AuthServiceService) {
+    public ViewServices: AuthServiceService,
+    public pathService: PathService) {
     // this.ViewServices.getServices().then((services) => {
     //   this.ArrayServices = services;
 
@@ -33,10 +35,6 @@ export class ServiceDetailPage implements OnInit {
   clearData() {
     this.ArrayServices = null;
     this.ArrayICTServices = null;
-  }
-
-  redirect() {
-    this.ViewServices.setURL('/service-detail')
   }
 
   runs(){
@@ -75,8 +73,6 @@ export class ServiceDetailPage implements OnInit {
 
   request() {
 
-
-
     localStorage.clear();
     if(this.flag == true){
       //  console.log(this.flag)
@@ -92,7 +88,8 @@ export class ServiceDetailPage implements OnInit {
       localStorage.setItem("description", this.ArrayICTServices.description);
     }
     // localStorage.setItem("flag", this.flag.toString());
-    this.ViewServices.getUser('request');
+    this.pathService.URL = '/service-detail';
+    this.pathService.getUser('request');
   }
 
 }

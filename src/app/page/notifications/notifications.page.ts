@@ -43,7 +43,7 @@ export class NotificationsPage implements OnInit {
   // }
   ngOnInit() {
     // this.NotificationService.getUser(this.URL)
-    this.service.gotUser().subscribe((user) =>{
+    this.service.getUserProfile().subscribe((user) =>{
       this.user = user;
       console.log(this.user);
     })

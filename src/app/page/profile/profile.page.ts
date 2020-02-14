@@ -30,12 +30,13 @@ export class ProfilePage implements OnInit {
   }
 
 Redirect() {
-  this.pathService.URL = '/tabs/profile';
+  // this.pathService.URL = '/tabs/profile';
 
   this.router.events.pipe(filter((evt: any) => evt instanceof RoutesRecognized),
     pairwise()).subscribe((events: RoutesRecognized[]) => {
     // this.pathService.URL = events[0].urlAfterRedirects;
   })
+
   this.pathService.getUser('/view-profile');
 }
 
@@ -51,9 +52,7 @@ Redirect() {
 
   // Method signOut() is for logging our user out
   signOut() {
-    this.profileService.logOut();
-    this.profileService.URL = '/tabs/profile_logout';
-    this.router.navigateByUrl('/tabs/services');
+    this.profileService.signOut();
   }
 
 }

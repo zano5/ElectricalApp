@@ -8,7 +8,8 @@ import { Router } from '@angular/router';
 export class PathService {
 
   Results:string;
-  URL;
+  URL = [];
+  
   constructor(public router: Router) {
     // this.router.events.pipe(filter((evt: any) => evt instanceof RoutesRecognized),
     // pairwise()).subscribe((events: RoutesRecognized[]) => {
@@ -16,13 +17,13 @@ export class PathService {
     // })
   }
 
-  set setURL(url_address) {
-    this.URL = url_address;
-  }
+  // set setURL(url_address) {
+  //   this.URL = url_address;
+  // }
 
-  get getURL() {
-    return this.URL;
-  }
+  // get getURL() {
+  //   return this.URL;
+  // }
 
   // The getUser is for checking the currently singned-in user
   getUser(url) {
@@ -30,15 +31,15 @@ export class PathService {
       if (user) {
         // User is signed in
         this.router.navigateByUrl(url);
-        console.log(url);
       } else {
-        if(this.URL == '/tabs/profile_logout'){
-          this.router.navigateByUrl('/tabs/services');
-        }else {
-          this.router.navigateByUrl('/sign-in');
-        }
+        this.router.navigateByUrl('/sign-in');
+        this.URL = url;
       }
     });
+}
+
+returnURL() {
+  return this.URL;
 }
 
 }
