@@ -27,20 +27,13 @@ export class ProfilePage implements OnInit {
 
 Redirect() {
   // this.profileService.getUser(this.ViewProfileURL);
-  this.profileService.URL = '/tabs/profile';
-  // this.profileService.setURL('/tabs/profile');
+  this.profileService.URL = '/view-profile';
   this.profileService.getUser('/view-profile');
-}
-
-logOutRedirect() {
-  this.profileService.URL = '/tabs/profile_logout';
-  // this.profileService.setURL('/tabs/profile_logout')
 }
 
   terms() {
     this.router.navigateByUrl('terms');
   }
-
 
   contactInfo() {
 
@@ -48,22 +41,10 @@ logOutRedirect() {
 
   }
 
-  viewProfile() {
-    // if(this.results == 'true'){
-    //   this.router.navigateByUrl('/view-profile');
-    // }else{
-    //   this.router.navigateByUrl('/sign-in');
-    // }
-  }
-  
-
   // Method signOut() is for logging our user out
   signOut() {
     this.profileService.logOut();
-    // this.profileService.URL = '/tabs/profile_logout';
-    this.router.navigateByUrl('/sign-in');
-
-
+    // this.profileService.URL = '/tabs/services';
   }
 
 }

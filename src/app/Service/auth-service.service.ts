@@ -52,16 +52,6 @@ export class AuthServiceService {
         // User is signed in
         this.router.navigateByUrl(url);
         console.log(url);
-        // if(url == '/tabs/notifications'){
-        //   this.router.navigateByUrl('/tabs/notifications');
-        // }else if(url == '/view-profile'){
-        //   this.router.navigateByUrl('/view-profile');
-        // }else if(url == '/tabs/profile_logout'){
-        //   this.router.navigateByUrl('/tabs/profile');
-        // }else{
-        //   this.router.navigateByUrl('/tabs/services');
-        // }
-
       } else {
         this.router.navigateByUrl('/sign-in');
       }
@@ -84,9 +74,9 @@ export class AuthServiceService {
   }
 
   logOut() {
-    return firebase.auth().signOut().then((results) => {
+    firebase.auth().signOut().then((results) => {
       // Sign-out successful.
-      // console.log(results);
+      this.router.navigateByUrl('/tabs/services');
     }).catch((error) => {
       // An error happened.
     });
