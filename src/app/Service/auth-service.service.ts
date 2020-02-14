@@ -12,6 +12,7 @@ import { error } from 'protractor';
 export class AuthServiceService {
   array;
   writePost;
+  writePost1;
   Services = [];
   Results:Boolean;
   UserName;
@@ -27,36 +28,11 @@ export class AuthServiceService {
   
 
   URL;
-  constructor(private router: Router,private afs : AngularFirestore,public afAuth: AngularFireAuth) {
-    // this.router.events.pipe(filter((evt: any) => evt instanceof RoutesRecognized),
-    // pairwise()).subscribe((events: RoutesRecognized[]) => {
-    //   this.URL = events[0].urlAfterRedirects;
-    // })
-
+  constructor(private router: Router,
+    private afs : AngularFirestore,
+    public afAuth: AngularFireAuth) {
   }
   
-  set setURL(url_address) {
-    this.URL = url_address;
-  }
-
-  get getURL() {
-    return this.URL;
-  }
-
-  // The getUser is for checking the currently singned-in user
-  getUser(url) {
-
-    return firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        // User is signed in
-        this.router.navigateByUrl(url);
-        console.log(url);
-      } else {
-        this.router.navigateByUrl('/sign-in');
-      }
-    });
-}
-
   logIn(email,password) {
 
     return firebase.auth().signInWithEmailAndPassword(email, password).then((results) => {
@@ -72,13 +48,20 @@ export class AuthServiceService {
     });
   }
 
-  logOut() {
-    firebase.auth().signOut().then((results) => {
-      // Sign-out successful.
-      this.router.navigateByUrl('/tabs/services');
-    }).catch((error) => {
-      // An error happened.
-    });
+  // logOut() {
+  //   return firebase.auth().signOut().then((results) => {
+  //     // Sign-out successful.
+  //     console.log(results);
+  //   }).catch((error) => {
+  //     // An error happened.
+  //   });
+  // }
+
+  
+  async signOut() {
+    await this.afAuth.auth.signOut();
+    this.router.navigateByUrl('/tabs/services');
+    // this.router.navigate(['/']);
   }
 
   getUserProfile() {
@@ -127,8 +110,11 @@ export class AuthServiceService {
   }
 
   addRequest(item : any){
-    console.log(this.afAuth.auth.currentUser.uid)
     item.uid = this.afAuth.auth.currentUser.uid;
+    this.writePost1 = this.afs.collection('request/').add(item);
+            // this.writePost1.add(item);
+    console.log(item)
+    
     this.writePost = this.afs.collection('user/').doc(this.afAuth.auth.currentUser.uid).collection('request');
     this.writePost.add(item).then(() =>{
             console.log(item);
@@ -137,18 +123,20 @@ export class AuthServiceService {
             alert("Transaction "+ item.refNo +" is currently being processed and Request was recieved succesfully ..");
             // console.log(item.description);
             this.router.navigateByUrl('tabs/notifications');
-    
+            // this.router.navigate("tabs/notifications",{params : {}})
         });
+       
 }
+
 viewRequest(){
       
-  return  this.afs.collection('user').doc(this.afAuth.auth.currentUser.uid).collection('request').valueChanges();
+  return  this.afs.collection('user').doc(this.afAuth.auth.currentUser.uid).collection('request',ref => ref.where('uid', '==' ,this.afAuth.auth.currentUser.uid) && ref.orderBy('stamp',"desc")).valueChanges();
 
 }
 
- gotUser(){
-  return  this.afs.collection('user').doc(this.afAuth.auth.currentUser.uid).valueChanges();
- }
+//  gotUser(){
+//   return  this.afs.collection('user').doc(this.afAuth.auth.currentUser.uid).valueChanges();
+//  }
 
   addUser(user){
 

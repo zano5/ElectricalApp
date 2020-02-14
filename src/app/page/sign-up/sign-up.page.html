@@ -34,7 +34,7 @@
                 </div>
                 <ion-item color="transparent">
                     <ion-label position="floating">Contact Number</ion-label>
-                    <ion-input type="text" formControlName="number" required></ion-input>
+                    <ion-input type="number" formControlName="number"  [maxlength]="10" required></ion-input>
                 </ion-item>
                 <div class="error" *ngIf="register.get('number').hasError('required') && register.get('number').touched">
                     Please input your Number

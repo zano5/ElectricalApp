@@ -4,6 +4,7 @@ import { AuthServiceService } from 'src/app/Service/auth-service.service';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { LoadingController,AlertController, Events } from '@ionic/angular';
 import { filter, pairwise } from 'rxjs/operators';
+import { PathService } from 'src/app/Service/path.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -23,7 +24,8 @@ export class SignInPage implements OnInit {
     private router: Router,
     public Alert: AlertController,
     public SignInService:AuthServiceService,
-    public loadingController: LoadingController
+    public loadingController: LoadingController,
+    public pathService: PathService
 
    ) {
 
@@ -46,31 +48,26 @@ export class SignInPage implements OnInit {
   }
 
   signIn(){
-    this.url = this.SignInService.URL;
+    // this.url = this.SignInService.URL;
+    this.url = this.pathService.returnURL();
     console.log(this.url);
 
     this.SignInService.logIn(this.email, this.password).then(data => {
       if (data.operationType === "signIn") {
         // if(this.url == '/tabs/profile'){
-
-        //   this.router.navigateByUrl('/view-profile');
-
-        // }else if(this.url == '/service-detail'){
-          
-        //   this.router.navigateByUrl('/request');
+        //   this.router.navigateByUrl('/tabs/view-profile');
 
         // }else if(this.url == '/tabs/notifications'){
-          
         //   this.router.navigateByUrl('/tabs/notifications');
+          
+        // }else if(this.url == '/service-detail'){
+        //   this.router.navigateByUrl('/request');
 
         // }else{
-          
         //   this.router.navigateByUrl('/tabs/services');
-
         // }
 
         this.router.navigateByUrl(this.url);
-        // this.router.navigateByUrl('/tabs/services');
         // this.presentToast();
       } else {
         this.presentAlert(data);

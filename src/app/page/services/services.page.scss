@@ -28,7 +28,7 @@ ion-content {
             width: 100px;
             height: 120px;
             flex: 0 0 auto;
-            background-color: white;
+            background-color: lightgray;
         }
         .images {
             position: absolute;
@@ -44,6 +44,7 @@ ion-content {
             color: black;
         }
     }
+    
     .Electrical {
         .scrolling-wrapper-flexbox {
             box-shadow: none;
@@ -101,7 +102,7 @@ ion-content {
             width: 280px;
             height: 200px;
             flex: 0 0 auto;
-            background-color: white;
+            background-color: gray;
         }
         .text {
             position: absolute;

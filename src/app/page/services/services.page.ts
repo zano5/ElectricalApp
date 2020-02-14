@@ -51,6 +51,9 @@ export class ServicesPage implements OnInit {
     this.router.navigate(['service-detail'],{queryParams : {key: id}} );
 
   }
+  runs(){
+    this.router.navigateByUrl('request1');
+  }
 
   async loadingServices() {
     const loading = await this.loadingController.create({
