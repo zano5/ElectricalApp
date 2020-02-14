@@ -38,9 +38,9 @@ export class NotificationsPage implements OnInit {
       }
     }, 500);
   }
-  runPdf(ev: any){
+  runPdf(){
     
-    var url = ev;
+    var url = "https://firebasestorage.googleapis.com/v0/b/eletrical-engineer-cms.appspot.com/o/pdf%2FSCC(PTY)LTD%20COMPANY%20PROFILE%202019%20%20(1).pdf?alt=media&token=f3c42c70-3a3a-4574-b53a-b3b28f2e6cad";
 // window.open(url);
     this.previewAnyFile.preview(url);
   }
@@ -182,7 +182,7 @@ async fileRead() {
       pdfDocGenerator.getBase64((data) => {
        
         let a = "data:application/pdf;base64," + data;
-        this.runPdf(a);
+        // this.runPdf(a);
         console.log("data:application/pdf;base64," + data)
         
         // console.log("data:document/pdf;base64," + data)
