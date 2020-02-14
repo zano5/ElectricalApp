@@ -88,7 +88,6 @@ export class ServiceDetailPage implements OnInit {
       localStorage.setItem("description", this.ArrayICTServices.description);
     }
     // localStorage.setItem("flag", this.flag.toString());
-    this.pathService.URL = '/service-detail';
     this.pathService.getUser('request');
   }
 
