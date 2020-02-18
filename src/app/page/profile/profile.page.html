@@ -21,6 +21,10 @@
             Terms & Conditions
         </ion-item>
 
+        <ion-item detail = "true" [routerLink] = "['/history']">
+            History
+        </ion-item>
+
         <ion-item (click)="signOut()" *ngIf="results == 'true'">
             Log Out
         </ion-item>
