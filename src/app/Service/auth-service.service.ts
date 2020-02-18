@@ -106,7 +106,6 @@ export class AuthServiceService {
   
     }
 
-    
   getUserName(email) {
     this.UserName = email;
   }
@@ -114,7 +113,7 @@ export class AuthServiceService {
   addRequest(item : any){
     item.uid = this.afAuth.auth.currentUser.uid;
     this.writePost1 = this.afs.collection('request/').add(item);
-            // this.writePost1.add(item);
+    // this.writePost1.add(item);
     console.log(item)
     
     this.writePost = this.afs.collection('user/').doc(this.afAuth.auth.currentUser.uid).collection('request');
@@ -127,16 +126,25 @@ export class AuthServiceService {
             this.router.navigateByUrl('tabs/notifications');
             // this.router.navigate("tabs/notifications",{params : {}})
         });
+
+
+    ////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    this.afs.collection("newHistory").doc(this.afAuth.auth.currentUser.uid).set({
+      item
+    })
+    .then(() => {
+      console.log("Document successfully written!");
+    })
+    .catch((error) => {
+      console.error("Error writing document: ", error);
+    });
+
+    this.router.navigateByUrl('/tabs/notifications');
        
 }
 
-
 AddNewRequest(item: any) {
-  var writePost = this.afs.collection('history').doc(this.afAuth.auth.currentUser.uid);
-  this.writePost.add(item).then(() => {
-    alert("Transaction "+ item.refNo +" is currently being processed and Request was recieved succesfully ..");
-    this.router.navigateByUrl('tabs/notifications');
-  })
 }
 
 viewRequest(){
