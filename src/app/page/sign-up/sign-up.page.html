@@ -92,12 +92,11 @@
                 </div>
 
                 <div class="error" *ngIf="register.get('cpassword').hasError('mustMatch') ">Passwords must match</div>
-
+                <br>
                 <ion-button expand="block" color="primary" [disabled]="!register.valid" (click)="PresentAlert()" class="order">Sign In</ion-button>
                 <!-- <ion-button [disabled]="!register.valid" expand="full" shape="round" color="primary" (click)="PresentAlert()">Sign up</ion-button> -->
                 <br>
                 <br>
-
                 <p>Already have Account? <a (click)="singIn()"> Sign In</a></p>
 
             </form>

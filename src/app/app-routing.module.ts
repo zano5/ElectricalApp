@@ -3,7 +3,8 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'welcome', pathMatch: 'full' },
+  // { path: '', redirectTo: 'welcome', pathMatch: 'full' },
+  { path: '', redirectTo: '/tabs/services', pathMatch: 'full' },
   { path: 'home', loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)},
   {
     path: '',
@@ -81,7 +82,12 @@ const routes: Routes = [
   {
     path: 'request1',
     loadChildren: () => import('./page/request1/request1.module').then( m => m.Request1PageModule)
+  },
+  {
+    path: 'history',
+    loadChildren: () => import('./page/history/history.module').then( m => m.HistoryPageModule)
   }
+
 
  
 ];

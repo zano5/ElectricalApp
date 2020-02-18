@@ -9,7 +9,7 @@
         <ion-card class="scrolling-wrapper-flexbox">
             <ion-card-header class="card" (click)=" detail(services.id) " *ngFor="let services of ArrayServices ">
                 <img src="{{services.photoURL}}" alt="photos" class="images" />
-                <span class="text">{{services.name}}</span>
+                <span class="text"><b>{{services.name}}</b></span>
             </ion-card-header>
         </ion-card>
 
@@ -38,7 +38,8 @@
         </ion-card>
     </div>
 
-    <ion-fab vertical="bottom" class="fab" slot="fixed">
+
+    <ion-fab vertical="bottom" horizontal="center" slot="fixed" class="fab">
         <ion-fab-button>
             <ion-icon (click)="runs()" name="add"></ion-icon>
         </ion-fab-button>
