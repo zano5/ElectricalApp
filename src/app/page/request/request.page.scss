@@ -1,3 +1,46 @@
-//  .background {
-//      background-image: ('assets/images/new logo-1.jpg');
-//  }
+.background {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+.items {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    padding: 0;
+    .ref {
+        background-color: lightgray;
+        text-align: center;
+    }
+    .name {
+        background-color: lightgray;
+        text-align: center;
+    }
+    .description {
+        background-color: lightgray;
+        text-align: center;
+    }
+    .cost {
+        background-color: lightgray;
+        text-align: center;
+    }
+    .electric {
+        background-color: lightgray;
+    }
+    .ict {
+        background-color: lightgray;
+    }
+    .group {
+        background-color: lightgray;
+    }
+    .date {
+        background-color: lightgray;
+    }
+    .time {
+        background-color: lightgray;
+    }
+}

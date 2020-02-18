@@ -1,35 +1,41 @@
-<ion-content class="ion-padding"  [scrollEvents]="true">
-<!-- <ion-button (click)="ScrollToBottom()"> recent</ion-button> ->
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-title>Notifications</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" [scrollEvents]="true">
+    <!-- <ion-button (click)="ScrollToBottom()"> recent</ion-button> ->
 <ion-fab-button (click)="runPdf()" >
     <ion-icon name="arrow-round-down" ></ion-icon>
 </ion-fab-button> -->
-  
+
 
     <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
         <ion-infinite-scroll-content>
-          <div class="card" *ngFor="let item of request; let i = index">
-    <div id="indicator"></div> 
-    <!-- <div class="if" *ngIf="item.ictObj.length"> -->
-        <h2>{{user.name | titlecase}} {{user.surname | titlecase}}</h2>
+            <div class="card" *ngFor="let item of request; let i = index">
+                <div id="indicator"></div>
+                <!-- <div class="if" *ngIf="item.ictObj.length"> -->
+                <h2>{{user.name | titlecase}} {{user.surname | titlecase}}</h2>
 
-        <p>Reference Number: {{item.refNo}} </p>
-        <!-- <p>Service: {{item.service}}</p> -->
-        <p>Cost: R {{item.serviceCost}}</p>
-        <!-- <p>Call-Out Fee: R {{item.calloutFee}}</p> -->
-        <p>Date: {{item.stamp | date : 'medium'}}</p>
-        
-       
+                <p>Reference Number: {{item.refNo}} </p>
+                <!-- <p>Service: {{item.service}}</p> -->
+                <p>Cost: R {{item.serviceCost}}</p>
+                <!-- <p>Call-Out Fee: R {{item.calloutFee}}</p> -->
+                <p>Date: {{item.stamp | date : 'medium'}}</p>
 
-            <div class="button1" >
 
-                <ion-fab vertical="bottom" horizontal="end" style="position: relative;">
-                    <ion-fab-button  (click)="runPdf()">
-                        <ion-icon name="md-list-box"></ion-icon>
-                    </ion-fab-button >
-                </ion-fab>
-</div>
-  
-    <!-- </div> -->
+
+                <div class="button1">
+
+                    <ion-fab vertical="bottom" horizontal="end" style="position: relative;">
+                        <ion-fab-button (click)="runPdf()">
+                            <ion-icon name="download"></ion-icon>
+                        </ion-fab-button>
+                    </ion-fab>
+                </div>
+
+                <!-- </div> -->
 
             </div>
         </ion-infinite-scroll-content>
