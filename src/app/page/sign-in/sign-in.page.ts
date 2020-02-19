@@ -54,19 +54,6 @@ export class SignInPage implements OnInit {
 
     this.SignInService.logIn(this.email, this.password).then(data => {
       if (data.operationType === "signIn") {
-        // if(this.url == '/tabs/profile'){
-        //   this.router.navigateByUrl('/tabs/view-profile');
-
-        // }else if(this.url == '/tabs/notifications'){
-        //   this.router.navigateByUrl('/tabs/notifications');
-          
-        // }else if(this.url == '/service-detail'){
-        //   this.router.navigateByUrl('/request');
-
-        // }else{
-        //   this.router.navigateByUrl('/tabs/services');
-        // }
-
         this.router.navigateByUrl(this.url);
         // this.presentToast();
       } else {

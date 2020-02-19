@@ -81,10 +81,17 @@ const routes: Routes = [
   {
     path: 'request1',
     loadChildren: () => import('./page/request1/request1.module').then( m => m.Request1PageModule)
-  },  {
+  },
+  {
     path: 'transactions',
     loadChildren: () => import('./page/transactions/transactions.module').then( m => m.TransactionsPageModule)
   }
+  ,
+  {
+    path: 'history',
+    loadChildren: () => import('./page/history/history.module').then( m => m.HistoryPageModule)
+  }
+
 
 
  

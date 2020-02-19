@@ -6,6 +6,7 @@ import { AuthServiceService } from 'src/app/Service/auth-service.service';
 import{AlertController} from '@ionic/angular';
 import { from } from 'rxjs';
 import { async } from 'rxjs/internal/scheduler/async';
+import { PathService } from 'src/app/Service/path.service';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.page.html',
@@ -21,8 +22,12 @@ export class SignUpPage implements OnInit {
   surname : '',
     number : 0,
   pass : ''}
-
-  constructor(private fb: FormBuilder,  private router: Router,public ViewServices: AuthServiceService,private alertcontroller:AlertController) {
+  
+  constructor(private fb: FormBuilder,  
+    private router: Router,
+    public ViewServices: AuthServiceService,
+    private alertcontroller:AlertController,
+    private pathService: PathService) {
 
     this.register = fb.group({
       name: ['', Validators.compose([Validators.pattern('[a-zA-Z ]*'), Validators.minLength(4), Validators.maxLength(30), Validators.required])],

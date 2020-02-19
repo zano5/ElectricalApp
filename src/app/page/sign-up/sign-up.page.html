@@ -3,7 +3,7 @@
     <ion-row>
         <ion-col text-center>
             <div id="logo">
-                <img src="/assets/images/new logo-1.jpg" alt="Avatar" class="imgC" width="70%" style="position:absolute;left:10%;">
+                <img src="/assets/images/scc.jpg" alt="Avatar" class="imgC" width="70%" style="position:absolute;left:15%;">
             </div>
             <br>
             <br>
@@ -16,8 +16,8 @@
             <br>
             <br>
             <br>
-            <h1><b><i>Signup</i></b></h1>
-            <form [formGroup]="register">
+            <h1><b><i>Sign up</i></b></h1>
+            <form [formGroup]="register" padding>
                 <ion-item color="transparent">
                     <ion-label position="floating">Name</ion-label>
                     <ion-input type="text" formControlName="name" required></ion-input>
@@ -34,7 +34,7 @@
                 </div>
                 <ion-item color="transparent">
                     <ion-label position="floating">Contact Number</ion-label>
-                    <ion-input type="number" formControlName="number"  [maxlength]="10" required></ion-input>
+                    <ion-input type="number" formControlName="number" [maxlength]="10" required></ion-input>
                 </ion-item>
                 <div class="error" *ngIf="register.get('number').hasError('required') && register.get('number').touched">
                     Please input your Number
@@ -93,7 +93,10 @@
 
                 <div class="error" *ngIf="register.get('cpassword').hasError('mustMatch') ">Passwords must match</div>
                 <br>
-                <ion-button [disabled]="!register.valid" expand="full" shape="round" color="primary" (click)="PresentAlert()">Sign up</ion-button>
+                <ion-button expand="block" color="primary" [disabled]="!register.valid" (click)="PresentAlert()" class="order">Sign In</ion-button>
+                <!-- <ion-button [disabled]="!register.valid" expand="full" shape="round" color="primary" (click)="PresentAlert()">Sign up</ion-button> -->
+                <br>
+                <br>
                 <p>Already have Account? <a (click)="singIn()"> Sign In</a></p>
 
             </form>

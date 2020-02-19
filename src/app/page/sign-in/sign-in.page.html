@@ -3,7 +3,7 @@
     <ion-row>
         <ion-col text-center>
             <div id="logo">
-                <img src="/assets/images/new logo-1.jpg" alt="Avatar" class="imgC" width="70%" style="position:absolute;left:10%;">
+                <img src="/assets/images/scc.jpg" alt="Avatar" class="imgC" width="70%" style="position:absolute;left:15%;">
             </div>
             <br>
             <br>
@@ -15,12 +15,12 @@
             <br>
             <br>
             <br>
-            <h1><b><i>Login</i></b></h1>
-            <form [formGroup]="loginForm" *ngIf="isForgotPassword" padding>
+            <h1><b>Sign in</b></h1>
+            <form [formGroup]="loginForm" *ngIf="isForgotPassword" class="form" padding>
                 <div class="shipping-card">
                     <ion-item color="transparent" class="group">
                         <ion-label position="floating">Email</ion-label>
-                        <ion-input type="email" [(ngModel)]="email" formControlName="email"></ion-input>
+                        <ion-input type="email" [(ngModel)]="email" formControlName="email" class="line"></ion-input>
                     </ion-item>
                     <div class="error" *ngIf="loginForm.get('email').hasError('required') && loginForm.get('email').touched">
                         Please input your email
@@ -42,9 +42,14 @@
                         Maximum 12 characters
                     </div>
                     <br>
-                    <ion-button expand="full" shape="round" [disabled]="!loginForm.valid" (click)="signIn()" color="primary" style="margin-top: 1vh;">Sign In</ion-button>
-                    <p>Forgot Password? please <a href="forgot-password"> click here</a></p>
-                    <p>No account? please <a href="sign-up">click here</a></p>
+                    <ion-button expand="block" color="primary" [disabled]="!loginForm.valid" (click)="signIn()" color="primary" style="margin-top: 1vh;" class="order">Sign In</ion-button>
+                    <br>
+                    <br>
+                    <br>
+
+
+                    <p>Forgot Password<a href="forgot-password"> click here</a></p>
+                    <p>No account?<a href="sign-up">click here</a></p>
 
                 </div>
             </form>
@@ -60,7 +65,9 @@
                     Email address invalid
                 </div>
                 <br>
-                <ion-grid>
+                <ion-button expand="block" color="primary" (click)="reset()" class="order" [disabled]="!forgotpasswordForm.valid">Reset</ion-button>
+                <!-- <ion-button expand="block" [disabled]="!forgotpasswordForm.valid" color="primary" (click)="reset()">Reset</ion-button> -->
+                <!-- <ion-grid>
                     <ion-row>
                         <ion-col>
                             <ion-button expand="block" color="primary" (click)="isForgotPassword = true">Cancel</ion-button>
@@ -69,12 +76,11 @@
                             <ion-button expand="block" [disabled]="!forgotpasswordForm.valid" color="primary" (click)="reset()">Reset</ion-button>
                         </ion-col>
                     </ion-row>
-                </ion-grid>
+                </ion-grid> -->
             </form>
         </ion-col>
     </ion-row>
 
-    <div style="text-align: center;">
-        <ion-icon name="home" (click)="home()" style="width: 27px; height: 27px;"></ion-icon>
-    </div>
+
+
 </ion-content>

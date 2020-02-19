@@ -26,37 +26,24 @@
 <ion-content>
     <div *ngIf="flag; else notShow" class="image_container">
         <img [src]="ArrayServices?.photoURL" alt="avatar" />
-      </div>
-      
-      <ng-template #notShow>
-          <div class="image_container">
-
-        <img [src]="ArrayICTServices?.photoURL" alt="avatar" />
+        <h5 style="position:absalute;left:15px;">{{ArrayServices?.name}} </h5>
     </div>
 
       </ng-template>
  
     <br>
-    <div padding>
-        <!-- <div class="shade"></div> -->
+   
+       
+
+    <!-- <div padding>
+       <!- <div class="shade"></div> -->
         <h5 style="position:absalute;left:15px;">{{ArrayServices?.name}} </h5>
-        <!-- <p><a href="#">Reviews(10)</a></p> -->
-    </div>
-    <div class="ion-padding">
+    
+    </div> -->
+    <div>
         <h6>Description</h6>
-      
-        <!-- <span style = "font-size: 15px;">{{ArrayServices?.description}}</span> -->
         <p>{{ArrayServices?.description}}</p>
-        <!-- <span style="font-size: 15px;">{{ArrayServices?.cost}}</span> -->
-        <p>{{ArrayICTServices?.description}}</p>
-        <!-- <span style="font-size: 15px;">{{ArrayICTServices?.cost}}</span> -->
     </div>
-
-    <ion-button expand="full" shape="round" color="primary" (click)="request()" class="order">
+    <ion-button expand="block" color="primary" (click)="request()" class="order">
         Request</ion-button>
-
-
-
-
-
 </ion-content>

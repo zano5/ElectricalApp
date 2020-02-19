@@ -1,12 +1,18 @@
-
-
-h3, p{
+h3,
+p {
     text-align: center;
- 
 }
 
-
-ion-button{
-
+ion-button {
     margin-top: 10px;
+}
+
+.order {
+    position: absolute;
+    left: 10px;
+    width: 95%;
+}
+
+.form {
+    padding: 0px;
 }
