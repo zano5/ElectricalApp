@@ -1,6 +1,11 @@
 <ion-content class="ion-padding">
+    <!-- <ion-buttons slot="start">
+        <ion-back-button defaultHref="tabs/profile"></ion-back-button>
+    </ion-buttons> -->
+
     <br>
     <ion-row>
+
         <ion-col text-center>
             <div id="logo">
                 <img src="/assets/images/scc.jpg" alt="Avatar" class="imgC" width="70%" style="position:absolute;left:15%;">
@@ -49,7 +54,7 @@
 
 
                     <p>Forgot Password<a href="forgot-password"> click here</a></p>
-                    <p>No account?<a href="sign-up">click here</a></p>
+                    <p>No account?<a [routerLink] = "['/sign-up']">click here</a></p>
 
                 </div>
             </form>
