@@ -43,8 +43,12 @@ ion-content {
             left: 0px;
             color: black;
         }
+        h5 {
+            padding: 15px;
+        }
     }
     .Electrical {
+        box-shadow: none;
         .scrolling-wrapper-flexbox {
             box-shadow: none;
             display: flex;
@@ -55,6 +59,7 @@ ion-content {
             max-width: 400p;
         }
         .card {
+            box-shadow: none;
             width: 280px;
             height: 180px;
             flex: 0 0 auto;
@@ -87,6 +92,7 @@ ion-content {
         }
     }
     .ICT {
+        box-shadow: none;
         .scrolling-wrapper-flexbox {
             box-shadow: none;
             display: flex;
@@ -137,7 +143,7 @@ ion-content {
     }
     .fab {
         position: absolute;
-        top: 90%;
-        left: 83%;
+        top: 88%;
+        left: 92%;
     }
 }
