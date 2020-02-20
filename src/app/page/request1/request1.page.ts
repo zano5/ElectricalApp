@@ -37,6 +37,7 @@ export class Request1Page implements OnInit {
   dat = new Date();
   runx: any = [];
   run1: any = [];
+
   request = {
     refNo: "",
     date: "",
@@ -46,6 +47,7 @@ export class Request1Page implements OnInit {
     eleObj : [],
     ictObj : []
   }
+  
   obj: any;
   obj1: any;
   ArrayServices;
@@ -167,6 +169,7 @@ export class Request1Page implements OnInit {
       if(this.time.length > 0 && this.date.length > 0) {
         if(this.afAuth.auth.currentUser)
         this.ViewServices.addRequest(this.request);
+        // this.ViewServices.AddRequest(this.request);
       }
       else {
         this.route.navigateByUrl('sign-in');
@@ -222,7 +225,8 @@ export class Request1Page implements OnInit {
         }
     }
  
-    // this.ViewServices.addRequest(this.request);
+    this.ViewServices.addRequest(this.request);
+    // this.ViewServices.AddNewRequest(this.request);
   }
 
 

@@ -26,13 +26,22 @@ export class AuthServiceService {
   firtName;
   lastName;
   
-
   URL;
+  Ref = [];
+  HistoryArray = [];
   constructor(private router: Router,
     private afs : AngularFirestore,
     public afAuth: AngularFireAuth) {
   }
-  
+
+  set setURL(url_address) {
+    this.URL = url_address;
+  }
+
+  get getURL() {
+    return this.URL;
+  }
+
   logIn(email,password) {
 
     return firebase.auth().signInWithEmailAndPassword(email, password).then((results) => {
@@ -47,16 +56,6 @@ export class AuthServiceService {
       return errorCode;
     });
   }
-
-  // logOut() {
-  //   return firebase.auth().signOut().then((results) => {
-  //     // Sign-out successful.
-  //     console.log(results);
-  //   }).catch((error) => {
-  //     // An error happened.
-  //   });
-  // }
-
   
   async signOut() {
     await this.afAuth.auth.signOut();
@@ -104,7 +103,6 @@ export class AuthServiceService {
   
     }
 
-    
   getUserName(email) {
     this.UserName = email;
   }
@@ -112,7 +110,7 @@ export class AuthServiceService {
   addRequest(item : any){
     item.uid = this.afAuth.auth.currentUser.uid;
     this.writePost1 = this.afs.collection('request/').add(item);
-            // this.writePost1.add(item);
+    // this.writePost1.add(item);
     console.log(item)
     
     this.writePost = this.afs.collection('user/').doc(this.afAuth.auth.currentUser.uid).collection('request');
@@ -125,7 +123,24 @@ export class AuthServiceService {
             this.router.navigateByUrl('tabs/notifications');
             // this.router.navigate("tabs/notifications",{params : {}})
         });
+
+
+    // this.afs.collection("newHistory").doc(this.afAuth.auth.currentUser.uid).set({
+    //   item
+    // })
+    // .then(() => {
+    //   console.log("Document successfully written!");
+    // })
+    // .catch((error) => {
+    //   console.error("Error writing document: ", error);
+    // });
+
+    // this.router.navigateByUrl('/tabs/notifications');
        
+}
+
+ViewHistory() {
+  return this.afs.collection('user').doc(this.afAuth.auth.currentUser.uid).collection('request').valueChanges();
 }
 
 viewRequest(){
@@ -134,25 +149,50 @@ viewRequest(){
 
 }
 
+set setRef(ref) {
+  this.Ref = ref;
+}
+
+get getRef() {
+  return this.Ref;
+}
+
+ViewHistoryDetails() {
+  return this.afs.collection("user").doc(this.afAuth.auth.currentUser.uid).collection("request").valueChanges();
+
+  // var db = firebase.firestore();
+  //   return db.collection("user").doc(this.afAuth.auth.currentUser.uid).collection("request").get().then((querySnapshot) => {
+  //     querySnapshot.forEach((doc) => {
+  //       if(this.Ref == doc.data().refNo){
+  //         // this.HistoryArray.push(doc.data());
+  //         console.log(doc.data().refNo);
+  //       }else{
+  //         console.log("false");
+  //       }
+  //     });
+
+  //     return this.HistoryArray;
+  // });
+}
+
 //  gotUser(){
 //   return  this.afs.collection('user').doc(this.afAuth.auth.currentUser.uid).valueChanges();
 //  }
 
-  addUser(user){
+  addUser(user,url){
+    // console.log(user);
 
-    console.log(user);
-  
-    this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.pass).then((error )=> {
+    this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.pass).then((results )=> {
       // Handle Errors here.
-      console.log(error)
+      console.log(results)
       // console.log(error.user.uid)
-      user.uid = error.user.uid;
+      user.uid = results.user.uid;
       user.pass = "";
-    this.writePost = this.afs.collection<any>('user').doc(error.user.uid);
+    this.writePost = this.afs.collection<any>('user').doc(results.user.uid);
     this.writePost.set(user);
     
         alert(user.email + " succesful registered" );
-        this.router.navigateByUrl('sign-in');
+        this.router.navigateByUrl(url);
     });
 
   }

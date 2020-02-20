@@ -1,6 +1,11 @@
-<ion-content >
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-title>Services</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
     <div class="recently">
-        <h5 padding>Most viewed services</h5>
+        <h5>Most viewed services</h5>
         <ion-card class="scrolling-wrapper-flexbox">
             <ion-card-header class="card" (click)=" detail(services.id) " *ngFor="let services of ArrayServices ">
                 <img src="{{services.photoURL}}" alt="photos" class="images" />
@@ -33,9 +38,10 @@
         </ion-card>
     </div>
 
-    <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+
+    <ion-fab vertical="bottom" horizontal="center" slot="fixed" class="fab">
         <ion-fab-button>
-          <ion-icon (click)="runs()" name="add"></ion-icon>
+            <ion-icon (click)="runs()" name="add"></ion-icon>
         </ion-fab-button>
-      </ion-fab>
+    </ion-fab>
 </ion-content>

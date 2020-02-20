@@ -21,9 +21,9 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { UpdateNamesPage } from './page/modal/update-names/update-names.page';
-import { Downloader } from '@ionic-native/downloader/ngx';
-import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
-import { DocumentViewer } from '@ionic-native/document-viewer/ngx';
+// import { Downloader } from '@ionic-native/downloader/ngx';
+// import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
+// import { DocumentViewer } from '@ionic-native/document-viewer/ngx';
 
 
 var firebaseConfig = {
@@ -62,10 +62,10 @@ firebase.analytics();
     SplashScreen,
     Geolocation,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    Downloader,
+    // Downloader,
     // PreviewAnyFile
-    DocumentViewer,
-    PreviewAnyFile
+    // DocumentViewer,
+    // PreviewAnyFile
     
   ],
   bootstrap: [AppComponent,]

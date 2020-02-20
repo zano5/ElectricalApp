@@ -21,6 +21,10 @@
             Terms & Conditions
         </ion-item>
 
+        <ion-item detail = "true" (click) = "HistoryRedirect()">
+            History
+        </ion-item>
+
         <ion-item (click)="signOut()" *ngIf="results == 'true'">
             Log Out
         </ion-item>

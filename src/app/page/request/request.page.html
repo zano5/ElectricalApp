@@ -9,7 +9,91 @@
 
 <ion-content class="background">
 
+    <div class="reference">
 
+        <h5>Reference Number</h5>
+        <p>{{ref}}</p>
+
+    </div>
+    <div class="name">
+        <h5 padding>Selected Service</h5>
+        <h6>Name</h6>
+        <p>{{name}}</p>
+        <h6>Description</h6>
+        <p>{{descrp}}</p>
+    </div>
+
+    <div class="more">
+        <h5>Need more services</h5>
+        <h6>Electrica & Metarial</h6>
+        <ion-select multiple="true" cancelText="Dismiss" okText="Okay!" [(ngModel)]="run1">
+
+
+            <ion-select-option *ngFor="let services of ArrayServices;" [value]="services.name">
+                {{services.name}}</ion-select-option>
+
+
+        </ion-select>
+        <h6>
+            Information Technology
+        </h6>
+
+
+        <ion-select multiple="true" cancelText="Dismiss" okText="Okay!" [(ngModel)]="runx">
+
+
+            <ion-select-option *ngFor="let services of ArrayICTServices" [value]="services.name">{{services.name}}
+            </ion-select-option>
+
+
+        </ion-select>
+
+    </div>
+
+    <div class="info">
+        <ion-item *ngFor="let i of runx">
+            <ul>
+                <li>{{i}}</li>
+            </ul>
+        </ion-item>
+    </div>
+
+    <div class="Address">
+        <h5>Enter Address</h5>
+
+
+
+
+        <ion-input type="text" (ionInput)="search($event)" (ionChange)="addressCheck($event)" [value]="selectedAddress" clearInput></ion-input>
+
+        <div style="position: absolute; max-width: 90%; min-width: 90%; z-index: 999; " class="search">
+            <ion-list lines="none" *ngIf="addresses.length > 0" color="lightb" style="background: var(--ion-item-background,var(--ion-background-color, black)); ">
+                <ion-item *ngFor="let address of addresses ; let i=index" (click)="onSelect(address, i)" color="dark">
+                    <ion-icon name="pin"></ion-icon>
+                    <p class="searchv">{{ address}}</p>
+                </ion-item>
+            </ion-list>
+
+        </div>
+    </div>
+
+    <div class="date-time">
+
+        <h5>Date & Time</h5>
+
+        <ion-label>Date:</ion-label>
+        <ion-datetime [min]="day" max="2025-12-31" [(ngModel)]="date"></ion-datetime>
+
+
+
+        <ion-label>Time</ion-label>
+        <ion-datetime displayFormat="HH:mm" [(ngModel)]="time"></ion-datetime>
+
+    </div>
+    <br>
+    <ion-button expand="block" color="primary" (click)="submit()" class="order">Submit</ion-button>
+
+    <!-- 
     <div class="ion-padding">
         <ion-item color="transparent">
             <p class="left">Reference no : {{ref}}</p>
@@ -28,42 +112,42 @@
 
             <ion-label class="ion-text-wrap">Make More Electrical Request</ion-label>
             <ion-select multiple="true" cancelText="Dismiss" okText="Okay!" [(ngModel)]="run1">
-      
-      
-              <ion-select-option   *ngFor="let services of ArrayServices;" [value]="services.name">
-                {{services.name}}</ion-select-option>
-      
-      
-            </ion-select>
-          </ion-item>
-          <ion-item *ngFor="let i of run1">
-            <ul>
-              <li>{{i}}</li>
-            </ul>
-          </ion-item>
-          <ion-item>
-      
-            <ion-label class="ion-text-wrap">Want To Make More ICT Request</ion-label>
-            <ion-select multiple="true" cancelText="Dismiss" okText="Okay!" [(ngModel)]="runx">
-              <!-- <div class="one" *ngFor = "let services of ArrayICTServices"> -->
-      
-              <ion-select-option *ngFor="let services of ArrayICTServices" [value]="services.name">{{services.name}}
-              </ion-select-option>
-              <!-- </div> -->
-      
-            </ion-select>
-          </ion-item>
-      
-          <ion-item *ngFor="let i of runx">
-            <ul>
-              <li>{{i}}</li>
-            </ul>
-          </ion-item>
-        <ion-item color="transparent" class="group">
-            <ion-label position="floating">Address</ion-label>
 
-            <!-- <ion-icon name="pin" style="zoom: 1.5;"   slot="end" (click)="presentModal()" ></ion-icon> -->
-            <ion-input type="text" (ionInput)="search($event)"  (ionChange)="addressCheck($event)" [value]="selectedAddress" clearInput></ion-input>
+
+                <ion-select-option *ngFor="let services of ArrayServices;" [value]="services.name">
+                    {{services.name}}</ion-select-option>
+
+
+            </ion-select>
+        </ion-item>
+        <ion-item *ngFor="let i of run1">
+            <ul>
+                <li>{{i}}</li>
+            </ul>
+        </ion-item>
+        <ion-item> -->
+
+    <!-- <ion-label class="ion-text-wrap">Want To Make More ICT Request</ion-label>
+            <ion-select multiple="true" cancelText="Dismiss" okText="Okay!" [(ngModel)]="runx"> -->
+
+
+    <!-- <ion-select-option *ngFor="let services of ArrayICTServices" [value]="services.name">{{services.name}}
+                </ion-select-option>
+                
+
+            </ion-select>
+        </ion-item>
+
+        <ion-item *ngFor="let i of runx">
+            <ul>
+                <li>{{i}}</li>
+            </ul>
+        </ion-item>
+        <ion-item color="transparent" class="group">
+            <ion-label position="floating">Address</ion-label> -->
+
+    <!--        
+            <ion-input type="text" (ionInput)="search($event)" (ionChange)="addressCheck($event)" [value]="selectedAddress" clearInput></ion-input>
         </ion-item>
         <div style="position: absolute; max-width: 90%; min-width: 90%; z-index: 999; " class="search">
             <ion-list lines="none" *ngIf="addresses.length > 0" color="lightb" style="background: var(--ion-item-background,var(--ion-background-color, black)); ">
@@ -84,35 +168,14 @@
             <ion-label>HH:mm</ion-label>
             <ion-datetime displayFormat="HH:mm" [(ngModel)]="time"></ion-datetime>
         </ion-item>
-  
-
-        <!-- <ion-item color="transparent">
-
-            <ion-label class="ion-text-wrap">Want To Make More ICT Request</ion-label>
-            <ion-select multiple="true" cancelText="Nah" value="moreRequest" okText="Okay!">
-                <div class="one" *ngFor="let services of ArrayICTServices">
-
-                    <ion-select-option value="bacon">{{services.name}}</ion-select-option>
-                </div>
-
-            </ion-select>
-        </ion-item>
-        <ion-item color="transparent">
-
-            <ion-label class="ion-text-wrap">Want To Make More Electrical Request</ion-label>
-            <ion-select multiple="true" cancelText="Nah" value="moreRequest" okText="Okay!">
 
 
-                <ion-select-option value="bacon" (click)="run(services)" *ngFor="let services of ArrayServices; let i = index">{{services.name}}</ion-select-option>
 
-
-            </ion-select>
-        </ion-item> -->
 
 
     </div>
+    <ion-button expand="block" color="primary" (click)="submit()" class="order">Submit</ion-button> -->
 
-    <ion-button expand="full" shape="round" color="primary" (click)="submit()">Submit</ion-button>
 
 
 

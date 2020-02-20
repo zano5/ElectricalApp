@@ -21,6 +21,6 @@ export class TabsPage implements OnInit {
 
   redirect() {
     this.pathService.getUser(this.notificationURL);
-    // this.pathService.URL = this.notificationURL;
+    this.TabService.URL = this.notificationURL;
   }
 }

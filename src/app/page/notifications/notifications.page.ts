@@ -1,10 +1,10 @@
 import { Component, OnInit,ViewChild  } from '@angular/core';
 import { AuthServiceService } from 'src/app/Service/auth-service.service';
 import { Plugins, FilesystemDirectory, FilesystemEncoding } from '@capacitor/core';
-import { Downloader, DownloadRequest, NotificationVisibility } from '@ionic-native/downloader/ngx';
+// import { Downloader, DownloadRequest, NotificationVisibility } from '@ionic-native/downloader/ngx';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
-import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
+// import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
 import { IonContent } from '@ionic/angular';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { observable } from 'rxjs';
@@ -24,7 +24,7 @@ export class NotificationsPage implements OnInit {
   arr : [];
   obj : any;
   
-  constructor(private previewAnyFile: PreviewAnyFile,public service: AuthServiceService,private downloader: Downloader) { }
+  constructor(public service: AuthServiceService) { }
 
   loadData(event) {
     setTimeout(() => {
@@ -38,12 +38,12 @@ export class NotificationsPage implements OnInit {
       }
     }, 500);
   }
-  runPdf(ev: any){
+//   runPdf(ev: any){
     
-    var url = ev;
-// window.open(url);
-    this.previewAnyFile.preview(url);
-  }
+//     var url = ev;
+// // window.open(url);
+//     this.previewAnyFile.preview(url);
+//   }
 
   toggleInfiniteScroll() {
     this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
@@ -182,7 +182,7 @@ async fileRead() {
       pdfDocGenerator.getBase64((data) => {
        
         let a = "data:application/pdf;base64," + data;
-        this.runPdf(a);
+        // this.runPdf(a);
         console.log("data:application/pdf;base64," + data)
         
         // console.log("data:document/pdf;base64," + data)

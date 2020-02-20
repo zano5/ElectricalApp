@@ -28,7 +28,7 @@ ion-content {
             width: 100px;
             height: 120px;
             flex: 0 0 auto;
-            background-color: lightgray;
+            background-color: white;
         }
         .images {
             position: absolute;
@@ -43,9 +43,12 @@ ion-content {
             left: 0px;
             color: black;
         }
+        h5 {
+            padding: 15px;
+        }
     }
-    
     .Electrical {
+        box-shadow: none;
         .scrolling-wrapper-flexbox {
             box-shadow: none;
             display: flex;
@@ -56,6 +59,7 @@ ion-content {
             max-width: 400p;
         }
         .card {
+            box-shadow: none;
             width: 280px;
             height: 180px;
             flex: 0 0 auto;
@@ -88,6 +92,7 @@ ion-content {
         }
     }
     .ICT {
+        box-shadow: none;
         .scrolling-wrapper-flexbox {
             box-shadow: none;
             display: flex;
@@ -135,5 +140,10 @@ ion-content {
             font: bold;
             z-index: 11;
         }
+    }
+    .fab {
+        position: absolute;
+        top: 88%;
+        left: 92%;
     }
 }
