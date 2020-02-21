@@ -157,6 +157,10 @@ get getRef() {
   return this.Ref;
 }
 
+ViewAllRequests() {
+  return this.afs.collection("request").valueChanges();
+}
+
 ViewHistoryDetails() {
   return this.afs.collection("user").doc(this.afAuth.auth.currentUser.uid).collection("request").valueChanges();
 

@@ -37,7 +37,7 @@ export class HistoryPage implements OnInit {
     await loading.present();
     this.historyService.ViewHistory().subscribe((data) => {
       this.previousRequests = data;
-      console.log(this.previousRequests);
+      // console.log(this.previousRequests);
       loading.dismiss();
     })
     // const { role, data } = await loading.onDidDismiss();
