@@ -22,7 +22,7 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { UpdateNamesPage } from './page/modal/update-names/update-names.page';
 import { Downloader } from '@ionic-native/downloader/ngx';
-import { PreviewAnyFile } from '@ionic-native/preview-any-file';
+import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
 import { DocumentViewer } from '@ionic-native/document-viewer/ngx';
 import { File } from '@ionic-native/file/ngx';
 
@@ -66,7 +66,7 @@ firebase.analytics();
     // PreviewAnyFile
     // DocumentViewer,
     // PreviewAnyFile
-    // DocumentViewer,
+    DocumentViewer,
     PreviewAnyFile,
     File
   ],
