@@ -32,12 +32,19 @@ export class ProfilePage implements OnInit {
 Redirect() {
   // this.pathService.URL = '/tabs/profile';
 
-  this.router.events.pipe(filter((evt: any) => evt instanceof RoutesRecognized),
-    pairwise()).subscribe((events: RoutesRecognized[]) => {
-    // this.pathService.URL = events[0].urlAfterRedirects;
-  })
+  // this.router.events.pipe(filter((evt: any) => evt instanceof RoutesRecognized),
+  //   pairwise()).subscribe((events: RoutesRecognized[]) => {
+  //   // this.pathService.URL = events[0].urlAfterRedirects;
+  // })
 
   this.pathService.getUser('/view-profile');
+  this.profileService.URL = '/view-profile';
+}
+
+HistoryRedirect() {
+  // this.pathService.getUser('/history');
+  // this.profileService.URL = '/history';
+  this.router.navigateByUrl('history');
 }
 history(){
   this.router.navigateByUrl('transactions');

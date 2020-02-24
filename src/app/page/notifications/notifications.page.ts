@@ -8,7 +8,7 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
 import { IonContent, Platform } from '@ionic/angular';
 import { IonInfiniteScroll } from '@ionic/angular';
-import { observable } from 'rxjs';
+
 import { File } from '@ionic-native/file/ngx';
 import { DocumentViewer, DocumentViewerOptions } from '@ionic-native/document-viewer/ngx';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -27,22 +27,13 @@ export class NotificationsPage implements OnInit {
   arr : [];
   obj : any;
   pdfLink:any;
-  constructor(private file : File,private platform : Platform,private doc : DocumentViewer,private sanitizer: DomSanitizer,public service: AuthServiceService,private previewAnyFile : PreviewAnyFile) { 
+  constructor(private file : File,private platform : Platform,private sanitizer: DomSanitizer,public service: AuthServiceService,private previewAnyFile : PreviewAnyFile) { 
 
-    // this.pdfLink = this.sanitizer.bypassSecurityTrustResourceUrl('http://docs.google.com/gview?embedded=true&url='+"https://firebasestorage.googleapis.com/v0/b/eletrical-engineer-cms.appspot.com/o/pdf%2FSCC(PTY)LTD%20COMPANY%20PROFILE%202019%20%20(1).pdf?alt=media&token=f3c42c70-3a3a-4574-b53a-b3b28f2e6cad");
+   
   }
   viewDoc()
 {
-  // let filepath = this.file.applicationDirectory + 'www/assets/pdf/SCC.pdf';
-  // var a = document.createElement('A');
-  // if(this.platform.is('android')) {
-   
-  // } else {
-  //   const options : DocumentViewerOptions = {
-  //     title: 'MyPdf',
-  //   }
-  //   this.doc.viewDocument(filepath,"application/pdf",options)
-    
+  
     window.open("https://firebasestorage.googleapis.com/v0/b/eletrical-engineer-cms.appspot.com/o/pdf%2FSCC(PTY)LTD%20COMPANY%20PROFILE%202019%20%20(1).pdf?alt=media&token=f3c42c70-3a3a-4574-b53a-b3b28f2e6cad");
   
 }

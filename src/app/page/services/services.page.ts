@@ -29,10 +29,15 @@ export class ServicesPage implements OnInit {
   this.obj1 = this.ViewServices.getServiceICT();
   this.obj1.subscribe((data)=>{
     this.ArrayICTServices = data;
-    console.log(this.ArrayICTServices)
+    // console.log(this.ArrayICTServices)
     
   });
 
+  this.ViewServices.ViewAllRequests().subscribe((requests) => {
+    console.log(requests);
+    // requests.forEach((key) => {
+    // })
+  })
  this.loadingServices();
 
 
@@ -67,12 +72,12 @@ export class ServicesPage implements OnInit {
     
     this.obj.subscribe((data)=>{
       this.ArrayServices = data;
-      console.log(this.ArrayServices)
+      // console.log(this.ArrayServices)
       loading.dismiss();
       this.run = false;
     });
   
-    console.log('Loading dismissed!');
+    // console.log('Loading dismissed!');
   }
 
 

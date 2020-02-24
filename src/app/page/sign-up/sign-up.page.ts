@@ -23,6 +23,7 @@ export class SignUpPage implements OnInit {
     number : 0,
   pass : ''}
   
+  url;
   constructor(private fb: FormBuilder,  
     private router: Router,
     public ViewServices: AuthServiceService,
@@ -44,6 +45,7 @@ export class SignUpPage implements OnInit {
   }
 
 signUp(){
+this.url = this.ViewServices.URL = '/tabs/notifications';
 
 this.user.name = this.register.value.name;
 this.user.surname = this.register.value.surname;
@@ -51,7 +53,7 @@ this.user.number = this.register.value.number;
 this.user.email = this.register.value.email;
 this.user.pass = this.register.value.password;
   console.log(this.user);
-this.ViewServices.addUser(this.user);
+this.ViewServices.addUser(this.user,this.url);
 
 }
   ngOnInit() {

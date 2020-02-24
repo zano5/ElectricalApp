@@ -1,11 +1,11 @@
 <ion-header>
     <ion-toolbar color="primary">
-        <ion-title>Services</ion-title>
+        <ion-title style = "text-align: center;">Services</ion-title>
     </ion-toolbar>
 </ion-header>
 <ion-content>
     <div class="recently">
-        <h5 padding>Most viewed services</h5>
+        <h5>Most viewed services</h5>
         <ion-card class="scrolling-wrapper-flexbox">
             <ion-card-header class="card" (click)=" detail(services.id) " *ngFor="let services of ArrayServices ">
                 <img src="{{services.photoURL}}" alt="photos" class="images" />

@@ -89,6 +89,7 @@ export class ServiceDetailPage implements OnInit {
     }
     // localStorage.setItem("flag", this.flag.toString());
     this.pathService.getUser('request');
+    this.ViewServices.URL = '/request';
   }
 
 }
