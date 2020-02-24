@@ -1,26 +1,26 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="tabs/profile"></ion-back-button>
-    </ion-buttons>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="tabs/profile"></ion-back-button>
+        </ion-buttons>
 
-    <ion-title>history-details</ion-title>
-  </ion-toolbar>
+        <ion-title>history-details</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div>
-    <ion-card>
-      <ion-card-header>
-        <ion-card-subtitle>{{historyArray?.refNo}}</ion-card-subtitle>
-        <ion-card-title>{{historyArray?.service}}</ion-card-title>
-        <p>{{historyArray?.serviceCost}}</p>
-      </ion-card-header>
-    
-      <ion-card-content>
-        <p>{{historyArray?.serviceDesc}}</p>
-        <p style = "float: right;">{{historyArray?.date}}</p>
-      </ion-card-content>
-    </ion-card>
-  </div>
+    <div>
+        <ion-card>
+            <ion-card-header>
+                <ion-card-subtitle>{{historyArray?.refNo}}</ion-card-subtitle>
+                <ion-card-title>{{historyArray?.service}}</ion-card-title>
+                <p>{{historyArray?.serviceCost}}</p>
+            </ion-card-header>
+
+            <ion-card-content>
+                <p>{{historyArray?.serviceDesc}}</p>
+                <p style="float: right;">{{historyArray?.date}}</p>
+            </ion-card-content>
+        </ion-card>
+    </div>
 </ion-content>

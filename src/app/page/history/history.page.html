@@ -1,22 +1,22 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="tabs/profile" (click) = "redirect()"></ion-back-button>
-    </ion-buttons>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="tabs/profile" (click)="redirect()"></ion-back-button>
+        </ion-buttons>
 
-    <ion-title>History</ion-title>
-  </ion-toolbar>
+        <ion-title>History</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card *ngFor = "let history of previousRequests" [routerLink] = "['/history-details']" (click) = "setRef(history.refNo)">
-    <ion-card-header>
-      <ion-card-title>Reference: {{history.refNo}}</ion-card-title>
-      <!-- <ion-card-subtitle>{{history.service}}</ion-card-subtitle> -->
-    </ion-card-header>
-  
-    <ion-card-content>
-      <p style = "float: right;">{{history.date}}</p>
-    </ion-card-content>
-  </ion-card>
+    <ion-card *ngFor="let history of previousRequests" [routerLink]="['/history-details']" (click)="setRef(history.refNo)" class="color">
+        <ion-card-header>
+            <h6 color="dark">Reference: {{history.refNo}}</h6>
+            <!-- <ion-card-subtitle>{{history.service}}</ion-card-subtitle> -->
+        </ion-card-header>
+
+        <ion-card-content>
+            <p style="float: right;" color="dark">{{history.date}}</p>
+        </ion-card-content>
+    </ion-card>
 </ion-content>
