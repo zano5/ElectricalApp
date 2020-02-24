@@ -76,9 +76,14 @@ export class ServiceDetailPage implements OnInit {
     localStorage.clear();
     if(this.flag == true){
       //  console.log(this.flag)
-    localStorage.setItem("name", this.ArrayServices.name);
-    localStorage.setItem("cost", this.ArrayServices.cost);
-    localStorage.setItem("description", this.ArrayServices.description)
+
+      /////////This service id///////////////////////////
+      localStorage.setItem("key", this.docKey);
+      ////////////////is a new code////////////////
+
+      localStorage.setItem("name", this.ArrayServices.name);
+      localStorage.setItem("cost", this.ArrayServices.cost);
+      localStorage.setItem("description", this.ArrayServices.description)
     }
     else{
       // console.log(this.ArrayICTServices)

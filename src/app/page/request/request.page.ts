@@ -5,6 +5,7 @@ import { ModalController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import{AlertController} from '@ionic/angular';
+import { Key } from 'protractor';
 @Component({
   selector: 'app-request',
   templateUrl: './request.page.html',
@@ -49,10 +50,11 @@ export class RequestPage implements OnInit {
     time : "",
     distance : 0,
     calloutFee : 0,
-    uid : ''
-    
-  
+    uid : '',
+    serviceID: ''
   }
+
+  Key;
   obj : any;
   obj1 : any;
   ArrayServices;
@@ -146,7 +148,8 @@ console.log(i)
       // console.log(this.cost1);
       // this.request.calloutFee = this.cost1;
     })
-
+    let key = localStorage.getItem("key");
+    ////////////////////////////////////
     let name = localStorage.getItem("name");
     let description = localStorage.getItem("description")
     let cost = localStorage.getItem("cost");
@@ -154,6 +157,9 @@ console.log(i)
     this.name = name;
     this.descrp = description;
     this.cost = cost;
+    /////////////////////////////
+    /////////////////////////////
+    this.Key = key;
     console.log(flag)
 console.log(this.cost)
 console.log(this.descrp)
@@ -187,6 +193,11 @@ this.obj.subscribe((data)=>{
     this.request.serviceCost = this.cost;
     this.request.refNo = this.ref;
     this.request.date = this.date.substr(0,10);
+
+    /////////This service id///////////////////////////
+    this.request.serviceID = this.Key;
+    ////////////////is a new code////////////////
+    
     // console.log(this.request);
     // console.log(this.time.substr(11,8) + " tyd");
     // console.log(this.date.substr(0,10) + " dag");
