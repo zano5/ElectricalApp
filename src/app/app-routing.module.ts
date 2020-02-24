@@ -86,7 +86,11 @@ const routes: Routes = [
   {
     path: 'history',
     loadChildren: () => import('./page/history/history.module').then( m => m.HistoryPageModule)
+  },  {
+    path: 'history-details',
+    loadChildren: () => import('./page/history-details/history-details.module').then( m => m.HistoryDetailsPageModule)
   }
+
 
 
  

@@ -27,23 +27,20 @@ export class AuthServiceService {
   lastName;
   
   URL;
+  Ref = [];
+  HistoryArray = [];
   constructor(private router: Router,
     private afs : AngularFirestore,
     public afAuth: AngularFireAuth) {
   }
 
-  // setURL(url_address) {
-  //   this.URL = url_address;
-  //   console.log(this.URL);
-  // }
+  set setURL(url_address) {
+    this.URL = url_address;
+  }
 
-  // getURL() {
-  //   return this.URL;
-  // }
-
-  // getHistory() {
-
-  // }
+  get getURL() {
+    return this.URL;
+  }
 
   logIn(email,password) {
 
@@ -128,23 +125,22 @@ export class AuthServiceService {
         });
 
 
-    ////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////
-    this.afs.collection("newHistory").doc(this.afAuth.auth.currentUser.uid).set({
-      item
-    })
-    .then(() => {
-      console.log("Document successfully written!");
-    })
-    .catch((error) => {
-      console.error("Error writing document: ", error);
-    });
+    // this.afs.collection("newHistory").doc(this.afAuth.auth.currentUser.uid).set({
+    //   item
+    // })
+    // .then(() => {
+    //   console.log("Document successfully written!");
+    // })
+    // .catch((error) => {
+    //   console.error("Error writing document: ", error);
+    // });
 
-    this.router.navigateByUrl('/tabs/notifications');
+    // this.router.navigateByUrl('/tabs/notifications');
        
 }
 
-AddNewRequest(item: any) {
+ViewHistory() {
+  return this.afs.collection('user').doc(this.afAuth.auth.currentUser.uid).collection('request').valueChanges();
 }
 
 viewRequest(){
@@ -153,11 +149,41 @@ viewRequest(){
 
 }
 
+set setRef(ref) {
+  this.Ref = ref;
+}
+
+get getRef() {
+  return this.Ref;
+}
+
+ViewAllRequests() {
+  return this.afs.collection("request").valueChanges();
+}
+
+ViewHistoryDetails() {
+  return this.afs.collection("user").doc(this.afAuth.auth.currentUser.uid).collection("request").valueChanges();
+
+  // var db = firebase.firestore();
+  //   return db.collection("user").doc(this.afAuth.auth.currentUser.uid).collection("request").get().then((querySnapshot) => {
+  //     querySnapshot.forEach((doc) => {
+  //       if(this.Ref == doc.data().refNo){
+  //         // this.HistoryArray.push(doc.data());
+  //         console.log(doc.data().refNo);
+  //       }else{
+  //         console.log("false");
+  //       }
+  //     });
+
+  //     return this.HistoryArray;
+  // });
+}
+
 //  gotUser(){
 //   return  this.afs.collection('user').doc(this.afAuth.auth.currentUser.uid).valueChanges();
 //  }
 
-  addUser(user){
+  addUser(user,url){
     // console.log(user);
 
     this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.pass).then((results )=> {
@@ -170,7 +196,7 @@ viewRequest(){
     this.writePost.set(user);
     
         alert(user.email + " succesful registered" );
-        this.router.navigateByUrl('sign-in');
+        this.router.navigateByUrl(url);
     });
 
   }
