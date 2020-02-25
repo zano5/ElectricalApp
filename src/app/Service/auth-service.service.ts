@@ -245,6 +245,16 @@ ViewHistoryDetails() {
   });
   }
 
+  getPlumbingServices() {
+    return this.afs.collection('servicesPlumbing/').valueChanges();
+    // var db = firebase.firestore();
+    // return db.collection('servicesPlumbing/').get().then((snap) => {
+    //   snap.forEach((doc) => {
+
+    //   })
+    // })
+  }
+
   ///////////////////////////////////////////////////////////////////////////////////////////////////////
   UpdateNames(Name,Surname) {
     // this.UserID = firebase.auth().currentUser.uid;

@@ -31,6 +31,7 @@ export class ServicesPage implements OnInit {
   service_info;
 
   MostRequested = [];
+  PlumbingServices = [];
   constructor(private router: Router,
     public loadingController: LoadingController,
     public ViewServices: AuthServiceService) {
@@ -47,8 +48,9 @@ export class ServicesPage implements OnInit {
   });
 
   this.ViewServices.getService().subscribe((services) => {
+    this.service_info = services;
     services.forEach((data) => {
-      this.service_info = data;
+      // this.service_info = data;
     })
   })
 
@@ -56,42 +58,11 @@ export class ServicesPage implements OnInit {
 
     requests.forEach((requestInfo) => {
       this.AllServices = requestInfo;
-      if(this.AllServices.service == "Process level control & security lightening") {
-        // this.requestCounter++;
-        this.firstCounter++;
-      }else if(this.AllServices.service == "Maintenance of transformers"){
-        this.secondCounter++;
-      }else if(this.AllServices.service == "Electrin fencing & earthing"){
-        this.thirdCounter++;
-      }else if(this.AllServices.service == "plumbing"){
-        this.fourthCounter++;
-      }else if(this.AllServices.service == "Regular load testing and balancing"){
-        this.fifthCounter++;
-      }else if(this.AllServices.service == "Installation of conduits and trunkin"){
-        this.sixthCounter++;
-      }else{}
+      // console.log(this.AllServices.service)
     })
-
-    console.log(this.firstCounter);
-    console.log(this.secondCounter);
-    console.log(this.thirdCounter);
-    console.log(this.fourthCounter);
-    console.log(this.fifthCounter);
-    console.log(this.sixthCounter);
   })
 
-  this.MostRequested.push(
-    this.firstCounter,
-    this.secondCounter,
-    this.thirdCounter,
-    this.fourthCounter,
-    this.fifthCounter,
-    this.sixthCounter
-  )
-
-// let sortedDescPoints = this.MostRequested.sort((a,b) => {
-
-// })
+  // console.log(this.MostRequested);
   this.loadingServices();
 }
 
@@ -110,6 +81,10 @@ export class ServicesPage implements OnInit {
 
   }
 
+  plumbingID(id) {
+    this.router.navigate(['service-detail'],{queryParams: {key: id}});
+  }
+
   runs(){
     this.router.navigateByUrl('request1');
   }
@@ -124,6 +99,11 @@ export class ServicesPage implements OnInit {
     this.obj = this.ViewServices.getService();
     this.obj1 = this.ViewServices.getServiceICT();
     
+    this.ViewServices.getPlumbingServices().subscribe((plumbing) => {
+      this.PlumbingServices = plumbing;
+      console.log(this.PlumbingServices);
+    })
+
     this.obj.subscribe((data)=>{
       this.ArrayServices = data;
       console.log(this.ArrayServices)
