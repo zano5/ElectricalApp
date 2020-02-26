@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 import * as firebase from "firebase";
 
 import { LoadingController } from '@ionic/angular';
@@ -66,24 +66,34 @@ export class ServicesPage implements OnInit {
   this.loadingServices();
 }
 
-  
-  detail(id : any){
-    this.router.navigateByUrl('service-detail')
-    this.flag = true;
-    this.router.navigate(['service-detail'],{queryParams : {key: id, flag : this.flag}} );
-
-  }
-
-  detail1(id : any){
-
+  detail_id(id : any){
     // this.router.navigateByUrl('service-detail')
-    this.router.navigate(['service-detail'],{queryParams : {key: id}} );
+    this.flag = true;
+    this.router.navigate(['service-detail'],{queryParams : {key: id, flag : this.flag}});
 
   }
 
-  plumbingID(id) {
-    this.router.navigate(['service-detail'],{queryParams: {key: id}});
-  }
+  // detail(items) {
+  //   const navigationExtras: NavigationExtras = {
+  //     queryParams: {
+  //       data: JSON.stringify(items),
+  //     }
+  //   };
+  //   this.router.navigate(['service-detail'], navigationExtras);
+  // }
+
+  // detail1(id : any){
+
+  //   // this.router.navigateByUrl('service-detail')
+  //   // this.flag = true;
+  //   this.router.navigate(['service-detail'],{queryParams : {key: id, flag: this.flag}});
+
+  // }
+
+  // plumbingID(id: any) {
+  //   // this.flag = true;
+  //   this.router.navigate(['service-detail'],{queryParams: {key: id, flag: this.flag}});
+  // }
 
   runs(){
     this.router.navigateByUrl('request1');

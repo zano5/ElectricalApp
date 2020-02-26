@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthServiceService } from 'src/app/Service/auth-service.service';
 import { LoadingController } from '@ionic/angular';
 import { PathService } from 'src/app/Service/path.service';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-history',
@@ -27,6 +27,15 @@ export class HistoryPage implements OnInit {
 
   redirect() {
     this.route.navigateByUrl('/tabs/profile');
+  }
+
+  detail(items) {
+    const navigationExtras: NavigationExtras = {
+      queryParams: {
+        data: JSON.stringify(items),
+      }
+    };
+    this.route.navigate(['history-details'], navigationExtras);
   }
 
   async presentLoading() {

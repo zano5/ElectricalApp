@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthServiceService } from 'src/app/Service/auth-service.service';
 import { LoadingController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-history-details',
@@ -12,11 +13,21 @@ export class HistoryDetailsPage implements OnInit {
   details;
   historyArray;
   Ref;
+  HistoryInfo;
+
   constructor(public historyService: AuthServiceService,
-    public loadingController: LoadingController) { }
+    public loadingController: LoadingController,
+    public addr: ActivatedRoute) { }
 
   ngOnInit() {
-    this.loadingHistoryDetails();
+    // this.loadingHistoryDetails();
+    
+    this.addr.queryParams.subscribe(params => {
+      if (params && params.data) {
+        this.HistoryInfo = JSON.parse(params.data);
+        console.log(this.HistoryInfo);
+      }
+    });
   }
 
   async loadingHistoryDetails() {

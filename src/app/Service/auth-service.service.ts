@@ -29,6 +29,7 @@ export class AuthServiceService {
   URL;
   Ref = [];
   HistoryArray = [];
+  PlumbingServices = [];
   constructor(private router: Router,
     private afs : AngularFirestore,
     public afAuth: AngularFireAuth) {
@@ -204,8 +205,13 @@ ViewHistoryDetails() {
   getDoc(key: string){
     return this.afs.doc("services/"+key).valueChanges();
   }
+
   getICTDoc(key: string){
     return this.afs.doc("serviceICT/"+key).valueChanges();
+  }
+
+  getPlumbingDoc(key: string){
+    return this.afs.doc("servicesPlumbing/"+key).valueChanges();
   }
 
   getServiceICT(){
@@ -246,13 +252,13 @@ ViewHistoryDetails() {
   }
 
   getPlumbingServices() {
-    return this.afs.collection('servicesPlumbing/').valueChanges();
-    // var db = firebase.firestore();
-    // return db.collection('servicesPlumbing/').get().then((snap) => {
-    //   snap.forEach((doc) => {
-
-    //   })
-    // })
+    return this.afs.collection('servicesPlumbing/').snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as any;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
   }
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////

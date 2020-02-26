@@ -9,7 +9,7 @@
 </ion-header>
 
 <ion-content>
-    <ion-card *ngFor="let history of previousRequests" [routerLink]="['/history-details']" (click)="setRef(history.refNo)" class="color">
+    <ion-card *ngFor="let history of previousRequests" mode = "ios" [routerLink]="['/history-details']" (click)="detail(history)" class="color">
         <ion-card-header>
             <h6 color="dark">Reference: {{history.refNo}}</h6>
             <!-- <ion-card-subtitle>{{history.service}}</ion-card-subtitle> -->
