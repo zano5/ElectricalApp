@@ -47,18 +47,21 @@ export class ServicesPage implements OnInit {
     
   });
 
+  ////////////////////////////////////////////////////
+  //////////////////////////////////////////////////
+  //////////////////////////////////////////////////////
   this.ViewServices.getService().subscribe((services) => {
-    this.service_info = services;
+    // this.service_info = services;
     services.forEach((data) => {
-      // this.service_info = data;
+      this.service_info = data;
+      console.log(this.service_info);
     })
   })
 
   this.ViewServices.ViewAllRequests().subscribe((requests) => {
-
+    console.log(requests);
     requests.forEach((requestInfo) => {
       this.AllServices = requestInfo;
-      // console.log(this.AllServices.service)
     })
   })
 
@@ -111,7 +114,6 @@ export class ServicesPage implements OnInit {
     
     this.ViewServices.getPlumbingServices().subscribe((plumbing) => {
       this.PlumbingServices = plumbing;
-      console.log(this.PlumbingServices);
     })
 
     this.obj.subscribe((data)=>{
