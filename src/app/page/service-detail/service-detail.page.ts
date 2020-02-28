@@ -19,6 +19,7 @@ export class ServiceDetailPage implements OnInit {
   PlumbingServices;
 
   ServiceDetails;
+  counter = 0;
   constructor(private router: Router,
     private addr: ActivatedRoute,
     public ViewServices: AuthServiceService,
@@ -50,6 +51,7 @@ export class ServiceDetailPage implements OnInit {
     this.addr.queryParams.subscribe(data => {
       // console.log(data);
       this.docKey = data.key;
+      this.counter = data.count;
       // console.log(data);
       if (data.flag) {
         this.flag = true;
@@ -94,6 +96,7 @@ export class ServiceDetailPage implements OnInit {
 
   request() {
 
+    this.router.navigate(['request'],{queryParams: {count: this.counter}});
     localStorage.clear();
 
     /////////This service id///////////////////////////
@@ -102,7 +105,8 @@ export class ServiceDetailPage implements OnInit {
 
     localStorage.setItem("name", this.ServiceDetails.name);
     localStorage.setItem("cost", this.ServiceDetails.cost);
-    localStorage.setItem("description", this.ServiceDetails.description)
+    localStorage.setItem("description", this.ServiceDetails.description);
+    localStorage.setItem("count", this.counter.toString());
 
     // if(this.flag == true){
     //   //  console.log(this.flag)

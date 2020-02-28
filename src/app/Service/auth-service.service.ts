@@ -226,6 +226,35 @@ ViewHistoryDetails() {
 
   }
 
+  electricalUpdateCounter(key,count:number) {
+    firebase.firestore().collection('services/').doc(key).get().then((data) => {
+      if(data != null){
+        this.afs.collection('services/').doc(key).update({"requestsMade":count}).then((data) => {
+        }).catch(() => {
+          this.afs.collection('services/').doc(key).set(count)
+        })
+      }else{}
+    })
+
+    firebase.firestore().collection('serviceICT/').doc(key).get().then((data) => {
+      if(data != null){
+        this.afs.collection('serviceICT/').doc(key).update({"requestsMade":count}).then((data) => {
+        }).catch(() => {
+          this.afs.collection('serviceICT/').doc(key).set(count)
+        })
+      }else{}
+    })
+
+    firebase.firestore().collection('servicesPlumbing/').doc(key).get().then((data) => {
+      if(data != null){
+        this.afs.collection('servicesPlumbing/').doc(key).update({"requestsMade":count}).then((data) => {
+        }).catch(() => {
+          this.afs.collection('servicesPlumbing/').doc(key).set(count)
+        })
+      }else{}
+    })
+  }
+
   getService(){
 
     return this.afs.collection('services/').snapshotChanges().pipe(

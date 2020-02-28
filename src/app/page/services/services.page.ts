@@ -28,17 +28,22 @@ export class ServicesPage implements OnInit {
   fifthCounter = 0;
   sixthCounter = 0;
 
-  service_info;
+  service_info = [];
+
+  count = 0;
 
   MostRequested = [];
   PlumbingServices = [];
+  id = [];
   constructor(private router: Router,
     public loadingController: LoadingController,
     public ViewServices: AuthServiceService) {
-  
+      this.count = 0;
+      console.log(this.count);
      }
 
   ngOnInit() {
+    
   // this.ViewServices.getUser();
   this.obj1 = this.ViewServices.getServiceICT();
   this.obj1.subscribe((data)=>{
@@ -54,17 +59,20 @@ export class ServicesPage implements OnInit {
     // this.service_info = services;
     services.forEach((data) => {
       this.service_info = data;
-      console.log(this.service_info);
     })
   })
 
   this.ViewServices.ViewAllRequests().subscribe((requests) => {
-    console.log(requests);
+    // console.log(requests);
     requests.forEach((requestInfo) => {
       this.AllServices = requestInfo;
     })
-  })
+  });
 
+  console.log(this.service_info);
+  // this.ViewServices.getDoc(this.service_info.id).subscribe((data) => {
+  //   console.log(data);
+  // })
   // console.log(this.MostRequested);
   this.loadingServices();
 }
@@ -72,8 +80,8 @@ export class ServicesPage implements OnInit {
   detail_id(id : any){
     // this.router.navigateByUrl('service-detail')
     this.flag = true;
-    this.router.navigate(['service-detail'],{queryParams : {key: id, flag : this.flag}});
-
+    this.count++;
+    this.router.navigate(['service-detail'],{queryParams : {key: id, flag : this.flag, count: this.count}});
   }
 
   // detail(items) {
