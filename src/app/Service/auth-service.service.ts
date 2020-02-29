@@ -245,14 +245,14 @@ ViewHistoryDetails() {
       }else{}
     })
 
-    firebase.firestore().collection('servicesPlumbing/').doc(key).get().then((data) => {
-      if(data != null){
-        this.afs.collection('servicesPlumbing/').doc(key).update({"requestsMade":count}).then((data) => {
-        }).catch(() => {
-          this.afs.collection('servicesPlumbing/').doc(key).set(count)
-        })
-      }else{}
-    })
+    // firebase.firestore().collection('servicesPlumbing/').doc(key).get().then((data) => {
+    //   if(data != null){
+    //     this.afs.collection('servicesPlumbing/').doc(key).update({"requestsMade":count}).then((data) => {
+    //     }).catch(() => {
+    //       this.afs.collection('servicesPlumbing/').doc(key).set(count)
+    //     })
+    //   }else{}
+    // })
   }
 
   getService(){

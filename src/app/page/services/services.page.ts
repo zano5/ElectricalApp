@@ -4,6 +4,7 @@ import * as firebase from "firebase";
 
 import { LoadingController } from '@ionic/angular';
 import { AuthServiceService } from 'src/app/Service/auth-service.service';
+import { PathService } from 'src/app/Service/path.service';
 
 @Component({
   selector: 'app-services',
@@ -37,7 +38,8 @@ export class ServicesPage implements OnInit {
   id = [];
   constructor(private router: Router,
     public loadingController: LoadingController,
-    public ViewServices: AuthServiceService) {
+    public ViewServices: AuthServiceService,
+    public pathService: PathService) {
       this.count = 0;
       console.log(this.count);
      }
@@ -77,6 +79,10 @@ export class ServicesPage implements OnInit {
   this.loadingServices();
 }
 
+redirect() {
+  this.pathService.getUser("request1");
+}
+
   detail_id(id : any){
     // this.router.navigateByUrl('service-detail')
     this.flag = true;
@@ -107,7 +113,7 @@ export class ServicesPage implements OnInit {
   // }
 
   runs(){
-    this.router.navigateByUrl('request1');
+    // this.router.navigateByUrl('request1');
   }
 
   async loadingServices() {
