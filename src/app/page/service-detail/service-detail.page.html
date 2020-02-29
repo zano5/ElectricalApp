@@ -23,22 +23,38 @@
     </h3>
 </div>
 
+<!-- <p>*ngIf="flag; else notShow"</p> -->
 <ion-content>
-    <div *ngIf="flag; else notShow" class="image_container">
-        <img [src]="ArrayServices?.photoURL" alt="avatar" />
-        <h5 padding>{{ArrayServices?.name}} </h5>
+    <div class="image_container">
+        <img [src]="ServiceDetails?.photoURL" alt = "avatar"/>
+        <h5>{{ServiceDetails?.name}} </h5>
+
+        <nav>
+            <h6>Description</h6>
+            <p>{{ServiceDetails?.description}}</p>
+        </nav>
     </div>
 
-
-    <!-- <div padding>
-      
-        <h5 style="position:absalute;left:15px;">{{ArrayServices?.name}} </h5>
+    <!-- <div *ngIf = "PlumbingServices?.length != 0" class = "image_container">
+        <nav>
+            <img [src] = "PlumbingServices?.photoURL" *ngIf = "PlumbingServices?.length != 0"/>
+            <h5 *ngIf = "PlumbingServices?.length != 0">{{PlumbingServices?.name}}</h5>
+        </nav>
+    </div>
     
+    <div *ngIf = "ArrayICTServices?.length != 0" class = "image_container">
+        <nav>
+            <img [src] = "ArrayICTServices?.photoURL" *ngIf = "ArrayICTServices?.length != 0"/>
+            <h5 *ngIf = "ArrayICTServices?.length != 0">{{ArrayICTServices?.name}}</h5>
+        </nav>
+
+        <nav>
+            <h6 *ngIf = "ArrayICTServices?.length != 0">Description</h6>
+            <p *ngIf = "ArrayICTServices?.length != 0">{{ArrayICTServices?.description}}</p>
+        </nav>
     </div> -->
-    <div>
-        <h6 padding>Description</h6>
-        <p padding>{{ArrayServices?.description}}</p>
-    </div>
+
     <ion-button expand="block" color="primary" (click)="request()" class="order">
-        Request</ion-button>
+        Request
+    </ion-button>
 </ion-content>

@@ -5,6 +5,7 @@ import { ModalController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import{AlertController} from '@ionic/angular';
+import { Key } from 'protractor';
 @Component({
   selector: 'app-request',
   templateUrl: './request.page.html',
@@ -49,16 +50,23 @@ export class RequestPage implements OnInit {
     time : "",
     distance : 0,
     calloutFee : 0,
-    uid : ''
-    
-  
+    uid : '',
+    serviceID: ''
   }
+
+  Key;
   obj : any;
   obj1 : any;
   ArrayServices;
   ArrayICTServices;
   dat = new Date();
   day;
+
+  counter:number = 0;
+  request_made:number = 0;
+  docArray;
+  countNum;
+  sum = 0;
   constructor(private alertcontroller:AlertController,
     public ViewServices: AuthServiceService,
     private addr : ActivatedRoute,
@@ -108,10 +116,12 @@ console.log(i)
       this.addresses = [];
     }
   }
+
   but1(){
     this.moreRequestICT = false; 
     console.log(this.moreRequestICT)
   }
+
   but(){
     this.moreRequestICT = true; 
     console.log(this.moreRequestICT)
@@ -130,23 +140,64 @@ console.log(i)
     console.log(this.selectedAddress)
     // this.user.address = this.selectedAddress;
     this.addresses = [];
-  } 
+  }
+
   ngOnInit() {
     // this.requestService.getUser(this.URL);
 
+    this.obj = this.ViewServices.getService();
+    this.obj1 = this.ViewServices.getServiceICT();
+
+    this.ViewServices.getService().subscribe((data)=>{
+      this.ArrayServices = data;
+    })
+
+    this.ViewServices.getServiceICT().subscribe((data)=>{
+      this.ArrayICTServices = data;
+      console.log(this.ArrayICTServices);
+    })
+
+    this.ViewServices.getDoc(localStorage.getItem("key")).subscribe((data) => {
+      if(data != null){
+        this.docArray = data;
+        console.log(this.docArray.requestsMade);
+        this.counter = parseInt(this.docArray.requestsMade);
+        console.log(this.counter);
+      }else{}
+    });
+
+    this.ViewServices.getICTDoc(localStorage.getItem("key")).subscribe((data) => {
+      if(data != null){
+        this.docArray = data;
+        console.log(this.docArray.requestsMade);
+        this.counter = parseInt(this.docArray.requestsMade);
+        console.log(this.counter);
+      }else{}
+    })
+
+    this.ViewServices.getPlumbingDoc(localStorage.getItem("key")).subscribe((data) => {
+      if(data != null){
+        this.docArray = data;
+        console.log(this.docArray.requestsMade);
+        this.counter = parseInt(this.docArray.requestsMade);
+        console.log(this.counter);
+      }else{}
+    })
     this.addr.queryParams.subscribe(data => {
-      console.log(data);
       this.KM = data.KM;
-      console.log(data.lng + "  " + data.lat);
+      // console.log(data.lng + "  " + data.lat);
       // this.request.coords = [data.lng,data.lat];
-      // console.log(this.request);
-    
       // this.request.distance = this.KM;
       this.cost1 = this.KM * 5;
-      // console.log(this.cost1);
       // this.request.calloutFee = this.cost1;
     })
 
+    this.countNum = parseInt(localStorage.getItem("count"));
+    console.log(this.countNum);
+    // let number:number = parseInt(this.docArray.requestsMade);
+    // console.log(this.docArray.requestsMade)
+    let key = localStorage.getItem("key");
+    ////////////////////////////////////
     let name = localStorage.getItem("name");
     let description = localStorage.getItem("description")
     let cost = localStorage.getItem("cost");
@@ -154,26 +205,13 @@ console.log(i)
     this.name = name;
     this.descrp = description;
     this.cost = cost;
-    console.log(flag)
-console.log(this.cost)
-console.log(this.descrp)
-console.log(this.name)
-
-this.obj = this.ViewServices.getService();
-this.obj1 = this.ViewServices.getServiceICT();
-
-this.obj.subscribe((data)=>{
-  this.ArrayServices = data;
-  console.log(this.ArrayServices)
-
-  })
-
-  this.obj1.subscribe((data)=>{
-    this.ArrayICTServices = data;
-    console.log(this.ArrayICTServices)
-  
-    })
-
+    /////////////////////////////
+    /////////////////////////////
+    this.Key = key;
+    console.log(flag);
+    console.log(this.cost);
+    console.log(this.descrp);
+    console.log(this.name);
 }
 
 
@@ -187,6 +225,11 @@ this.obj.subscribe((data)=>{
     this.request.serviceCost = this.cost;
     this.request.refNo = this.ref;
     this.request.date = this.date.substr(0,10);
+
+    /////////This service id///////////////////////////
+    this.request.serviceID = this.Key;
+    ////////////////is a new code////////////////
+    
     // console.log(this.request);
     // console.log(this.time.substr(11,8) + " tyd");
     // console.log(this.date.substr(0,10) + " dag");
@@ -225,6 +268,14 @@ this.obj.subscribe((data)=>{
       // make condition for to send request
       
     // this.ViewServices.addRequest(this.request);
+
+    this.countNum = parseInt(localStorage.getItem("count"));
+    console.log(this.countNum);
+
+    this.counter = this.counter + this.countNum;
+    console.log("Counter: " + this.counter);
+
+    this.ViewServices.electricalUpdateCounter(this.Key, this.counter);
   }
 
   

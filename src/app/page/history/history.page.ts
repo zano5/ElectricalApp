@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthServiceService } from 'src/app/Service/auth-service.service';
 import { LoadingController } from '@ionic/angular';
 import { PathService } from 'src/app/Service/path.service';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-history',
@@ -29,6 +29,15 @@ export class HistoryPage implements OnInit {
     this.route.navigateByUrl('/tabs/profile');
   }
 
+  detail(items) {
+    const navigationExtras: NavigationExtras = {
+      queryParams: {
+        data: JSON.stringify(items),
+      }
+    };
+    this.route.navigate(['history-details'], navigationExtras);
+  }
+
   async presentLoading() {
     const loading = await this.loadingController.create({
       message: 'Please wait...',
@@ -37,7 +46,7 @@ export class HistoryPage implements OnInit {
     await loading.present();
     this.historyService.ViewHistory().subscribe((data) => {
       this.previousRequests = data;
-      console.log(this.previousRequests);
+      // console.log(this.previousRequests);
       loading.dismiss();
     })
     // const { role, data } = await loading.onDidDismiss();

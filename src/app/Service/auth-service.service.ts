@@ -29,6 +29,7 @@ export class AuthServiceService {
   URL;
   Ref = [];
   HistoryArray = [];
+  PlumbingServices = [];
   constructor(private router: Router,
     private afs : AngularFirestore,
     public afAuth: AngularFireAuth) {
@@ -157,6 +158,10 @@ get getRef() {
   return this.Ref;
 }
 
+ViewAllRequests() {
+  return this.afs.collection("request").valueChanges();
+}
+
 ViewHistoryDetails() {
   return this.afs.collection("user").doc(this.afAuth.auth.currentUser.uid).collection("request").valueChanges();
 
@@ -200,8 +205,13 @@ ViewHistoryDetails() {
   getDoc(key: string){
     return this.afs.doc("services/"+key).valueChanges();
   }
+
   getICTDoc(key: string){
     return this.afs.doc("serviceICT/"+key).valueChanges();
+  }
+
+  getPlumbingDoc(key: string){
+    return this.afs.doc("servicesPlumbing/"+key).valueChanges();
   }
 
   getServiceICT(){
@@ -214,6 +224,35 @@ ViewHistoryDetails() {
       }))
     );
 
+  }
+
+  electricalUpdateCounter(key,count:number) {
+    firebase.firestore().collection('services/').doc(key).get().then((data) => {
+      if(data != null){
+        this.afs.collection('services/').doc(key).update({"requestsMade":count}).then((data) => {
+        }).catch(() => {
+          this.afs.collection('services/').doc(key).set(count)
+        })
+      }else{}
+    })
+
+    firebase.firestore().collection('serviceICT/').doc(key).get().then((data) => {
+      if(data != null){
+        this.afs.collection('serviceICT/').doc(key).update({"requestsMade":count}).then((data) => {
+        }).catch(() => {
+          this.afs.collection('serviceICT/').doc(key).set(count)
+        })
+      }else{}
+    })
+
+    // firebase.firestore().collection('servicesPlumbing/').doc(key).get().then((data) => {
+    //   if(data != null){
+    //     this.afs.collection('servicesPlumbing/').doc(key).update({"requestsMade":count}).then((data) => {
+    //     }).catch(() => {
+    //       this.afs.collection('servicesPlumbing/').doc(key).set(count)
+    //     })
+    //   }else{}
+    // })
   }
 
   getService(){
@@ -239,6 +278,16 @@ ViewHistoryDetails() {
 
       return this.Services;
   });
+  }
+
+  getPlumbingServices() {
+    return this.afs.collection('servicesPlumbing/').snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as any;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
   }
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////

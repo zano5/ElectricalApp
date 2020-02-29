@@ -40,7 +40,7 @@ ion-content {
         .text {
             position: absolute;
             top: 60%;
-            left: 0px;
+            left: 5px;
             color: black;
         }
         h5 {
@@ -81,11 +81,11 @@ ion-content {
         }
         .card-title {
             position: absolute;
-            top: 70%;
-            left: 0px;
-            display: inline;
+            top: 65%;
+            left: 25%;
             font-size: 1rem;
-            // width: 50%;
+            width: 50%;
+            // font-weight: bold;
             color: white;
             font: bold;
             z-index: 11;

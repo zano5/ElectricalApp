@@ -7,6 +7,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UpdateContactsPage } from '../modal/update-contacts/update-contacts.page';
 import { UpdateEmailPage } from '../modal/update-email/update-email.page';
 import { database } from 'firebase';
+import { finalize } from 'rxjs/operators';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @Component({
   selector: 'app-view-profile',
@@ -16,12 +18,17 @@ import { database } from 'firebase';
 export class ViewProfilePage implements OnInit {
   UserProfile:any;
   Persona = [];
+  uploadPercent: any;
+  mainImage: any;
+  downloadU: any;
+  // storage: any;
 
   constructor(public viewProfileService: AuthServiceService,
     public loadingController: LoadingController,
     public Alert:AlertController,
     public route: Router,
-    public modalController: ModalController) {
+    public modalController: ModalController,
+    private storage: AngularFireStorage) {
       this.viewProfileService.getUserProfile().subscribe((data) => {
         this.UserProfile = data;
         console.log(this.UserProfile);
@@ -31,6 +38,24 @@ export class ViewProfilePage implements OnInit {
 
   ngOnInit() {
     // this.loadingProfile();
+  }
+
+  uploadFile(event) {
+    const file = event.target.files[0];
+    const filePath = 'PIC' + Math.random().toString(36).substring(2);
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath, file);
+    // observe percentage changes
+    this.uploadPercent = task.percentageChanges();
+    task.snapshotChanges().pipe(
+      finalize(() => {
+        this.downloadU = fileRef.getDownloadURL().subscribe(url => {
+          console.log(url);
+          this.mainImage = url
+          this.uploadPercent = null;
+        });
+      })
+    ).subscribe();
   }
 
   back() {
