@@ -49,10 +49,25 @@
     <div>
         <ion-item class = "ion-padding">
             <ion-label position="stacked">Comments</ion-label>
-            <ion-textarea>
+            <ion-textarea [(ngModel)] = "comments">
             </ion-textarea>
         </ion-item>
 
-        <ion-button color="primary" class = "ion-padding" mode = "ios">Success</ion-button>
+        <ion-button color="primary" class = "ion-padding" mode = "ios" (click) = "Comment(HistoryInfo?.serviceID,comments)">Success</ion-button>
     </div>
+
+    <div>
+        <ion-item>
+            <ion-avatar slot="start">
+              <!-- <img src="./avatar-han.png"> -->
+              <ion-icon name="person" style = "width: 30px;height: 30px;border: 1px solid black;border-radius: 50px;padding: 7px;"></ion-icon>
+            </ion-avatar>
+            <ion-label>
+              <h2>{{User_Info?.name}} {{User_Info?.surname}}</h2>
+              <!-- <h3>Look, kid...</h3> -->
+              <p>{{Comment_Array?.comment}}</p>
+            </ion-label>
+          </ion-item>
+    </div>
+
 </ion-content>

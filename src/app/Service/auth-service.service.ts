@@ -226,6 +226,68 @@ ViewHistoryDetails() {
 
   }
 
+  //Adding comments
+  //////////////////
+  Comments(key,Comment) {
+
+    this.afs.firestore.collection('services/').doc(key).get().then((docSnapshot) => {
+      if(docSnapshot.exists){
+        return this.afs.collection('services/').doc(key).collection('comments').add({
+          comment: Comment,
+          uid: this.afAuth.auth.currentUser.uid
+        }).then((data) => {
+          console.log("Document successfully written!");
+        }).catch((error) => {
+          console.error("Error writing document: ", error);
+        })
+      }else{}
+    })
+
+    this.afs.firestore.collection('serviceICT/').doc(key).get().then((docSnapshot) => {
+      if(docSnapshot.exists){
+        return this.afs.collection('serviceICT/').doc(key).collection('comments').add({
+          comment: Comment,
+          uid: this.afAuth.auth.currentUser.uid
+          // name: 
+        }).then((data) => {
+          console.log("Document successfully written!");
+        }).catch((error) => {
+          console.error("Error writing document: ", error);
+        })
+      }else{}
+    })
+
+    this.afs.firestore.collection("servicesPlumbing/").doc(key).get().then((docSnapshot) => {
+      if(docSnapshot.exists){
+        return this.afs.collection('servicesPlumbing/').doc(key).collection('comments').add({
+          comment: Comment,
+          uid: this.afAuth.auth.currentUser.uid
+        }).then((data) => {
+          console.log("Document successfully written!");
+        }).catch((error) => {
+          console.error("Error writing document: ", error);
+        })
+      }
+    })
+    // console.log("Return info: " + pen);
+
+    
+  }
+
+  getComments(key) {
+    return this.afs.collection('services/').doc(key).collection('comments').valueChanges();
+    // return firebase.firestore().collection('services/').doc(key).collection('comments').get().then((data) => {
+    // }).catch((error) => {
+    //   console.log(error);
+    // })
+  }
+
+  getUserByID(key:string) {
+    return this.afs.collection('user/').doc(key).valueChanges();
+  }
+
+  //////////////////////////////////////////
+  /////////////////////////////////////////
   electricalUpdateCounter(key,count:number) {
     firebase.firestore().collection('services/').doc(key).get().then((data) => {
       if(data != null){
@@ -245,14 +307,14 @@ ViewHistoryDetails() {
       }else{}
     })
 
-    // firebase.firestore().collection('servicesPlumbing/').doc(key).get().then((data) => {
-    //   if(data != null){
-    //     this.afs.collection('servicesPlumbing/').doc(key).update({"requestsMade":count}).then((data) => {
-    //     }).catch(() => {
-    //       this.afs.collection('servicesPlumbing/').doc(key).set(count)
-    //     })
-    //   }else{}
-    // })
+    firebase.firestore().collection('servicesPlumbing/').doc(key).get().then((data) => {
+      if(data != null){
+        this.afs.collection('servicesPlumbing/').doc(key).update({"requestsMade":count}).then((data) => {
+        }).catch(() => {
+          this.afs.collection('servicesPlumbing/').doc(key).set(count)
+        })
+      }else{}
+    })
   }
 
   getService(){
