@@ -18,6 +18,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import * as firebase from "firebase";
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { StarRatingModule} from 'ionic4-star-rating';
 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { UpdateNamesPage } from './page/modal/update-names/update-names.page';
@@ -51,6 +52,7 @@ firebase.analytics();
      MatExpansionModule,
      ReactiveFormsModule,
      FormsModule,
+     StarRatingModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule, // firestore
     AngularFireAuthModule, // auth

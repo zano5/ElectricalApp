@@ -18,7 +18,13 @@ export class HistoryDetailsPage implements OnInit {
   comments;
   Comment_Array;
   User_Info;
+  Alpha = [];
+
   Key;
+  name;
+  surname;
+  User_Array;
+  rates = 0;
   constructor(public historyService: AuthServiceService,
     public loadingController: LoadingController,
     public addr: ActivatedRoute) { }
@@ -29,27 +35,31 @@ export class HistoryDetailsPage implements OnInit {
     this.addr.queryParams.subscribe(params => {
       if (params && params.data) {
         this.HistoryInfo = JSON.parse(params.data);
-        console.log(this.HistoryInfo.serviceID);
+        console.log(this.HistoryInfo);
       }
     });
 
     this.historyService.getComments(this.HistoryInfo.serviceID).subscribe((data) => {
+      this.Comment_Array = data;
+      console.log(this.Comment_Array);
       data.forEach((info) => {
-        this.Comment_Array = info;
-        this.historyService.getUserByID(this.Comment_Array.uid).subscribe((data) => {
-          this.User_Info = data;
-        })
+        this.Alpha.push(info);
       })
-    })
-
+    });
   }
 
   Comment(key,comments) {
+
     if(this.comments != null){
-      this.historyService.Comments(this.HistoryInfo.serviceID,this.comments);
+      this.historyService.Comments(this.HistoryInfo.serviceID,this.comments, this.name, this.surname);
     }else{}
 
     console.log(this.comments);
+  }
+
+  logRatingChange(event) {
+    // this.rates = event;
+    console.log("Changing rates: " + this.rates);
   }
 
   async loadingHistoryDetails() {

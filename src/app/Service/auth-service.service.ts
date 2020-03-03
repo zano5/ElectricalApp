@@ -30,6 +30,9 @@ export class AuthServiceService {
   Ref = [];
   HistoryArray = [];
   PlumbingServices = [];
+
+  Reserve = [];
+
   constructor(private router: Router,
     private afs : AngularFirestore,
     public afAuth: AngularFireAuth) {
@@ -228,13 +231,14 @@ ViewHistoryDetails() {
 
   //Adding comments
   //////////////////
-  Comments(key,Comment) {
+  Comments(key,Comment, name, surname) {
 
     this.afs.firestore.collection('services/').doc(key).get().then((docSnapshot) => {
       if(docSnapshot.exists){
         return this.afs.collection('services/').doc(key).collection('comments').add({
           comment: Comment,
-          uid: this.afAuth.auth.currentUser.uid
+          uid: this.afAuth.auth.currentUser.uid,
+          email: this.afAuth.auth.currentUser.email,
         }).then((data) => {
           console.log("Document successfully written!");
         }).catch((error) => {
@@ -247,7 +251,8 @@ ViewHistoryDetails() {
       if(docSnapshot.exists){
         return this.afs.collection('serviceICT/').doc(key).collection('comments').add({
           comment: Comment,
-          uid: this.afAuth.auth.currentUser.uid
+          uid: this.afAuth.auth.currentUser.uid,
+          email: this.afAuth.auth.currentUser.email
           // name: 
         }).then((data) => {
           console.log("Document successfully written!");
@@ -261,7 +266,8 @@ ViewHistoryDetails() {
       if(docSnapshot.exists){
         return this.afs.collection('servicesPlumbing/').doc(key).collection('comments').add({
           comment: Comment,
-          uid: this.afAuth.auth.currentUser.uid
+          uid: this.afAuth.auth.currentUser.uid,
+          email: this.afAuth.auth.currentUser.email
         }).then((data) => {
           console.log("Document successfully written!");
         }).catch((error) => {
@@ -276,10 +282,6 @@ ViewHistoryDetails() {
 
   getComments(key) {
     return this.afs.collection('services/').doc(key).collection('comments').valueChanges();
-    // return firebase.firestore().collection('services/').doc(key).collection('comments').get().then((data) => {
-    // }).catch((error) => {
-    //   console.log(error);
-    // })
   }
 
   getUserByID(key:string) {
