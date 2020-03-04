@@ -24,35 +24,87 @@
         </ion-card>
     </div>
 
-    <div style = "text-align: center;">
-        <nav>
+    <div>
+        <nav class = "ion-padding">
             <span>Rate service</span>
+            <p style = "font-size: 12px;">Tell us what you think</p>
         </nav>
-        <nav>
-            <ion-icon name="star-outline" style = "width: 26px; height: 26px;"></ion-icon>
-            <!-- <ion-icon name="star"></ion-icon> -->
 
+        <!-- <nav>
             <ion-icon name="star-outline" style = "width: 26px; height: 26px;"></ion-icon>
-            <!-- <ion-icon name="star"></ion-icon> -->
-
             <ion-icon name="star-outline" style = "width: 26px; height: 26px;"></ion-icon>
-            <!-- <ion-icon name="star"></ion-icon> -->
-
             <ion-icon name="star-outline" style = "width: 26px; height: 26px;"></ion-icon>
-            <!-- <ion-icon name="star"></ion-icon> -->
-
             <ion-icon name="star-outline" style = "width: 26px; height: 26px;"></ion-icon>
-            <!-- <ion-icon name="star"></ion-icon> -->
-        </nav>
+            <ion-icon name="star-outline" style = "width: 26px; height: 26px;"></ion-icon>
+        </nav> -->
     </div>
 
     <div>
-        <ion-item class = "ion-padding">
-            <ion-label position="stacked">Comments</ion-label>
-            <ion-textarea>
-            </ion-textarea>
-        </ion-item>
+        <nav style = "text-align: center;">
+            <ionic4-star-rating
+                activeIcon = "ios-star"
+                defaultIcon = "ios-star-outline"
+                activeColor = "red" 
+                defaultColor = "black"
+                readonly="false"
+                fontSize = "22px"
+                rating = "0"
+                (ratingChanged)="logRatingChange($event)">
+            </ionic4-star-rating>
+        </nav>
+        <!-- "#aaaaaa" -->
+        <!-- "#488aff" -->
+        <nav>
+            <ion-item class = "ion-padding" lines = "none" style = "padding: 0%;">
+                <ion-label position="stacked">Comments</ion-label>
+                <ion-textarea [(ngModel)] = "comments" style = "border: 0.5px solid gray;padding-left: 10px;padding-right: 10px;border-radius: 10px;">
+                </ion-textarea>
+            </ion-item>
+        </nav>
 
-        <ion-button color="primary" class = "ion-padding" mode = "ios">Success</ion-button>
+        <nav>
+            <ion-button color="primary" class = "ion-padding" mode = "ios" (click) = "Comment()">Success</ion-button>
+        </nav>
     </div>
+
+    <div style = "margin-top: 50px;">
+        <h4 style = "padding-left: 20px;padding-right: 20px;">Comments</h4>
+        <ion-item *ngFor = "let com of Comment_Array">
+            <ion-avatar slot="start">
+              <ion-icon name="person" style = "width: 30px;height: 30px;border: 1px solid black;border-radius: 50px;padding: 7px;"></ion-icon>
+            </ion-avatar>
+
+            <ion-label>
+              <!-- <h2>{{User_Info?.name}} {{User_Info?.surname}}</h2> -->
+              <h2>{{com?.email}}</h2>
+
+              <ion-row >
+                <!-- <ion-col>
+                    <span>{{com?.date}}</span>
+                </ion-col>
+                  <ion-col size="1" id="rates" *ngFor="let i of specAvarageRates(rate.rate).fill(1)">
+                      <ion-icon name="star" color="secondary"></ion-icon>
+                  </ion-col> -->
+                  <nav>
+                    <ionic4-star-rating
+                        activeIcon = "ios-star"
+                        defaultIcon = "ios-star-outline"
+                        activeColor = "red" 
+                        defaultColor = "#aaaaaa"
+                        readonly="true"
+                        fontSize = "15px"
+                        rating = "{{com?.rate}}">
+                    </ionic4-star-rating>
+                  </nav>
+
+                  <nav>
+                    <p>{{com?.date}}</p>
+                  </nav>
+                </ion-row>
+              <!-- <p>{{com?.date}}</p> -->
+              <p>{{com?.comment}}</p>
+            </ion-label>
+          </ion-item>
+    </div>
+
 </ion-content>

@@ -57,4 +57,43 @@
     <ion-button expand="block" color="primary" (click)="request()" class="order">
         Request
     </ion-button>
+
+    <div style = "margin-top: 100px;">
+        <h4 style = "padding-left: 20px;padding-right: 20px;">Comments</h4>
+        <ion-item *ngFor = "let com of Comments_Array">
+            <!-- <ion-avatar slot="start">
+              <ion-icon name="person" style = "width: 30px;height: 30px;border: 1px solid black;border-radius: 50px;padding: 7px;"></ion-icon>
+            </ion-avatar> -->
+
+            <ion-label>
+              <h2>{{com?.email}}</h2>
+
+              <ion-row >
+                <!-- <ion-col>
+                    <span>{{com?.date}}</span>
+                </ion-col>
+                  <ion-col size="1" id="rates" *ngFor="let i of specAvarageRates(rate.rate).fill(1)">
+                      <ion-icon name="star" color="secondary"></ion-icon>
+                  </ion-col> -->
+                  <nav>
+                    <ionic4-star-rating
+                        activeIcon = "ios-star"
+                        defaultIcon = "ios-star-outline"
+                        activeColor = "red" 
+                        defaultColor = "#aaaaaa"
+                        readonly="true"
+                        fontSize = "15px"
+                        rating = "{{com?.rate}}">
+                    </ionic4-star-rating>
+                  </nav>
+
+                  <nav>
+                    <p>{{com?.date}}</p>
+                  </nav>
+                </ion-row>
+              <!-- <p>{{com?.date}}</p> -->
+              <p>{{com?.comment}}</p>
+            </ion-label>
+          </ion-item>
+    </div>
 </ion-content>

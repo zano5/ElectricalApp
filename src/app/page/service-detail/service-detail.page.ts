@@ -20,6 +20,8 @@ export class ServiceDetailPage implements OnInit {
 
   ServiceDetails;
   counter = 0;
+  Comments_Array;
+
   constructor(private router: Router,
     private addr: ActivatedRoute,
     public ViewServices: AuthServiceService,
@@ -70,6 +72,15 @@ export class ServiceDetailPage implements OnInit {
     //   }
     // });
 
+    // this.ViewServices.getComments(this.docKey).subscribe((data) => {
+    //   this.Comments_Array = data;
+    // })
+    
+    this.ViewServices.getReviews(this.docKey).subscribe((data) => {
+      this.Comments_Array = data;
+    })
+
+    console.log(this.docKey);
     this.ViewServices.getDoc(this.docKey).subscribe((data) =>{
       if(data != null){
         this.ServiceDetails = data;

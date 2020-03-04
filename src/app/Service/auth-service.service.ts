@@ -6,6 +6,7 @@ import { map, filter, pairwise } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 import { error } from 'protractor';
+import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 @Injectable({
   providedIn: 'root'
 })
@@ -30,6 +31,10 @@ export class AuthServiceService {
   Ref = [];
   HistoryArray = [];
   PlumbingServices = [];
+
+  Reserve = [];
+  service_id;
+  Reviews = [];
   constructor(private router: Router,
     private afs : AngularFirestore,
     public afAuth: AngularFireAuth) {
@@ -226,6 +231,98 @@ ViewHistoryDetails() {
 
   }
 
+  ////////////////Add reviews////////////////////////////
+  //////////////////////////////////////////////////////
+
+  set setServiceID(id) {
+    this.service_id = id;
+  }
+
+  get getServiceID() {
+    return this.service_id;
+  }
+
+  submitReviews(rate,comment,date) {
+    
+    this.afs.firestore.collection('reviews').add({
+      date: date,
+      rate: rate,
+      comment: comment,
+      uid: this.afAuth.auth.currentUser.uid,
+      email: this.afAuth.auth.currentUser.email,
+      serviceID: this.service_id,
+    }).then((message) => {
+      console.log("Comment made successfully");
+    }).catch((error) => {
+      console.log("Error detected: " + error);
+    })
+  }
+
+  getReviews(key) {
+    return this.afs.collection('reviews', ref => ref.where('serviceID', '==' , key)).valueChanges()
+
+    // return this.afs.collection('reviews',ref => ref.where('uid', '==' , key) && ref.orderBy('stamp',"desc")).valueChanges();
+  }
+  //Adding comments
+  //////////////////
+  Comments(key,Comment, name, surname) {
+
+    this.afs.firestore.collection('services/').doc(key).get().then((docSnapshot) => {
+      if(docSnapshot.exists){
+        return this.afs.collection('services/').doc(key).collection('comments').add({
+          comment: Comment,
+          uid: this.afAuth.auth.currentUser.uid,
+          email: this.afAuth.auth.currentUser.email,
+        }).then((data) => {
+          console.log("Document successfully written!");
+        }).catch((error) => {
+          console.error("Error writing document: ", error);
+        })
+      }else{}
+    })
+
+    this.afs.firestore.collection('serviceICT/').doc(key).get().then((docSnapshot) => {
+      if(docSnapshot.exists){
+        return this.afs.collection('serviceICT/').doc(key).collection('comments').add({
+          comment: Comment,
+          uid: this.afAuth.auth.currentUser.uid,
+          email: this.afAuth.auth.currentUser.email
+          // name: 
+        }).then((data) => {
+          console.log("Document successfully written!");
+        }).catch((error) => {
+          console.error("Error writing document: ", error);
+        })
+      }else{}
+    })
+
+    this.afs.firestore.collection("servicesPlumbing/").doc(key).get().then((docSnapshot) => {
+      if(docSnapshot.exists){
+        return this.afs.collection('servicesPlumbing/').doc(key).collection('comments').add({
+          comment: Comment,
+          uid: this.afAuth.auth.currentUser.uid,
+          email: this.afAuth.auth.currentUser.email
+        }).then((data) => {
+          console.log("Document successfully written!");
+        }).catch((error) => {
+          console.error("Error writing document: ", error);
+        })
+      }
+    })
+    // console.log("Return info: " + pen);
+ 
+  }
+
+  getComments(key) {
+    return this.afs.collection('services/').doc(key).collection('comments').valueChanges();
+  }
+
+  getUserByID(key:string) {
+    return this.afs.collection('user/').doc(key).valueChanges();
+  }
+
+  //////////////////////////////////////////
+  /////////////////////////////////////////
   electricalUpdateCounter(key,count:number) {
     firebase.firestore().collection('services/').doc(key).get().then((data) => {
       if(data != null){
@@ -236,14 +333,14 @@ ViewHistoryDetails() {
       }else{}
     })
 
-    firebase.firestore().collection('serviceICT/').doc(key).get().then((data) => {
-      if(data != null){
-        this.afs.collection('serviceICT/').doc(key).update({"requestsMade":count}).then((data) => {
-        }).catch(() => {
-          this.afs.collection('serviceICT/').doc(key).set(count)
-        })
-      }else{}
-    })
+    // firebase.firestore().collection('serviceICT/').doc(key).get().then((data) => {
+    //   if(data != null){
+    //     this.afs.collection('serviceICT/').doc(key).update({"requestsMade":count}).then((data) => {
+    //     }).catch(() => {
+    //       this.afs.collection('serviceICT/').doc(key).set(count)
+    //     })
+    //   }else{}
+    // })
 
     // firebase.firestore().collection('servicesPlumbing/').doc(key).get().then((data) => {
     //   if(data != null){
@@ -317,7 +414,9 @@ ViewHistoryDetails() {
     })
   }
 
-
+  getUser_Info() {
+    return this.afs.collection('user/').doc(this.afAuth.auth.currentUser.uid).valueChanges();
+  }
   Clear() {
     this.UserArray.splice(0,1);
   }
