@@ -66,8 +66,32 @@
             </ion-avatar> -->
 
             <ion-label>
-              <!-- <h2>{{com?.uid}}</h2> -->
               <h2>{{com?.email}}</h2>
+
+              <ion-row >
+                <!-- <ion-col>
+                    <span>{{com?.date}}</span>
+                </ion-col>
+                  <ion-col size="1" id="rates" *ngFor="let i of specAvarageRates(rate.rate).fill(1)">
+                      <ion-icon name="star" color="secondary"></ion-icon>
+                  </ion-col> -->
+                  <nav>
+                    <ionic4-star-rating
+                        activeIcon = "ios-star"
+                        defaultIcon = "ios-star-outline"
+                        activeColor = "red" 
+                        defaultColor = "#aaaaaa"
+                        readonly="true"
+                        fontSize = "15px"
+                        rating = "{{com?.rate}}">
+                    </ionic4-star-rating>
+                  </nav>
+
+                  <nav>
+                    <p>{{com?.date}}</p>
+                  </nav>
+                </ion-row>
+              <!-- <p>{{com?.date}}</p> -->
               <p>{{com?.comment}}</p>
             </ion-label>
           </ion-item>

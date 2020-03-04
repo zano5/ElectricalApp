@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthServiceService } from 'src/app/Service/auth-service.service';
 import { LoadingController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-history-details',
@@ -25,9 +26,14 @@ export class HistoryDetailsPage implements OnInit {
   surname;
   User_Array;
   rates = 0;
+
+  date;
+
+  Information;
   constructor(public historyService: AuthServiceService,
     public loadingController: LoadingController,
-    public addr: ActivatedRoute) { }
+    public addr: ActivatedRoute) {
+    }
 
   ngOnInit() {
     // this.loadingHistoryDetails();
@@ -39,16 +45,33 @@ export class HistoryDetailsPage implements OnInit {
       }
     });
 
-    this.historyService.getComments(this.HistoryInfo.serviceID).subscribe((data) => {
+    // this.historyService.getUser_Info().subscribe((data) => {
+    //   this.Information = data;
+    //   this.name = this.Information.name;
+    //   this.surname = this.Information.surname;
+    //   this.Alpha.push({
+    //     Name: this.name,
+    //     Surname: this.surname
+    //   })
+    // })
+
+    // this.historyService.getComments(this.HistoryInfo.serviceID).subscribe((data) => {
+    //   this.Comment_Array = data;
+    //   console.log(this.Comment_Array);
+    //   data.forEach((info) => {
+    //     this.Alpha.push(info);
+    //   })
+    // });
+
+    this.historyService.getReviews(this.HistoryInfo.serviceID).subscribe((data) => {
       this.Comment_Array = data;
-      console.log(this.Comment_Array);
-      data.forEach((info) => {
-        this.Alpha.push(info);
-      })
-    });
+    })
   }
 
-  Comment(key,comments) {
+  Comment() {
+    this.date = moment().format('L');
+    this.historyService.service_id = this.HistoryInfo.serviceID;
+    this.historyService.submitReviews(this.rates,this.comments,this.date);
 
     if(this.comments != null){
       this.historyService.Comments(this.HistoryInfo.serviceID,this.comments, this.name, this.surname);
@@ -58,7 +81,7 @@ export class HistoryDetailsPage implements OnInit {
   }
 
   logRatingChange(event) {
-    // this.rates = event;
+    this.rates = event;
     console.log("Changing rates: " + this.rates);
   }
 

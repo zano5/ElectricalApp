@@ -6,6 +6,8 @@ import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import{AlertController} from '@ionic/angular';
 import { Key } from 'protractor';
+import * as moment from 'moment';
+
 @Component({
   selector: 'app-request',
   templateUrl: './request.page.html',
@@ -67,6 +69,8 @@ export class RequestPage implements OnInit {
   docArray;
   countNum;
   sum = 0;
+
+  minDate;
   constructor(private alertcontroller:AlertController,
     public ViewServices: AuthServiceService,
     private addr : ActivatedRoute,
@@ -91,6 +95,8 @@ export class RequestPage implements OnInit {
       this.day = this.dat.getFullYear().toString() + '-' + month.toString() + '-' + this.dat.getDate().toString();
     }
     console.log(this.day)
+
+    this.minDate = moment().format('L');
    }
 
    async presentModal() {
@@ -183,6 +189,7 @@ console.log(i)
         console.log(this.counter);
       }else{}
     })
+
     this.addr.queryParams.subscribe(data => {
       this.KM = data.KM;
       // console.log(data.lng + "  " + data.lat);

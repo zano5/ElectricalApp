@@ -17,6 +17,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import * as firebase from "firebase";
+import * as moment from 'moment';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { StarRatingModule} from 'ionic4-star-rating';
 

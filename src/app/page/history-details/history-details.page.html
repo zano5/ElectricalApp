@@ -41,17 +41,19 @@
 
     <div>
         <nav style = "text-align: center;">
-            <ionic4-star-rating #rating
+            <ionic4-star-rating
                 activeIcon = "ios-star"
                 defaultIcon = "ios-star-outline"
-                activeColor = "#488aff" 
-                defaultColor = "#aaaaaa"
+                activeColor = "red" 
+                defaultColor = "black"
                 readonly="false"
                 fontSize = "22px"
+                rating = "0"
                 (ratingChanged)="logRatingChange($event)">
             </ionic4-star-rating>
         </nav>
-
+        <!-- "#aaaaaa" -->
+        <!-- "#488aff" -->
         <nav>
             <ion-item class = "ion-padding" lines = "none" style = "padding: 0%;">
                 <ion-label position="stacked">Comments</ion-label>
@@ -61,7 +63,7 @@
         </nav>
 
         <nav>
-            <ion-button color="primary" class = "ion-padding" mode = "ios" (click) = "Comment(HistoryInfo?.serviceID,comments)">Success</ion-button>
+            <ion-button color="primary" class = "ion-padding" mode = "ios" (click) = "Comment()">Success</ion-button>
         </nav>
     </div>
 
@@ -75,8 +77,32 @@
             <ion-label>
               <!-- <h2>{{User_Info?.name}} {{User_Info?.surname}}</h2> -->
               <h2>{{com?.email}}</h2>
+
+              <ion-row >
+                <!-- <ion-col>
+                    <span>{{com?.date}}</span>
+                </ion-col>
+                  <ion-col size="1" id="rates" *ngFor="let i of specAvarageRates(rate.rate).fill(1)">
+                      <ion-icon name="star" color="secondary"></ion-icon>
+                  </ion-col> -->
+                  <nav>
+                    <ionic4-star-rating
+                        activeIcon = "ios-star"
+                        defaultIcon = "ios-star-outline"
+                        activeColor = "red" 
+                        defaultColor = "#aaaaaa"
+                        readonly="true"
+                        fontSize = "15px"
+                        rating = "{{com?.rate}}">
+                    </ionic4-star-rating>
+                  </nav>
+
+                  <nav>
+                    <p>{{com?.date}}</p>
+                  </nav>
+                </ion-row>
+              <!-- <p>{{com?.date}}</p> -->
               <p>{{com?.comment}}</p>
-              <!-- <p>{{Comment_Array?.comment}}</p> -->
             </ion-label>
           </ion-item>
     </div>

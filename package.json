@@ -43,6 +43,7 @@
     "ionic-rating": "^2.0.0",
     "ionic4-star-rating": "^1.1.1",
     "mapbox-gl": "^1.6.1",
+    "moment": "^2.24.0",
     "pdfmake": "^0.1.63",
     "rxjs": "~6.5.1",
     "tslib": "^1.9.0",

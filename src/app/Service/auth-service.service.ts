@@ -6,6 +6,7 @@ import { map, filter, pairwise } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 import { error } from 'protractor';
+import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 @Injectable({
   providedIn: 'root'
 })
@@ -32,7 +33,8 @@ export class AuthServiceService {
   PlumbingServices = [];
 
   Reserve = [];
-
+  service_id;
+  Reviews = [];
   constructor(private router: Router,
     private afs : AngularFirestore,
     public afAuth: AngularFireAuth) {
@@ -229,6 +231,38 @@ ViewHistoryDetails() {
 
   }
 
+  ////////////////Add reviews////////////////////////////
+  //////////////////////////////////////////////////////
+
+  set setServiceID(id) {
+    this.service_id = id;
+  }
+
+  get getServiceID() {
+    return this.service_id;
+  }
+
+  submitReviews(rate,comment,date) {
+    
+    this.afs.firestore.collection('reviews').add({
+      date: date,
+      rate: rate,
+      comment: comment,
+      uid: this.afAuth.auth.currentUser.uid,
+      email: this.afAuth.auth.currentUser.email,
+      serviceID: this.service_id,
+    }).then((message) => {
+      console.log("Comment made successfully");
+    }).catch((error) => {
+      console.log("Error detected: " + error);
+    })
+  }
+
+  getReviews(key) {
+    return this.afs.collection('reviews', ref => ref.where('serviceID', '==' , key)).valueChanges()
+
+    // return this.afs.collection('reviews',ref => ref.where('uid', '==' , key) && ref.orderBy('stamp',"desc")).valueChanges();
+  }
   //Adding comments
   //////////////////
   Comments(key,Comment, name, surname) {
@@ -276,8 +310,7 @@ ViewHistoryDetails() {
       }
     })
     // console.log("Return info: " + pen);
-
-    
+ 
   }
 
   getComments(key) {
@@ -300,23 +333,23 @@ ViewHistoryDetails() {
       }else{}
     })
 
-    firebase.firestore().collection('serviceICT/').doc(key).get().then((data) => {
-      if(data != null){
-        this.afs.collection('serviceICT/').doc(key).update({"requestsMade":count}).then((data) => {
-        }).catch(() => {
-          this.afs.collection('serviceICT/').doc(key).set(count)
-        })
-      }else{}
-    })
+    // firebase.firestore().collection('serviceICT/').doc(key).get().then((data) => {
+    //   if(data != null){
+    //     this.afs.collection('serviceICT/').doc(key).update({"requestsMade":count}).then((data) => {
+    //     }).catch(() => {
+    //       this.afs.collection('serviceICT/').doc(key).set(count)
+    //     })
+    //   }else{}
+    // })
 
-    firebase.firestore().collection('servicesPlumbing/').doc(key).get().then((data) => {
-      if(data != null){
-        this.afs.collection('servicesPlumbing/').doc(key).update({"requestsMade":count}).then((data) => {
-        }).catch(() => {
-          this.afs.collection('servicesPlumbing/').doc(key).set(count)
-        })
-      }else{}
-    })
+    // firebase.firestore().collection('servicesPlumbing/').doc(key).get().then((data) => {
+    //   if(data != null){
+    //     this.afs.collection('servicesPlumbing/').doc(key).update({"requestsMade":count}).then((data) => {
+    //     }).catch(() => {
+    //       this.afs.collection('servicesPlumbing/').doc(key).set(count)
+    //     })
+    //   }else{}
+    // })
   }
 
   getService(){
@@ -381,7 +414,9 @@ ViewHistoryDetails() {
     })
   }
 
-
+  getUser_Info() {
+    return this.afs.collection('user/').doc(this.afAuth.auth.currentUser.uid).valueChanges();
+  }
   Clear() {
     this.UserArray.splice(0,1);
   }
