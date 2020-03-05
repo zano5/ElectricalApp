@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 import { AuthServiceService } from 'src/app/Service/auth-service.service';
 import { ActivatedRoute } from '@angular/router';
 import { PathService } from 'src/app/Service/path.service';
@@ -16,6 +16,12 @@ export class ServiceDetailPage implements OnInit {
   run: boolean =true;
   key : boolean = false;
   DocName;
+  PlumbingServices;
+
+  ServiceDetails;
+  counter = 0;
+  Comments_Array;
+
   constructor(private router: Router,
     private addr: ActivatedRoute,
     public ViewServices: AuthServiceService,
@@ -33,8 +39,9 @@ export class ServiceDetailPage implements OnInit {
   }
 
   clearData() {
-    this.ArrayServices = null;
-    this.ArrayICTServices = null;
+    this.ArrayServices = [];
+    this.ArrayICTServices = [];
+    this.PlumbingServices = [];
   }
 
   runs(){
@@ -44,9 +51,10 @@ export class ServiceDetailPage implements OnInit {
   ngOnInit() {
     this.runs();
     this.addr.queryParams.subscribe(data => {
+      // console.log(data);
       this.docKey = data.key;
-      // console.log(data)
-      this.flag = data.flag;
+      this.counter = data.count;
+      // console.log(data);
       if (data.flag) {
         this.flag = true;
       }
@@ -57,15 +65,41 @@ export class ServiceDetailPage implements OnInit {
       // console.log(this.docKey)
     });
 
-    this.ViewServices.getDoc(this.docKey).subscribe((data) =>{
-      console.log(data)
-      this.ArrayServices = data;
+    // this.addr.queryParams.subscribe(params => {
+    //   if (params && params.data) {
+    //     this.ServiceDetails = JSON.parse(params.data);
+    //     console.log(this.ServiceDetails)
+    //   }
+    // });
+
+    // this.ViewServices.getComments(this.docKey).subscribe((data) => {
+    //   this.Comments_Array = data;
+    // })
+    
+    this.ViewServices.getReviews(this.docKey).subscribe((data) => {
+      this.Comments_Array = data;
     })
+
+    console.log(this.docKey);
+    this.ViewServices.getDoc(this.docKey).subscribe((data) =>{
+      if(data != null){
+        this.ServiceDetails = data;
+      }else{}
+    });
 
     this.ViewServices.getICTDoc(this.docKey).subscribe((data) =>{
       // console.log(data)
-      this.ArrayICTServices = data;
-    })
+      if(data != null){
+        this.ServiceDetails = data;
+      }else{}
+    });
+
+    this.ViewServices.getPlumbingDoc(this.docKey).subscribe((data) => {
+      // console.log(data);
+      if(data != null){
+        this.ServiceDetails = data;
+      }else{}
+    });
     console.log('two')
     // this.run= false;
   }
@@ -73,21 +107,49 @@ export class ServiceDetailPage implements OnInit {
 
   request() {
 
+    this.router.navigate(['request'],{queryParams: {count: this.counter}});
     localStorage.clear();
-    if(this.flag == true){
-      //  console.log(this.flag)
-    localStorage.setItem("name", this.ArrayServices.name);
-    localStorage.setItem("cost", this.ArrayServices.cost);
-    localStorage.setItem("description", this.ArrayServices.description)
-    }
-    else{
-      // console.log(this.ArrayICTServices)
-      // console.log(this.flag)
-      localStorage.setItem("name", this.ArrayICTServices.name);
-      localStorage.setItem("cost", this.ArrayICTServices.cost);
-      localStorage.setItem("description", this.ArrayICTServices.description);
-    }
+
+    /////////This service id///////////////////////////
+    localStorage.setItem("key", this.docKey);
+    ////////////////is a new code////////////////
+
+    localStorage.setItem("name", this.ServiceDetails.name);
+    localStorage.setItem("cost", this.ServiceDetails.cost);
+    localStorage.setItem("description", this.ServiceDetails.description);
+    localStorage.setItem("count", this.counter.toString());
+
+    // if(this.flag == true){
+    //   //  console.log(this.flag)
+
+    //   /////////This service id///////////////////////////
+    //   localStorage.setItem("key", this.docKey);
+    //   ////////////////is a new code////////////////
+
+    //   localStorage.setItem("name", this.ArrayServices.name);
+    //   localStorage.setItem("cost", this.ArrayServices.cost);
+    //   localStorage.setItem("description", this.ArrayServices.description)
+    // }
+    // else{
+    //   // console.log(this.ArrayICTServices)
+
+    //   /////////This service id///////////////////////////
+    //   localStorage.setItem("key", this.docKey);
+    //   ////////////////is a new code////////////////
+    //   // console.log(this.flag)
+    //   localStorage.setItem("name", this.ArrayICTServices.name);
+    //   localStorage.setItem("cost", this.ArrayICTServices.cost);
+    //   localStorage.setItem("description", this.ArrayICTServices.description);
+    // }
     // localStorage.setItem("flag", this.flag.toString());
+
+    // const navigationExtras: NavigationExtras = {
+    //   queryParams: {
+    //     data: JSON.stringify(items),
+    //   }
+    // };
+    // this.router.navigate(['service-detail'], navigationExtras);
+
     this.pathService.getUser('request');
     this.ViewServices.URL = '/request';
   }

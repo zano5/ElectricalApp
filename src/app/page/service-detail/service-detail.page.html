@@ -23,15 +23,77 @@
     </h3>
 </div>
 
+<!-- <p>*ngIf="flag; else notShow"</p> -->
 <ion-content>
-    <div *ngIf="flag; else notShow" class="image_container">
-        <img [src]="ArrayServices?.photoURL" alt="avatar" />
-        <h5>{{ArrayServices?.name}} </h5>
+    <div class="image_container">
+        <img [src]="ServiceDetails?.photoURL" alt = "avatar"/>
+        <h5>{{ServiceDetails?.name}} </h5>
+
+        <nav>
+            <h6>Description</h6>
+            <p>{{ServiceDetails?.description}}</p>
+        </nav>
     </div>
-    <div>
-        <h6>Description</h6>
-        <p>{{ArrayServices?.description}}</p>
+
+    <!-- <div *ngIf = "PlumbingServices?.length != 0" class = "image_container">
+        <nav>
+            <img [src] = "PlumbingServices?.photoURL" *ngIf = "PlumbingServices?.length != 0"/>
+            <h5 *ngIf = "PlumbingServices?.length != 0">{{PlumbingServices?.name}}</h5>
+        </nav>
     </div>
+    
+    <div *ngIf = "ArrayICTServices?.length != 0" class = "image_container">
+        <nav>
+            <img [src] = "ArrayICTServices?.photoURL" *ngIf = "ArrayICTServices?.length != 0"/>
+            <h5 *ngIf = "ArrayICTServices?.length != 0">{{ArrayICTServices?.name}}</h5>
+        </nav>
+
+        <nav>
+            <h6 *ngIf = "ArrayICTServices?.length != 0">Description</h6>
+            <p *ngIf = "ArrayICTServices?.length != 0">{{ArrayICTServices?.description}}</p>
+        </nav>
+    </div> -->
+
     <ion-button expand="block" color="primary" (click)="request()" class="order">
-        Request</ion-button>
+        Request
+    </ion-button>
+
+    <div style = "margin-top: 100px;">
+        <h4 style = "padding-left: 20px;padding-right: 20px;">Comments</h4>
+        <ion-item *ngFor = "let com of Comments_Array">
+            <!-- <ion-avatar slot="start">
+              <ion-icon name="person" style = "width: 30px;height: 30px;border: 1px solid black;border-radius: 50px;padding: 7px;"></ion-icon>
+            </ion-avatar> -->
+
+            <ion-label>
+              <h2>{{com?.email}}</h2>
+
+              <ion-row >
+                <!-- <ion-col>
+                    <span>{{com?.date}}</span>
+                </ion-col>
+                  <ion-col size="1" id="rates" *ngFor="let i of specAvarageRates(rate.rate).fill(1)">
+                      <ion-icon name="star" color="secondary"></ion-icon>
+                  </ion-col> -->
+                  <nav>
+                    <ionic4-star-rating
+                        activeIcon = "ios-star"
+                        defaultIcon = "ios-star-outline"
+                        activeColor = "red" 
+                        defaultColor = "#aaaaaa"
+                        readonly="true"
+                        fontSize = "15px"
+                        rating = "{{com?.rate}}">
+                    </ionic4-star-rating>
+                  </nav>
+
+                  <nav>
+                    <p>{{com?.date}}</p>
+                  </nav>
+                </ion-row>
+              <!-- <p>{{com?.date}}</p> -->
+              <p>{{com?.comment}}</p>
+            </ion-label>
+          </ion-item>
+    </div>
 </ion-content>

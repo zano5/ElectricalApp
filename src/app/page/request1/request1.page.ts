@@ -54,7 +54,13 @@ export class Request1Page implements OnInit {
   ArrayICTServices;
   day: string;
 
-  constructor(public afAuth: AngularFireAuth,private alertcontroller: AlertController, public ViewServices: AuthServiceService, private addr: ActivatedRoute, private modalCtrl: ModalController, private mapboxService: MapService,private route : Router) {
+  constructor(public afAuth: AngularFireAuth,
+    private alertcontroller: AlertController,
+    public ViewServices: AuthServiceService,
+    private addr: ActivatedRoute,
+    private modalCtrl: ModalController,
+    private mapboxService: MapService,
+    private route : Router) {
 
     this.ref = (Math.random() * 100000).toFixed(0) + "AAC";
 
@@ -114,6 +120,7 @@ export class Request1Page implements OnInit {
     // this.user.address = this.selectedAddress;
     this.addresses = [];
   }
+
   ngOnInit() {
     // this.requestService.getUser(this.URL);
 
@@ -135,16 +142,13 @@ export class Request1Page implements OnInit {
 
     this.obj.subscribe((data) => {
       this.ArrayServices = data;
-      console.log(this.ArrayServices)
-
+      // console.log(this.ArrayServices)
     })
 
     this.obj1.subscribe((data) => {
       this.ArrayICTServices = data;
-      console.log(this.ArrayICTServices)
-
+      // console.log(this.ArrayICTServices)
     })
-
   }
 
   run(i) {
