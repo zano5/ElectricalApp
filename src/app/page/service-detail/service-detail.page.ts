@@ -22,6 +22,11 @@ export class ServiceDetailPage implements OnInit {
   counter = 0;
   Comments_Array;
 
+  name;
+  surname;
+  Information;
+  first_Char;
+  second_Char;
   constructor(private router: Router,
     private addr: ActivatedRoute,
     public ViewServices: AuthServiceService,
@@ -78,6 +83,14 @@ export class ServiceDetailPage implements OnInit {
     
     this.ViewServices.getReviews(this.docKey).subscribe((data) => {
       this.Comments_Array = data;
+      data.forEach((info) => {
+        this.Information = info;
+        this.name = this.Information;
+        this.surname = this.Information;
+
+        this.first_Char = String(this.name).charAt(0);
+        this.second_Char = String(this.surname).charAt(0);
+      })
     })
 
     console.log(this.docKey);

@@ -54,14 +54,6 @@ export class ServicesPage implements OnInit {
     
   });
 
-<<<<<<< HEAD
-  // this.ViewServices.ViewAllRequests().subscribe((requests) => {
-  //   console.log(requests);
-  //   // requests.forEach((key) => {
-  //   // })
-  // })
- this.loadingServices();
-=======
   ////////////////////////////////////////////////////
   //////////////////////////////////////////////////
   //////////////////////////////////////////////////////
@@ -71,7 +63,6 @@ export class ServicesPage implements OnInit {
       this.service_info = data;
     })
   })
->>>>>>> 930a08d350451417d08d3b595112671def76cd57
 
   this.ViewServices.ViewAllRequests().subscribe((requests) => {
     // console.log(requests);

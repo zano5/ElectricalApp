@@ -30,6 +30,8 @@ export class HistoryDetailsPage implements OnInit {
   date;
 
   Information;
+  first_Char;
+  second_Char;
   constructor(public historyService: AuthServiceService,
     public loadingController: LoadingController,
     public addr: ActivatedRoute) {
@@ -65,6 +67,15 @@ export class HistoryDetailsPage implements OnInit {
 
     this.historyService.getReviews(this.HistoryInfo.serviceID).subscribe((data) => {
       this.Comment_Array = data;
+      data.forEach((info) => {
+        this.Information = info;
+        this.name = this.Information.name;
+        this.surname = this.Information.surname;
+        
+        this.first_Char = String(this.name).charAt(0);
+        this.second_Char = String(this.surname).charAt(0);
+
+      })
     })
   }
 
