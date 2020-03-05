@@ -26,23 +26,11 @@
 <ion-content>
     <div *ngIf="flag; else notShow" class="image_container">
         <img [src]="ArrayServices?.photoURL" alt="avatar" />
-        <h5 padding>{{ArrayServices?.name}} </h5>
+        <h5>{{ArrayServices?.name}} </h5>
     </div>
-
-      </ng-template>
- 
-    <br>
-   
-       
-
-    <!-- <div padding>
-       <!- <div class="shade"></div> -->
-        <h5 style="position:absalute;left:15px;">{{ArrayServices?.name}} </h5>
-    
-    </div> -->
     <div>
-        <h6 padding>Description</h6>
-        <p padding>{{ArrayServices?.description}}</p>
+        <h6>Description</h6>
+        <p>{{ArrayServices?.description}}</p>
     </div>
     <ion-button expand="block" color="primary" (click)="request()" class="order">
         Request</ion-button>

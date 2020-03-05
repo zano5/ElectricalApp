@@ -33,11 +33,11 @@ export class ServicesPage implements OnInit {
     
   });
 
-  this.ViewServices.ViewAllRequests().subscribe((requests) => {
-    console.log(requests);
-    // requests.forEach((key) => {
-    // })
-  })
+  // this.ViewServices.ViewAllRequests().subscribe((requests) => {
+  //   console.log(requests);
+  //   // requests.forEach((key) => {
+  //   // })
+  // })
  this.loadingServices();
 
 

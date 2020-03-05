@@ -38,16 +38,16 @@ export class NotificationsPage implements OnInit {
   
 }
   loadData(event) {
-    setTimeout(() => {
-      console.log('Done');
-      event.target.complete();
+    // setTimeout(() => {
+    //   console.log('Done');
+    //   event.target.complete();
 
-      // App logic to determine if all data is loaded
-      // and disable the infinite scroll
-      if (this.request.length == 1000) {
-        event.target.disabled = true;
-      }
-    }, 500);
+    //   // App logic to determine if all data is loaded
+    //   // and disable the infinite scroll
+    //   if (this.request.length == 1000) {
+    //     event.target.disabled = true;
+    //   }
+    // }, 500);
   }
   runPdf(){
     
@@ -120,16 +120,16 @@ async fileRead() {
       this.request[i].service  +
       this.request[i].serviceDesc,
      
-      {
-      style: 'tableExample',
-			table: {
-				widths: ['*', 'auto'],
-				body: [
-          // [this.request[i].service, this.request[i].service.cost],
-					[this.request[i].serviceDesc,this.request[i].service],
-				]
-			}
-    }
+      // {
+      // style: 'tableExample',
+			// table: {
+			// 	widths: ['*', 'auto'],
+			// 	body: [
+      //     // [this.request[i].service, this.request[i].service.cost],
+			// 		// [this.request[i].serviceDesc,this.request[i].service],
+			// 	]
+			// }
+    
     //  { layout: 'lightHorizontalLines', // optional
     //     table: {
     //       // headers are automatically repeated if the table spans over multiple pages
