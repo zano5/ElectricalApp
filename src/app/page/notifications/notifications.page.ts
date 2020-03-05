@@ -1,13 +1,16 @@
 import { Component, OnInit,ViewChild  } from '@angular/core';
+import { DomSanitizer} from '@angular/platform-browser';
 import { AuthServiceService } from 'src/app/Service/auth-service.service';
 import { Plugins, FilesystemDirectory, FilesystemEncoding } from '@capacitor/core';
 // import { Downloader, DownloadRequest, NotificationVisibility } from '@ionic-native/downloader/ngx';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
-// import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
-import { IonContent } from '@ionic/angular';
+import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
+import { IonContent, Platform } from '@ionic/angular';
 import { IonInfiniteScroll } from '@ionic/angular';
-import { observable } from 'rxjs';
+
+import { File } from '@ionic-native/file/ngx';
+import { DocumentViewer, DocumentViewerOptions } from '@ionic-native/document-viewer/ngx';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 const { Filesystem } = Plugins;
 @Component({
@@ -23,27 +26,40 @@ export class NotificationsPage implements OnInit {
   user : any;
   arr : [];
   obj : any;
-  
-  constructor(public service: AuthServiceService) { }
+  pdfLink:any;
+  constructor(private file : File,private platform : Platform,private sanitizer: DomSanitizer,public service: AuthServiceService,private previewAnyFile : PreviewAnyFile) { 
 
-  loadData(event) {
-    setTimeout(() => {
-      console.log('Done');
-      event.target.complete();
-
-      // App logic to determine if all data is loaded
-      // and disable the infinite scroll
-      if (this.request.length == 1000) {
-        event.target.disabled = true;
-      }
-    }, 500);
+   
   }
-//   runPdf(ev: any){
+  viewDoc()
+{
+  
+    window.open("https://firebasestorage.googleapis.com/v0/b/eletrical-engineer-cms.appspot.com/o/pdf%2FSCC(PTY)LTD%20COMPANY%20PROFILE%202019%20%20(1).pdf?alt=media&token=f3c42c70-3a3a-4574-b53a-b3b28f2e6cad");
+  
+}
+  loadData(event) {
+    // setTimeout(() => {
+    //   console.log('Done');
+    //   event.target.complete();
+
+    //   // App logic to determine if all data is loaded
+    //   // and disable the infinite scroll
+    //   if (this.request.length == 1000) {
+    //     event.target.disabled = true;
+    //   }
+    // }, 500);
+  }
+  runPdf(){
     
-//     var url = ev;
-// // window.open(url);
-//     this.previewAnyFile.preview(url);
-//   }
+    var url = "https://firebasestorage.googleapis.com/v0/b/eletrical-engineer-cms.appspot.com/o/pdf%2FSCC(PTY)LTD%20COMPANY%20PROFILE%202019%20%20(1).pdf?alt=media&token=f3c42c70-3a3a-4574-b53a-b3b28f2e6cad";
+// window.open(url);
+    this.previewAnyFile.preview(url).then((aa) => {
+      alert(JSON.stringify(aa))
+    }),(ee) =>
+    {
+      alert(JSON.stringify(ee))
+    };
+  }
 
   toggleInfiniteScroll() {
     this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
@@ -104,16 +120,16 @@ async fileRead() {
       this.request[i].service  +
       this.request[i].serviceDesc,
      
-      {
-      style: 'tableExample',
-			table: {
-				widths: ['*', 'auto'],
-				body: [
-          // [this.request[i].service, this.request[i].service.cost],
-					[this.request[i].serviceDesc,this.request[i].service],
-				]
-			}
-    }
+      // {
+      // style: 'tableExample',
+			// table: {
+			// 	widths: ['*', 'auto'],
+			// 	body: [
+      //     // [this.request[i].service, this.request[i].service.cost],
+			// 		// [this.request[i].serviceDesc,this.request[i].service],
+			// 	]
+			// }
+    
     //  { layout: 'lightHorizontalLines', // optional
     //     table: {
     //       // headers are automatically repeated if the table spans over multiple pages

@@ -23,10 +23,10 @@ import { StarRatingModule} from 'ionic4-star-rating';
 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { UpdateNamesPage } from './page/modal/update-names/update-names.page';
-// import { Downloader } from '@ionic-native/downloader/ngx';
-// import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
-// import { DocumentViewer } from '@ionic-native/document-viewer/ngx';
-
+import { Downloader } from '@ionic-native/downloader/ngx';
+import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
+import { DocumentViewer } from '@ionic-native/document-viewer/ngx';
+import { File } from '@ionic-native/file/ngx';
 
 var firebaseConfig = {
   apiKey: "AIzaSyB83CuKn-QSuzzxN6X8l2L5UKqfeb2NjvA",
@@ -69,7 +69,9 @@ firebase.analytics();
     // PreviewAnyFile
     // DocumentViewer,
     // PreviewAnyFile
-    
+    DocumentViewer,
+    PreviewAnyFile,
+    File
   ],
   bootstrap: [AppComponent,]
 })

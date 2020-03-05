@@ -74,6 +74,11 @@ export class Request1Page implements OnInit {
     } else {
       this.day = this.dat.getFullYear().toString() + '-' + month.toString() + '-' + this.dat.getDate().toString();
     }
+    if (this.dat.getDate() < 10) {
+      this.day = this.dat.getFullYear().toString() + '-0' + month.toString() + '-' +  + '0'+this.dat.getDate().toString();
+    } else {
+      this.day = this.dat.getFullYear().toString() + '-' + month.toString() + '-' + this.dat.getDate().toString();
+    }
     console.log(this.day)
   }
 
