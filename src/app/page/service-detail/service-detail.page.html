@@ -61,9 +61,15 @@
     <div style = "margin-top: 100px;">
         <h4 style = "padding-left: 20px;padding-right: 20px;">Comments</h4>
         <ion-item *ngFor = "let com of Comments_Array">
-            <!-- <ion-avatar slot="start">
-              <ion-icon name="person" style = "width: 30px;height: 30px;border: 1px solid black;border-radius: 50px;padding: 7px;"></ion-icon>
-            </ion-avatar> -->
+            <ion-avatar slot="start" style = "background-color: rgba(43, 160, 167, 0.8);
+            text-align: center;padding: 0%;">
+                <p style = "text-align: center; color: white;
+                    margin: 28% auto; letter-spacing: -2px;">
+                    {{first_Char}}
+                    {{second_Char}}
+                </p>
+              <!-- <ion-icon name="person" style = "width: 30px;height: 30px;border: 1px solid black;border-radius: 50px;padding: 7px;"></ion-icon> -->
+            </ion-avatar>
 
             <ion-label>
                 <h2>{{com?.name}} {{com?.surname}}</h2>

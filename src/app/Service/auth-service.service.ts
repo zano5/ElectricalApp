@@ -321,35 +321,53 @@ ViewHistoryDetails() {
     return this.afs.collection('user/').doc(key).valueChanges();
   }
 
+  getMostRequested_Electrical_Services() {
+    return this.afs.collection('services/', ref => ref.where('requestsMade', '>', 2).orderBy('requestsMade', 'desc')).valueChanges();
+  }
+
+  getMostRequested_ICT_Services() {
+    return this.afs.collection('serviceICT/', ref => ref.where('requestsMade', '>', 2).orderBy('requestsMade', 'desc')).valueChanges();
+  }
+
+  getRequested_Plumbing_Services() {
+    return this.afs.collection('servicePlumbing/', ref => ref.where('requestsMade', '>', 2).orderBy('requestsMade', 'desc')).valueChanges();
+  }
+  
   //////////////////////////////////////////
   /////////////////////////////////////////
   electricalUpdateCounter(key,count:number) {
-    firebase.firestore().collection('services/').doc(key).get().then((data) => {
-      if(data != null){
-        this.afs.collection('services/').doc(key).update({"requestsMade":count}).then((data) => {
-        }).catch(() => {
-          this.afs.collection('services/').doc(key).set(count)
-        })
-      }else{}
-    })
 
-    // firebase.firestore().collection('serviceICT/').doc(key).get().then((data) => {
-    //   if(data != null){
-    //     this.afs.collection('serviceICT/').doc(key).update({"requestsMade":count}).then((data) => {
-    //     }).catch(() => {
-    //       this.afs.collection('serviceICT/').doc(key).set(count)
-    //     })
-    //   }else{}
-    // })
+    if(key != null){
+      firebase.firestore().collection('services/').doc(key).get().then((doc) => {
+        if(doc.exists){
+          firebase.firestore().collection('services/').doc(key).update({
+            requestsMade: count
+          }).catch((error) => {
+            console.log("Error message: " + error);
+          })
+        }else{}
+      })
 
-    // firebase.firestore().collection('servicesPlumbing/').doc(key).get().then((data) => {
-    //   if(data != null){
-    //     this.afs.collection('servicesPlumbing/').doc(key).update({"requestsMade":count}).then((data) => {
-    //     }).catch(() => {
-    //       this.afs.collection('servicesPlumbing/').doc(key).set(count)
-    //     })
-    //   }else{}
-    // })
+      firebase.firestore().collection('serviceICT/').doc(key).get().then((doc) => {
+        if(doc.exists){
+          firebase.firestore().collection('serviceICT/').doc(key).update({
+            requestsMade: count
+          }).catch((error) => {
+            console.log("Error message: " + error);
+          })
+        }else{}
+      })
+
+      firebase.firestore().collection('servicePlumbing/').doc(key).get().then((doc) => {
+        if(doc.exists){
+          firebase.firestore().collection('servicePlumbing/').doc(key).update({
+            requestsMade: count
+          }).catch((error) => {
+            console.log("Error message: " + error);
+          })
+        }else{}
+      })
+    }else{}
   }
 
   getService(){

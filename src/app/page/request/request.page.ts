@@ -279,10 +279,7 @@ console.log(i)
     this.countNum = parseInt(localStorage.getItem("count"));
     console.log(this.countNum);
 
-    this.counter = this.counter + this.countNum;
-    console.log("Counter: " + this.counter);
-
-    this.ViewServices.electricalUpdateCounter(this.Key, this.counter);
+    this.ViewServices.electricalUpdateCounter(this.Key, this.countNum);
   }
 
   

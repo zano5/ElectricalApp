@@ -32,7 +32,7 @@ export class ServicesPage implements OnInit {
   service_info = [];
 
   count = 0;
-
+  requestsMade;
   MostRequested = [];
   PlumbingServices = [];
   id = [];
@@ -83,10 +83,11 @@ redirect() {
   this.pathService.getUser("request1");
 }
 
-  detail_id(id : any){
+  detail_id(id : any, requestMade){
     // this.router.navigateByUrl('service-detail')
+    this.requestsMade = parseInt(requestMade);
+    this.count = this.requestsMade + 1;
     this.flag = true;
-    this.count++;
     this.router.navigate(['service-detail'],{queryParams : {key: id, flag : this.flag, count: this.count}});
   }
 
