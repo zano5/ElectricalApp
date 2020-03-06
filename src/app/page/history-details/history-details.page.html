@@ -72,8 +72,8 @@
         <ion-item *ngFor = "let com of Comment_Array">
             <ion-avatar slot="start" style = "background-color: rgba(43, 160, 167, 0.8);
             text-align: center;padding: 0%;">
-                <p style = "text-align: center;color: white
-                ;margin: 28% auto;letter-spacing: -2px;">
+                <p style = "text-align: center; color: white;
+                margin: 28% auto; letter-spacing: -2px;">
                     {{first_Char}}
                     {{second_Char}}
                 </p>
@@ -82,7 +82,7 @@
 
             <ion-label>
               <h2>{{com?.name}} {{com?.surname}}</h2>
-              <!-- <h2>{{com?.email}}</h2> -->
+              <h2>{{com?.email}}</h2>
 
               <ion-row >
                 <!-- <ion-col>
