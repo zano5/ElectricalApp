@@ -36,6 +36,11 @@ export class ServicesPage implements OnInit {
   MostRequested = [];
   PlumbingServices = [];
   id = [];
+  requestsMade;
+
+  mostRequested_Electrical_Services;
+  mostRequested_Plumbing_Services;
+  mostRequested_ICT_Services;
   constructor(private router: Router,
     public loadingController: LoadingController,
     public ViewServices: AuthServiceService,
@@ -54,14 +59,6 @@ export class ServicesPage implements OnInit {
     
   });
 
-<<<<<<< HEAD
-  // this.ViewServices.ViewAllRequests().subscribe((requests) => {
-  //   console.log(requests);
-  //   // requests.forEach((key) => {
-  //   // })
-  // })
- this.loadingServices();
-=======
   ////////////////////////////////////////////////////
   //////////////////////////////////////////////////
   //////////////////////////////////////////////////////
@@ -71,7 +68,6 @@ export class ServicesPage implements OnInit {
       this.service_info = data;
     })
   })
->>>>>>> 930a08d350451417d08d3b595112671def76cd57
 
   this.ViewServices.ViewAllRequests().subscribe((requests) => {
     // console.log(requests);
@@ -92,10 +88,15 @@ redirect() {
   this.pathService.getUser("request1");
 }
 
-  detail_id(id : any){
+  detail_id(id : any, requestsMade){
     // this.router.navigateByUrl('service-detail')
+
+    this.requestsMade = parseInt(requestsMade);
+
+    this.count = this.requestsMade + 1;
+    
+    console.log("Counter: " + this.count);
     this.flag = true;
-    this.count++;
     this.router.navigate(['service-detail'],{queryParams : {key: id, flag : this.flag, count: this.count}});
   }
 
@@ -130,11 +131,17 @@ redirect() {
       message: 'loading...',
       //  duration: 20000
     });
+    
     this.run= true;
     await loading.present();
     this.obj = this.ViewServices.getService();
     this.obj1 = this.ViewServices.getServiceICT();
     
+    this.ViewServices.getMostRequested().subscribe((data) => {
+      this.mostRequested_Electrical_Services = data;
+      console.log(this.mostRequested_Electrical_Services);
+    })
+
     this.ViewServices.getPlumbingServices().subscribe((plumbing) => {
       this.PlumbingServices = plumbing;
     })

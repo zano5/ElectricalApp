@@ -29,6 +29,7 @@ export class HistoryDetailsPage implements OnInit {
 
   date;
 
+  TestInfo;
   Information;
   first_Char;
   second_Char;
@@ -55,8 +56,8 @@ export class HistoryDetailsPage implements OnInit {
       this.historyService.name = this.Information.name;
       this.historyService.surname = this.Information.surname;
       
-      this.first_Char = String(this.name).charAt(0);
-      this.second_Char = String(this.surname).charAt(0);
+      // this.first_Char = String(this.name).charAt(0);
+      // this.second_Char = String(this.surname).charAt(0);
     })
 
     // this.historyService.getComments(this.HistoryInfo.serviceID).subscribe((data) => {
@@ -69,7 +70,17 @@ export class HistoryDetailsPage implements OnInit {
 
     this.historyService.getReviews(this.HistoryInfo.serviceID).subscribe((data) => {
       this.Comment_Array = data;
-      console.log(this.Comment_Array);
+      // console.log(this.Comment_Array.name);
+      data.forEach((info) => {
+        this.TestInfo = info;
+        console.log(this.TestInfo.name);
+        this.name = this.TestInfo.name;
+        this.surname = this.TestInfo.surname;
+
+        this.first_Char = String(this.name).charAt(0);
+        this.second_Char = String(this.surname).charAt(0);
+      })
+      console.log(this.TestInfo);
     })
   }
 

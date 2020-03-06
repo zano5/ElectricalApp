@@ -336,24 +336,44 @@ ViewHistoryDetails() {
 
   //////////////////////////////////////////
   /////////////////////////////////////////
-  electricalUpdateCounter(key,count:number) {
-    firebase.firestore().collection('services/').doc(key).get().then((data) => {
-      if(data != null){
-        this.afs.collection('services/').doc(key).update({"requestsMade":count}).then((data) => {
-        }).catch(() => {
-          this.afs.collection('services/').doc(key).set(count)
-        })
-      }else{}
-    })
 
-    // firebase.firestore().collection('serviceICT/').doc(key).get().then((data) => {
-    //   if(data != null){
-    //     this.afs.collection('serviceICT/').doc(key).update({"requestsMade":count}).then((data) => {
-    //     }).catch(() => {
-    //       this.afs.collection('serviceICT/').doc(key).set(count)
-    //     })
-    //   }else{}
-    // })
+  getMostRequested() {
+    return this.afs.collection('services/', ref => ref.where('requestsMade', '>' , 2)).valueChanges()
+  }
+
+  electricalUpdateCounter(key,count:number) {
+    if(key != null){
+      firebase.firestore().collection('services/').doc(key).get().then((doc) => {
+        if(doc.exists){
+          firebase.firestore().collection('services/').doc(key).update({
+            requestsMade: count
+          }).catch((error) => {
+            console.log("Error message: " + error);
+          })
+        }else{
+        }
+      })
+
+      firebase.firestore().collection('serviceICT/').doc(key).get().then((doc) => {
+        if(doc.exists){
+          firebase.firestore().collection('serviceICT/').doc(key).update({
+            requestsMade: count
+          }).catch((error) => {
+            console.log("Error message: " + error);
+          })
+        }else{}
+      })
+
+      firebase.firestore().collection('servicesPlumbing/').doc(key).get().then((doc) => {
+        if(doc.exists){
+          firebase.firestore().collection('servicesPlumbing/').doc(key).update({
+            requestsMade: count
+          }).catch((error) => {
+            console.log("Error message: " + error);
+          })
+        }else{}
+      })
+    }else{}
 
     // firebase.firestore().collection('servicesPlumbing/').doc(key).get().then((data) => {
     //   if(data != null){

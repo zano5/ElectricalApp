@@ -70,10 +70,10 @@
     <div style = "margin-top: 50px;">
         <h4 style = "padding-left: 20px;padding-right: 20px;">Comments</h4>
         <ion-item *ngFor = "let com of Comment_Array">
-            <ion-avatar slot="start" style = "margin-bottom: 60px;">
-                <p style = "background-color: rgba(43, 160, 167, 0.8);
-                text-align: center;padding: 25%;border-radius: 50%;
-                color: white;">
+            <ion-avatar slot="start" style = "background-color: rgba(43, 160, 167, 0.8);
+            text-align: center;padding: 0%;">
+                <p style = "text-align: center;color: white
+                ;margin: 28% auto;letter-spacing: -2px;">
                     {{first_Char}}
                     {{second_Char}}
                 </p>
@@ -110,6 +110,10 @@
               <!-- <p>{{com?.date}}</p> -->
               <p>{{com?.comment}}</p>
             </ion-label>
+
+            <!-- <nav>
+                <ion-icon name="thumbs-up" slot = "start"></ion-icon>
+            </nav> -->
           </ion-item>
     </div>
 

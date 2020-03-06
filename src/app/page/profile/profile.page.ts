@@ -42,9 +42,9 @@ Redirect() {
 }
 
 HistoryRedirect() {
-  // this.pathService.getUser('/history');
-  // this.profileService.URL = '/history';
-  this.router.navigateByUrl('history');
+  this.pathService.getUser('/history');
+  this.profileService.URL = '/history';
+  // this.router.navigateByUrl('history');
 }
 history(){
   this.router.navigateByUrl('transactions');
