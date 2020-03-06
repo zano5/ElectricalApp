@@ -22,20 +22,11 @@ export class ServiceDetailPage implements OnInit {
   counter = 0;
   Comments_Array;
 
-<<<<<<< HEAD
-  Information;
-  name;
-  surname;
-  first_Char;
-  second_Char;
-  TestInfo;
-=======
   name;
   surname;
   Information;
   first_Char;
   second_Char;
->>>>>>> e63b1072e4b7bd42a88033cd80dfe6e041e0d70f
   constructor(private router: Router,
     private addr: ActivatedRoute,
     public ViewServices: AuthServiceService,
