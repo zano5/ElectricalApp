@@ -8,12 +8,23 @@
         <ion-searchbar showCancelButton="focus"></ion-searchbar>
     </div>
 
-    <div class="recently">
+    <!-- <div class="recently">
         <h5>Most viewed services</h5>
         <ion-card class="scrolling-wrapper-flexbox">
             <ion-card-header class="card" (click)=" detail(services.id) " *ngFor="let services of ArrayServices ">
                 <img src="{{services.photoURL}}" alt="photos" class="images" />
                 <span class="text"><b>{{services.name}}</b></span>
+            </ion-card-header>
+        </ion-card>
+
+    </div> -->
+
+    <div class="recently">
+        <h5>Most requested</h5>
+        <ion-card class="scrolling-wrapper-flexbox">
+            <ion-card-header class="card" *ngFor="let serv of sorted_array">
+                <img src="{{serv?.photoURL}}" alt="photos" class="images" />
+                <span class="text"><b>{{serv?.name}}</b></span>
             </ion-card-header>
         </ion-card>
 

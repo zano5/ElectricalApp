@@ -330,7 +330,7 @@ ViewHistoryDetails() {
   }
 
   getRequested_Plumbing_Services() {
-    return this.afs.collection('servicePlumbing/', ref => ref.where('requestsMade', '>', 2).orderBy('requestsMade', 'desc')).valueChanges();
+    return this.afs.collection('servicesPlumbing/', ref => ref.where('requestsMade', '>', 2).orderBy('requestsMade', 'desc')).valueChanges();
   }
   
   //////////////////////////////////////////
@@ -358,9 +358,9 @@ ViewHistoryDetails() {
         }else{}
       })
 
-      firebase.firestore().collection('servicePlumbing/').doc(key).get().then((doc) => {
+      firebase.firestore().collection('servicesPlumbing/').doc(key).get().then((doc) => {
         if(doc.exists){
-          firebase.firestore().collection('servicePlumbing/').doc(key).update({
+          firebase.firestore().collection('servicesPlumbing/').doc(key).update({
             requestsMade: count
           }).catch((error) => {
             console.log("Error message: " + error);

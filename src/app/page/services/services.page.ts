@@ -32,10 +32,19 @@ export class ServicesPage implements OnInit {
   service_info = [];
 
   count = 0;
-  requestsMade;
+  
   MostRequested = [];
   PlumbingServices = [];
   id = [];
+  requestsMade;
+
+  mostRequested_Electrical_Services;
+  mostRequested_Plumbing_Services;
+  mostRequested_ICT_Services;
+
+  sorted_array = [];
+  New_Sorted_Array = [];
+
   constructor(private router: Router,
     public loadingController: LoadingController,
     public ViewServices: AuthServiceService,
@@ -127,6 +136,28 @@ redirect() {
     this.obj = this.ViewServices.getService();
     this.obj1 = this.ViewServices.getServiceICT();
     
+    this.ViewServices.getMostRequested_Electrical_Services().subscribe((data) => {
+      this.mostRequested_Electrical_Services = data;
+      this.MostRequested.push(this.mostRequested_Electrical_Services);
+    });
+
+    this.ViewServices.getMostRequested_ICT_Services().subscribe((data) => {
+      this.mostRequested_ICT_Services = data;
+      this.MostRequested.push(this.mostRequested_ICT_Services);
+    });
+
+    this.ViewServices.getRequested_Plumbing_Services().subscribe((data) => {
+      this.mostRequested_Plumbing_Services = data;
+      this.MostRequested.push(this.mostRequested_Plumbing_Services);
+
+      for(var i = 0; i < this.MostRequested.length; i++){
+        for(var j = 0; j < this.MostRequested[i].length; j++){
+          this.sorted_array.push(this.MostRequested[i][j]);
+          console.log(this.sorted_array);
+        }
+      }
+    });
+
     this.ViewServices.getPlumbingServices().subscribe((plumbing) => {
       this.PlumbingServices = plumbing;
     })
