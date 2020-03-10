@@ -45,6 +45,17 @@ export class ServicesPage implements OnInit {
   sorted_array = [];
   New_Sorted_Array = [];
 
+  searchbar;
+  beta = [];
+  search_bar;
+
+  ///////////////////////////////////
+  //////////////////////////////////
+
+  New_Array;
+  All_Services = [];
+  All_Services_Loaded = [];
+  errorMessage;
   constructor(private router: Router,
     public loadingController: LoadingController,
     public ViewServices: AuthServiceService,
@@ -59,10 +70,16 @@ export class ServicesPage implements OnInit {
   this.obj1 = this.ViewServices.getServiceICT();
   this.obj1.subscribe((data)=>{
     this.ArrayICTServices = data;
+
+    this.ArrayICTServices.forEach((info) => {
+      this.All_Services.push(info);
+      this.All_Services_Loaded.push(info);
+    })
     // console.log(this.ArrayICTServices)
     
   });
 
+  
   ////////////////////////////////////////////////////
   //////////////////////////////////////////////////
   //////////////////////////////////////////////////////
@@ -87,6 +104,59 @@ export class ServicesPage implements OnInit {
   // console.log(this.MostRequested);
   this.loadingServices();
 }
+
+
+
+////////////////////////////////////
+
+////////////Search bar/////////////////////
+
+​
+
+initializeItems(): void {
+  // this.New_Array = this.ArrayServicesLoaded;
+  this.New_Array = this.All_Services_Loaded;
+}
+
+onKeydown(event) {
+
+  if(event.key == "Enter"){
+    console.log(event);
+    for(var a = 0; a < this.SearchBar.length; a++){
+      console.log()
+    }
+  }
+}
+
+SearchBar(event) {
+
+  this.initializeItems();
+  console.log(this.searchbar);
+    const searchTerm = event.srcElement.value;
+    if (!searchTerm) {
+      this.errorMessage=null
+      this.New_Array = [];
+      return;
+    }
+
+    this.New_Array = this.All_Services.filter(currentProperty => {
+      if (currentProperty.name && searchTerm) {
+        if (currentProperty.name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {          
+          return true;
+        }
+        return false;
+      }
+    });
+
+    console.log("lenght " +this.New_Array.length)
+
+    if(this.New_Array.length ==0){
+      this.errorMessage = "Search not found!";
+    }
+    console.log(this.New_Array);
+
+}
+
 
 redirect() {
   this.pathService.getUser("request1");
@@ -153,18 +223,33 @@ redirect() {
       for(var i = 0; i < this.MostRequested.length; i++){
         for(var j = 0; j < this.MostRequested[i].length; j++){
           this.sorted_array.push(this.MostRequested[i][j]);
-          console.log(this.sorted_array);
         }
       }
+
+      this.sorted_array.forEach((info) => {
+        this.sorted_array.sort((a, b) => {
+          return - a.requestsMade + b.requestsMade;
+        });
+      });
     });
 
     this.ViewServices.getPlumbingServices().subscribe((plumbing) => {
       this.PlumbingServices = plumbing;
+
+      this.PlumbingServices.forEach((info) => {
+        this.All_Services.push(info);
+        this.All_Services_Loaded.push(info);
+      });
     })
 
     this.obj.subscribe((data)=>{
       this.ArrayServices = data;
-      console.log(this.ArrayServices)
+
+      this.ArrayServices.forEach((info) => {
+        this.All_Services.push(info);
+        this.All_Services_Loaded.push(info);
+      });
+
       loading.dismiss();
       this.run = false;
     });
