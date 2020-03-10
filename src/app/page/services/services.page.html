@@ -22,7 +22,7 @@
     <div class="recently">
         <h5>Most requested</h5>
         <ion-card class="scrolling-wrapper-flexbox">
-            <ion-card-header class="card" *ngFor="let serv of sorted_array">
+            <ion-card-header class="card" (click) = "detail_id(services.id, services.requestsMade)" *ngFor="let serv of sorted_array">
                 <img src="{{serv?.photoURL}}" alt="photos" class="images" />
                 <span class="text"><b>{{serv?.name}}</b></span>
             </ion-card-header>
