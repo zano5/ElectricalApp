@@ -120,7 +120,7 @@ export class ServiceDetailPage implements OnInit {
 
   request() {
 
-    this.router.navigate(['request'],{queryParams: {count: this.counter}});
+    // this.router.navigate(['request'],{queryParams: {count: this.counter}});
     localStorage.clear();
 
     /////////This service id///////////////////////////
