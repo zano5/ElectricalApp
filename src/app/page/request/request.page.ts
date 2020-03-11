@@ -89,23 +89,39 @@ export class RequestPage implements OnInit {
     console.log(this.dat.getDate())
     console.log(this.dat.getMonth())
     console.log(this.dat.getFullYear())
+    // if (this.dat.getMonth() < 10) {
+    //   this.day = this.dat.getFullYear().toString() + '-0' + month.toString() + '-' + this.dat.getDate().toString();
+    // } else {
+    //   this.day = this.dat.getFullYear().toString() + '-' + month.toString() + '-' + this.dat.getDate().toString();
+    // }
+    // console.log(this.day)
+
+    // this.minDate = moment().format('L');
+
+    if (this.dat.getMonth() < 10 && this.dat.getDate() < 10) {
+      this.day = this.dat.getFullYear().toString() + '-0' + month.toString() + '-'+   '0'+this.dat.getDate().toString();
+    } else {
+      this.day = this.dat.getFullYear().toString() + '-' + month.toString() + '-' + this.dat.getDate().toString();
+    }
+    if (this.dat.getDate() < 10) {
+      this.day = this.dat.getFullYear().toString() + '-0' + month.toString() + '-' +   '0'+this.dat.getDate().toString();
+    } else {
+      this.day = this.dat.getFullYear().toString() + '-' + month.toString() + '-' + this.dat.getDate().toString();
+    }
     if (this.dat.getMonth() < 10) {
-      this.day = this.dat.getFullYear().toString() + '-0' + month.toString() + '-' + this.dat.getDate().toString();
+      this.day = this.dat.getFullYear().toString() + '-0' + month.toString() + '-' +   this.dat.getDate().toString();
     } else {
       this.day = this.dat.getFullYear().toString() + '-' + month.toString() + '-' + this.dat.getDate().toString();
     }
     console.log(this.day)
-
-    this.minDate = moment().format('L');
    }
 
-   async presentModal() {
-
-      this.flag = false;
- 
+  async presentModal() {
+    this.flag = false;
   }
+
   run(i){
-console.log(i)
+    console.log(i)
   }
 
   search(event: any) {
@@ -283,10 +299,7 @@ console.log(i)
   }
 
   
-
   addressCheck(event){
-
-
     this.checkAddress = event.target.value;
     console.log("info",this.checkAddress);    
 

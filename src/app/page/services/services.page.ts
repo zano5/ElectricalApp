@@ -75,8 +75,8 @@ export class ServicesPage implements OnInit {
       this.All_Services.push(info);
       this.All_Services_Loaded.push(info);
     })
-    // console.log(this.ArrayICTServices)
-    
+    console.log(this.ArrayICTServices)
+
   });
 
   
@@ -91,9 +91,18 @@ export class ServicesPage implements OnInit {
   })
 
   this.ViewServices.ViewAllRequests().subscribe((requests) => {
-    // console.log(requests);
+    console.log(requests);
     requests.forEach((requestInfo) => {
       this.AllServices = requestInfo;
+
+      for(var a = 0; a < this.ArrayServices.length; a++){
+        if(this.ArrayServices.name === this.AllServices.service){
+          console.log(this.ArrayServices[a].name);
+        }else{
+          console.log("false");
+        }
+      }
+
     })
   });
 
@@ -105,7 +114,10 @@ export class ServicesPage implements OnInit {
   this.loadingServices();
 }
 
-
+// CollectData(key,requests){
+//   console.log("ID: " + key);
+//   console.log("Requests: " + requests);
+// }
 
 ////////////////////////////////////
 
@@ -121,10 +133,31 @@ initializeItems(): void {
 onKeydown(event) {
 
   if(event.key == "Enter"){
-    console.log(event);
-    for(var a = 0; a < this.SearchBar.length; a++){
-      console.log()
-    }
+    // this.initializeItems();
+    // console.log(this.searchbar);
+    // const searchTerm = event.srcElement.value;
+
+    // if (!searchTerm) {
+    //   this.errorMessage=null
+    //   this.New_Array = [];
+    //   return;
+    // }
+
+    // this.New_Array = this.All_Services.filter(currentProperty => {
+    //   if (currentProperty.name && searchTerm) {
+    //     if (currentProperty.name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {          
+    //       return true;
+    //     }
+    //     return false;
+    //   }
+    // });
+
+    // console.log("lenght " +this.New_Array.length)
+
+    // if(this.New_Array.length ==0){
+    //   this.errorMessage = "Search not found!";
+    // }
+    // console.log(this.New_Array);
   }
 }
 
@@ -235,7 +268,6 @@ redirect() {
 
     this.ViewServices.getPlumbingServices().subscribe((plumbing) => {
       this.PlumbingServices = plumbing;
-
       this.PlumbingServices.forEach((info) => {
         this.All_Services.push(info);
         this.All_Services_Loaded.push(info);
@@ -244,7 +276,7 @@ redirect() {
 
     this.obj.subscribe((data)=>{
       this.ArrayServices = data;
-
+      console.log(this.ArrayServices);
       this.ArrayServices.forEach((info) => {
         this.All_Services.push(info);
         this.All_Services_Loaded.push(info);

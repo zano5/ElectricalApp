@@ -9,7 +9,7 @@
         <!-- (keydown) = "onKeyDown($event)" -->
         <ion-list position="floating" style="position: absolute; max-width: 100%; min-width: 100%; z-index: 999; ">
             <ion-item *ngFor="let array of New_Array | slice : 0:5">
-                <ion-label>{{array?.name}}</ion-label>
+                <ion-label (click) = "detail_id(array?.id,array?.requestsMade)">{{array?.name}}</ion-label>
             </ion-item>
         </ion-list>
 
@@ -25,7 +25,7 @@
     <div class="recently">
         <h5>Most requested</h5>
         <ion-card class="scrolling-wrapper-flexbox">
-            <ion-card-header class="card" (click) = "detail_id(services.id, services.requestsMade)" *ngFor="let serv of sorted_array">
+            <ion-card-header class="card" (click) = "detail_id(serv?.id, serv.requestsMade);" *ngFor="let serv of sorted_array">
                 <img src="{{serv?.photoURL}}" alt="photos" class="images" />
                 <span class="text"><b>{{serv?.name}}</b></span>
             </ion-card-header>

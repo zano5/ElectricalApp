@@ -330,7 +330,14 @@ ViewHistoryDetails() {
   }
 
   getRequested_Plumbing_Services() {
-    return this.afs.collection('servicesPlumbing/', ref => ref.where('requestsMade', '>', 2).orderBy('requestsMade', 'desc')).valueChanges();
+    // return this.afs.collection('servicesPlumbing/', ref => ref.where('requestsMade', '>', 2).orderBy('requestsMade', 'desc')).valueChanges();
+    return this.afs.collection('servicesPlumbing/',ref => ref.where('requestsMade' , '>', 2).orderBy('requestsMade', 'desc')).snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as any;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
   }
   
   //////////////////////////////////////////
