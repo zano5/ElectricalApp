@@ -4,19 +4,33 @@
     </ion-toolbar>
 </ion-header>
 <ion-content>
-    <div class = "search-bar">
-        <ion-searchbar showCancelButton="focus"></ion-searchbar>
+    <div>
+        <ion-searchbar showCancelButton="focus" class = "search-bar" (keydown)="onKeydown($event)" (ionInput)="SearchBar($event)" [(ngModel)] = "searchbar"></ion-searchbar>
+        <ion-list position="floating" style="position: absolute; max-width: 100%; min-width: 100%; z-index: 999; ">
+            <ion-item *ngFor="let array of New_Array | slice : 0:5">
+                <ion-label>{{array?.name}}</ion-label>
+            </ion-item>
+        </ion-list>
+
+        <ion-list position="floating" style="position: absolute; max-width: 100%; min-width: 100%; z-index: 999; " *ngIf = "errorMessage"> 
+            <ion-item>
+                    <ion-label>
+                            {{errorMessage}}
+                        </ion-label>
+            </ion-item>
+            
+        </ion-list>
+        <!-- <ion-button size="small" class = "ion-padding" (click) = "SearchBar()">Search</ion-button> -->
     </div>
 
     <div class="recently">
-        <h5>Most viewed services</h5>
+        <h5>Most requested</h5>
         <ion-card class="scrolling-wrapper-flexbox">
-            <ion-card-header class="card" (click)=" detail(services.id) " *ngFor="let services of ArrayServices ">
-                <img src="{{services.photoURL}}" alt="photos" class="images" />
-                <span class="text"><b>{{services.name}}</b></span>
+            <ion-card-header class="card" (click) = "detail_id(services.id, services.requestsMade)" *ngFor = "let serv of sorted_array">
+                <img src="{{serv?.photoURL}}" alt="photos" class="images" />
+                <span class="text"><b>{{serv?.name}}</b></span>
             </ion-card-header>
         </ion-card>
-
     </div>
 
     <div class="Electrical">

@@ -4,7 +4,6 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import { Router, RoutesRecognized } from '@angular/router';
 import { map, filter, pairwise } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Observable } from 'rxjs';
 import { error } from 'protractor';
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 @Injectable({
@@ -38,6 +37,7 @@ export class AuthServiceService {
 
   name;
   surname;
+
   constructor(private router: Router,
     private afs : AngularFirestore,
     public afAuth: AngularFireAuth) {
@@ -337,8 +337,16 @@ ViewHistoryDetails() {
   //////////////////////////////////////////
   /////////////////////////////////////////
 
-  getMostRequested() {
-    return this.afs.collection('services/', ref => ref.where('requestsMade', '>' , 2)).valueChanges()
+  getMostRequested_Electrical_Services() {
+    return this.afs.collection('services/', ref => ref.where('requestsMade', '>' , 2).orderBy('requestsMade', 'desc')).valueChanges();
+  }
+
+  getMostRequested_ICT_Services() {
+    return this.afs.collection('serviceICT/', ref => ref.where('requestsMade', '>', 2).orderBy('requestsMade', 'desc')).valueChanges();
+  }
+
+  getMostRequested_Plumbing_Services() {
+    return this.afs.collection('servicesPlumbing/', ref => ref.where('requestsMade', '>', 2).orderBy('requestsMade', 'desc')).valueChanges();
   }
 
   electricalUpdateCounter(key,count:number) {

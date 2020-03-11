@@ -102,11 +102,11 @@ export class ViewProfilePage implements OnInit {
       // duration: 2000
     });
     await loading.present();
-    // this.viewProfileService.getUserProfile().then((data) => {
-    //   this.UserProfile = data;
-    //   console.log(this.UserProfile);
-    //   loading.dismiss();
-    // })
+    this.viewProfileService.getUserProfile().subscribe((data) => {
+      this.UserProfile = data;
+      console.log(this.UserProfile);
+      loading.dismiss();
+    })
   }
   // filechanged(event){
   //   const files=event.target.files
