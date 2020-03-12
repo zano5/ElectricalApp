@@ -97,14 +97,24 @@ export class ServicesPage implements OnInit {
     requests.forEach((requestInfo) => {
       this.AllServices = requestInfo;
 
-      for(var a = 0; a < this.ArrayServices.length; a++){
-        if(this.ArrayServices.name === this.AllServices.service){
-          console.log(this.ArrayServices[a].name);
-        }else{
-          console.log("false");
-        }
-      }
+      // for(var a = 0; a < this.ArrayServices.length; a++){
+      //   if(this.ArrayServices.name === this.AllServices.service){
+      //     console.log(this.ArrayServices[a].name);
+      //   }else{
+      //     console.log("false");
+      //   }
+      // }
 
+      if(this.ArrayServices[0].name === this.AllServices.service){
+        this.firstCounter++;
+        console.log(this.firstCounter);
+      }else if(this.ArrayServices[1].name === this.AllServices.service){
+        this.secondCounter++;
+        console.log(this.secondCounter);
+      }else if(this.ArrayServices[2].name === this.AllServices.service){
+        this.thirdCounter++;
+        console.log(this.thirdCounter);
+      }else{}
     })
   });
 
@@ -119,50 +129,6 @@ export class ServicesPage implements OnInit {
 
 ////////////////////////////////////
 ////////////Search bar/////////////////////
-
-// initializeItems(): void {
-//   // this.New_Array = this.ArrayServicesLoaded;
-//   this.New_Array = this.All_Services_Loaded;
-// }
-
-// onKeydown(event) {
-
-//   if(event.key == "Enter"){
-//     console.log(event);
-//     for(var a = 0; a < this.SearchBar.length; a++){
-//       console.log()
-//     }
-//   }
-// }
-
-// SearchBar(event) {
-//   this.initializeItems();
-//   console.log(this.searchbar);
-
-//     const searchTerm = event.srcElement.value;
-
-//     if (!searchTerm) {
-//       this.errorMessage=null
-//       this.New_Array = [];
-//       return;
-//     }
-    
-//     this.New_Array = this.All_Services.filter(currentProperty => {
-//       if (currentProperty.name && searchTerm) {
-//         if (currentProperty.name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {          
-//           return true;
-//         }
-       
-//         return false;
-//       }
-//     });
-//     console.log("lenght " +this.New_Array.length)
-//     if(this.New_Array.length ==0){
-//       this.errorMessage = "Search not found!";
-//     }
-    
-//     console.log(this.New_Array);
-// }
 
 // CollectData(key,requests){
 //   console.log("ID: " + key);
