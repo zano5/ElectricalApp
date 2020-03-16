@@ -29,6 +29,7 @@ export class HistoryDetailsPage implements OnInit {
 
   date;
 
+  TestInfo;
   Information;
   first_Char;
   second_Char;
@@ -47,15 +48,17 @@ export class HistoryDetailsPage implements OnInit {
       }
     });
 
-    // this.historyService.getUser_Info().subscribe((data) => {
-    //   this.Information = data;
-    //   this.name = this.Information.name;
-    //   this.surname = this.Information.surname;
-    //   this.Alpha.push({
-    //     Name: this.name,
-    //     Surname: this.surname
-    //   })
-    // })
+    this.historyService.getUser_Info().subscribe((data) => {
+      this.Information = data;
+      this.name = this.Information.name;
+      this.surname = this.Information.surname;
+
+      this.historyService.name = this.Information.name;
+      this.historyService.surname = this.Information.surname;
+      
+      // this.first_Char = String(this.name).charAt(0);
+      // this.second_Char = String(this.surname).charAt(0);
+    })
 
     // this.historyService.getComments(this.HistoryInfo.serviceID).subscribe((data) => {
     //   this.Comment_Array = data;

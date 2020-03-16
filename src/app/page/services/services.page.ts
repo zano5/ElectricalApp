@@ -13,6 +13,8 @@ import { PathService } from 'src/app/Service/path.service';
 })
 export class ServicesPage implements OnInit {
   ArrayServices;
+  ArrayServicesLoaded;
+
   ArrayICTServices;
   imagePath="assets/images/wired.jpg";
   obj : any;
@@ -103,19 +105,14 @@ export class ServicesPage implements OnInit {
   // })
   // console.log(this.MostRequested);
   this.loadingServices();
-}
 
-// CollectData(key,requests){
-//   console.log("ID: " + key);
-//   console.log("Requests: " + requests);
-// }
+}
 
 ////////////////////////////////////
 
 ////////////Search bar/////////////////////
 
 ​
-
 initializeItems(): void {
   // this.New_Array = this.ArrayServicesLoaded;
   this.New_Array = this.All_Services_Loaded;
@@ -124,32 +121,7 @@ initializeItems(): void {
 onKeydown(event) {
 
   if(event.key == "Enter"){
-    // this.initializeItems();
-    // console.log(this.searchbar);
-    // const searchTerm = event.srcElement.value;
-
-    // if (!searchTerm) {
-    //   this.errorMessage=null
-    //   this.New_Array = [];
-    //   return;
-    // }
-
-    // this.New_Array = this.All_Services.filter(currentProperty => {
-    //   if (currentProperty.name && searchTerm) {
-    //     if (currentProperty.name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {          
-    //       return true;
-    //     }
-    //     return false;
-    //   }
-    // });
-
-    // console.log("lenght " +this.New_Array.length)
-
-    // if(this.New_Array.length ==0){
-    //   this.errorMessage = "Search not found!";
-    // }
-    // console.log(this.New_Array);
-  }
+  }else{}
 }
 
 SearchBar(event) {
@@ -226,6 +198,7 @@ redirect() {
       message: 'loading...',
       //  duration: 20000
     });
+    
     this.run= true;
     await loading.present();
     this.obj = this.ViewServices.getService();

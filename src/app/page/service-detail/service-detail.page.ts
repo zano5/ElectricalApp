@@ -96,7 +96,7 @@ export class ServiceDetailPage implements OnInit {
     // this.ViewServices.getComments(this.docKey).subscribe((data) => {
     //   this.Comments_Array = data;
     // })
-    
+
     this.ViewServices.getReviews(this.docKey).subscribe((data) => {
       this.Comments_Array = data;
       data.forEach((info) => {

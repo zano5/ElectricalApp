@@ -4,7 +4,6 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import { Router, RoutesRecognized } from '@angular/router';
 import { map, filter, pairwise } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Observable } from 'rxjs';
 import { error } from 'protractor';
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 @Injectable({
@@ -35,6 +34,10 @@ export class AuthServiceService {
   Reserve = [];
   service_id;
   Reviews = [];
+
+  name;
+  surname;
+
   constructor(private router: Router,
     private afs : AngularFirestore,
     public afAuth: AngularFireAuth) {
@@ -234,6 +237,14 @@ ViewHistoryDetails() {
   ////////////////Add reviews////////////////////////////
   //////////////////////////////////////////////////////
 
+  set setName(name) {
+    this.name = name;
+  }
+
+  set setSurname(surname) {
+    this.surname = surname;
+  }
+
   set setServiceID(id) {
     this.service_id = id;
   }
@@ -251,6 +262,8 @@ ViewHistoryDetails() {
       uid: this.afAuth.auth.currentUser.uid,
       email: this.afAuth.auth.currentUser.email,
       serviceID: this.service_id,
+      name: this.name,
+      surname: this.surname
     }).then((message) => {
       console.log("Comment made successfully");
     }).catch((error) => {
@@ -339,7 +352,7 @@ ViewHistoryDetails() {
       }))
     );
   }
-  
+
   //////////////////////////////////////////
   /////////////////////////////////////////
   electricalUpdateCounter(key,count:number) {
@@ -442,6 +455,7 @@ ViewHistoryDetails() {
   getUser_Info() {
     return this.afs.collection('user/').doc(this.afAuth.auth.currentUser.uid).valueChanges();
   }
+
   Clear() {
     this.UserArray.splice(0,1);
   }

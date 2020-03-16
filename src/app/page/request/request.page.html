@@ -24,28 +24,21 @@
     </div>
 
     <div class="more">
+
         <h5>Need more services</h5>
         <h6>Electrica & Metarial</h6>
-        <ion-select multiple="true" cancelText="Dismiss" okText="Okay!" [(ngModel)]="run1">
 
-
+        <ion-select multiple="true" cancelText="Dismiss" okText="Okay!" (ionChange) = "collect(services)" [(ngModel)]="run1">
             <ion-select-option *ngFor="let services of ArrayServices;" [value]="services.name">
-                {{services.name}}</ion-select-option>
-
-
+                {{services.name}}
+            </ion-select-option>
         </ion-select>
-        <h6>
-            Information Technology
-        </h6>
 
+        <h6>Information Technology</h6>
 
         <ion-select multiple="true" cancelText="Dismiss" okText="Okay!" [(ngModel)]="runx">
-
-
             <ion-select-option *ngFor="let services of ArrayICTServices" [value]="services.name">{{services.name}}
             </ion-select-option>
-
-
         </ion-select>
 
     </div>
