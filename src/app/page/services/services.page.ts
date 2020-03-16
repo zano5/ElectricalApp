@@ -185,13 +185,14 @@ SearchBar(event) {
 redirect() {
   this.pathService.getUser("request1");
 }
-
-  detail_id(id : any, requestMade){
+// id : any, requestMade
+  detail_id(services){
     // this.router.navigateByUrl('service-detail')
-    this.requestsMade = parseInt(requestMade);
+    console.log(services);
+    this.requestsMade = parseInt(services.requestsMade);
     this.count = this.requestsMade + 1;
     this.flag = true;
-    this.router.navigate(['service-detail'],{queryParams : {key: id, flag : this.flag, count: this.count}});
+    this.router.navigate(['service-detail'],{queryParams : {key: services.id, flag : this.flag, count: this.count, average_ratings: services.averageRating}});
   }
 
   // detail(items) {

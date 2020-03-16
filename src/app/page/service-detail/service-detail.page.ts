@@ -27,6 +27,20 @@ export class ServiceDetailPage implements OnInit {
   Information;
   first_Char;
   second_Char;
+
+  averageRatings = 0;
+  Average = 0;
+
+  ReviewsArray = [];
+  Total_Ratings = 0;
+  Total_Length = 0;
+  countRatings = 0;
+
+  one_Rating;
+  two_Rating;
+  three_Rating;
+  four_Rating;
+  five_Rating;
   constructor(private router: Router,
     private addr: ActivatedRoute,
     public ViewServices: AuthServiceService,
@@ -59,6 +73,8 @@ export class ServiceDetailPage implements OnInit {
       // console.log(data);
       this.docKey = data.key;
       this.counter = data.count;
+      this.averageRatings = parseFloat(data.average_ratings);
+      
       // console.log(data);
       if (data.flag) {
         this.flag = true;
@@ -84,12 +100,25 @@ export class ServiceDetailPage implements OnInit {
     this.ViewServices.getReviews(this.docKey).subscribe((data) => {
       this.Comments_Array = data;
       data.forEach((info) => {
+        this.ReviewsArray.push(info);
         this.Information = info;
         this.name = this.Information;
         this.surname = this.Information;
 
         this.first_Char = String(this.name).charAt(0);
         this.second_Char = String(this.surname).charAt(0);
+
+        for(var a = 0; a < this.ReviewsArray.length; a++){
+          console.log(this.ReviewsArray[a]);
+          this.Total_Ratings = this.Total_Ratings + this.ReviewsArray[a].rate;
+        }
+
+        console.log(this.Total_Ratings);
+        this.averageRatings = (this.Total_Ratings / (this.ReviewsArray.length * 5));
+        console.log(this.averageRatings);
+        this.countRatings = this.ReviewsArray.length;
+        console.log(this.ReviewsArray.length);
+
       })
     })
 
