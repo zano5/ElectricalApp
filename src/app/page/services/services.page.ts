@@ -94,15 +94,6 @@ export class ServicesPage implements OnInit {
     console.log(requests);
     requests.forEach((requestInfo) => {
       this.AllServices = requestInfo;
-
-      for(var a = 0; a < this.ArrayServices.length; a++){
-        if(this.ArrayServices.name === this.AllServices.service){
-          console.log(this.ArrayServices[a].name);
-        }else{
-          console.log("false");
-        }
-      }
-
     })
   });
 
