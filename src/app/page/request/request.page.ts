@@ -71,6 +71,7 @@ export class RequestPage implements OnInit {
   sum = 0;
 
   minDate;
+  run1;
   constructor(private alertcontroller:AlertController,
     public ViewServices: AuthServiceService,
     private addr : ActivatedRoute,
@@ -147,6 +148,10 @@ export class RequestPage implements OnInit {
   but(){
     this.moreRequestICT = true; 
     console.log(this.moreRequestICT)
+  }
+
+  collect(event) {
+    console.log(event);
   }
 
   onSelect(address, i) {

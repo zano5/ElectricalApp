@@ -352,7 +352,7 @@ ViewHistoryDetails() {
       }))
     );
   }
-  
+
   //////////////////////////////////////////
   /////////////////////////////////////////
   electricalUpdateCounter(key,count:number) {
