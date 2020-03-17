@@ -27,6 +27,20 @@ export class ServiceDetailPage implements OnInit {
   Information;
   first_Char;
   second_Char;
+
+  averageRatings = 0;
+  Average = 0;
+
+  ReviewsArray = [];
+  Total_Ratings = 0;
+  Total_Length = 0;
+  countRatings = 0;
+
+  one_Rating;
+  two_Rating;
+  three_Rating;
+  four_Rating;
+  five_Rating;
   constructor(private router: Router,
     private addr: ActivatedRoute,
     public ViewServices: AuthServiceService,
@@ -59,7 +73,8 @@ export class ServiceDetailPage implements OnInit {
       // console.log(data);
       this.docKey = data.key;
       this.counter = data.count;
-      // console.log(data);
+      this.averageRatings = parseFloat(data.average_ratings);
+      // console.log(this.averageRatings);
       if (data.flag) {
         this.flag = true;
       }
@@ -69,6 +84,8 @@ export class ServiceDetailPage implements OnInit {
       console.log(this.flag)
       // console.log(this.docKey)
     });
+
+    // for(var i = 0; i < this)
 
     // this.addr.queryParams.subscribe(params => {
     //   if (params && params.data) {
@@ -83,15 +100,30 @@ export class ServiceDetailPage implements OnInit {
 
     this.ViewServices.getReviews(this.docKey).subscribe((data) => {
       this.Comments_Array = data;
+      // console.log(this.Comments_Array);
       data.forEach((info) => {
+        this.ReviewsArray.push(info);
+
         this.Information = info;
         this.name = this.Information;
         this.surname = this.Information;
 
         this.first_Char = String(this.name).charAt(0);
         this.second_Char = String(this.surname).charAt(0);
+
+        for(var a = 0; a < this.ReviewsArray.length; a++){
+          console.log(this.ReviewsArray[a]);
+          this.Total_Ratings = this.Total_Ratings + this.ReviewsArray[a].rate;
+        }
+
+        this.averageRatings = (this.Total_Ratings / (this.ReviewsArray.length * 5));
+        this.countRatings = this.ReviewsArray.length;
+        console.log(this.countRatings);
       })
     })
+    // for(var i = 0; i < this.ReviewsArray.length; i++){
+    //   console.log(this.ReviewsArray[i]);
+    // }
 
     console.log(this.docKey);
     this.ViewServices.getDoc(this.docKey).subscribe((data) =>{
@@ -117,6 +149,7 @@ export class ServiceDetailPage implements OnInit {
     // this.run= false;
   }
 
+  ionViewDidLoad() {}
 
   request() {
 

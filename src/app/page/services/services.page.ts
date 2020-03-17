@@ -51,6 +51,7 @@ export class ServicesPage implements OnInit {
   beta = [];
   search_bar;
 
+  AverageRatings = 0;
   ///////////////////////////////////
   //////////////////////////////////
 
@@ -58,6 +59,8 @@ export class ServicesPage implements OnInit {
   All_Services = [];
   All_Services_Loaded = [];
   errorMessage;
+
+  Comments_and_Ratings;
   constructor(private router: Router,
     public loadingController: LoadingController,
     public ViewServices: AuthServiceService,
@@ -158,12 +161,16 @@ redirect() {
   this.pathService.getUser("request1");
 }
 
-  detail_id(id : any, requestMade){
-    // this.router.navigateByUrl('service-detail')
-    this.requestsMade = parseInt(requestMade);
+// id : any, requestMade
+  detail_id(services){
+    console.log(services);
+    
+    this.requestsMade = parseInt(services.requestsMade);
+
     this.count = this.requestsMade + 1;
     this.flag = true;
-    this.router.navigate(['service-detail'],{queryParams : {key: id, flag : this.flag, count: this.count}});
+    this.AverageRatings = services.averageRating
+    this.router.navigate(['service-detail'],{queryParams : {key: services.id, flag : this.flag, count: this.count, average_ratings: this.AverageRatings}});
   }
 
   // detail(items) {
