@@ -103,7 +103,6 @@ export class ServiceDetailPage implements OnInit {
       // console.log(this.Comments_Array);
       data.forEach((info) => {
         this.ReviewsArray.push(info);
-
         this.Information = info;
         this.name = this.Information;
         this.surname = this.Information;
