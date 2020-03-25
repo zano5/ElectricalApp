@@ -36,11 +36,19 @@ export class ServiceDetailPage implements OnInit {
   Total_Length = 0;
   countRatings = 0;
 
-  one_Rating;
-  two_Rating;
-  three_Rating;
-  four_Rating;
-  five_Rating;
+  one_Rating = 0;
+  two_Rating = 0;
+  three_Rating = 0;
+  four_Rating = 0;
+  five_Rating = 0;
+
+  services;
+  Ratings;
+  Average_Ratings;
+  TotalViews = 0;
+
+  value1 = 0;
+  value;
   constructor(private router: Router,
     private addr: ActivatedRoute,
     public ViewServices: AuthServiceService,
@@ -111,20 +119,46 @@ export class ServiceDetailPage implements OnInit {
         this.second_Char = String(this.surname).charAt(0);
 
         for(var a = 0; a < this.ReviewsArray.length; a++){
-          console.log(this.ReviewsArray[a]);
+          // console.log(this.ReviewsArray[a]);
           this.Total_Ratings = this.Total_Ratings + this.ReviewsArray[a].rate;
+
+          if(this.ReviewsArray[a].rate == 1){
+            this.one_Rating++;
+          }else if(this.ReviewsArray[a].rate == 2){
+            this.two_Rating++;
+          }else if(this.ReviewsArray[a].rate == 3){
+            this.three_Rating++;
+          }else if(this.ReviewsArray[a].rate == 4){
+            this.four_Rating++;
+          }else if(this.ReviewsArray[a].rate == 5){
+            this.five_Rating++;
+          }else{}
         }
 
-        this.averageRatings = (this.Total_Ratings / (this.ReviewsArray.length * 5));
-        this.countRatings = this.ReviewsArray.length;
-        console.log(this.countRatings);
+        console.log(this.one_Rating);
+        console.log(this.two_Rating);
+        console.log(this.three_Rating);
+        console.log(this.four_Rating);
+        console.log(this.five_Rating);
+
+        this.countRatings = this.one_Rating + this.two_Rating + this.three_Rating + this.four_Rating + this.five_Rating;
+
+        this.TotalViews = this.one_Rating + this.two_Rating + this.three_Rating + this.four_Rating + this.five_Rating;
+        // this.value1 = this.one_Rating;
+        console.log(this.TotalViews);
       })
+
+      this.ViewServices.getAverageRatings(this.docKey).subscribe((data) => {
+        this.services = data;
+        this.Ratings = this.services.averageRating;
+        this.Average_Ratings = this.Ratings.toFixed(1);
+      });
     })
     // for(var i = 0; i < this.ReviewsArray.length; i++){
     //   console.log(this.ReviewsArray[i]);
     // }
 
-    console.log(this.docKey);
+    // console.log(this.docKey);
     this.ViewServices.getDoc(this.docKey).subscribe((data) =>{
       if(data != null){
         this.ServiceDetails = data;
@@ -146,9 +180,16 @@ export class ServiceDetailPage implements OnInit {
     });
     console.log('two')
     // this.run= false;
+
+    this.ViewServices.getAverageRatings(this.docKey).subscribe((data) => {
+      this.services = data;
+      // this.Ratings = this.services.averageRating;
+      // this.Average_Ratings = this.Ratings.toFixed(1);
+    });
   }
 
-  ionViewDidLoad() {}
+  ionViewDidLoad() {
+  }
 
   request() {
 

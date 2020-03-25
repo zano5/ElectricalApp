@@ -61,6 +61,7 @@ export class ServicesPage implements OnInit {
   errorMessage;
 
   Comments_and_Ratings;
+  ReviewsArray;
   constructor(private router: Router,
     public loadingController: LoadingController,
     public ViewServices: AuthServiceService,
@@ -156,6 +157,13 @@ SearchBar(event) {
 
 }
 
+GetReviews() {
+  // this.ViewServices.getAverageRatings(this.docKey).subscribe((data) => {
+    //   this.services = data;
+    //   this.Ratings = this.services.averageRating;
+    //   this.Average_Ratings = this.Ratings.toFixed(1);
+    // });
+}
 
 redirect() {
   this.pathService.getUser("request1");

@@ -4,7 +4,7 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import { Router, RoutesRecognized } from '@angular/router';
 import { map, filter, pairwise } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { error } from 'protractor';
+import { error, Key } from 'protractor';
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 @Injectable({
   providedIn: 'root'
@@ -352,6 +352,45 @@ ViewHistoryDetails() {
       }))
     );
   }
+
+  updateRatings(key, ratings) {
+    if(key != null){
+      firebase.firestore().collection('services/').doc(key).get().then((doc) => {
+        if(doc.exists){
+          firebase.firestore().collection('services/').doc(key).update({
+            averageRating: ratings
+          }).catch((error) => {
+            console.log("Error message: " + error);
+          });
+        }else{}
+      });
+
+      firebase.firestore().collection('serviceICT/').doc(key).get().then((doc) => {
+        if(doc.exists){
+          firebase.firestore().collection('serviceICT/').doc(key).update({
+            averageRating: ratings
+          }).catch((error) => {
+            console.log("Error message: " + error);
+          });
+        }else{}
+      });
+
+      firebase.firestore().collection('servicesPlumbing/').doc(key).get().then((doc) => {
+        if(doc.exists){
+          firebase.firestore().collection('servicesPlumbing/').doc(key).update({
+            averageRating: ratings
+          }).catch((error) => {
+            console.log("Error message: " + error);
+          });
+        }else{}
+      })
+    }
+  }
+
+  getAverageRatings(key) {
+    return this.afs.collection('services/').doc(key).valueChanges();
+  }
+
 
   //////////////////////////////////////////
   /////////////////////////////////////////
