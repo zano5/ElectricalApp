@@ -384,8 +384,12 @@ ViewHistoryDetails() {
           });
         }else{}
       })
-    }
+    }else{}
   }
+
+  //////////////////////////////////////////////////
+  ////////////////////////////////////////////////
+  getRequestsMade() {}
 
   getAverageRatings(key) {
     return this.afs.collection('services/').doc(key).valueChanges();

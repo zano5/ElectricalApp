@@ -28,6 +28,20 @@
             <ion-card-header class="card" (click) = "detail_id(services);" *ngFor="let serv of sorted_array">
                 <img src="{{serv?.photoURL}}" alt="photos" class="images" />
                 <span class="text"><b>{{serv?.name}}</b></span>
+
+                <div>
+                        <nav>
+                            <ionic4-star-rating
+                                activeIcon = "ios-star"
+                                defaultIcon = "ios-star-outline"
+                                activeColor = "red" 
+                                defaultColor = "#aaaaaa"
+                                readonly="true"
+                                fontSize = "15px"
+                                rating = "{{serv?.averageRating}}">
+                            </ionic4-star-rating>
+                        </nav>
+                    </div>
             </ion-card-header>
         </ion-card>
     </div>
@@ -70,8 +84,32 @@
             ​
             <ion-card-header class="card" style="overflow:hidden;" *ngFor="let services of PlumbingServices" (click) = "detail_id(services)" style="padding: 0px; ">
                 <img src="{{services.photoURL}}" alt="photos" />
-                <span style="font-size: 18px;" class="text ">{{services.name}}</span><br> ​ ​
+                <span style="font-size: 18px;" class="text ">{{services.name}}</span><br>
+                <div>
+                    <nav>
+                        <ionic4-star-rating
+                            activeIcon = "ios-star"
+                            defaultIcon = "ios-star-outline"
+                            activeColor = "red" 
+                            defaultColor = "#aaaaaa"
+                            readonly="true"
+                            fontSize = "15px"
+                            rating = "{{services.averageRating}}">
+                        </ionic4-star-rating>
+                      </nav>
+                </div>
+
+                <div style = "color: white;font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">
+                    <span>
+                        {{services.requestsMade}} requests
+                    </span>
+                </div>
+
             </ion-card-header>
+
+            <ion-card-content>
+                <span style="font-size: 18px;" class="text">requestsMade</span>
+            </ion-card-content>
         </ion-card>
     </div>
 
@@ -82,6 +120,27 @@
             <ion-card-header class="card" style="overflow:hidden;" *ngFor="let services of ArrayICTServices" (click) = "detail_id(services)" style="padding: 0px; ">
                 <img src="{{services.photoURL}}" alt="photos" />
                 <span style="font-size: 18px;" class="text ">{{services.name}}</span><br> ​ ​
+
+                <div>
+                    <nav>
+                        <ionic4-star-rating
+                            activeIcon = "ios-star"
+                            defaultIcon = "ios-star-outline"
+                            activeColor = "red" 
+                            defaultColor = "#aaaaaa"
+                            readonly="true"
+                            fontSize = "15px"
+                            rating = "{{services.averageRating}}">
+                        </ionic4-star-rating>
+                    </nav>
+                </div>
+
+                <div style = "color: white;font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">
+                    <span>
+                        {{services.requestsMade}} requests
+                    </span>
+                </div>
+
             </ion-card-header>
         </ion-card>
     </div>
