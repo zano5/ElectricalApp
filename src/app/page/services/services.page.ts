@@ -5,6 +5,7 @@ import * as firebase from "firebase";
 import { LoadingController } from '@ionic/angular';
 import { AuthServiceService } from 'src/app/Service/auth-service.service';
 import { PathService } from 'src/app/Service/path.service';
+import { isUndefined } from 'util';
 
 @Component({
   selector: 'app-services',
@@ -52,6 +53,7 @@ export class ServicesPage implements OnInit {
   search_bar;
 
   AverageRatings = 0;
+
   ///////////////////////////////////
   //////////////////////////////////
 
@@ -100,16 +102,35 @@ export class ServicesPage implements OnInit {
     console.log(requests);
     requests.forEach((requestInfo) => {
       this.AllServices = requestInfo;
+      if((isUndefined(this.AllServices.eleObj)) && (isUndefined(this.AllServices.ictObj))){
+        console.log(this.AllServices.service);
+      }else if(isUndefined(this.AllServices.eleObj)){
+        console.log(this.AllServices.service);
+      }else if(isUndefined(this.AllServices.ictObj)){
+        console.log(this.AllServices.service);
+      }else{
+        console.log(this.AllServices.eleObj);
+        console.log(this.AllServices.ictObj);
+      }
+
     })
   });
 
-  console.log(this.service_info);
   // this.ViewServices.getDoc(this.service_info.id).subscribe((data) => {
   //   console.log(data);
   // })
   // console.log(this.MostRequested);
   this.loadingServices();
 
+  // const functions = require('firebase-functions');
+
+  //   exports.useMultipleWildcards = functions.firestore.document('request/').onWrite((change, context) => {
+  //     // context.params.userId == "marie";
+  //     // context.params.messageCollectionId == "incoming_messages";
+  //     // context.params.messageId == "134";
+  //     // change.after.data() == {body: "Hello"}
+  //     console.log(context.params.userId);
+  //   });
 }
 
 ////////////////////////////////////
