@@ -54,6 +54,9 @@ export class ServicesPage implements OnInit {
 
   AverageRatings = 0;
 
+  electric_services_array = [];
+  ict_services_array = [];
+  plumbing_services_array = [];
   ///////////////////////////////////
   //////////////////////////////////
 
@@ -64,6 +67,10 @@ export class ServicesPage implements OnInit {
 
   Comments_and_Ratings;
   ReviewsArray;
+
+  Combined_Services = [];
+  Combined_Count:number = 0;
+  len;
   constructor(private router: Router,
     public loadingController: LoadingController,
     public ViewServices: AuthServiceService,
@@ -80,6 +87,7 @@ export class ServicesPage implements OnInit {
     this.ArrayICTServices = data;
 
     this.ArrayICTServices.forEach((info) => {
+      this.ict_services_array = info;
       this.All_Services.push(info);
       this.All_Services_Loaded.push(info);
     })
@@ -99,40 +107,48 @@ export class ServicesPage implements OnInit {
   })
 
   this.ViewServices.ViewAllRequests().subscribe((requests) => {
-    console.log(requests);
+
     requests.forEach((requestInfo) => {
       this.AllServices = requestInfo;
-      if((isUndefined(this.AllServices.eleObj)) && (isUndefined(this.AllServices.ictObj))){
-        console.log(this.AllServices.service);
-      }else if(isUndefined(this.AllServices.eleObj)){
-        console.log(this.AllServices.service);
-      }else if(isUndefined(this.AllServices.ictObj)){
-        console.log(this.AllServices.service);
-      }else{
-        console.log(this.AllServices.eleObj);
-        console.log(this.AllServices.ictObj);
-      }
 
+      if(isUndefined(this.AllServices.service)){
+      }else{
+        for(var a = 0; a < this.electric_services_array.length; a++){
+          if(this.electric_services_array[a].name === this.AllServices.service){
+            console.log("true");
+            this.Combined_Count++;
+            if(this.Combined_Services.length == 0){
+              this.Combined_Services.push(this.electric_services_array[a],this.Combined_Count);
+            }else{
+              if(this.electric_services_array[a].name === this.Combined_Services[a].name){
+                this.Combined_Services[a].Count = this.Combined_Count;
+              }else{
+                this.Combined_Services.push(this.electric_services_array[a],this.Combined_Count);
+                this.electric_services_array[a].Count = this.Combined_Count;
+              }
+            }
+          }else{
+          }
+        }
+      }
     })
   });
-
+  
+  console.log(this.Combined_Services);
   // this.ViewServices.getDoc(this.service_info.id).subscribe((data) => {
   //   console.log(data);
   // })
   // console.log(this.MostRequested);
   this.loadingServices();
+}
 
+getRollo() {
   // const functions = require('firebase-functions');
 
   //   exports.useMultipleWildcards = functions.firestore.document('request/').onWrite((change, context) => {
-  //     // context.params.userId == "marie";
-  //     // context.params.messageCollectionId == "incoming_messages";
-  //     // context.params.messageId == "134";
-  //     // change.after.data() == {body: "Hello"}
   //     console.log(context.params.userId);
   //   });
 }
-
 ////////////////////////////////////
 
 ////////////Search bar/////////////////////
@@ -269,6 +285,7 @@ redirect() {
     this.ViewServices.getPlumbingServices().subscribe((plumbing) => {
       this.PlumbingServices = plumbing;
       this.PlumbingServices.forEach((info) => {
+        this.plumbing_services_array = info;
         this.All_Services.push(info);
         this.All_Services_Loaded.push(info);
       });
@@ -278,6 +295,8 @@ redirect() {
       this.ArrayServices = data;
       console.log(this.ArrayServices);
       this.ArrayServices.forEach((info) => {
+        this.electric_services_array.push(info);
+
         this.All_Services.push(info);
         this.All_Services_Loaded.push(info);
       });
