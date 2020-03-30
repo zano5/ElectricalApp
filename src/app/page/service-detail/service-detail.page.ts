@@ -3,6 +3,7 @@ import { Router, NavigationExtras } from '@angular/router';
 import { AuthServiceService } from 'src/app/Service/auth-service.service';
 import { ActivatedRoute } from '@angular/router';
 import { PathService } from 'src/app/Service/path.service';
+import { isUndefined } from 'util';
 @Component({
   selector: 'app-service-detail',
   templateUrl: './service-detail.page.html',
@@ -49,6 +50,11 @@ export class ServiceDetailPage implements OnInit {
 
   value1 = 0;
   value;
+
+  AllServices;
+  Serv = [];
+  RequestCount = 0;
+  Combined_Services = [];
   constructor(private router: Router,
     private addr: ActivatedRoute,
     public ViewServices: AuthServiceService,
@@ -135,17 +141,9 @@ export class ServiceDetailPage implements OnInit {
           }else{}
         }
 
-        console.log(this.one_Rating);
-        console.log(this.two_Rating);
-        console.log(this.three_Rating);
-        console.log(this.four_Rating);
-        console.log(this.five_Rating);
-
         this.countRatings = this.one_Rating + this.two_Rating + this.three_Rating + this.four_Rating + this.five_Rating;
-
         this.TotalViews = this.one_Rating + this.two_Rating + this.three_Rating + this.four_Rating + this.five_Rating;
         // this.value1 = this.one_Rating;
-        console.log(this.TotalViews);
       })
 
       this.ViewServices.getAverageRatings(this.docKey).subscribe((data) => {
@@ -162,6 +160,7 @@ export class ServiceDetailPage implements OnInit {
     this.ViewServices.getDoc(this.docKey).subscribe((data) =>{
       if(data != null){
         this.ServiceDetails = data;
+        this.Combined_Services.push(data);
       }else{}
     });
 
@@ -169,6 +168,7 @@ export class ServiceDetailPage implements OnInit {
       // console.log(data)
       if(data != null){
         this.ServiceDetails = data;
+        this.Combined_Services.push(data);
       }else{}
     });
 
@@ -176,6 +176,7 @@ export class ServiceDetailPage implements OnInit {
       // console.log(data);
       if(data != null){
         this.ServiceDetails = data;
+        this.Combined_Services.push(data);
       }else{}
     });
     console.log('two')
@@ -186,6 +187,27 @@ export class ServiceDetailPage implements OnInit {
       // this.Ratings = this.services.averageRating;
       // this.Average_Ratings = this.Ratings.toFixed(1);
     });
+
+
+    console.log(this.Combined_Services);
+    this.ViewServices.ViewAllRequests().subscribe((data) => {
+      data.forEach((info) => {
+        this.AllServices = info;
+        if(isUndefined(this.AllServices.service)){
+        }else{
+          for(var i = 0; i < this.AllServices.length; i++){
+            if(this.AllServices.service === this.Serv[0].name){
+              // this.RequestCount++;
+              // this.Combined_Services.push(this.Serv[0], this.RequestCount);
+              console.log("true");
+            }else{
+              console.log("false");
+            }
+          }
+        }
+      });
+    });
+    
   }
 
   ionViewDidLoad() {

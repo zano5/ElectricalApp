@@ -70,14 +70,32 @@
     <div style = "margin-top: 40px;" class = "ion-padding">
         <h4>Ratings and reviews</h4>
         <ion-item>
-            <ion-avatar slot="start">
+            <ion-avatar slot="start" style = "width: 30%;height: 30%;">
               <!-- <img src="./avatar-finn.png"> -->
-              <h1>{{Average_Ratings}}</h1>
+              <h1 style = "font-size: 305%;">{{Average_Ratings}}</h1>
+              <p>{{countRatings}}</p>
+              <!-- <h3>{{countRatings}}</h3> -->
             </ion-avatar>
             <ion-label>
-              <h2>{{Average_Ratings}}</h2>
-              <h3>I'm a big deal</h3>
-              <p>{{countRatings}}</p>
+                <ion-list>
+                    5<ion-progress-bar value="{{ProgressBarValueFive}}" mode = "ios"></ion-progress-bar>
+                </ion-list>
+
+                <ion-list>
+                    4<ion-progress-bar value="{{ProgressBarValueFour}}" mode = "ios"></ion-progress-bar>
+                </ion-list>
+
+                <ion-list>
+                    3<ion-progress-bar value="{{ProgressBarValueThree}}" mode = "ios"></ion-progress-bar>
+                </ion-list>
+
+                <ion-list>
+                    2<ion-progress-bar value="{{ProgressBarValueTwo}}" mode = "ios"></ion-progress-bar>
+                </ion-list>
+
+                <ion-list>
+                    1<ion-progress-bar value="{{ProgressBarValueOne}}" mode = "ios"></ion-progress-bar>
+                </ion-list>
             </ion-label>
           </ion-item>
     </div>

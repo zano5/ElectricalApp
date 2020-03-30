@@ -211,15 +211,18 @@ ViewHistoryDetails() {
   }
 
   getDoc(key: string){
-    return this.afs.doc("services/"+key).valueChanges();
+    // return this.afs.doc("services/"+key).valueChanges();
+    return this.afs.collection('services').doc(key).valueChanges();
   }
 
   getICTDoc(key: string){
-    return this.afs.doc("serviceICT/"+key).valueChanges();
+    // return this.afs.doc("serviceICT/"+key).valueChanges();
+    return this.afs.collection('serviceICT').doc(key).valueChanges();
   }
 
   getPlumbingDoc(key: string){
-    return this.afs.doc("servicesPlumbing/"+key).valueChanges();
+    // return this.afs.doc("servicesPlumbing/"+key).valueChanges();
+    return this.afs.collection('servicePlumbing').doc(key).valueChanges();
   }
 
   getServiceICT(){

@@ -34,6 +34,12 @@ export class HistoryDetailsPage implements OnInit {
   first_Char;
   second_Char;
 
+  ////////////////////////
+  ProgressBarValueFive = 0;
+  ProgressBarValueFour = 0;
+  ProgressBarValueThree = 0;
+  ProgressBarValueTwo = 0;
+  ProgressBarValueOne = 0;
   ////////////////////
   //////////////////////
 
@@ -98,6 +104,7 @@ export class HistoryDetailsPage implements OnInit {
         this.name = this.Information.name;
         this.surname = this.Information.surname;
         
+        console.log(this.ReviewsArray);
         this.first_Char = String(this.name).charAt(0);
         this.second_Char = String(this.surname).charAt(0);
 
@@ -119,11 +126,13 @@ export class HistoryDetailsPage implements OnInit {
 
       })
       
-    console.log(this.one_Rating);
-    console.log(this.two_Rating);
-    console.log(this.three_Rating);
-    console.log(this.four_Rating);
-    console.log(this.five_Rating);
+      console.log(this.five_Rating);
+      this.ProgressBarValueFive = this.five_Rating / 100;
+      this.ProgressBarValueFour = this.four_Rating / 100;
+      this.ProgressBarValueThree = this.three_Rating / 100;
+      this.ProgressBarValueTwo = this.two_Rating / 100;
+      this.ProgressBarValueOne = this.one_Rating / 100;
+      
       this.countRatings = this.ReviewsArray.length;
     })
     // console.log(this.averageRatings);
