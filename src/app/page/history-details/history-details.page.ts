@@ -3,6 +3,7 @@ import { AuthServiceService } from 'src/app/Service/auth-service.service';
 import { LoadingController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
+import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-history-details',
@@ -136,12 +137,38 @@ export class HistoryDetailsPage implements OnInit {
       this.countRatings = this.ReviewsArray.length;
     })
     // console.log(this.averageRatings);
-    this.historyService.getAverageRatings(this.HistoryInfo.serviceID).subscribe((data) => {
-      this.services = data;
-      this.Ratings = this.services.averageRating;
-      this.Ratings.toFixed(1);
-      this.Average_Ratings = this.Ratings.toFixed(1);
+    this.historyService.get_Electric_Average_Ratings(this.HistoryInfo.serviceID).subscribe((data) => {
+      if(isNullOrUndefined(data)){
+
+      }else{
+        this.services = data;
+        this.Ratings = this.services.averageRating;
+        this.Ratings.toFixed(1);
+        this.Average_Ratings = this.Ratings.toFixed(1);
+      }
     })
+
+    this.historyService.get_ICT_Average_Ratings(this.HistoryInfo.serviceID).subscribe((data) => {
+      if(isNullOrUndefined(data)){
+
+      }else{
+        this.services = data;
+        this.Ratings = this.services.averageRating;
+        this.Ratings.toFixed(1);
+        this.Average_Ratings = this.Ratings.toFixed(1);
+      }
+    });
+
+    this.historyService.get_Plumbing_Average_Ratings(this.HistoryInfo.serviceID).subscribe((data) => {
+      if(isNullOrUndefined(data)){
+
+      }else{
+        this.services = data;
+        this.Ratings = this.services.averageRating;
+        this.Ratings.toFixed(1);
+        this.Average_Ratings = this.Ratings.toFixed(1);
+      }
+    });
   }
 
   Comment() {

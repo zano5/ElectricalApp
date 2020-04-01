@@ -4,19 +4,42 @@
             <ion-back-button defaultHref="tabs/profile" (click)="redirect()"></ion-back-button>
         </ion-buttons>
 
-        <ion-title>History</ion-title>
+        <ion-title style = "text-align: center;">History</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
     <ion-card *ngFor="let history of previousRequests" mode = "ios" [routerLink]="['/history-details']" (click)="detail(history)" class="color">
         <ion-card-header>
-            <h6 color="dark">Reference: {{history.refNo}}</h6>
-            <!-- <ion-card-subtitle>{{history.service}}</ion-card-subtitle> -->
+            <ion-card-subtitle>Reference: {{history.refNo}}</ion-card-subtitle>
+            <h3 color="dark">{{history.service}}</h3>
         </ion-card-header>
 
         <ion-card-content>
+            <!-- <nav>
+                <ionic4-star-rating
+                    activeIcon = "ios-star"
+                    defaultIcon = "ios-star-outline"
+                    activeColor = "red" 
+                    defaultColor = "#aaaaaa"
+                    readonly="true"
+                    fontSize = "15px"
+                    rating = "{{history?.rate}}">
+                </ionic4-star-rating>
+            </nav> -->
             <p style="float: right;" color="dark">{{history.date}}</p>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngIf = "previousRequests?.length == 0" style = "box-shadow: none;text-align: center;top: 20%;">
+            <ion-icon ios="ios-document" style = "width: 100px; height: 100px;" md="md-document"></ion-icon>
+        <ion-card-header>
+            <!-- <ion-card-subtitle>Destination</ion-card-subtitle> -->
+            <ion-card-title style = "text-align: center;">Alert</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            You have no requests available. Please go to home <ion-icon ios="ios-home" md="md-home"></ion-icon> and make a request.
+            All requests you make will appear here. 
         </ion-card-content>
     </ion-card>
 </ion-content>

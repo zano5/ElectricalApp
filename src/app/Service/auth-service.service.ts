@@ -38,6 +38,7 @@ export class AuthServiceService {
   name;
   surname;
 
+  AverageRatings = [];
   constructor(private router: Router,
     private afs : AngularFirestore,
     public afAuth: AngularFireAuth) {
@@ -393,10 +394,17 @@ ViewHistoryDetails() {
   //////////////////////////////////////////////////
   ////////////////////////////////////////////////
 
-  getAverageRatings(key) {
+  get_Electric_Average_Ratings(key) {
     return this.afs.collection('services/').doc(key).valueChanges();
   }
 
+  get_ICT_Average_Ratings(key) {
+    return this.afs.collection('serviceICT/').doc(key).valueChanges();
+  }
+
+  get_Plumbing_Average_Ratings(key) {
+    return this.afs.collection('servicesPlumbing').doc(key).valueChanges();
+  }
 
   //////////////////////////////////////////
   /////////////////////////////////////////

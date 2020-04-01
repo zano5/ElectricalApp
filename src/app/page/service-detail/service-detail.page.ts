@@ -3,7 +3,7 @@ import { Router, NavigationExtras } from '@angular/router';
 import { AuthServiceService } from 'src/app/Service/auth-service.service';
 import { ActivatedRoute } from '@angular/router';
 import { PathService } from 'src/app/Service/path.service';
-import { isUndefined } from 'util';
+import { isUndefined, isNullOrUndefined } from 'util';
 @Component({
   selector: 'app-service-detail',
   templateUrl: './service-detail.page.html',
@@ -13,6 +13,7 @@ export class ServiceDetailPage implements OnInit {
   ArrayServices;
   ArrayICTServices;
   docKey;
+  serviceName;
   flag: boolean = false;
   run: boolean =true;
   key : boolean = false;
@@ -68,7 +69,7 @@ export class ServiceDetailPage implements OnInit {
 
     // })
     
-    console.log('one')
+    // console.log('one')
   }
 
   clearData() {
@@ -84,8 +85,9 @@ export class ServiceDetailPage implements OnInit {
   ngOnInit() {
     this.runs();
     this.addr.queryParams.subscribe(data => {
-      // console.log(data);
+      console.log(data);
       this.docKey = data.key;
+      this.serviceName = data.name;
       this.counter = data.count;
       this.averageRatings = parseFloat(data.average_ratings);
       // console.log(this.averageRatings);
@@ -95,16 +97,14 @@ export class ServiceDetailPage implements OnInit {
       else {
         this.flag = false;
       }
-      console.log(this.flag)
+      // console.log(this.flag)
       // console.log(this.docKey)
     });
 
-    // for(var i = 0; i < this)
-
     // this.addr.queryParams.subscribe(params => {
     //   if (params && params.data) {
-    //     this.ServiceDetails = JSON.parse(params.data);
-    //     console.log(this.ServiceDetails)
+    //     this.Combined_Services = JSON.parse(params.data.navigationExtras);
+    //     console.log(this.Combined_Services);
     //   }
     // });
 
@@ -146,68 +146,177 @@ export class ServiceDetailPage implements OnInit {
         // this.value1 = this.one_Rating;
       })
 
-      this.ViewServices.getAverageRatings(this.docKey).subscribe((data) => {
+      this.ViewServices.get_Electric_Average_Ratings(this.docKey).subscribe((data) => {
+        if(isNullOrUndefined(data)){
+
+        }else{
+          this.services = data;
+          this.Ratings = this.services.averageRating;
+          this.Average_Ratings = this.Ratings.toFixed(1);
+        }
+      });
+    })
+
+    this.ViewServices.get_ICT_Average_Ratings(this.docKey).subscribe((data) => {
+      if(isNullOrUndefined(data)){
+
+      }else{
         this.services = data;
         this.Ratings = this.services.averageRating;
         this.Average_Ratings = this.Ratings.toFixed(1);
-      });
-    })
+      }
+    });
+
+    this.ViewServices.get_Plumbing_Average_Ratings(this.docKey).subscribe((data) => {
+      if(isNullOrUndefined(data)){
+
+      }else{
+        this.services = data;
+        this.Ratings = this.services.averageRating;
+        this.Average_Ratings = this.Ratings.toFixed(1);
+      }
+    });
     // for(var i = 0; i < this.ReviewsArray.length; i++){
     //   console.log(this.ReviewsArray[i]);
     // }
 
     // console.log(this.docKey);
     this.ViewServices.getDoc(this.docKey).subscribe((data) =>{
-      if(data != null){
+      console.log(data);
+      if(isNullOrUndefined(data)){
+      }else{
         this.ServiceDetails = data;
         this.Combined_Services.push(data);
-      }else{}
+
+        this.ViewServices.ViewAllRequests().subscribe((data) => {
+          data.forEach((info) => {
+            this.AllServices = info;
+            if(isUndefined(this.AllServices.service)){
+              if(isUndefined(this.AllServices.eleObj)){
+
+              }else{
+                for(var x = 0; x < this.AllServices.eleObj.length; x++){
+                  if(this.ServiceDetails.name === this.AllServices.eleObj[x]){
+                    this.RequestCount++;
+                  }else{}
+                }
+              }
+            }else{
+              if(this.ServiceDetails.name === this.AllServices.service){
+                this.RequestCount++;
+              }else{
+              console.log("false");
+              }
+            }
+          });
+
+          console.log(this.RequestCount);
+        });
+      }
     });
 
     this.ViewServices.getICTDoc(this.docKey).subscribe((data) =>{
-      // console.log(data)
-      if(data != null){
+
+      if(isNullOrUndefined(data)){
+      }else{
         this.ServiceDetails = data;
         this.Combined_Services.push(data);
-      }else{}
+
+        this.ViewServices.ViewAllRequests().subscribe((data) => {
+          data.forEach((info) => {
+            this.AllServices = info;
+            if(isUndefined(this.AllServices.service)){
+              if(isUndefined(this.AllServices.ictObj)){
+
+              }else{
+                for(var x = 0; x < this.AllServices.ictObj.length; x++){
+                  if(this.ServiceDetails.name === this.AllServices.ictObj[x]){
+                    this.RequestCount++;
+                  }else{}
+                }
+              }
+            }else{
+              if(this.ServiceDetails.name === this.AllServices.service){
+                this.RequestCount++;
+              }else{
+              console.log("false");
+              }
+            }
+          });
+
+          console.log(this.RequestCount);
+        });
+      }
     });
 
     this.ViewServices.getPlumbingDoc(this.docKey).subscribe((data) => {
-      // console.log(data);
-      if(data != null){
+
+      if(isNullOrUndefined(data)){
+      }else{
         this.ServiceDetails = data;
         this.Combined_Services.push(data);
-      }else{}
+
+        this.ViewServices.ViewAllRequests().subscribe((data) => {
+          data.forEach((info) => {
+            this.AllServices = info;
+            if(isUndefined(this.AllServices.service)){
+              if(isUndefined(this.AllServices.plumbingObj)){
+
+              }else{
+                for(var x = 0; x < this.AllServices.plumbingObj.length; x++){
+                  if(this.ServiceDetails.name === this.AllServices.plumbingObj[x]){
+                    this.RequestCount++;
+                  }else{}
+                }
+              }
+            }else{
+              if(this.ServiceDetails.name === this.AllServices.service){
+                this.RequestCount++;
+              }else{
+              console.log("false");
+              }
+            }
+          });
+
+          console.log(this.RequestCount);
+        });
+      }
+
+      // if(data != null){
+      //   this.ServiceDetails = data;
+      //   this.Combined_Services.push(data);
+      // }else{}
     });
-    console.log('two')
+    // console.log('two')
     // this.run= false;
 
-    this.ViewServices.getAverageRatings(this.docKey).subscribe((data) => {
-      this.services = data;
-      // this.Ratings = this.services.averageRating;
-      // this.Average_Ratings = this.Ratings.toFixed(1);
-    });
-
-
     console.log(this.Combined_Services);
-    this.ViewServices.ViewAllRequests().subscribe((data) => {
-      data.forEach((info) => {
-        this.AllServices = info;
-        if(isUndefined(this.AllServices.service)){
-        }else{
-          for(var i = 0; i < this.AllServices.length; i++){
-            if(this.AllServices.service === this.Serv[0].name){
-              // this.RequestCount++;
-              // this.Combined_Services.push(this.Serv[0], this.RequestCount);
-              console.log("true");
-            }else{
-              console.log("false");
-            }
-          }
-        }
-      });
-    });
-    
+
+    // this.ViewServices.ViewAllRequests().subscribe((data) => {
+    //   data.forEach((info) => {
+    //     this.AllServices = info;
+    //     if(isUndefined(this.AllServices.service)){
+    //       if(isUndefined(this.AllServices.eleObj) && (isUndefined(this.AllServices.ictObj))){
+            
+    //       }else{} 
+    //     }else{
+    //       if(this.serviceName === this.AllServices.service){
+    //         this.RequestCount++;
+    //       }else{
+    //         console.log("false");
+    //       }
+    //       // for(var i = 0; i < this.AllServices.length; i++){
+    //       //   if(this.ServiceDetails.name == this.AllServices.service){
+    //       //     this.RequestCount++;
+    //       //     console.log(this.RequestCount);
+    //       //   }else{
+    //       //     console.log("false");
+    //       //   }
+    //       // }
+    //     }
+    //   });
+    //   console.log(this.RequestCount);
+    // });
   }
 
   ionViewDidLoad() {

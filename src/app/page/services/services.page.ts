@@ -5,7 +5,7 @@ import * as firebase from "firebase";
 import { LoadingController } from '@ionic/angular';
 import { AuthServiceService } from 'src/app/Service/auth-service.service';
 import { PathService } from 'src/app/Service/path.service';
-import { isUndefined } from 'util';
+import { isUndefined, isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-services',
@@ -54,9 +54,9 @@ export class ServicesPage implements OnInit {
 
   AverageRatings = 0;
 
-  electric_services_array = [];
-  ict_services_array = [];
-  plumbing_services_array = [];
+  electric_services_array;
+  ict_services_array;
+  plumbing_services_array;
   ///////////////////////////////////
   //////////////////////////////////
 
@@ -71,6 +71,7 @@ export class ServicesPage implements OnInit {
   Combined_Services = [];
   Combined_Count:number = 0;
   len;
+  RequestCount = 0;
   constructor(private router: Router,
     public loadingController: LoadingController,
     public ViewServices: AuthServiceService,
@@ -110,27 +111,6 @@ export class ServicesPage implements OnInit {
 
     requests.forEach((requestInfo) => {
       this.AllServices = requestInfo;
-
-      if(isUndefined(this.AllServices.service)){
-      }else{
-        for(var a = 0; a < this.electric_services_array.length; a++){
-          if(this.electric_services_array[a].name === this.AllServices.service){
-            console.log("true");
-            this.Combined_Count++;
-            if(this.Combined_Services.length == 0){
-              this.Combined_Services.push(this.electric_services_array[a],this.Combined_Count);
-            }else{
-              if(this.electric_services_array[a].name === this.Combined_Services[a].name){
-                this.Combined_Services[a].Count = this.Combined_Count;
-              }else{
-                this.Combined_Services.push(this.electric_services_array[a],this.Combined_Count);
-                this.electric_services_array[a].Count = this.Combined_Count;
-              }
-            }
-          }else{
-          }
-        }
-      }
     })
   });
   
@@ -140,6 +120,35 @@ export class ServicesPage implements OnInit {
   // })
   // console.log(this.MostRequested);
   this.loadingServices();
+
+  /**
+   * ******************
+   * 885443543535435435
+   * 556356463545465465
+   * kfdngfgg6546456345
+   * ******************
+   * **/
+  this.ViewServices.getService().subscribe((data) => {
+    if(isNullOrUndefined(data)){
+    }else{
+      data.forEach((info) => {
+        this.electric_services_array = info;
+
+        this.ViewServices.ViewAllRequests().subscribe((requests) => {
+          requests.forEach((requestsInfo) => {
+            this.ReviewsArray = requestsInfo;
+            if(this.electric_services_array.name == this.ReviewsArray.service){
+              console.log("true");
+            }else{
+              console.log("false");
+            }
+          });
+        });
+
+      });
+    }
+  });
+
 }
 
 getRollo() {
@@ -173,6 +182,7 @@ SearchBar(event) {
     if (!searchTerm) {
       this.errorMessage=null
       this.New_Array = [];
+      console.log(this.New_Array);
       return;
     }
 
@@ -185,7 +195,7 @@ SearchBar(event) {
       }
     });
 
-    console.log("lenght " +this.New_Array.length)
+    console.log("length " +this.New_Array.length)
 
     if(this.New_Array.length ==0){
       this.errorMessage = "Search not found!";
@@ -208,24 +218,25 @@ redirect() {
 
 // id : any, requestMade
   detail_id(services){
-    console.log(services);
-    
+    // console.log(services);
+
     this.requestsMade = parseInt(services.requestsMade);
 
     this.count = this.requestsMade + 1;
     this.flag = true;
     this.AverageRatings = services.averageRating
-    this.router.navigate(['service-detail'],{queryParams : {key: services.id, flag : this.flag, count: this.count, average_ratings: this.AverageRatings}});
+    this.router.navigate(['service-detail'],{queryParams : {key: services.id, name: services.name,flag : this.flag, count: this.count, average_ratings: this.AverageRatings}});
   }
 
-  // detail(items) {
-  //   const navigationExtras: NavigationExtras = {
-  //     queryParams: {
-  //       data: JSON.stringify(items),
-  //     }
-  //   };
-  //   this.router.navigate(['service-detail'], navigationExtras);
-  // }
+  detail(items) {
+
+    // const navigationExtras: NavigationExtras = {
+    //   queryParams: {
+    //     data: JSON.stringify(items),
+    //   }
+    // };
+    // this.router.navigate(['service-detail'], navigationExtras);
+  }
 
   // detail1(id : any){
 
@@ -293,9 +304,7 @@ redirect() {
 
     this.obj.subscribe((data)=>{
       this.ArrayServices = data;
-      console.log(this.ArrayServices);
       this.ArrayServices.forEach((info) => {
-        this.electric_services_array.push(info);
 
         this.All_Services.push(info);
         this.All_Services_Loaded.push(info);
