@@ -56,6 +56,12 @@ export class ServiceDetailPage implements OnInit {
   Serv = [];
   RequestCount = 0;
   Combined_Services = [];
+
+  ProgressBarValueFive = 0;
+  ProgressBarValueFour = 0;
+  ProgressBarValueThree = 0;
+  ProgressBarValueTwo = 0;
+  ProgressBarValueOne = 0;
   constructor(private router: Router,
     private addr: ActivatedRoute,
     public ViewServices: AuthServiceService,
@@ -141,6 +147,12 @@ export class ServiceDetailPage implements OnInit {
           }else{}
         }
 
+        this.ProgressBarValueFive = this.five_Rating / 100;
+        this.ProgressBarValueFour = this.four_Rating / 100;
+        this.ProgressBarValueThree = this.three_Rating / 100;
+        this.ProgressBarValueTwo = this.two_Rating / 100;
+        this.ProgressBarValueOne = this.one_Rating / 100;
+        
         this.countRatings = this.one_Rating + this.two_Rating + this.three_Rating + this.four_Rating + this.five_Rating;
         this.TotalViews = this.one_Rating + this.two_Rating + this.three_Rating + this.four_Rating + this.five_Rating;
         // this.value1 = this.one_Rating;

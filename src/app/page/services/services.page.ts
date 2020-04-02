@@ -180,7 +180,7 @@ SearchBar(event) {
   console.log(this.searchbar);
     const searchTerm = event.srcElement.value;
     if (!searchTerm) {
-      this.errorMessage=null
+      this.errorMessage = null
       this.New_Array = [];
       console.log(this.New_Array);
       return;
@@ -197,7 +197,7 @@ SearchBar(event) {
 
     console.log("length " +this.New_Array.length)
 
-    if(this.New_Array.length ==0){
+    if(this.New_Array.length == 0){
       this.errorMessage = "Search not found!";
     }
     console.log(this.New_Array);

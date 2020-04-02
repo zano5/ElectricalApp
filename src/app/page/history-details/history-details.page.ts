@@ -134,7 +134,7 @@ export class HistoryDetailsPage implements OnInit {
       this.ProgressBarValueTwo = this.two_Rating / 100;
       this.ProgressBarValueOne = this.one_Rating / 100;
       
-      this.countRatings = this.ReviewsArray.length;
+      this.countRatings = this.one_Rating + this.two_Rating + this.three_Rating + this.four_Rating + this.five_Rating;
     })
     // console.log(this.averageRatings);
     this.historyService.get_Electric_Average_Ratings(this.HistoryInfo.serviceID).subscribe((data) => {

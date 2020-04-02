@@ -69,33 +69,62 @@
 
     <div style = "margin-top: 40px;" class = "ion-padding">
         <h4>Ratings and reviews</h4>
-        <ion-item>
+        <ion-item lines = "none">
             <ion-avatar slot="start" style = "width: 30%;height: 30%;">
               <!-- <img src="./avatar-finn.png"> -->
               <h1 style = "font-size: 305%;">{{Average_Ratings}}</h1>
-              <p>{{countRatings}}</p>
+              <h6>{{countRatings}}</h6>
               <!-- <h3>{{countRatings}}</h3> -->
             </ion-avatar>
             <ion-label>
-                <ion-list>
-                    5<ion-progress-bar value="{{ProgressBarValueFive}}" mode = "ios"></ion-progress-bar>
-                </ion-list>
 
-                <ion-list>
-                    4<ion-progress-bar value="{{ProgressBarValueFour}}" mode = "ios"></ion-progress-bar>
-                </ion-list>
+                <ion-grid slot = "start" style = "width: 100%;">
+                        <ion-row>
+                            <ion-col size = "1" style = "text-align: center;">
+                                5
+                            </ion-col>
+                            <ion-col>
+                                <ion-progress-bar style = "height: 13px;margin: 3px auto;border-radius: 3px;" value="{{ProgressBarValueFive}}" mode = "ios"></ion-progress-bar>
+                            </ion-col>
+                        </ion-row>
+    
+                        <ion-row>
+                            <ion-col size = "1" style = "text-align: center;">
+                                4
+                            </ion-col>
+                            <ion-col>
+                                <ion-progress-bar style = "height: 13px;margin: 3px auto;border-radius: 3px;" value="{{ProgressBarValueFour}}" mode = "ios"></ion-progress-bar>
+                            </ion-col>
+                        </ion-row>
 
-                <ion-list>
-                    3<ion-progress-bar value="{{ProgressBarValueThree}}" mode = "ios"></ion-progress-bar>
-                </ion-list>
+                        <ion-row>
+                            <ion-col size = "1" style = "text-align: center;">
+                                3
+                            </ion-col>
+                            <ion-col>
+                                <ion-progress-bar style = "height: 13px;margin: 3px auto;border-radius: 3px;" value="{{ProgressBarValueThree}}" mode = "ios"></ion-progress-bar>
+                            </ion-col>
+                        </ion-row>
 
-                <ion-list>
-                    2<ion-progress-bar value="{{ProgressBarValueTwo}}" mode = "ios"></ion-progress-bar>
-                </ion-list>
+                        <ion-row>
+                            <ion-col size = "1" style = "text-align: center;">
+                                2
+                            </ion-col>
+                            <ion-col>
+                                <ion-progress-bar style = "height: 13px;margin: 3px auto;border-radius: 3px;" value="{{ProgressBarValueTwo}}" mode = "ios"></ion-progress-bar>
+                            </ion-col>
+                        </ion-row>
 
-                <ion-list>
-                    1<ion-progress-bar value="{{ProgressBarValueOne}}" mode = "ios"></ion-progress-bar>
-                </ion-list>
+                        <ion-row>
+                            <ion-col size = "1" style = "text-align: center;">
+                                1
+                            </ion-col>
+                            <ion-col>
+                                <ion-progress-bar style = "height: 13px;margin: 3px auto;border-radius: 3px;" value="{{ProgressBarValueOne}}" mode = "ios"></ion-progress-bar>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                
             </ion-label>
           </ion-item>
     </div>
