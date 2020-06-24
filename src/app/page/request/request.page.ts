@@ -7,6 +7,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import{AlertController} from '@ionic/angular';
 import { Key } from 'protractor';
 import * as moment from 'moment';
+import { PathService } from 'src/app/Service/path.service';
 
 @Component({
   selector: 'app-request',
@@ -53,7 +54,25 @@ export class RequestPage implements OnInit {
     distance : 0,
     calloutFee : 0,
     uid : '',
+    status: "Pending",
     serviceID: ''
+  }
+
+  requestObject = {
+    refNo : "",
+    serviceDesc : "",
+    serviceCost : "",
+    date : "",
+    stamp : Date.now(),
+    coords: [],
+    time : "",
+    distance : 0,
+    calloutFee : 0,
+    uid : '',
+    status: "Pending",
+    eleObj : [],
+    ictObj : [],
+    plumbingObj: []
   }
 
   Key;
@@ -61,6 +80,7 @@ export class RequestPage implements OnInit {
   obj1 : any;
   ArrayServices;
   ArrayICTServices;
+  ArrayPlumbingServices;
   dat = new Date();
   day;
 
@@ -71,13 +91,20 @@ export class RequestPage implements OnInit {
   sum = 0;
 
   minDate;
-  run1;
+  runx: any = [];
+  run1: any = [];
+  runp:any = [];
+
+  ElectricalArray = [];
+  ICTArray = [];
+  PlumbingArray = [];
   constructor(private alertcontroller:AlertController,
     public ViewServices: AuthServiceService,
     private addr : ActivatedRoute,
     private modalCtrl:ModalController,
     private mapboxService :MapService,
-    private fb: FormBuilder,) {
+    private fb: FormBuilder,
+    public pathService: PathService) {
 
     this.ref = (Math.random()* 100000).toFixed(0) + "AAC";
     // this.requestForm = fb.group({
@@ -171,18 +198,36 @@ export class RequestPage implements OnInit {
 
   ngOnInit() {
     // this.requestService.getUser(this.URL);
+    // this.ViewServices.getUser();
+    console.log(this.ViewServices.getUser());
+    // this.ViewServices.getUserProfile().subscribe((data) => {
+    //   console.log(data);
+    // });
 
     this.obj = this.ViewServices.getService();
     this.obj1 = this.ViewServices.getServiceICT();
 
     this.ViewServices.getService().subscribe((data)=>{
       this.ArrayServices = data;
+      data.forEach((info) => {
+        this.ElectricalArray.push(info);
+      });
     })
 
     this.ViewServices.getServiceICT().subscribe((data)=>{
       this.ArrayICTServices = data;
-      console.log(this.ArrayICTServices);
+      data.forEach((info) => {
+        this.ICTArray.push(info);
+      });
+      // console.log(this.ArrayICTServices);
     })
+
+    this.ViewServices.getPlumbingServices().subscribe((data) => {
+      this.ArrayPlumbingServices = data;
+      data.forEach((info) => {
+        this.PlumbingArray.push(info);
+      });
+    });
 
     this.ViewServices.getDoc(localStorage.getItem("key")).subscribe((data) => {
       if(data != null){
@@ -240,67 +285,87 @@ export class RequestPage implements OnInit {
     console.log(this.cost);
     console.log(this.descrp);
     console.log(this.name);
+
+    // for(let name in this.ElectricalArray){
+    //   console.log(name);
+    // }
+
+    this.ElectricalArray.forEach((data) => {
+      console.log(data);
+    });
+    // this.ElectricalArray.forEach((data) => {
+    //   console.log(data);
+    // });
 }
 
 
   submit(){
-    // console.log(this.addresses)
-    // console.log(this.addresses.length)
+    
+    console.log(this.run1);
+    console.log(this.runx);
     console.log(this.selectedAddress)
     console.log(this.selectedAddress.length)
-    this.request.service = this.name;
-    this.request.serviceDesc = this.descrp;
-    this.request.serviceCost = this.cost;
-    this.request.refNo = this.ref;
-    this.request.date = this.date.substr(0,10);
-
-    /////////This service id///////////////////////////
-    this.request.serviceID = this.Key;
-    ////////////////is a new code////////////////
     
-    // console.log(this.request);
-    // console.log(this.time.substr(11,8) + " tyd");
-    // console.log(this.date.substr(0,10) + " dag");
-    this.request.time = this.time.substr(11,8);
-    
+    if((this.checkAddress == "") && (this.time.length == 0) && (this.date.length == 0)){
+      alert("Address, date and time are required to make a request.");
+    }else if((this.checkAddress == "") && (this.date.length == 0)){
+      alert("Address and date are required to make a request.");
+    }else if((this.checkAddress == "") && (this.time.length == 0)){
+      alert("Address and time are required to make a request.");
+    }else if((this.time.length == 0) && (this.date.length == 0)){
+      alert("Date and time are required to make a request.");
+    }else if(this.checkAddress == ""){
+      alert("Address is required to make a request.");
+    }else if(this.date.length == 0){
+      alert("Date is required to make a request.");
+    }else if(this.time.length == 0){
+      alert("Time is required to make a request.");
+    }else{
+        this.request.service = this.name;
+        this.request.serviceDesc = this.descrp;
+        this.request.serviceCost = this.cost;
+        this.request.refNo = this.ref;
+        this.request.date = this.date.substr(0,10);
+        this.request.serviceID = this.Key;
+        this.request.time = this.time.substr(11,8);
 
-    if (this.checkAddress ==  "") {
-      alert("address field is required to make a request");
-    }
-    else {
-      if(this.time.length > 0 && this.date.length > 0) {
-        this.ViewServices.addRequest(this.request);
-      }
-    }
- 
-      if (this.time.length == 0 && this.date.length == 0) {
-        alert("Date and Time required to make a request")
-        console.log('Date and Time required to make a request ')
-      }
-      else {
-        if(this.date.length > 0) {
-          this.request.date = this.date.substr(0, 10);
-          }
-          else {
-            alert("Date required to make an request")
-          }
-          if(this.time.length > 0) {
-            this.request.time = this.time.substr(11, 8);
-        
-            }
-            else {
-              alert("Time required to make an request")
-            }
-      }
-
-      // make condition for to send request
+        if((this.run1.length > 0) || (this.runx.length > 0) || (this.runp.length > 0)){
       
-    // this.ViewServices.addRequest(this.request);
+          for(var a = 0; a < this.ElectricalArray.length; a++){
+            if(this.ElectricalArray[a].name == this.name){
+              this.run1.push(this.name);
+            }else{
+            }
+          }
+    
+          for(var b = 0; b < this.ICTArray.length; b++){
+            if(this.ICTArray[b].name == this.name){
+              this.runx.push(this.name);
+            }else{}
+          }
+    
+          for(var c = 0; c < this.PlumbingArray.length; c++){
+            if(this.PlumbingArray[c].name == this.name){
+              this.runp.push(this.name);
+            }else{}
+          }
+            this.requestObject.refNo = this.ref;
+            this.requestObject.date = this.date.substr(0,10);
+            this.requestObject.time = this.time.substr(11,8);
+            this.requestObject.uid = this.ViewServices.getUser();
+            this.requestObject.eleObj = this.run1;
+            this.requestObject.ictObj = this.runx;
+            this.requestObject.plumbingObj = this.runp;
+            this.ViewServices.addRequest(this.requestObject);
+        }else{
+          this.ViewServices.addRequest(this.request);
+        }
+    }
 
     this.countNum = parseInt(localStorage.getItem("count"));
     console.log(this.countNum);
 
-    this.ViewServices.electricalUpdateCounter(this.Key, this.countNum);
+    // this.ViewServices.electricalUpdateCounter(this.Key, this.countNum);
   }
 
   

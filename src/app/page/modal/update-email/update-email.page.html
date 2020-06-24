@@ -1,14 +1,14 @@
 <ion-header>
     <ion-toolbar color="primary">
-        <ion-title>UpdateEmail</ion-title>
-        <ion-icon name="close" (click)="closeModal()" slot="end" style="margin-right: 20px; width: 20px;height: 20px;"></ion-icon>
+        <ion-title>Update Email</ion-title>
+        <ion-icon name="close" (click)="closeModal()" slot="end" style="margin-right: 20px; width: 40px;height: 40px;"></ion-icon>
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class = "ion-padding">
     <div>
         <form [formGroup]="updateEmailForm">
-            <ion-item>
+            <ion-item color = "transparent">
                 <ion-icon name="mail" style="margin-right: 15px;"></ion-icon>
                 <ion-input placeholder="Email" [(ngModel)]="email" formControlName="email" value="{{e_mail}}"></ion-input>
             </ion-item>
@@ -19,7 +19,7 @@
     <ion-button size="large" color="light" [disabled] = "!updateEmailForm.valid" (click) = "updateEmail();closeModal()">Save</ion-button>
   </div> -->
 
-    <div style="text-align: center; margin-top: 20px;">
-        <ion-button color="dark" [disabled]="!updateEmailForm.valid" (click)="updateEmail();closeModal()">Save</ion-button>
+    <div style="text-align: center; margin-top: 20px;" class = "ion-padding">
+        <ion-button expand="full" shape="round" color="primary" [disabled]="!updateEmailForm.valid" (click)="updateEmail();closeModal()">Save</ion-button>
     </div>
 </ion-content>

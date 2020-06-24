@@ -1,9 +1,9 @@
 <ion-header>
     <ion-toolbar color="primary">
-        <ion-buttons slot="start">
+        <ion-buttons slot="start" style = "position: absolute;">
             <ion-back-button defaultHref="tabs/services"></ion-back-button>
         </ion-buttons>
-        <ion-title>Request</ion-title>
+        <ion-title style = "text-align: center;">Request</ion-title>
     </ion-toolbar>
 </ion-header>
 
@@ -14,7 +14,7 @@
   </div> -->
     <div class="ion-padding">
 
-        <ion-item>
+        <ion-item color = "none">
 
             <ion-label class="ion-text-wrap">Make More Electrical Request</ion-label>
             <ion-select multiple="true" cancelText="Dismiss" okText="Okay!" [(ngModel)]="run1">
@@ -31,7 +31,7 @@
                 <li>{{i}}</li>
             </ul>
         </ion-item>
-        <ion-item>
+        <ion-item color = "none">
 
             <ion-label class="ion-text-wrap">Want To Make More ICT Request</ion-label>
             <ion-select multiple="true" cancelText="Dismiss" okText="Okay!" [(ngModel)]="runx">
@@ -45,6 +45,25 @@
         </ion-item>
 
         <ion-item *ngFor="let i of runx">
+            <ul>
+                <li>{{i}}</li>
+            </ul>
+        </ion-item>
+
+        <ion-item color = "none">
+
+                <ion-label class="ion-text-wrap">Want To Make More Plumbing Request</ion-label>
+                <ion-select multiple="true" cancelText="Dismiss" okText="Okay!" [(ngModel)]="runp">
+                    <!-- <div class="one" *ngFor = "let services of ArrayICTServices"> -->
+    
+                <ion-select-option *ngFor="let services of ArrayPlumbingServices" [value]="services.name">{{services.name}}
+                </ion-select-option>
+                    <!-- </div> -->
+    
+            </ion-select>
+        </ion-item>
+    
+        <ion-item *ngFor="let i of runp">
             <ul>
                 <li>{{i}}</li>
             </ul>
@@ -68,7 +87,7 @@
 
         <ion-item color="transparent">
             <ion-label>Date:</ion-label>
-            <ion-datetime [min]="day" max="2025-12-31" [(ngModel)]="date"></ion-datetime>
+            <ion-datetime min = "{{minTime}}" displayFormat = "YYYY-MM-DD" max = "2025-12-31" [(ngModel)]="date" type = "date"></ion-datetime>
         </ion-item>
 
         <ion-item color="transparent">

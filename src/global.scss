@@ -26,9 +26,10 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 ion-content {
-    .search-barContainer {
+    --background:#F5F8FA;
+    #search-barContainer {
         ion-searchbar {
-            --background: rgb(235, 235, 235) !important;
+            --background: rgb(209, 206, 206) !important;
             div.searchbar-input-container.sc-ion-searchbar-md {
                 input.searchbar-input.sc-ion-searchbar-md {
                     box-shadow: none !important;

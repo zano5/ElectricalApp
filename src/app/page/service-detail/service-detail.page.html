@@ -1,9 +1,9 @@
 <ion-header>
     <ion-toolbar color="primary">
-        <ion-buttons slot="start">
+        <ion-buttons slot="start" style = "position: absolute;">
             <ion-back-button defaultHref="tabs/services" (click)="clearData()"></ion-back-button>
         </ion-buttons>
-        <ion-title>Service Details</ion-title>
+        <ion-title style = "text-align: center;">Service Details</ion-title>
     </ion-toolbar>
 </ion-header>
 <div class="ion-padding" *ngIf="run" style="position: relative;width: 100%;height: 100%;">
@@ -26,7 +26,7 @@
 <!-- <p>*ngIf="flag; else notShow"</p> -->
 <ion-content>
     <div class="image_container">
-        <img [src]="ServiceDetails?.photoURL" alt = "avatar"/>
+        <img [src]="ServiceDetails?.photoURL" alt = "avatar" style = "width: 100%;height: 200px;"/>
         <h5>{{ServiceDetails?.name}} </h5>
 
         <nav>
@@ -63,7 +63,7 @@
     <div style = "margin-top: 60px;" class = "ion-padding">
         <!-- <ion-progress-bar value="0.25" buffer = "0.5"></ion-progress-bar> -->
         <h4>Ratings and reviews</h4>
-        <ion-item lines = "none">
+        <ion-item lines = "none" color = "none">
             <ion-avatar slot="start" style = "width: 30%;height: 30%;">
               <!-- <img src="./avatar-finn.png"> -->
               <h1 style = "font-size: 305%;">{{Average_Ratings}}</h1>
@@ -119,21 +119,52 @@
             </ion-label>
           </ion-item>
     </div>
-    <div style = "margin-top: 100px;">
-        <h4 style = "padding-left: 20px;padding-right: 20px;">Comments</h4>
-        <ion-item *ngFor = "let com of Comments_Array">
+
+    <div>
+        <nav style = "text-align: center;">
+            <ionic4-star-rating
+                activeIcon = "ios-star"
+                defaultIcon = "ios-star-outline"
+                activeColor = "red" 
+                defaultColor = "black"
+                readonly="false"
+                fontSize = "32px"
+                rating = "0"
+                (ratingChanged)="logRatingChange($event)">
+            </ionic4-star-rating>
+        </nav>
+            <!-- "#aaaaaa" -->
+            <!-- "#488aff" -->
+        <nav>
+            <ion-item class = "ion-padding" lines = "none" color = "none" style = "padding: 0%;">
+                <ion-label position="stacked">Comments</ion-label>
+                <ion-textarea [(ngModel)] = "comments" style = "border: 0.5px solid gray;padding-left: 10px;padding-right: 10px;border-radius: 10px;">
+                </ion-textarea>
+            </ion-item>
+        </nav>
+    
+        <nav>
+            <ion-button color="primary" class = "ion-padding" mode = "ios" (click) = "Comment()">Success</ion-button>
+        </nav>
+    </div>
+
+    <div style = "margin-top: 60px;">
+        <h4 style = "padding-left: 20px;padding-right: 20px;">Comments <span style = "margin-left: 10px;">{{number_of_comments}}</span></h4>
+        <ion-item *ngFor = "let com of Comments_Array | slice:0:slice; let i=index" color = "none">
             <ion-avatar slot="start" style = "background-color: rgba(43, 160, 167, 0.8);
             text-align: center;padding: 0%;">
-                <p style = "text-align: center; color: white;
+                <!-- <p style = "text-align: center; color: white;
                     margin: 28% auto; letter-spacing: -2px;">
                     {{first_Char}}
                     {{second_Char}}
-                </p>
+                </p> -->
+
+                <h1 style = "text-align: center; color: white;margin: 10% auto;text-transform: uppercase;">{{com?.email | slice: 0:1}}</h1>
               <!-- <ion-icon name="person" style = "width: 30px;height: 30px;border: 1px solid black;border-radius: 50px;padding: 7px;"></ion-icon> -->
             </ion-avatar>
 
             <ion-label>
-                <h2>{{com?.name}} {{com?.surname}}</h2>
+                <!-- <h2>{{com?.name}} {{com?.surname}}</h2> -->
                 <h2>{{com?.email}}</h2>
 
               <ion-row >
@@ -160,8 +191,15 @@
                   </nav>
                 </ion-row>
               <!-- <p>{{com?.date}}</p> -->
-              <p>{{com?.comment}}</p>
+              <p class="ion-text-wrap">{{com?.comment}}</p>
             </ion-label>
           </ion-item>
+
+          <ion-infinite-scroll threshold="100px" (ionInfinite)="loadReviews($event)">
+            <ion-infinite-scroll-content
+              loadingSpinner="bubbles"
+              loadingText="Loading more data...">
+            </ion-infinite-scroll-content>
+          </ion-infinite-scroll>
     </div>
 </ion-content>

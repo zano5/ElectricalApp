@@ -3,7 +3,8 @@ import { AuthServiceService } from 'src/app/Service/auth-service.service';
 import { LoadingController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
-import { isNullOrUndefined } from 'util';
+import { isNullOrUndefined, isUndefined } from 'util';
+import { IonInfiniteScroll } from '@ionic/angular';
 
 @Component({
   selector: 'app-history-details',
@@ -61,6 +62,9 @@ export class HistoryDetailsPage implements OnInit {
   Ratings = 0;
   services;
   Average_Ratings;
+  slice:number = 5;
+  number_of_comments = 0;
+  serviceID;
   constructor(public historyService: AuthServiceService,
     public loadingController: LoadingController,
     public addr: ActivatedRoute) {
@@ -76,38 +80,42 @@ export class HistoryDetailsPage implements OnInit {
       }
     });
 
-    this.historyService.getUser_Info().subscribe((data) => {
-      this.Information = data;
-      this.name = this.Information.name;
-      this.surname = this.Information.surname;
+    this.historyService.get_Service(this.HistoryInfo.serviceName).subscribe((data) => {
+      if(isUndefined(data)){
+      }else{
+        this.serviceID = data[0];
+        console.log(this.serviceID);
+      }
+    });
 
-      this.historyService.name = this.Information.name;
-      this.historyService.surname = this.Information.surname;
-      
-      // this.first_Char = String(this.name).charAt(0);
-      // this.second_Char = String(this.surname).charAt(0);
-      
-    })
+    this.historyService.get_ICT_Service(this.HistoryInfo.serviceName).subscribe((data) => {
+      if(isNullOrUndefined(data)){
+        return
+      }else{
+        this.serviceID = data[0];
+        console.log(this.serviceID);
+      }
+    });
 
-    // this.historyService.getComments(this.HistoryInfo.serviceID).subscribe((data) => {
-    //   this.Comment_Array = data;
-    //   console.log(this.Comment_Array);
-    //   data.forEach((info) => {
-    //     this.Alpha.push(info);
-    //   })
-    // });
+    this.historyService.get_Plumbing_Service(this.HistoryInfo.serviceName).subscribe((data) => {
+      console.log(data);
+      if(isNullOrUndefined(data)){
+        return
+      }else{
+        this.serviceID = data[0];
+        console.log(this.serviceID);
+      }
+    });
 
-    this.historyService.getReviews(this.HistoryInfo.serviceID).subscribe((data) => {
+    
+    this.historyService.getReviews(this.serviceID).subscribe((data) => {
       this.Comment_Array = data;
       data.forEach((info) => {
         this.ReviewsArray.push(info);
         this.Information = info;
-        this.name = this.Information.name;
-        this.surname = this.Information.surname;
+        this.number_of_comments++;
         
         console.log(this.ReviewsArray);
-        this.first_Char = String(this.name).charAt(0);
-        this.second_Char = String(this.surname).charAt(0);
 
         for(var a = 0; a < this.ReviewsArray.length; a++){
           // console.log(this.ReviewsArray[a]);
@@ -127,7 +135,6 @@ export class HistoryDetailsPage implements OnInit {
 
       })
       
-      console.log(this.five_Rating);
       this.ProgressBarValueFive = this.five_Rating / 100;
       this.ProgressBarValueFour = this.four_Rating / 100;
       this.ProgressBarValueThree = this.three_Rating / 100;
@@ -136,8 +143,8 @@ export class HistoryDetailsPage implements OnInit {
       
       this.countRatings = this.one_Rating + this.two_Rating + this.three_Rating + this.four_Rating + this.five_Rating;
     })
-    // console.log(this.averageRatings);
-    this.historyService.get_Electric_Average_Ratings(this.HistoryInfo.serviceID).subscribe((data) => {
+
+    this.historyService.get_Electric_Average_Ratings(this.serviceID).subscribe((data) => {
       if(isNullOrUndefined(data)){
 
       }else{
@@ -148,7 +155,7 @@ export class HistoryDetailsPage implements OnInit {
       }
     })
 
-    this.historyService.get_ICT_Average_Ratings(this.HistoryInfo.serviceID).subscribe((data) => {
+    this.historyService.get_ICT_Average_Ratings(this.serviceID).subscribe((data) => {
       if(isNullOrUndefined(data)){
 
       }else{
@@ -159,7 +166,7 @@ export class HistoryDetailsPage implements OnInit {
       }
     });
 
-    this.historyService.get_Plumbing_Average_Ratings(this.HistoryInfo.serviceID).subscribe((data) => {
+    this.historyService.get_Plumbing_Average_Ratings(this.serviceID).subscribe((data) => {
       if(isNullOrUndefined(data)){
 
       }else{
@@ -171,35 +178,11 @@ export class HistoryDetailsPage implements OnInit {
     });
   }
 
-  Comment() {
-    this.date = moment().format('L');
-    this.historyService.service_id = this.HistoryInfo.serviceID;
-    this.historyService.submitReviews(this.rates,this.comments,this.date);
-
-    if(this.comments != null){
-      // this.historyService.Comments(this.HistoryInfo.serviceID,this.comments, this.name, this.surname);
-
-      this.averageRatings = ((1 * this.one_Rating) + 
-                            (2 * this.two_Rating) + 
-                            (3 * this.three_Rating) + 
-                            (4 * this.four_Rating) + 
-                            (5 * this.five_Rating)) / 
-                            (this.one_Rating + 
-                              this.two_Rating + 
-                              this.three_Rating + 
-                              this.four_Rating + 
-                              this.five_Rating);
-
-      console.log(this.averageRatings);
-      this.historyService.updateRatings(this.HistoryInfo.serviceID, this.averageRatings);
-    }else{}
-
-    // console.log(this.comments);
-  }
-
-  logRatingChange(event) {
-    this.rates = event;
-    console.log("Changing rates: " + this.rates);
+  loadReviews(event) {
+    setTimeout(() => {
+      this.slice += 5;
+      event.target.complete();
+    }, 500);
   }
 
   async loadingHistoryDetails() {

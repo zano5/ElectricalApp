@@ -6,28 +6,28 @@
 
 <ion-content>
 
-    <ion-list>
-        <ion-item detail="true" (click)="Redirect()">
+    <ion-list style = "background: transparent;">
+        <ion-item color = "transparent" lines = "none" detail="true" (click)="Redirect()">
             Profile
         </ion-item>
 
-        <ion-item detail="true" (click)="contactInfo()">
+        <ion-item color = "transparent" lines = "none" detail="true" (click)="contactInfo()">
             Contact Details
         </ion-item>
 
-        <ion-item detail="true" (click)="history()">
-            Transaction History
-        </ion-item>
+        <!-- <ion-item detail="true" (click)="history()">
+            Transaction Historys
+        </ion-item> -->
 
-        <ion-item detail="true" (click)="terms()">
+        <ion-item color = "transparent" lines = "none" detail="true" (click)="terms()">
             Terms & Conditions
         </ion-item>
 
-        <ion-item detail="true" (click)="HistoryRedirect()">
+        <ion-item color = "transparent" lines = "none" detail="true" (click)="HistoryRedirect()">
             History
         </ion-item>
 
-        <ion-item (click)="signOut()" *ngIf="results == 'true'">
+        <ion-item color = "transparent" lines = "none" (click)="signOut()" *ngIf="results == 'true'">
             Log Out
         </ion-item>
 

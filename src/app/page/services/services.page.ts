@@ -78,6 +78,7 @@ export class ServicesPage implements OnInit {
     public pathService: PathService) {
       this.count = 0;
       console.log(this.count);
+      // this.loadingServices();
      }
 
   ngOnInit() {
@@ -86,13 +87,13 @@ export class ServicesPage implements OnInit {
   this.obj1 = this.ViewServices.getServiceICT();
   this.obj1.subscribe((data)=>{
     this.ArrayICTServices = data;
-
+    console.log("ICT services: " + data);
     this.ArrayICTServices.forEach((info) => {
       this.ict_services_array = info;
+      console.log("ICT services: " + this.ict_services_array);
       this.All_Services.push(info);
       this.All_Services_Loaded.push(info);
     })
-    console.log(this.ArrayICTServices)
 
   });
 
@@ -131,6 +132,7 @@ export class ServicesPage implements OnInit {
   this.ViewServices.getService().subscribe((data) => {
     if(isNullOrUndefined(data)){
     }else{
+      console.log(data);
       data.forEach((info) => {
         this.electric_services_array = info;
 
@@ -148,6 +150,40 @@ export class ServicesPage implements OnInit {
       });
     }
   });
+
+  // this.ViewServices.getDoc(this.docKey).subscribe((data) =>{
+  //   console.log(data);
+  //   if(isNullOrUndefined(data)){
+  //   }else{
+  //     this.ServiceDetails = data;
+  //     this.Combined_Services.push(data);
+
+  //     this.ViewServices.ViewAllRequests().subscribe((data) => {
+  //       data.forEach((info) => {
+  //         this.AllServices = info;
+  //         if(isUndefined(this.AllServices.service)){
+  //           if(isUndefined(this.AllServices.eleObj)){
+
+  //           }else{
+  //             for(var x = 0; x < this.AllServices.eleObj.length; x++){
+  //               if(this.ServiceDetails.name === this.AllServices.eleObj[x]){
+  //                 this.RequestCount++;
+  //               }else{}
+  //             }
+  //           }
+  //         }else{
+  //           if(this.ServiceDetails.name === this.AllServices.service){
+  //             this.RequestCount++;
+  //           }else{
+  //           console.log("false");
+  //           }
+  //         }
+  //       });
+
+  //       console.log(this.RequestCount);
+  //     });
+  //   }
+  // });
 
 }
 

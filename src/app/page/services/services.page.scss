@@ -1,6 +1,26 @@
 
 ion-content {
-    .search-barContainer {
+
+    #test {
+        overflow: hidden;
+        overflow-y: scroll;
+        ion-card {
+            max-width: 80%;
+            background: url('src/assets/test_image.jpg') no-repeat center center / cover;
+            position: relative;
+            z-index: 1;
+            border-radius: 10px;
+        }
+
+        ion-card::before {
+            content: "";
+            top: 0px;bottom: 0px;left: 0px;right: 0px;
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: -1;
+        }
+    }
+    #search-barContainer {
         #suggestions_list {
             position: absolute;
             max-width: 100%;
@@ -113,7 +133,7 @@ ion-content {
             overflow-x: auto;
             position: relative;
             width: 100%;
-            max-width: 400px;
+            max-width: 100%;
             --background: transparent;
         }
         .card {
@@ -131,7 +151,7 @@ ion-content {
             bottom: 0;
             z-index: 10;
             background: black;
-            opacity: 0.5;
+            opacity: 0.8;
             border-radius: 10px;
         }
         img {

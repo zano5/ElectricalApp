@@ -52,6 +52,10 @@ export class AuthServiceService {
     return this.URL;
   }
 
+  getUser() { 
+    return firebase.auth().currentUser.uid;
+  }
+
   logIn(email,password) {
 
     return firebase.auth().signInWithEmailAndPassword(email, password).then((results) => {
@@ -73,32 +77,18 @@ export class AuthServiceService {
     // this.router.navigate(['/']);
   }
 
+  deleteAccount() {
+    firebase.auth().currentUser.delete().then(() => {
+      console.log("Your account was removed.");
+      this.router.navigateByUrl('/services');
+    }).catch((error) => {
+      console.log(error);
+    });
+    this.afAuth.auth.currentUser.delete();
+  }
+
   getUserProfile() {
-    // this.UserID = firebase.auth().currentUser.uid;
     return this.afs.collection("user").doc(this.afAuth.auth.currentUser.uid).valueChanges();
-    // var docRef = firebase.firestore().collection("user").doc("iJBFolJoORSamW141RcN26MlaKs2");
-    // return docRef.get().then((doc) => {
-    //   if(doc.exists){
-    //     this.UserArray.push(doc.data());
-    //   }else{}
-
-    //   return this.UserArray;
-    // }).catch((error) => {
-    //   console.log("Error getting document:", error);
-    // });
-
-    // return new Observable((observer) => {
-    //   docRef.get().then((doc) => {
-    //     if(doc.exists){
-    //       this.UserArray.push(doc.data());
-    //     }else{}
-
-    //     return this.UserArray;
-    //   }).catch((error) => {
-    //     console.log("Error getting document:", error);
-    //   })
-    // })
-   
   }
 
   resetPassword(mail){
@@ -133,19 +123,6 @@ export class AuthServiceService {
             this.router.navigateByUrl('tabs/notifications');
             // this.router.navigate("tabs/notifications",{params : {}})
         });
-
-
-    // this.afs.collection("newHistory").doc(this.afAuth.auth.currentUser.uid).set({
-    //   item
-    // })
-    // .then(() => {
-    //   console.log("Document successfully written!");
-    // })
-    // .catch((error) => {
-    //   console.error("Error writing document: ", error);
-    // });
-
-    // this.router.navigateByUrl('/tabs/notifications');
        
 }
 
@@ -173,20 +150,6 @@ ViewAllRequests() {
 
 ViewHistoryDetails() {
   return this.afs.collection("user").doc(this.afAuth.auth.currentUser.uid).collection("request").valueChanges();
-
-  // var db = firebase.firestore();
-  //   return db.collection("user").doc(this.afAuth.auth.currentUser.uid).collection("request").get().then((querySnapshot) => {
-  //     querySnapshot.forEach((doc) => {
-  //       if(this.Ref == doc.data().refNo){
-  //         // this.HistoryArray.push(doc.data());
-  //         console.log(doc.data().refNo);
-  //       }else{
-  //         console.log("false");
-  //       }
-  //     });
-
-  //     return this.HistoryArray;
-  // });
 }
 
 //  gotUser(){
@@ -194,7 +157,6 @@ ViewHistoryDetails() {
 //  }
 
   addUser(user,url){
-    // console.log(user);
 
     this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.pass).then((results )=> {
       // Handle Errors here.
@@ -223,7 +185,7 @@ ViewHistoryDetails() {
 
   getPlumbingDoc(key: string){
     // return this.afs.doc("servicesPlumbing/"+key).valueChanges();
-    return this.afs.collection('servicePlumbing').doc(key).valueChanges();
+    return this.afs.collection('servicesPlumbing').doc(key).valueChanges();
   }
 
   getServiceICT(){
@@ -277,9 +239,8 @@ ViewHistoryDetails() {
 
   getReviews(key) {
     return this.afs.collection('reviews', ref => ref.where('serviceID', '==' , key)).valueChanges()
-
-    // return this.afs.collection('reviews',ref => ref.where('uid', '==' , key) && ref.orderBy('stamp',"desc")).valueChanges();
   }
+
   //Adding comments
   //////////////////
   Comments(key,Comment, name, surname) {
@@ -339,16 +300,16 @@ ViewHistoryDetails() {
   }
 
   getMostRequested_Electrical_Services() {
-    return this.afs.collection('services/', ref => ref.where('requestsMade', '>', 2).orderBy('requestsMade', 'desc')).valueChanges();
+    return this.afs.collection('services/', ref => ref.where('requestsMade', '>', 10).orderBy('requestsMade', 'desc')).valueChanges();
   }
 
   getMostRequested_ICT_Services() {
-    return this.afs.collection('serviceICT/', ref => ref.where('requestsMade', '>', 2).orderBy('requestsMade', 'desc')).valueChanges();
+    return this.afs.collection('serviceICT/', ref => ref.where('requestsMade', '>', 10).orderBy('requestsMade', 'desc')).valueChanges();
   }
 
   getRequested_Plumbing_Services() {
     // return this.afs.collection('servicesPlumbing/', ref => ref.where('requestsMade', '>', 2).orderBy('requestsMade', 'desc')).valueChanges();
-    return this.afs.collection('servicesPlumbing/',ref => ref.where('requestsMade' , '>', 2).orderBy('requestsMade', 'desc')).snapshotChanges().pipe(
+    return this.afs.collection('servicesPlumbing/',ref => ref.where('requestsMade' , '>', 10).orderBy('requestsMade', 'desc')).snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as any;
         const id = a.payload.doc.id;
@@ -441,6 +402,38 @@ ViewHistoryDetails() {
         }else{}
       })
     }else{}
+  }
+
+  /////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////
+  //////////////////////////////////////////////////
+  ///the code below gets the service by name
+  /////////////////////////////////////////
+  get_Service(name) {
+    return this.afs.collection('services/',ref => ref.where('name', '==', name)).snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const id = a.payload.doc.id;
+        return id;
+      }))
+    );
+  }
+
+  get_ICT_Service(name) {
+    return this.afs.collection('serviceICT/',ref => ref.where('name', '==', name)).snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const id = a.payload.doc.id;
+        return id;
+      }))
+    );
+  }
+
+  get_Plumbing_Service(name) {
+    return this.afs.collection('servicePlumbing/',ref => ref.where('name', '==', name)).snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const id = a.payload.doc.id;
+        return id;
+      }))
+    );
   }
 
   getService(){

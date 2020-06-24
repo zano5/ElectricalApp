@@ -4,7 +4,7 @@
     </ion-toolbar>
 </ion-header>
 <ion-content>
-    <div class = "search-barContainer">
+    <div id = "search-barContainer">
 
         <ion-searchbar
             showCancelButton="focus"
@@ -12,7 +12,7 @@
             (ionInput) = "SearchBar($event)"
             [(ngModel)] = "searchbar">
         </ion-searchbar>
-
+        <!-- <ion-progress-bar type="indeterminate" *ngIf = "New_Array?.length > 0"></ion-progress-bar> -->
         <!-- (keydown) = "onKeyDown($event)" -->
         <ion-list id = "suggestions_list" position="floating" *ngIf = "New_Array?.length > 0">
             <!-- <ion-item>
@@ -85,6 +85,34 @@
         </ion-card>
     </div>
 
+    <!-- <div id = "test">
+        <ion-card>
+                <ion-card-header>
+                    <ion-card-subtitle>Destination</ion-card-subtitle>
+                    <ion-card-title>Madison, WI</ion-card-title>
+                </ion-card-header>
+
+                <ion-card-content>
+                    Founded in 1829 on an isthmus between Lake 
+                    Monona and Lake Mendota, Madison was named 
+                    the capital of the Wisconsin Territory in 1836.
+                </ion-card-content>
+        </ion-card>
+
+        <ion-card>
+                    <ion-card-header>
+                        <ion-card-subtitle>Destination</ion-card-subtitle>
+                        <ion-card-title>Madison, WI</ion-card-title>
+                    </ion-card-header>
+    
+                    <ion-card-content>
+                        Founded in 1829 on an isthmus between Lake 
+                        Monona and Lake Mendota, Madison was named 
+                        the capital of the Wisconsin Territory in 1836.
+                    </ion-card-content>
+            </ion-card>
+    </div> -->
+
     <div class="Electrical">
         <!-- services.id, services.requestsMade -->
         <h5 padding>Electrical & Materials</h5>
@@ -95,7 +123,7 @@
                     <span id="title" style="font-size: 18px;">{{services.name}}</span>
                 </div>
 
-                <div style = "z-index: 12;">
+                <div style = "z-index: 16;position: absolute;">
                     <nav>
                         <ionic4-star-rating
                             activeIcon = "ios-star"
@@ -103,15 +131,22 @@
                             activeColor = "red"
                             defaultColor = "#aaaaaa"
                             readonly="true"
-                            fontSize = "15px"
+                            fontSize = "18px"
                             rating = "{{services.averageRating}}">
                         </ionic4-star-rating>
+
+                        <table style = "margin-top: 5px;">
+                            <tr>
+                                <td><img src = "../assets/images/request-service.png" alt = "requests made" style = "width: 25px;height: 25px;"/></td>
+                                <td style = "color: white;padding-left: 8px;font-size: 20px;">{{services?.requestsMade}}</td>
+                            </tr>
+        
+                            <!-- <tr>
+                                <td><ion-icon style = "color: red;width: 18px;height: 20px;" name="star"></ion-icon></td>
+                                <td style = "color: white;padding-left: 8px;font-size: 20px;">{{services?.averageRating}}</td>
+                            </tr> -->
+                        </table>
                       </nav>
-                </div>
-                <div style = "color: white;font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">
-                    <span>
-                        {{services?.requestsMade}} requests
-                    </span>
                 </div>
             </ion-card-header>
         </ion-card>
@@ -121,13 +156,17 @@
         <!-- services.id, services.requestsMade -->
         <h5 padding>Plumbing</h5>
         <ion-card class="scrolling-wrapper-flexbox">
-            <ion-card-header class="card" style="overflow:hidden;" (click) = "detail_id(services)" *ngFor="let services of PlumbingServices" style="padding: 0px; " [style.backgroundImage]="'url(' + services.photoURL + ')'" style="background-position: center;background-repeat: no-repeat; background-size: cover;">
+            <ion-card-header class="card"
+            (click) = "detail_id(services)" 
+            *ngFor="let services of PlumbingServices" [style.backgroundImage]="'url(' + services.photoURL + ')'" 
+            style="overflow:hidden;padding: 0px;background-position: center;
+            background-repeat: no-repeat; background-size: cover;">
                 <div class="shade"></div>
                 <div text-center class="card-title">
                     <span id="title" style="font-size: 18px;">{{services.name}}</span>
                 </div>
 
-                <div>
+                <div style = "z-index: 16;position: absolute;margin: 20px;">
                     <nav>
                         <ionic4-star-rating
                             activeIcon = "ios-star"
@@ -135,79 +174,70 @@
                             activeColor = "red"
                             defaultColor = "#aaaaaa"
                             readonly="true"
-                            fontSize = "15px"
+                            fontSize = "18px"
                             rating = "{{services.averageRating}}">
                         </ionic4-star-rating>
-                      </nav>
-                </div>
-                <div style = "color: white;font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">
-                    <span>
-                        {{services.requestsMade}} requests
-                    </span>
-                </div>
-            </ion-card-header>
-        </ion-card>
-    </div>
-
-    <!-- The commented code below might still be needed. Please don't remove! -->
-
-    <!-- <div class="Plumbing">
-        <h5 padding>Plumbing</h5>
-        <ion-card class="scrolling-wrapper-flexbox">
-            ​
-            <ion-card-header class="card" style="overflow:hidden;" *ngFor="let services of PlumbingServices" (click) = "detail_id(services)" style="padding: 0px;">
-                <img src="{{services.photoURL}}" alt="photos" />
-                <span style="font-size: 18px;" class="text ">{{services.name}}</span><br>
-                <div>
-                    <nav style = "position: absolute;z-index: 12;">
-                        <ionic4-star-rating
-                            activeIcon = "ios-star"
-                            defaultIcon = "ios-star-outline"
-                            activeColor = "red"
-                            defaultColor = "#aaaaaa"
-                            readonly="true"
-                            fontSize = "15px"
-                            rating = "{{services.averageRating}}">
-                        </ionic4-star-rating>
-                      </nav>
-                </div>
-
-                <span style="font-size: 18px;" class="requests">
-                    {{services.requestsMade}} requests
-                </span>
-
-            </ion-card-header>
-        </ion-card>
-    </div> -->
-
-    <div class="ICT">
-        <h5 padding>Information Technology</h5>
-        <ion-card class="scrolling-wrapper-flexbox">
-            ​
-            <ion-card-header class="card" style="overflow:hidden;" *ngFor="let services of ArrayICTServices" (click) = "detail_id(services)" style="padding: 0px;">
-                <img src="{{services.photoURL}}" alt="photos" />
-                <span style="font-size: 18px;" class="text ">{{services.name}}</span><br>
-
-                <div>
-                    <nav>
-                        <ionic4-star-rating
-                            activeIcon = "ios-star"
-                            defaultIcon = "ios-star-outline"
-                            activeColor = "red"
-                            defaultColor = "#aaaaaa"
-                            readonly="true"
-                            fontSize = "15px"
-                            rating = "{{services.averageRating}}">
-                        </ionic4-star-rating>
+    
+                        <table style = "margin-top: 5px;">
+                            <tr>
+                                <td><img src = "../assets/images/request-service.png" alt = "requests made" style = "width: 25px;height: 25px;"/></td>
+                                <td style = "color: white;padding-left: 8px;font-size: 20px;">{{services.requestsMade}}</td>
+                            </tr>
+            
+                            <!-- <tr>
+                                <td><ion-icon style = "color: red;width: 18px;height: 20px;" name="star"></ion-icon></td>
+                                <td style = "color: white;padding-left: 8px;font-size: 20px;">{{services?.averageRating}}</td>
+                            </tr> -->
+                        </table>
                     </nav>
                 </div>
-                <span style="font-size: 18px;" class="requests">
-                    {{services.requestsMade}} requests
-                </span>
             </ion-card-header>
         </ion-card>
     </div>
 
+    <div class="Electrical">
+            <!-- services.id, services.requestsMade -->
+        <h5 padding>Information Technology</h5>
+        <ion-card class="scrolling-wrapper-flexbox">
+            <ion-card-header class="card" 
+            (click) = "detail_id(services)" 
+            *ngFor="let services of ArrayICTServices" 
+            [style.backgroundImage]="'url(' + services.photoURL + ')'" 
+            style="overflow:hidden;padding: 0px;background-position: center;
+            background-repeat: no-repeat; background-size: cover;">
+                <div class="shade"></div>
+                <div text-center class="card-title">
+                    <span id="title" style="font-size: 18px;">{{services.name}}</span>
+                </div>
+
+                <div style = "z-index: 16;position: absolute;margin: 20px;">
+                    <nav>
+                        <ionic4-star-rating
+                            activeIcon = "ios-star"
+                            defaultIcon = "ios-star-outline"
+                            activeColor = "red"
+                            defaultColor = "#aaaaaa"
+                            readonly="true"
+                            fontSize = "18px"
+                            rating = "{{services.averageRating}}">
+                        </ionic4-star-rating>
+    
+                        <table style = "margin-top: 5px;">
+                            <tr>
+                                <td><img src = "../assets/images/request-service.png" alt = "requests made" style = "width: 25px;height: 25px;"/></td>
+                                <td style = "color: white;padding-left: 8px;font-size: 20px;">{{services.requestsMade}}</td>
+                            </tr>
+            
+                            <!-- <tr>
+                                <td><ion-icon style = "color: red;width: 18px;height: 20px;" name="star"></ion-icon></td>
+                                <td style = "color: white;padding-left: 8px;font-size: 20px;">{{services?.averageRating}}</td>
+                            </tr> -->
+                        </table>
+                    </nav>
+                </div>
+            </ion-card-header>
+        </ion-card>
+    </div>
     <ion-fab vertical="bottom" horizontal="center" slot="fixed" class="fab">
         <ion-fab-button (click) = "redirect()">
             <ion-icon (click)="runs()" name="add"></ion-icon>

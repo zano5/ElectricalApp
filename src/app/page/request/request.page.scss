@@ -1,4 +1,4 @@
-.background {
+#background {
     background-color: white;
     .reference {
         background-color: #F6F1F1;
@@ -10,8 +10,10 @@
             padding: 20px;
         }
     }
-    .name {
-        background-color: #F6F1F1;
+    #name {
+        background-color: transparent;
+        border-bottom: 1px groove gray;
+        border-width: thin;
         color: black;
         h5 {
             margin-left: 10px;
@@ -26,8 +28,10 @@
         //     padding: 20px;
         // }
     }
-    .more {
-        background-color: #F6F1F1;
+    #more {
+        background-color: transparent;
+        border-bottom: 1px groove gray;
+        border-width: thin;
         color: black;
         h5 {
             margin-left: 10px;
@@ -39,8 +43,10 @@
             margin-left: 20px;
         }
     }
-    .info {
-        background-color: #F6F1F1;
+    #info {
+        background-color: transparent;
+        border-bottom: 1px groove gray;
+        border-width: thin;
         color: black;
         h5 {
             margin-left: 10px;
@@ -52,8 +58,10 @@
             margin-left: 20px;
         }
     }
-    .Address {
-        background-color: #F6F1F1;
+    #Address {
+        background-color: transparent;
+        border-bottom: 1px groove gray;
+        border-width: thin;
         color: black;
         h5 {
             margin-left: 10px;
@@ -65,8 +73,8 @@
             margin-left: 20px;
         }
     }
-    .date-time {
-        background-color: #F6F1F1;
+    #date-time {
+        background-color: transparent;
         color: black;
         h5 {
             margin-left: 10px;
@@ -75,6 +83,13 @@
             margin-left: 10px;
         }
         p {
+            margin-left: 20px;
+        }
+
+        ion-label {
+            margin-left: 20px;
+        }
+        ion-datetime {
             margin-left: 20px;
         }
     }

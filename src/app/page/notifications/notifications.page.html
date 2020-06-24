@@ -10,18 +10,109 @@
     <ion-icon name="arrow-round-down" ></ion-icon>
 </ion-fab-button> 
 
+<div class="Electrical" *ngIf = "AcceptedObject?.length > 0">
+    <h5 padding>Accepted Requests</h5>
+    <ion-card class="scrolling-wrapper-flexbox">
+        <ion-card-header class="card" style="overflow:hidden;padding: 0px;" *ngFor="let item of AcceptedObject;let i = index">
+            <div class="shade"></div>
+            <div text-center class="card-title">
+                <h2>{{user.name | titlecase}} {{user.surname | titlecase}}</h2>
+                <span id="title" style="font-size: 18px;">Reference Number: {{item.refNo}}</span>
+            </div>
+
+            <div class = "ion-padding">
+                <div>
+                    <p>Cost: R {{item.serviceCost}}</p>
+                    <p>Date: {{item.stamp | date : 'medium'}}</p>
+                </div>
+            </div>
+
+            <div class="button1">
+                <ion-fab vertical="bottom" horizontal="end" style = "width: 20px;height: 20px;" class="download">
+                    <ion-fab-button (click)="invoice(i)" color = "transparent" style = "background: transparent;">
+                        <ion-icon ios="ios-download" color = "primary" md="md-download"></ion-icon>
+                    </ion-fab-button>
+                </ion-fab>
+            </div>
+        </ion-card-header>
+    </ion-card>
+</div>
+
+<div class="Electrical" *ngIf = "PendingObject?.length > 0">
+    <h5 padding>Pending Requests</h5>
+    <ion-card class="scrolling-wrapper-flexbox">
+        <ion-card-header class="card" style="overflow:hidden;padding: 0px;" *ngFor="let item of PendingObject;let i = index">
+            <div class="shade"></div>
+            <div text-center class="card-title">
+                <h2>{{user.name | titlecase}} {{user.surname | titlecase}}</h2>
+                <span id="title" style="font-size: 18px;">Reference Number: {{item.refNo}}</span>
+            </div>
+    
+            <div>
+                <div class = "ion-padding">
+                    <p>Cost: R {{item.serviceCost}}</p>
+                    <p>Date: {{item.stamp | date : 'medium'}}</p>      
+                </div>  
+            </div>
+
+            <div class="button1" style = "background: transparent;">
+                <ion-fab vertical="bottom" horizontal="end" style = "width: 20px;height: 20px;" class="download">
+                    <ion-fab-button (click)="invoice(i)" color = "transparent" style = "--background: transparent;">
+                        <ion-icon ios="ios-download" color = "primary" md="md-download"></ion-icon>
+                    </ion-fab-button>
+                </ion-fab>
+            </div>
+        </ion-card-header>
+    </ion-card>
+</div>
+
+<div class="Electrical" *ngIf = "RejectedObjected?.length > 0">
+    <h5 padding>Rejected Requests</h5>
+    <ion-card class="scrolling-wrapper-flexbox">
+        <ion-card-header class="card" style="overflow:hidden;padding: 0px;" *ngFor="let item of RejectedObjected;let i = index">
+            <div class="shade"></div>
+            <div text-center class="card-title">
+                <h2>{{user.name | titlecase}} {{user.surname | titlecase}}</h2>
+                <span id="title" style="font-size: 18px;">Reference Number: {{item.refNo}}</span>
+            </div>
+        
+            <div class = "ion-padding">
+                <p>Cost: R {{item.serviceCost}}</p>
+                <p>Date: {{item.stamp | date : 'medium'}}</p>
+                
+                <!-- <nav>
+                    <ion-icon ios="ios-download" style = "float: right;width: 20px;height: 20px;margin-bottom: 20px;" color = "primary" md="md-download"></ion-icon>
+                </nav> -->
+
+                <div class="button1">
+
+                    <ion-fab vertical="bottom" horizontal="end" style = "width: 20px;height: 20px;" class="download">
+                        <ion-fab-button (click)="invoice(i)" color = "transparent" style = "background: transparent;">
+                            <ion-icon ios="ios-download" color = "primary" md="md-download"></ion-icon>
+
+                        </ion-fab-button>
+                    </ion-fab>
+                </div>
+            </div>
+        </ion-card-header>
+    </ion-card>
+</div>
+<!-- <div class="if" *ngIf="item.ictObj.length"> -->
+    <!-- <p>Service: {{item.service}}</p> -->
+    <!-- <p>Call-Out Fee: R {{item.calloutFee}}</p> -->
 <!-- <iframe *ngIf="pdfLink" [src]="pdfLink" width="100%" height="100%" frameborder="0" ></iframe> -->
-    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+
+    <!-- <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
         <ion-infinite-scroll-content>
             <div class="card" *ngFor="let item of request; let i = index">
                 <div id="indicator"></div>
-                <!-- <div class="if" *ngIf="item.ictObj.length"> -->
+                
                 <h2>{{user.name | titlecase}} {{user.surname | titlecase}}</h2>
 
                 <p>Reference Number: {{item.refNo}} </p>
-                <!-- <p>Service: {{item.service}}</p> -->
+                
                 <p>Cost: R {{item.serviceCost}}</p>
-                <!-- <p>Call-Out Fee: R {{item.calloutFee}}</p> -->
+                
                 <p>Date: {{item.stamp | date : 'medium'}}</p>
 
 
@@ -36,10 +127,8 @@
                     </ion-fab>
                 </div>
 
-                <!-- </div> -->
-
             </div>
         </ion-infinite-scroll-content>
-    </ion-infinite-scroll>
+    </ion-infinite-scroll> -->
 
 </ion-content>

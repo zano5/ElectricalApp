@@ -1,18 +1,19 @@
 .main {
     .background {
         background-color: #f04141;
-        position: absolute;
+        // position: absolute;
         top: 0px;
         left: 0px;
         right: 0px;
         width: 100%;
         height: 30%;
+        border-radius: 20px;
         .button {
             color: white;
         }
     }
     .username {
-        background-color: white;
+        // background-color: white;
         position: absolute;
         top: 170px;
         // bottom: 150px;
@@ -28,8 +29,9 @@
         // }
     }
     .userdetails {
-        position: absolute;
+        // position: absolute;
         top: 330px;
         width: 100%;
+        margin-top: 50px;
     }
 }

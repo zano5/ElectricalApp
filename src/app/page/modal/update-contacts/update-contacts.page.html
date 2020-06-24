@@ -1,21 +1,21 @@
 <ion-header>
     <ion-toolbar color="primary">
-        <ion-title>UpdateContacts</ion-title>
-        <ion-icon name="close" (click)="CloseModal()" slot="end" style="margin-right: 20px; width: 20px;height: 20px;"></ion-icon>
+        <ion-title>Update Contacts</ion-title>
+        <ion-icon name="close" (click)="CloseModal()" slot="end" style="margin-right: 20px; width: 40px;height: 40px;"></ion-icon>
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class = "ion-padding">
     <div>
         <form [formGroup]="updateContactsForm">
-            <ion-item>
+            <ion-item color = "transparent">
                 <ion-icon name="call" style="margin-right: 15px;"></ion-icon>
                 <ion-input placeholder="Contacts" value="{{numbers}}" [(ngModel)]="contacts" formControlName="contacts"></ion-input>
             </ion-item>
         </form>
     </div>
 
-    <div style="text-align: center; margin-top: 20px;">
-        <ion-button color="dark" [disabled]="!updateContactsForm.valid" (click)="updateContacts();CloseModal()">Save</ion-button>
+    <div style="text-align: center; margin-top: 20px;" class = "ion-padding">
+        <ion-button expand="full" shape="round" color="primary" [disabled]="!updateContactsForm.valid" (click)="updateContacts();CloseModal()">Save</ion-button>
     </div>
 </ion-content>

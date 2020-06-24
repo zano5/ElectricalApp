@@ -20,6 +20,10 @@ const { Filesystem } = Plugins;
 })
 export class NotificationsPage implements OnInit {
   // @ViewChild(IonContent,{static : true}) content: IonContent;
+
+  AcceptedObject = [];
+  PendingObject = [];
+  RejectedObjected = [];
   @ViewChild(IonInfiniteScroll,{static : true}) infiniteScroll: IonInfiniteScroll;
   URL = '/sign-in'
   request : any;
@@ -77,8 +81,7 @@ export class NotificationsPage implements OnInit {
     this.service.viewRequest().subscribe((err) =>{
       this.request = err;
       this.arr = this.request;
-      
-      console.log(this.arr)
+      // console.log(this.arr)
    
       console.log(this.request);
       let c = 0;
@@ -92,6 +95,19 @@ export class NotificationsPage implements OnInit {
         
       // }
      
+
+      for(var a = 0; a < this.request.length; a++){
+        if(this.request[a].status === "Accepted"){
+          this.AcceptedObject.push(this.request[a]);
+        }else if(this.request[a].status === "Pending"){
+          this.PendingObject.push(this.request[a]);
+        }else if(this.request[a].status === "Rejected"){
+          this.RejectedObjected.push(this.request[a]);
+        }else {}
+      }
+      console.log(this.AcceptedObject);
+      console.log(this.PendingObject);
+      console.log(this.RejectedObjected);
     })
   }
 

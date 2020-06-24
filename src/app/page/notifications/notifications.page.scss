@@ -2,39 +2,107 @@ ion-content {
     --ion-background-color: lightgrey;
 }
 
-#indicator {
-    width: 100%;
-    height: 20px;
-    background-color: green;
-}
+// #indicator {
+//     width: 100%;
+//     height: 20px;
+//     background-color: green;
+// }
+
+// .card {
+//     margin-top: 20px;
+//     width: 100%;
+//     height: 260px;
+//     position: relative;
+//     border-radius: 10px;
+//     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+//     transition: 0.3s;
+//     background-color: #FFFF;
+//     h2 {
+//         margin-left: 10px;
+//         margin-top: 10px;
+//     }
+//     p {
+//         margin-left: 10px;
+//         margin-top: 3px;
+//     }
+//     .button1 {
+//         position: sticky;
+//         // bottom: 5px;
+//         margin-left: 20px;
+//         right: 42vh;
+//         // align-items: right;
+//     }
+//     .download {
+//         position: absolute;
+//         top: 70%;
+//         left: 80%;
+//     }
+
+// }
 
 .card {
-    margin-top: 20px;
-    width: 100%;
-    height: 260px;
-    position: relative;
+    width: 300px;
+    height: 203px;
+    margin-right: 10px;
     border-radius: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
-    background-color: #FFFF;
-    h2 {
-        margin-left: 10px;
+    background-color: lightgray;
+}
+
+.Electrical {
+    box-shadow: none;
+    .scrolling-wrapper-flexbox {
+        box-shadow: none;
+        // box-shadow: 0em 0.2em 1em 0.2em rgba(0,0,0,0.4);
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        position: relative;
+        width: 100%;
+        max-width: 100%;
+        --background: transparent;
+    }
+    .card {
+        box-shadow: none;
+        // box-shadow: 0em 0.2em 1em 0.2em rgba(0,0,0,0.4);
+        width: 280px;
+        height: 180px;
+        flex: 0 0 auto;
+        background-color: white;
+        z-index: 2;
+    }
+    .shade {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 10;
+        background: black;
+        opacity: 0.1;
+        border-radius: 10px;
+    }
+    img {
+        width: 100%;
+        height: 100%;
+    }
+    .card-title {
+        // position: absolute;
+        top: 65%;
+        left: 25%;
+        font-size: 0.5rem;
         margin-top: 10px;
-    }
-    p {
-        margin-left: 10px;
-        margin-top: 3px;
-    }
-    .button1 {
-        position: sticky;
-        // bottom: 5px;
-        margin-left: 20px;
-        right: 42vh;
-        // align-items: right;
+        // width: 50%;
+        // font-weight: bold;
+        color: black;
+        font: bold;
+        z-index: 12;
     }
     .download {
         position: absolute;
         top: 70%;
         left: 80%;
     }
+
 }

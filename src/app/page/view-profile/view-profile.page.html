@@ -1,17 +1,17 @@
 <ion-header>
     <ion-toolbar color="primary">
-        <ion-buttons slot="start">
+        <ion-buttons slot="start" style = "position: absolute;">
             <ion-back-button defaultHref="tabs/profile" (click)="back()"></ion-back-button>
         </ion-buttons>
-        <ion-title>View Profile</ion-title>
+        <ion-title style = "text-align: center;">View Profile</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
     <div class="main">
-        <div class="profile-image">
-            <p style="text-align: center; font-weight: bold;">user profile</p>
-            <div *ngIf="mainImage =='' ">
+        <!-- <div class="profile-image"> -->
+            <!-- <p style="text-align: center; font-weight: bold;">user profile</p> -->
+            <!-- <div *ngIf="mainImage =='' ">
                 <img src="/assets/img/1.jpg">
             </div>
             <div *ngIf="mainImage !='' ">
@@ -22,37 +22,36 @@
                         <ion-icon name="camera" class="input" color="primary"  > </ion-icon>
                     </label>
                 <input id="file-input" class="input" type="file" (change)="uploadFile($event)" accept="image/x-png,image/gif,image/jpeg" />
-            </div>
-        </div>
+            </div> -->
+        <!-- </div> -->
 
-        <ion-item class="username" color="primary">
-            <ion-icon name="person" style="position: absolute;left: 0px;"></ion-icon>
-            <ion-label style="text-align: center;">{{UserProfile?.name}} {{UserProfile?.surname}}</ion-label>
+        <div style = "text-align: center;">
+            <ion-icon ios="ios-person" color = "primary" md="md-person" 
+            style = "margin-top: 50px;width: 100px;height: 100px;background-color: rgba(0, 0, 0, 0.8);border-radius: 60px;padding: 10px;"></ion-icon>
+        </div>
+        <!-- position: absolute; -->
+        <ion-item class="username" color = "none" lines = "none">
+            <!-- <ion-icon name="person" style="left: 0px;"></ion-icon> -->
+            <ion-label style="text-align: center; text-transform: uppercase;">{{UserProfile?.name}} {{UserProfile?.surname}}</ion-label>
 
             <ion-icon ios="ios-create" md="md-create" (click)="UpdateNamesModal(UserProfile)" style="position:absolute;right:0px;"></ion-icon>
 
         </ion-item>
         <div class="userdetails">
-            <ion-item>
+            <ion-item lines = "none" color = "transparent">
                 <ion-icon name="mail" style="margin-right: 15px;"></ion-icon>
                 <ion-label>
-                    {{UserProfile?.email}}
+                    <h2>EMAIL</h2>
+                    <h3>{{UserProfile?.email}}</h3>
                 </ion-label>
                 <ion-icon ios="ios-create" md="md-create" (click)="UpdateEmailModal(UserProfile)" color="primary"></ion-icon>
             </ion-item>
 
-            <ion-item>
-                <ion-icon name="mail" style="margin-right: 15px;"></ion-icon>
-                <ion-label>
-                    {{UserProfile?.email}}
-                </ion-label>
-                <ion-icon ios="ios-create" md="md-create" (click)="UpdateEmailModal(UserProfile)" color="primary"></ion-icon>
-            </ion-item>
-
-            <ion-item>
+            <ion-item lines = "none" color = "transparent">
                 <ion-icon name="call" style="margin-right: 15px;"></ion-icon>
                 <ion-label>
-                    {{UserProfile?.number}}
+                    <h2>CELLPHONE</h2>
+                    <h4>{{UserProfile?.number}}</h4>
                 </ion-label>
                 <ion-icon ios="ios-create" md="md-create" (click)="UpdateContractsModal(UserProfile)" color="primary"></ion-icon>
 
@@ -61,56 +60,7 @@
         </div>
     </div>
 
-
-
-
-    <!-- <ion-list>
-        <ion-item>
-            <ion-icon name="person" style="margin-right: 15px;"></ion-icon>
-            <ion-label>
-                {{UserProfile?.name}} {{UserProfile?.surname}}
-            </ion-label>
-            <ion-icon ios="ios-create" md="md-create" (click)="UpdateNamesModal(UserProfile)" color="primary"></ion-icon>
-        </ion-item>
-
-        <ion-item>
-            <ion-icon name="mail" style="margin-right: 15px;"></ion-icon>
-            <ion-label>
-                {{UserProfile?.email}}
-            </ion-label>
-            <ion-icon ios="ios-create" md="md-create" (click)="UpdateEmailModal(UserProfile)" color="primary"></ion-icon>
-        </ion-item>
-
-        <ion-item>
-            <ion-icon name="call" style="margin-right: 15px;"></ion-icon>
-            <ion-label>
-                {{UserProfile?.number}}
-            </ion-label>
-            <ion-icon ios="ios-create" md="md-create" (click)="UpdateContractsModal(UserProfile)" color="primary"></ion-icon>
-
-        </ion-item> -->
-
-    <!-- </ion-item> -->
-
-    <!-- <ion-item>
-      <ion-label class="ion-text-wrap">
-      Multiline text that should wrap when it is too long
-      to fit on one line in the item.
-      </ion-label>
-    </ion-item> -->
-
-    <!-- <ion-item>
-      <ion-label class="ion-text-wrap">
-        <ion-text color="primary">
-          <h3>H3 Primary Title</h3>
-        </ion-text>
-        <p>Paragraph line 1</p>
-        <ion-text color="secondary">
-          <p>Paragraph line 2 secondary</p>
-        </ion-text>
-      </ion-label>
-    </ion-item> -->
-
-    <!-- </ion-list> -->
-
+    <div style="text-align: center; margin-top: 50px;" class = "ion-padding">
+        <ion-button expand="full" shape="round" color="primary" (click)="deleteAccount()">Delete Account</ion-button>
+    </div>
 </ion-content>

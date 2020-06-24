@@ -1,19 +1,19 @@
 <ion-header>
     <ion-toolbar color="primary">
-        <ion-title>UpdateNames</ion-title>
-        <ion-icon name="close" (click)="CloseModal()" slot="end" style="margin-right: 20px; width: 20px;height: 20px;"></ion-icon>
+        <ion-title>Update Names</ion-title>
+        <ion-icon name="close" (click)="CloseModal()" slot="end" style="margin-right: 20px; width: 40px;height: 40px;"></ion-icon>
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class = "ion-padding">
     <div>
         <form [formGroup]="updateForm">
-            <ion-item>
+            <ion-item color = "transparent">
                 <ion-icon name="person" style="margin-right: 10px;"></ion-icon>
                 <ion-input [(ngModel)]="name" formControlName="name" placeholder="Name" value="{{firstN}}"></ion-input>
             </ion-item>
 
-            <ion-item>
+            <ion-item color = "transparent" style = "margin-top: 10px;">
                 <ion-icon name="person" style="margin-right: 10px;"></ion-icon>
                 <ion-input [(ngModel)]="surname" formControlName="surname" placeholder="Surname" value="{{lastN}}"></ion-input>
             </ion-item>
@@ -22,8 +22,8 @@
         <!-- <ion-button color="primary" [disabled] = "!updateForm.valid" (click) = "UpdateNames()">Save</ion-button> -->
     </div>
 
-    <div style="text-align: center; margin-top: 20px;">
-        <ion-button color="dark" [disabled]="!updateForm.valid" (click)="UpdateNames()">Save</ion-button>
+    <div style="text-align: center; margin-top: 20px;" class = "ion-padding">
+        <ion-button expand="full" shape="round" color="primary" [disabled]="!updateForm.valid" (click)="UpdateNames()">Save</ion-button>
     </div>
 
 </ion-content>

@@ -12,6 +12,14 @@ import { Router, NavigationExtras } from '@angular/router';
 export class HistoryPage implements OnInit {
 
   previousRequests;
+  AllServices = [];
+  ServiceInfo = {
+    refNo: '',
+    serviceName: '',
+    date: '',
+    serviceID: ''
+  }
+
   constructor(public historyService: AuthServiceService,
     public loadingController: LoadingController,
     public pathService: PathService,
@@ -29,13 +37,27 @@ export class HistoryPage implements OnInit {
     this.route.navigateByUrl('/tabs/profile');
   }
 
-  detail(items) {
+  detail(ref,name,date) {
+    console.log(ref);
+    console.log(name);
+    console.log(date);
+    this.ServiceInfo.refNo = ref;
+    this.ServiceInfo.serviceName = name;
+    this.ServiceInfo.date = date;
+
     const navigationExtras: NavigationExtras = {
       queryParams: {
-        data: JSON.stringify(items),
+        data: JSON.stringify(this.ServiceInfo),
       }
     };
+
     this.route.navigate(['history-details'], navigationExtras);
+  }
+
+  electricalServiceID(name) {
+    this.historyService.get_Service(name).subscribe((data) => {
+      this.ServiceInfo.serviceID = data[0];
+    });
   }
 
   async presentLoading() {

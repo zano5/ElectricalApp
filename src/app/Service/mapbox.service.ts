@@ -42,6 +42,7 @@ export class MapService {
 
     });
   }
+  
   search_word(query: string) {
 
     const url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/';

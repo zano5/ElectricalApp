@@ -6,9 +6,9 @@ import { IonicModule } from '@ionic/angular';
 
 import { ViewProfilePageRoutingModule } from './view-profile-routing.module';
 import { ViewProfilePage } from './view-profile.page';
-import { UpdateNamesPage } from '../modal/update-names/update-names.page';
-import { UpdateEmailPage } from '../modal/update-email/update-email.page';
-import { UpdateContactsPage } from '../modal/update-contacts/update-contacts.page';
+// import { UpdateNamesPage } from '../modal/update-names/update-names.page';
+// import { UpdateEmailPage } from '../modal/update-email/update-email.page';
+// import { UpdateContactsPage } from '../modal/update-contacts/update-contacts.page';
 
 @NgModule({
   imports: [
@@ -18,7 +18,9 @@ import { UpdateContactsPage } from '../modal/update-contacts/update-contacts.pag
     ViewProfilePageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [ViewProfilePage, UpdateNamesPage, UpdateEmailPage, UpdateContactsPage],
-  entryComponents: [UpdateNamesPage,UpdateEmailPage, UpdateContactsPage]
+  declarations: [ViewProfilePage],
+  entryComponents: []
 })
 export class ViewProfilePageModule {}
+// UpdateNamesPage,UpdateEmailPage,UpdateContactsPage
+// UpdateNamesPage,UpdateEmailPage,UpdateContactsPage

@@ -58,6 +58,12 @@ export class ViewProfilePage implements OnInit {
     ).subscribe();
   }
 
+  deleteAccount(){
+    // const ID = this.viewProfileService.getUser();
+    // console.log(ID);
+    this.viewProfileService.deleteAccount();
+  }
+
   back() {
     this.viewProfileService.Clear();
     this.route.navigateByUrl('/tabs/profile');

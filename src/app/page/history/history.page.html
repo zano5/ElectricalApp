@@ -1,6 +1,6 @@
 <ion-header>
     <ion-toolbar color="primary">
-        <ion-buttons slot="start">
+        <ion-buttons slot="start" style = "position: absolute;">
             <ion-back-button defaultHref="tabs/profile" (click)="redirect()"></ion-back-button>
         </ion-buttons>
 
@@ -9,27 +9,55 @@
 </ion-header>
 
 <ion-content>
-    <ion-card *ngFor="let history of previousRequests" mode = "ios" [routerLink]="['/history-details']" (click)="detail(history)" class="color">
-        <ion-card-header>
-            <ion-card-subtitle>Reference: {{history.refNo}}</ion-card-subtitle>
-            <h3 color="dark">{{history.service}}</h3>
-        </ion-card-header>
 
-        <ion-card-content>
-            <!-- <nav>
-                <ionic4-star-rating
-                    activeIcon = "ios-star"
-                    defaultIcon = "ios-star-outline"
-                    activeColor = "red" 
-                    defaultColor = "#aaaaaa"
-                    readonly="true"
-                    fontSize = "15px"
-                    rating = "{{history?.rate}}">
-                </ionic4-star-rating>
-            </nav> -->
-            <p style="float: right;" color="dark">{{history.date}}</p>
-        </ion-card-content>
-    </ion-card>
+    <div>
+        <ion-card *ngFor="let history of previousRequests; let i = index"  mode = "ios" class="color">
+            <ion-card-header>
+                <ion-card-subtitle>Reference: {{history.refNo}}</ion-card-subtitle>
+
+                <div *ngIf = "history?.eleObj?.length > 0">
+                    <ion-item color = "none" lines = "inset" (click)="detail(history.refNo,eledata,history.date)" 
+                    *ngFor = "let eledata of history?.eleObj;let i = index">
+                        <ion-label class="ion-text-wrap">
+                            <h3 style = "font-size: 20px;" color="dark">{{eledata}}</h3>
+                        </ion-label>
+                    </ion-item>
+                </div>
+
+                <div *ngIf = "history?.ictObj?.length > 0">
+                    <ion-item color = "none" lines = "inset" (click)="detail(history.refNo,ictdata,history.date)" 
+                    *ngFor = "let ictdata of history?.ictObj;let i = index">
+                        <ion-label class="ion-text-wrap">
+                            <h3 style = "font-size: 20px;" color="dark">{{ictdata}}</h3>
+                        </ion-label>
+                    </ion-item>
+                </div>
+
+
+                <div *ngIf = "history?.plumbingObj?.length > 0">
+                    <ion-item color = "none" lines = "inset" (click)="detail(history.refNo,plumbingdata,history.date)" 
+                    *ngFor = "let plumbingdata of history?.plumbingObj;let i = index">
+                        <ion-label class="ion-text-wrap">
+                            <h3 style = "font-size: 20px;" color="dark">{{plumbingdata}}</h3>
+                        </ion-label>
+                    </ion-item>
+                </div>
+
+                <div>
+                    <ion-item color = "none" lines = "none" (click)="detail(history.refNo,history.service,history.date)">
+                        <ion-label class="ion-text-wrap">
+                            <h3 style = "font-size: 20px;" color="dark">{{history.service}}</h3>
+                        </ion-label>
+                    </ion-item>
+                </div>
+            </ion-card-header>
+            
+            <ion-card-content>
+                <p style="float: right;" color="dark">{{history.date}}
+            </ion-card-content>
+        </ion-card>
+
+    </div>
 
     <ion-card *ngIf = "previousRequests?.length == 0" style = "box-shadow: none;text-align: center;top: 20%;">
             <ion-icon ios="ios-document" style = "width: 100px; height: 100px;" md="md-document"></ion-icon>
